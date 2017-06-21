@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>cha</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>Docs.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>CHAT document</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>TEXT</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>ca</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>Docs.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>CA document</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>TEXT</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>cex</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>Docs.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>CLAN Output File</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>TEXT</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>cut</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>Docs.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>Utility document</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>TEXT</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>cdc</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>Docs.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>Help document</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>TEXT</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>e32</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>Docs.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>Extra Document</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>TEXT</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>****</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>Docs.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>Plain Text File</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>****</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+		</dict>
+	</array>
+	<key>CFBundleExecutable</key>
+	<string>CLAND</string>
+	<key>CFBundleIconFile</key>
+	<string>ClanX.icns</string>
+	<key>CFBundleIdentifier</key>
+	<string>CLAND</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleLongVersionString</key>
+	<string>For the Version number, use "About Clan..." inside the application</string>
+	<key>CFBundleName</key>
+	<string>CLAND</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.0</string>
+	<key>CFBundleSignature</key>
+	<string>MCed</string>
+	<key>CFBundleVersion</key>
+	<string>For the Version number, use "About Clan..." inside the application</string>
+	<key>LSRequiresCarbon</key>
+	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>For help on the CLAN call: (412) 268-3793 or email: macw@cmu.edu</string>
+</dict>
+</plist>
