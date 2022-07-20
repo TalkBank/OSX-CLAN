@@ -51,6 +51,7 @@
 #include "ced.h"
 #include <FixMath.h>
 #include "MMedia.h"
+#include "my_vkf.h"
 #include "mp3.h"
 #if defined(_WIN32) || defined(__MACH__)
   #include "MP3ImporterPatch.h"
@@ -163,6 +164,7 @@ static pascal Boolean SoundConverterFillBufferDataProc(SoundComponentDataPtr *ou
 */
 		HUnlock(data->hSource);
 
+//fprintf(data->fp, "2 mediaTime=%ld; srcEnd=%ld;\n", data->mediaTime, data->srcEnd);
 		err = GetMediaSample(data->srcMedia,			// specifies the media for this operation
 							 data->hSource,				// function returns the sample data into this handle
 							 data->maxBufferSize,		// maximum number of bytes of sample data to be returned
@@ -193,6 +195,12 @@ static pascal Boolean SoundConverterFillBufferDataProc(SoundComponentDataPtr *ou
 		HLock(data->hSource);
 
 		newMediaTime = sourceReturnedTime + (durationPerSample * numberOfSamples);
+/*
+fprintf(data->fp, "3 err=%d; mediaTime=%ld; newMediaTime=%ld; srcEnd=%ld;\n", err, data->mediaTime, newMediaTime, data->srcEnd);
+fprintf(data->fp, "3.5 sourceReturnedTime=%ld; durationPerSample=%ld; numberOfSamples=%ld;\n", sourceReturnedTime, durationPerSample, numberOfSamples);
+fprintf(data->fp, "3.6 sourceBytesReturned=%ld; data->compData.desc.sampleCount=%ld; data->maxBufferSize=%ld;\n",
+		sourceBytesReturned, data->compData.desc.sampleCount, data->maxBufferSize);
+*/
 // The way to limit play on compressed stream  2008-03-12
 /*
 		if (data->maxSamples == 0L) {
@@ -227,7 +235,8 @@ repeat_read:
 		}
 */
 // The way to limit play on compressed stream
-		if ((noErr != err) || (sourceBytesReturned == 0L)) {
+		if ((err != noErr) || (sourceBytesReturned == 0L)) {
+			data->err = err;
 			data->isThereMoreSource = false;
 			data->compData.desc.buffer = NULL;
 			data->compData.desc.sampleCount = 0;		
@@ -235,12 +244,13 @@ repeat_read:
 			data->maxSamples = 0L;
 			data->compData.bufferSize = 0L;
 
-			if ((err != noErr) && (sourceBytesReturned > 0L))
+			if ((err != noErr) && (sourceBytesReturned > 0L)) {
 #if defined(_MAC_CODE)
 				DebugStr("\pGetMediaSample - Failed in FillBufferDataProc");
 #else
 				DebugStr((unsigned char *)"GetMediaSample - Failed in FillBufferDataProc");
 #endif
+			}
 		} else {
 			data->mediaTime = newMediaTime;
 // 2008-03-12	data->maxSamples = (data->srcEnd - data->mediaTime) / durationPerSample;
@@ -253,6 +263,7 @@ repeat_read:
 
 	// set outData to a properly filled out ExtendedSoundComponentData struct
 	*outData = (SoundComponentDataPtr)&data->compData;
+//fprintf(data->fp, "7 isThereMoreSource=%d; data->compData.bufferSize=%ld; \n", data->isThereMoreSource, data->compData.bufferSize);
 	return (data->isThereMoreSource);
 }
 
@@ -264,7 +275,7 @@ repeat_read:
 // a handle to the data is passed back to the caller who is responsible for disposing of it
 OSErr GetMovieMedia(FNType *inFile, Media *outMedia, Handle *outHandle)
 {
-	wchar_t		wrSoundFile[FNSize];
+	unCH		wrSoundFile[FNSize];
 	long 		ignoreFlags;
 	FSSpec		fss;
 	Movie		tMovie = 0;
@@ -469,7 +480,7 @@ repeat_playback:
 	scFillBufferData.hSource = NULL;
 	theDecompressionAtom = NULL;
 	mySoundConverter = NULL;
-	pDecomBuffer0 = NULL,
+	pDecomBuffer0 = NULL;
 	pDecomBuffer1 = NULL;
 	isMP3SoundDone = false;
 	isMP3Finishing = false;
@@ -499,7 +510,7 @@ repeat_playback:
 	theInputFormat.format = mySndHeader0.format;
 	theInputFormat.numChannels = mySndHeader0.numChannels;
 	theInputFormat.sampleSize = mySndHeader0.sampleSize;
-	theInputFormat.sampleRate = mySndHeader0. sampleRate;
+	theInputFormat.sampleRate = mySndHeader0.sampleRate;
 	theInputFormat.sampleCount = 0;
 	theInputFormat.buffer = NULL;
 	theInputFormat.reserved = 0;
@@ -678,6 +689,7 @@ repeat_playback:
 	pBuf1Size = 0L;
 #if defined(_MAC_CODE)
 	int			key;
+	char		res;
 	long 		CurFP;
 	long		msecs;
 	SCStatus	status;
@@ -747,9 +759,9 @@ repeat_playback:
 					} else {
 						mySndCmd.cmd = quietCmd;
 						err = SndDoImmediate(pSoundChannel, &mySndCmd);
-						if (key == 0x6200) {
+						if (key == VK_F7) {
 							isWinSndPlayAborted = 4; // F7
-						} else if (key == 0x6500) {
+						} else if (key == VK_F9) {
 							isWinSndPlayAborted = 5; // F9
 						} else
 							isWinSndPlayAborted = 1;
@@ -773,8 +785,31 @@ repeat_playback:
 		}
 		if (PlayingContSound == '\004') {
 			global_df->LeaveHighliteOn = TRUE;
-			if (key == 'i' || key == 'I' || key == ' ') {
-				char res;
+			if ((key == VK_F5 || key == VK_F1 || key == VK_F2) && F5_Offset != 0L) {
+				DrawCursor(0);
+				DrawSoundCursor(2);
+				ResetSelectFlag(0);
+				if (global_df->SnTr.BegF != CurFP && CurFP != 0L) {
+					global_df->row_win2 = 0L;
+					global_df->col_win2 = -2L;
+					global_df->col_chr2 = -2L;
+					if ((res=findStartMediaTag(TRUE, F5Option == EVERY_LINE)) != TRUE)
+						findEndOfSpeakerTier(res, F5Option == EVERY_LINE);
+					SaveUndoState(FALSE);
+					addBulletsToText(SOUNDTIER, global_df->SnTr.SoundFile, conv_to_msec_rep(global_df->SnTr.BegF), conv_to_msec_rep(CurFP));
+					global_df->SnTr.BegF = AlignMultibyteMediaStream(CurFP, '-');
+					SetPBCglobal_df(false, 0L);
+					if (global_df->SnTr.IsSoundOn)
+						DisplayEndF(FALSE);
+				}
+				selectNextSpeaker();
+				strcpy(global_df->err_message, "-Transcribing, click mouse to stop");
+				draw_mid_wm();
+				strcpy(global_df->err_message, DASHES);
+				wmove(global_df->w1, global_df->row_win, global_df->col_win-global_df->LeftCol);
+				wrefresh(global_df->w1);
+				isMP3SoundDone = true;
+			} else if (key == 'i' || key == 'I' || key == ' ') {
 				DrawCursor(0);
 				DrawSoundCursor(2);
 				ResetSelectFlag(0);								
@@ -972,7 +1007,7 @@ repeat_playback:
 							}
 						}
 					} else {
-						if (key == 0x6200) {
+						if (key == VK_F7) {
 							t = conv_to_msec_rep(CurFP) - PBC.step_length;
 							if (t < 0L)
 								t = 0L;
@@ -982,7 +1017,7 @@ repeat_playback:
 							t = conv_to_msec_rep(global_df->SnTr.BegF) + PBC.step_length;
 							global_df->SnTr.EndF = AlignMultibyteMediaStream(conv_from_msec_rep(t), '+');
 							isWinSndPlayAborted = 4; // F7
-						} else if (key == 0x6500) {
+						} else if (key == VK_F9) {
 							t = conv_to_msec_rep(CurFP) + PBC.step_length;
 							if (t < 0L)
 								t = 0L;
@@ -1026,13 +1061,24 @@ fin:
 		SetPBCglobal_df(false, 0L);
 	PlayingSound = FALSE;
 #else  // _MAC_CODE
+	double	tickCount, lastTickCount;
+
 	scFillBufferData.lTime_mark = GetTickCount();
 	if (PlayingContSound || !PBC.isPC) {
 		char t = 0;
 		MSG msg;
+		tickCount = (double)(GetTickCount());
+		lastTickCount = tickCount;
 		while (!isMP3SoundDone) {
-			if (PeekMessage(&msg,AfxGetApp()->m_pMainWnd->m_hWnd,0,0,PM_REMOVE))
-				t = checkMP3Sound(&msg, t);
+			if (tickCount - lastTickCount > 15) {
+				if (PeekMessage(&msg, AfxGetApp()->m_pMainWnd->m_hWnd, 0, 0, PM_REMOVE)) {
+					t = checkMP3Sound(&msg, t, tickCount);
+				} else {
+					t = checkMP3Sound(NULL, t, tickCount);
+				}
+				lastTickCount = tickCount;
+			}
+			tickCount = (double)(GetTickCount());
 		}
 		PBC.walk = 0;
 		PBC.isPC = 0;
@@ -1056,14 +1102,14 @@ void stopMP3SoundIfPlaying(void) {
 	PlayingSound = FALSE;
 }
 
-char checkMP3Sound(MSG* pMsg, char skipOnChar) {
+char checkMP3Sound(MSG* pMsg, char skipOnChar, double tickCount) {
 	OSErr 			err;
 	long			CurFP;
 	long			msecs;
 	double			timeOffset;
 	extern DWORD	walker_pause;
 
-	timeOffset = (double)(GetTickCount() - scFillBufferData.lTime_mark);
+	timeOffset = (double)(tickCount - scFillBufferData.lTime_mark);
 	CurFP = conv_from_msec_rep((long)timeOffset) + scFillBufferData.curBegTime;
 	if (CurFP > global_df->SnTr.EndF) {
 		mySndCmd.cmd = quietCmd;
@@ -1080,79 +1126,81 @@ char checkMP3Sound(MSG* pMsg, char skipOnChar) {
 		wmove(global_df->w1, global_df->row_win, global_df->col_win-global_df->LeftCol);
 		wrefresh(global_df->w1);
 	}
-	if (pMsg->message == WM_LBUTTONDOWN || pMsg->message == WM_RBUTTONDOWN) {
-		if (PlayingContSound || !PBC.enable) {
-			mySndCmd.cmd = quietCmd;
-			err = SndDoImmediate(pSoundChannel, &mySndCmd);
-			isMP3SoundDone = true;
-			isWinSndPlayAborted = 1;
-			if (global_df && PlayingContSound == '\004') {
-				DrawSoundCursor(0);
-				DrawCursor(0);
-				strcpy(global_df->err_message, DASHES);
-				draw_mid_wm();
-				wmove(global_df->w1, global_df->row_win, global_df->col_win-global_df->LeftCol);
-				wrefresh(global_df->w1);
-			}
-			if (PlayingContSound)
-				PlayingContSound = '\003';
-			goto continueMP3;
-		}
-	} else if (pMsg->message == WM_KEYDOWN) {
-		if (PlayingContSound == '\004') {
-			global_df->LeaveHighliteOn = TRUE;
-			if (pMsg->wParam == 'i' || pMsg->wParam == 'I' || pMsg->wParam == ' ') {
-				char res;
-
-				DrawCursor(2);
-				DrawSoundCursor(2);
-				ResetSelectFlag(0);
-				if (global_df->SnTr.BegF != CurFP && CurFP != 0L) {
-					global_df->row_win2 = 0L;
-					global_df->col_win2 = -2L;
-					global_df->col_chr2 = -2L;
-					if ((res=findStartMediaTag(TRUE, F5Option == EVERY_LINE)) != TRUE)
-						findEndOfSpeakerTier(res, F5Option == EVERY_LINE);
-					SaveUndoState(FALSE);
-					addBulletsToText(SOUNDTIER, global_df->SnTr.SoundFile, conv_to_msec_rep(global_df->SnTr.BegF), conv_to_msec_rep(CurFP));
-					global_df->SnTr.BegF = AlignMultibyteMediaStream(CurFP, '-');
-					SetPBCglobal_df(false, 0L);
-					if (global_df->SnTr.IsSoundOn)
-						DisplayEndF(FALSE);
-					if (GlobalDoc && global_df->DataChanged)
-						GlobalDoc->SetModifiedFlag(TRUE);
-				}
-				selectNextSpeaker();
-				strcpy(global_df->err_message, "-Transcribing, click mouse to stop");
-				draw_mid_wm();
-				strcpy(global_df->err_message, DASHES);
-				wmove(global_df->w1, global_df->row_win, global_df->col_win-global_df->LeftCol);
-				wrefresh(global_df->w1);
-				DrawSoundCursor(1);
-				DrawCursor(1);
-			}
-		} else if (pMsg->wParam >= 32) {
-			if (PlayingContSound) {
-				PlayingContSound = '\003';
+	if (pMsg != NULL) {
+		if (pMsg->message == WM_LBUTTONDOWN || pMsg->message == WM_RBUTTONDOWN) {
+			if (PlayingContSound || !PBC.enable) {
 				mySndCmd.cmd = quietCmd;
 				err = SndDoImmediate(pSoundChannel, &mySndCmd);
 				isMP3SoundDone = true;
 				isWinSndPlayAborted = 1;
-				skipOnChar = TRUE;
+				if (global_df && PlayingContSound == '\004') {
+					DrawSoundCursor(0);
+					DrawCursor(0);
+					strcpy(global_df->err_message, DASHES);
+					draw_mid_wm();
+					wmove(global_df->w1, global_df->row_win, global_df->col_win-global_df->LeftCol);
+					wrefresh(global_df->w1);
+				}
+				if (PlayingContSound)
+					PlayingContSound = '\003';
 				goto continueMP3;
 			}
-			if (!PBC.enable || (pMsg->wParam >= VK_F1 && pMsg->wParam <= VK_F12)) {
-				mySndCmd.cmd = quietCmd;
-				err = SndDoImmediate(pSoundChannel, &mySndCmd);
-				isMP3SoundDone = true;
-				if (pMsg->wParam == VK_F7 && PBC.enable) {
-					isWinSndPlayAborted = 4; // F7
-				} else if (pMsg->wParam == VK_F9 && PBC.enable) {
-					isWinSndPlayAborted = 5; // F9
-				} else
+		} else if (pMsg->message == WM_KEYDOWN) {
+			if (PlayingContSound == '\004') {
+				global_df->LeaveHighliteOn = TRUE;
+				if (pMsg->wParam == 'i' || pMsg->wParam == 'I' || pMsg->wParam == ' ') {
+					char res;
+
+					DrawCursor(2);
+					DrawSoundCursor(2);
+					ResetSelectFlag(0);
+					if (global_df->SnTr.BegF != CurFP && CurFP != 0L) {
+						global_df->row_win2 = 0L;
+						global_df->col_win2 = -2L;
+						global_df->col_chr2 = -2L;
+						if ((res=findStartMediaTag(TRUE, F5Option == EVERY_LINE)) != TRUE)
+							findEndOfSpeakerTier(res, F5Option == EVERY_LINE);
+						SaveUndoState(FALSE);
+						addBulletsToText(SOUNDTIER, global_df->SnTr.SoundFile, conv_to_msec_rep(global_df->SnTr.BegF), conv_to_msec_rep(CurFP));
+						global_df->SnTr.BegF = AlignMultibyteMediaStream(CurFP, '-');
+						SetPBCglobal_df(false, 0L);
+						if (global_df->SnTr.IsSoundOn)
+							DisplayEndF(FALSE);
+						if (GlobalDoc && global_df->DataChanged)
+							GlobalDoc->SetModifiedFlag(TRUE);
+					}
+					selectNextSpeaker();
+					strcpy(global_df->err_message, "-Transcribing, click mouse to stop");
+					draw_mid_wm();
+					strcpy(global_df->err_message, DASHES);
+					wmove(global_df->w1, global_df->row_win, global_df->col_win-global_df->LeftCol);
+					wrefresh(global_df->w1);
+					DrawSoundCursor(1);
+					DrawCursor(1);
+				}
+			} else if (pMsg->wParam >= 32) {
+				if (PlayingContSound) {
+					PlayingContSound = '\003';
+					mySndCmd.cmd = quietCmd;
+					err = SndDoImmediate(pSoundChannel, &mySndCmd);
+					isMP3SoundDone = true;
 					isWinSndPlayAborted = 1;
-				skipOnChar = TRUE;
-				goto continueMP3;
+					skipOnChar = TRUE;
+					goto continueMP3;
+				}
+				if (!PBC.enable || (pMsg->wParam >= VK_F1 && pMsg->wParam <= VK_F12)) {
+					mySndCmd.cmd = quietCmd;
+					err = SndDoImmediate(pSoundChannel, &mySndCmd);
+					isMP3SoundDone = true;
+					if (pMsg->wParam == VK_F7 && PBC.enable) {
+						isWinSndPlayAborted = 4; // F7
+					} else if (pMsg->wParam == VK_F9 && PBC.enable) {
+						isWinSndPlayAborted = 5; // F9
+					} else
+						isWinSndPlayAborted = 1;
+					skipOnChar = TRUE;
+					goto continueMP3;
+				}
 			}
 		}
 	}
@@ -1379,16 +1427,11 @@ char ReadMP3Sound(int col, int cm, Size cur) {
 							READ_outputFlags,
 							READ_actualOutputBytes;
 	OSErr 					err = noErr;
-	Boolean					READ_isMP3SoundDone = true;
+	Boolean					READ_isMP3SoundDone = true, isFTime = true, isRepeat = false;
 	int   row, hp1, lp1, hp2, lp2, scale;
-	short *tbuf;
+	short *tbuf = NULL;
 	long  i, scale_cnt;
 
-	READ_theDecompressionAtom = NULL;
-	READ_mySoundConverter = NULL;
-	READ_DecomBuffer = NULL;
-	READ_scFillBufferData.hSource = NULL;
-	READ_isMP3SoundDone = false;
 	if (cm == 0) {
 		GetSoundWinDim(&row, &cm);
 		global_df->SnTr.WEndF = global_df->SnTr.WBegF + ((Size)cm * (Size)global_df->scale_row * (Size)global_df->SnTr.SNDsample);
@@ -1407,6 +1450,12 @@ char ReadMP3Sound(int col, int cm, Size cur) {
 	hp2 = 0; lp2 = hp2 - 1;
 	wdrawcontr(global_df->SoundWin, TRUE);
 
+repeatSoundConverter:
+	READ_theDecompressionAtom = NULL;
+	READ_mySoundConverter = NULL;
+	READ_DecomBuffer = NULL;
+	READ_scFillBufferData.hSource = NULL;
+	READ_isMP3SoundDone = false;
 	err = MyGetSoundDescriptionExtension(global_df->SnTr.mp3.theSoundMedia, (AudioFormatAtomPtr *)&READ_theDecompressionAtom, &mySndHeader);
 	if (noErr == err) {	
 		// setup input/output format for sound converter
@@ -1463,40 +1512,70 @@ char ReadMP3Sound(int col, int cm, Size cur) {
 		BailErr(err);
 		// fill in struct that gets passed to SoundConverterFillBufferDataProc via the refcon
 		// this includes the ExtendedSoundComponentData record		
-		READ_scFillBufferData.srcMedia = global_df->SnTr.mp3.theSoundMedia;
 		READ_scFillBufferData.maxSamples = 0L;
-		READ_scFillBufferData.mediaTime = convertCurPosToMP3(cur);		
+		READ_scFillBufferData.srcMedia = global_df->SnTr.mp3.theSoundMedia;
+//		cur = 58977218;// g 58982008; b 58979218; 22050
+		if (isFTime == true)
+			READ_scFillBufferData.mediaTime = convertCurPosToMP3(cur);
 		READ_scFillBufferData.srcEnd = convertCurPosToMP3(global_df->SnTr.SoundFileSize);
 		READ_scFillBufferData.isThereMoreSource = true;
 		READ_scFillBufferData.maxBufferSize = kMaxInputBuffer;
+		READ_scFillBufferData.err = noErr;
 		READ_scFillBufferData.hSource = NewHandle((long)READ_scFillBufferData.maxBufferSize);		// allocate source media buffer
 		BailErr(MemError());
 		READ_scFillBufferData.compData.desc = theInputFormat;
 		READ_scFillBufferData.compData.desc.buffer = (Byte *)*READ_scFillBufferData.hSource;
+		READ_scFillBufferData.compData.desc.sampleCount = 0;
 		READ_scFillBufferData.compData.desc.flags = kExtendedSoundData;
 		READ_scFillBufferData.compData.recordSize = sizeof(ExtendedSoundComponentData);
 		READ_scFillBufferData.compData.extendedFlags = kExtendedSoundSampleCountNotValid | kExtendedSoundBufferSizeValid;
 		READ_scFillBufferData.compData.bufferSize = 0;
-		if (err == noErr) {			
+		if (err == noErr) {
 			READ_FillBufferDataUPP = NewSoundConverterFillBufferDataUPP(SoundConverterFillBufferDataProc);
 			if (noErr == err) {
+/*
+fprintf(fp, "BEFORE MAIN WHILE LOOP: cm=%d;\n", cm);
+fprintf(fp, "BegF=%ld; EndF=%ld; WBegF=%ld; WEndF=%ld;\n",
+global_df->SnTr.BegF, global_df->SnTr.EndF, global_df->SnTr.WBegF, global_df->SnTr.WEndF);
+fprintf(fp, "cur=%ld; SoundFileSize=%ld; SNDsample=%d\n\n",
+		cur, global_df->SnTr.SoundFileSize, global_df->SnTr.SNDsample);
+fprintf(fp, "kMaxInputBuffer=%ld; mediaTime=%ld; srcEnd=%ld;\n", kMaxInputBuffer, READ_scFillBufferData.mediaTime, READ_scFillBufferData.srcEnd);
+*/
 				while (!READ_isMP3SoundDone && col < cm) {
 					err = SoundConverterFillBuffer(READ_mySoundConverter,		// a sound converter
-												   READ_FillBufferDataUPP,	// the callback UPP
+												   READ_FillBufferDataUPP,		// the callback UPP
 												   &READ_scFillBufferData,		// refCon passed to FillDataProc
 												   READ_DecomBuffer,			// the decompressed data 'play' buffer
-												   READ_outputBytes,				// size of the 'play' buffer
+												   READ_outputBytes,			// size of the 'play' buffer
 												   &READ_actualOutputBytes,		// number of output bytes
 												   &READ_outputFrames,			// number of output frames
 												   &READ_outputFlags);			// fillbuffer retured advisor flags
-					if (err)
+					if (err) {
 						break;
-					if((READ_outputFlags & kSoundConverterHasLeftOverData) == false && READ_scFillBufferData.isThereMoreSource == false)
-						READ_isMP3SoundDone = true;
-					count = READ_outputBytes;
+					}
+					if (READ_scFillBufferData.err == invalidTime && isFTime == true) {
+						cur -= 1000L;
+						if (cur < 0L)
+							cur = 0L;
+						READ_scFillBufferData.mediaTime = convertCurPosToMP3(AlignMultibyteMediaStream(cur, '-'));
+//fprintf(fp, "RESET: mediaTime=%ld;\n", READ_scFillBufferData.mediaTime);
+						READ_scFillBufferData.isThereMoreSource = true;
+						isFTime = false;
+						isRepeat = true;
+						break;
+					} else
+						isFTime = false;
+
+					count = READ_actualOutputBytes;
 					if (global_df->SnTr.SNDsample != 1) {
 						tbuf = (short *)READ_DecomBuffer;
 						count /= 2;
+					}
+//fprintf(fp, "READ_actualOutputBytes=%ld; count=%ld; cm=%d;\n", READ_actualOutputBytes, count, cm);
+					if((READ_outputFlags & kSoundConverterHasLeftOverData) == false && READ_scFillBufferData.isThereMoreSource == false) {
+						READ_isMP3SoundDone = true;
+//fprintf(fp, "DONE READING: col=%d; cm=%d;\n", col, cm);
+						break;
 					}
 					for (i=0; i < count && col < cm; i++) {
 						if (scale == 0)
@@ -1506,19 +1585,27 @@ char ReadMP3Sound(int col, int cm, Size cur) {
 						else
 							row = (int)(tbuf[i]) / scale;
 						if (global_df->SnTr.SNDchan == 1 || doMixedSTWave) {
-							if (row > hp1) hp1 = row;
-							if (row < lp1) lp1 = row;
+							if (row > hp1)
+								hp1 = row;
+							if (row < lp1)
+								lp1 = row;
 						} else {
 							if ((i % 2) == 0) {
-								if (row > hp1) hp1 = row;
-								if (row < lp1) lp1 = row;
+								if (row > hp1)
+									hp1 = row;
+								if (row < lp1)
+									lp1 = row;
 							} else {
-								if (row > hp2) hp2 = row;
-								if (row < lp2) lp2 = row;
+								if (row > hp2)
+									hp2 = row;
+								if (row < lp2)
+									lp2 = row;
 							}
 						}
 						scale_cnt++;
+//fprintf(fp, "i=%ld; scale_cnt=%ld; global_df->scale_row=%ld; \n", i, scale_cnt, global_df->scale_row);
 						if (scale_cnt == global_df->scale_row) {
+//fprintf(fp, "hp1=%d; lp1=%d; hp2=%d; lp2=%d; col=%d\n", hp1, lp1, hp2, lp2, col);
 							if (global_df->TopP1 && global_df->BotP1) {
 								global_df->TopP1[col] = hp1;
 								global_df->BotP1[col] = lp1;
@@ -1555,5 +1642,9 @@ bail:
 		DisposePtr((Ptr)READ_theDecompressionAtom);
 	if (global_df->TopP1 && global_df->BotP1 && cm != 1)
 		global_df->TopP1[col] = -1;
+	if (isRepeat == true) {
+		isRepeat = false;
+		goto repeatSoundConverter;
+	}
 	return (char)(err == noErr);
 }

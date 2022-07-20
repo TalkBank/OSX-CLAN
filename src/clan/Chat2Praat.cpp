@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2014 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2022 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -65,6 +65,7 @@ struct ChatTiers {
 extern struct tier *defheadtier;
 extern char OverWriteFile;
 
+static char isMFAC2Praat;
 static ALLTIERS *RootTiers;
 static ALLTIERS *RootHeaders;
 static FNType mediaExt[10];
@@ -80,18 +81,31 @@ void init(char f) {
 		AddCEXExtension = ".textGrid";
 		stout = FALSE;
 		onlydata = 1;
-		FilterTier = 0;
 		LocalTierSelect = TRUE;
 		if (defheadtier->nexttier != NULL)
 			free(defheadtier->nexttier);
 		free(defheadtier);
 		defheadtier = NULL;
+		if (isMFAC2Praat == TRUE) {
+			addword('\0','\0',"+xxx");
+			addword('\0','\0',"+yyy");
+			addword('\0','\0',"+www");
+			addword('\0','\0',"+xxx@s*");
+			addword('\0','\0',"+yyy@s*");
+			addword('\0','\0',"+www@s*");
+			addword('\0','\0',"+-*");
+			addword('\0','\0',"+#*");
+			addword('\0','\0',"+(*.*)");
+		} else
+			FilterTier = 0;
 		RootTiers = NULL;
 		RootHeaders = NULL;
 		mediaExt[0] = EOS;
 		xminL = 0L; // 0xFFFFFFFL;
 		xmaxL = 0L;
 	} else {
+		if (isMFAC2Praat == TRUE)
+			nomap = TRUE;
 		if (mediaExt[0] == EOS) {
 			fprintf(stderr,"Please use +e option to specify media file extension.\n    (For example: +e.mov or +e.mpg or +e.wav)\n");
 			cutt_exit(0);
@@ -108,11 +122,21 @@ void usage() {
 
 
 CLAN_MAIN_RETURN main(int argc, char *argv[]) {
+	int i;
+
 	isWinMode = IS_WIN_MODE;
 	chatmode = CHAT_MODE;
 	CLAN_PROG_NUM = CHAT2PRAAT;
 	OnlydataLimit = 0;
-	UttlineEqUtterance = TRUE;
+	isMFAC2Praat = FALSE;
+	for (i=0; i < argc; i++) {
+		if (argv[i][0] == '-' || argv[i][0] == '+') {
+			if (argv[i][1] == 'c')
+				isMFAC2Praat = TRUE;
+		}
+	}
+	if (isMFAC2Praat == FALSE)
+		UttlineEqUtterance = TRUE;
 	bmain(argc,argv,NULL);
 }
 		
@@ -120,6 +144,12 @@ void getflag(char *f, char *f1, int *i) {
 
 	f++;
 	switch(*f++) {
+		case 'c':
+			isMFAC2Praat = TRUE;
+			addword('s','i',"+&+*");
+			addword('s','i',"+&-*");
+			no_arg_option(f);
+			break;
 		case 'e':
 			if (f[0] != '.')
 				uS.str2FNType(mediaExt, 0L, ".");
@@ -432,7 +462,7 @@ static ALLTIERS *addTierAnnotation(ALLTIERS *root, FNType *mediaFName, const cha
 			    		End = Beg + 5;
 			    	else if (len >= 5 && len < 10)
 			    		End = Beg + 80;
-			    	else if (len > 10)
+			    	else if (len >= 10)
 			    		End = Beg + 200;
 			    }
 				t->lastTime = End;
@@ -477,8 +507,9 @@ static ALLTIERS *addTierAnnotation(ALLTIERS *root, FNType *mediaFName, const cha
 	return(root);
 }
 
-static void makeAnotation(char *an, int bs, int es) {
+static void textToPraatXML(char *an, int bs, int es) {
 	long i;
+	char *line;
 	AttTYPE lastType;
 
 	for (; (isSpace(utterance->line[bs]) || utterance->line[bs] == '\n') && bs < es; bs++) ;
@@ -486,28 +517,36 @@ static void makeAnotation(char *an, int bs, int es) {
 	es++;
 	i = 0L;
 	lastType = 0;
+	if (isMFAC2Praat == FALSE)
+		line = utterance->line;
+	else
+		line = utterance->tuttline;
 	for (; bs < es; bs++) {
-		if (lastType != utterance->attLine[bs]) {
-			sprintf(an+i,"{0t%x}", utterance->attLine[bs]);
-			i = strlen(an);
+		if (isMFAC2Praat == FALSE) {
+			if (lastType != utterance->attLine[bs]) {
+				sprintf(an+i,"{0t%x}", utterance->attLine[bs]);
+				i = strlen(an);
+			}
+			lastType = utterance->attLine[bs];
 		}
-		lastType = utterance->attLine[bs];
-		if (utterance->line[bs] == '"') {
+		if (line[bs] == '"') {
 			strcpy(an+i, "&quot;");
 			i = strlen(an);
-		} else if (utterance->line[bs] == '\n')
+		} else if (line[bs] == '\n')
 			an[i++] = ' ';
-		else if (utterance->line[bs] == '\t')
+		else if (line[bs] == '\t')
 			an[i++] = ' ';
-		else if (utterance->line[bs] >= 0 && utterance->line[bs] < 32) {
-			sprintf(an+i,"{0x%x}", utterance->line[bs]);
+		else if (line[bs] >= 0 && line[bs] < 32) {
+			sprintf(an+i,"{0x%x}", line[bs]);
 			i = strlen(an);
 		} else
-			an[i++] = utterance->line[bs];
+			an[i++] = line[bs];
 	}
-	if (lastType != 0) {
-		sprintf(an+i,"{0t%x}", 0);
-		i = strlen(an);
+	if (isMFAC2Praat == FALSE) {
+		if (lastType != 0) {
+			sprintf(an+i,"{0t%x}", 0);
+			i = strlen(an);
+		}
 	}
 	an[i] = EOS;
 }
@@ -541,10 +580,17 @@ static void PrintAnnotations(int num, ALLTIERS *trs, char *s) {
 	lastEnd = xminD;
 	num = 0;
 	for (anns=trs->annotation; anns != NULL; anns=anns->nextAnnotation) {
+		if (anns->begD < 0.0)
+			anns->begD = lastEnd;
+		if (anns->endD < 0.0)
+			anns->endD = AdjustEndTime(anns->begD, anns->nextAnnotation);
+
 		if (anns->begD > lastEnd)
 			num++;
 		num++;
 		lastEnd = anns->endD;
+//if (strcmp(trs->name, "*CHI") == 0)
+//fprintf(stderr, "%d-%s\n", num, anns->st);
 	}
 	if (xmaxD > lastEnd)
 		num++;
@@ -571,6 +617,8 @@ static void PrintAnnotations(int num, ALLTIERS *trs, char *s) {
 		fprintf(fpout, "            xmax = %.3lf\n", anns->endD);
 		fprintf(fpout, "            text = \"%s\"\n", anns->st);
 		lastEnd = anns->endD;
+//if (strcmp(trs->name, "*CHI") == 0)
+//fprintf(stderr, "%d-%s\n", num, anns->st);
 	}
 	if (xmaxD > lastEnd) {
 		num++;
@@ -589,8 +637,10 @@ static int tiersCount(void) {
 	num = 0;
 	for (trs=RootTiers; trs != NULL; trs=trs->nextTier)
 		num++;
-	for (trs=RootHeaders; trs != NULL; trs=trs->nextTier)
-		num++;
+	for (trs=RootHeaders; trs != NULL; trs=trs->nextTier) {
+		if (strcmp(trs->name, "aud@MEDIA") != 0)
+			num++;
+	}
 	return(num);
 }
 
@@ -631,6 +681,8 @@ static void PrintTiers(void) {
 	}
 
 	for (trs=RootHeaders; trs != NULL; trs=trs->nextTier) {
+		if (strcmp(trs->name, "aud@MEDIA") == 0)
+			continue;
 		s = strrchr(trs->name, '@');
 		if (s == NULL)
 			s = trs->name;
@@ -787,8 +839,51 @@ static void addToAnnotations(C2P_CHATTIERS *TierCluster) {
 	}
 }
 
+static void cleanupAnPercentC2Praat(char *line) {
+	int i, j;
+	
+	i = 0;
+	while (line[i] != EOS) {
+		if (line[i] == '&' && (line[i+1] == '+' || line[i+1] == '-'))
+			strcpy(line+i, line+i+2);
+		else if (line[i] == '$' && isalnum(line[i-1])) {
+			for (j=i+1; isalpha((int)line[j]); j++) ;
+			if (j > i)
+				strcpy(line+i, line+j);
+			else
+				i++;
+		} else
+			i++;
+	}
+}
+
+static void filterAtSymC2Praat(char *line) {
+	long i, j;
+	
+	i = 0L;
+	while (line[i] != EOS) {
+		if (line[i] == '@') {
+			for (j=i; !uS.isskip(line,j,&dFnt,MBF) && line[j] != '+' && line[j] != '-' && line[j] != EOS; j++) ;
+			strcpy(line+i, line+j);
+		} else
+			i++;
+	}
+}
+
+static void removeAngleBracketsC2Praat(char *line) {
+	long i;
+	
+	i = 0L;
+	while (line[i] != EOS) {
+		if ((i == 0 || line[i-1] != '+') && (line[i] == '<' || line[i] == '>')) {
+			strcpy(line+i, line+i+1);
+		} else
+			i++;
+	}
+}
+
 void call() {
-	int		bs, es;
+	int		i, bs, es;
 	long	BegT, EndT;
 	long	t, bulletsCnt, numTiers;
 	FNType	mediaFName[FNSize], errfile[FNSize];
@@ -814,6 +909,8 @@ void call() {
 			isMediaHeaderFound = TRUE;
 		}
 		uS.remblanks(utterance->speaker);
+		if (!checktier(utterance->speaker))
+			continue;
 		if (utterance->speaker[0] == '@') {
 			if (// uS.isUTF8(utterance->speaker) ||
 				//	uS.partcmp(utterance->speaker, FONTHEADER, FALSE, FALSE) ||
@@ -839,7 +936,7 @@ void call() {
 			continue;
 		} else
 			isSpTierFound = TRUE;
-
+		
 		if (utterance->speaker[0] == '*' || utterance->speaker[0] == '@') {
 			if (TierCluster != NULL) {
 				addToAnnotations(TierCluster);
@@ -863,10 +960,24 @@ void call() {
 				if (mediaRes) {
 					if (strrchr(mediaFName, '.') == NULL && mediaFName[0] != EOS)
 						strcat(mediaFName, mediaExt);
-					makeAnotation(templineC, bs, es);
+					textToPraatXML(templineC, bs, es);
 					if (templineC[0] != EOS) {
 						if (utterance->speaker[0] == '*')
 							isBulletFound = TRUE;
+						if (isMFAC2Praat == TRUE) {
+							filterAtSymC2Praat(templineC);
+							removeAngleBracketsC2Praat(templineC);
+							for (i=0; templineC[i] != EOS; i++) {
+								if (uS.IsUtteranceDel(templineC, i))
+									templineC[i] = ' ';
+							}
+							uS.remFrontAndBackBlanks(templineC);
+							cleanupAnPercentC2Praat(templineC);
+							if (templineC[0] != EOS) {
+								strcat(templineC, " .");
+							}
+							removeExtraSpace(templineC);
+						}
 						TierCluster = addToChatTiers(TierCluster, mediaFName, utterance->speaker, templineC, BegT, EndT);
 					}
 				}
@@ -895,13 +1006,30 @@ void call() {
 			}
 			if (errFp != NULL) {
 				fprintf(errFp,"*** File \"%s\": line %ld.\n", oldfname, lineno);
-				fprintf(errFp, "Missing bullet.\n");
+				if (isMFAC2Praat == TRUE)
+					fprintf(errFp, "Warning: Missing bullet, but utterance is still written out\n");
+				else
+					fprintf(errFp, "Missing bullet.\n");
 			}
 		}
-		makeAnotation(templineC, bs, es);
+		textToPraatXML(templineC, bs, es);
 		if (templineC[0] != EOS) {
 			if (!isMediaHeaderFound)
 				mediaFName[0] = EOS;
+			if (isMFAC2Praat == TRUE) {
+				filterAtSymC2Praat(templineC);
+				removeAngleBracketsC2Praat(templineC);
+				for (i=0; templineC[i] != EOS; i++) {
+					if (uS.IsUtteranceDel(templineC, i))
+						templineC[i] = ' ';
+				}
+				uS.remFrontAndBackBlanks(templineC);
+				cleanupAnPercentC2Praat(templineC);
+				if (templineC[0] != EOS) {
+					strcat(templineC, " .");
+				}
+				removeExtraSpace(templineC);
+			}
 			TierCluster = addToChatTiers(TierCluster, "", utterance->speaker, templineC, -1, -1);
 		}
 	}
@@ -912,9 +1040,15 @@ void call() {
 	}
 
 	if (bulletsCnt <= 0L) {
-		fprintf(stderr, "\n\n    NO BULLETS FOUND IN THE FILE\n\n\n");
-		if (errFp != NULL)
-			fprintf(errFp, "\n\n    NO BULLETS FOUND IN THE FILE\n");
+		if (isMediaHeaderFound == FALSE) {
+			fprintf(stderr, "\n\n   @Media: HEADER WITH MEDIA FILE NAME WAS NOT FOUND\n\n\n");
+			if (errFp != NULL)
+				fprintf(errFp, "\n\n    @Media: HEADER WITH MEDIA FILE NAME WAS NOT FOUND\n");
+		} else {
+			fprintf(stderr, "\n\n    NO BULLETS FOUND IN THE FILE\n\n\n");
+			if (errFp != NULL)
+				fprintf(errFp, "\n\n    NO BULLETS FOUND IN THE FILE\n");
+		}
 	} else {
 		if (bulletsCnt != numTiers)
 			fprintf(stderr, "\n\n");

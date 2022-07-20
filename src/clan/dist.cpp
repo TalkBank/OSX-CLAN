@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2014 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2022 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -468,28 +468,27 @@ void pr_result(void) {
     prdebug(("pr_result()\n"));
 
     if (!onlydata) {
-	if (chatmode) {
-	    fprintf(fpout, "There were %d turns.\n\n\n", line_count);
-	} else {
-	    fprintf(fpout, "There were %d lines.\n\n\n", line_count);
-	}
+		if (chatmode) {
+			fprintf(fpout, "There were %d turns.\n\n\n", line_count);
+		} else {
+			fprintf(fpout, "There were %d lines.\n\n\n", line_count);
+		}
 
-	fprintf(fpout, format,
-	    "",
-	    "Occurrence",
-	    "First ",
-	    "Last  ",
-	    "Average ");
+		fprintf(fpout, format,
+			"",
+			"Occurrence",
+			"First ",
+			"Last  ",
+			"Average ");
 
-	fprintf(fpout, format,
-	    "Word",
-	    "Count",
-	    "Occurs",
-	    "Occurs",
-	    "Distance");
+		fprintf(fpout, format,
+			"Word",
+			"Count",
+			"Occurs",
+			"Occurs",
+			"Distance");
 
-	fprintf(fpout,
-	    "-----------------------------------------------------------\n");
+		fprintf(fpout, "-----------------------------------------------------------\n");
     }
 
 	/* Print out the data collected in the tree.			    */

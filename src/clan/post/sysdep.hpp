@@ -1,10 +1,12 @@
 /**********************************************************************
-	"Copyright 1990-2014 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2022 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
 #ifndef _SYSDEP_H_
 #define _SYSDEP_H_
+
+#include "longdef.hpp"
 
 #define NORET void
 

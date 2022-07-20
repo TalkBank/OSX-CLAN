@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2014 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2022 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -48,7 +48,6 @@ markPostARules(void) {
 
 BOOL
 read_arules(FILE *rulefile, FNType *fname) {
-	extern int DEBUG_CLAN;
 	ARULE_FILE_PTR c_ar_file, new_ar_file;
 	ARULES_PTR cur_rule;
 	ARULE_CLAUSE_PTR cur_clause;
@@ -501,11 +500,11 @@ get_allocat(STRING *line, ALLO_ENTRY_PTR allo_ptr) {
 static int
 apply_arules_post(int s, int e, ARULES_PTR rule_tmp) {
 	int rt_index;
-    STRING *surface;
+	STRING *surface;
 	ARULE_CLAUSE_PTR clause_tmp;
-    FEATTYPE *cat;
-    STRING *stem;
-    STRING *trans;
+	FEATTYPE *cat;
+	STRING *stem;
+	STRING *trans;
 	STRING *comp;
 	LEX_ENTRY_PTR lex_tmp;
 	CAT_COND_PTR cur_cond;
@@ -586,7 +585,7 @@ clause_loop:
 							fprintf(stderr, "\tstem=%s\n", stem);
 							fprintf(stderr, "\ttrans=%s\n", trans);
 							fprintf(stderr, "\tcomp=%s\n", comp);
-							CleanUpAll();
+							CleanUpAll(TRUE);
 							CloseFiles();
 							cutt_exit(0);
 						}
@@ -779,7 +778,7 @@ clause_loop:
 								fprintf(stderr, "\tstem=%s\n", stem);
 								fprintf(stderr, "\ttrans=%s\n", trans);
 								fprintf(stderr, "\tcomp=%s\n", comp);
-								CleanUpAll();
+								CleanUpAll(TRUE);
 								CloseFiles();
 								cutt_exit(0);
 							}

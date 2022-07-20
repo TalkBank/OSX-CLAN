@@ -97,6 +97,7 @@ typedef struct {
 	unsigned long				lTime_mark;
 	Boolean						isThereMoreSource;
 	UInt32						maxBufferSize;
+	OSErr err; // mary-wave
 } SCFillBufferData, *SCFillBufferDataPtr;
 
 extern char isMP3PatchLoaded;
@@ -110,7 +111,7 @@ extern OSErr MyGetSoundDescriptionExtension(Media inMedia, AudioFormatAtomPtr *o
 extern OSErr GetMovieMedia(FNType *inFile, Media *outMedia, Handle *outHandle);
 
 #if defined(_WIN32)
-  extern char checkMP3Sound(MSG* pMsg, char skipOnChar);
+  extern char checkMP3Sound(MSG* pMsg, char skipOnChar, double tickCount);
 #endif
 }
 #endif // __MP3PLAYER__

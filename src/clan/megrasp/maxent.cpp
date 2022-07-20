@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2014 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2022 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -327,7 +327,8 @@ ME_Model::update_model_expectation()
   for (vector<Sample>::const_iterator i = _vs.begin(); i != _vs.end(); i++, n++) {
 #if defined(_MAC_CODE) || defined(_WIN32)
 	  if (n % 10000 == 0) { // PERIOD
-		  fprintf(stderr,"\r%d ",n/10000);
+// lxs 2019-03-15 if (!isRecursive)
+			  fprintf(stderr,"\r%d ",n/10000);
 		  my_flush_chr();
 		  if (isKillProgram)
 			  megraps_exit(0);
@@ -521,7 +522,8 @@ ME_Model::train(const int cutoff,
   for (int n = 0; n < (int)_vs.size(); n++) {
 #if defined(_MAC_CODE) || defined(_WIN32)
 	  if (n % 10000 == 0) { // PERIOD
-		  fprintf(stderr,"\r%d ",n/10000);
+// lxs 2019-03-15 if (!isRecursive)
+			  fprintf(stderr,"\r%d ",n/10000);
 		  my_flush_chr();
 		  if (isKillProgram)
 			  megraps_exit(0);

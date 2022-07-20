@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0940"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8F6158670994098900A6D941"
-               BuildableName = "CLAN.app"
+               BlueprintIdentifier = "8F568C33140595650034D37D"
+               BuildableName = "CLANc.app"
                BlueprintName = "Clan"
                ReferencedContainer = "container:Clan.xcodeproj">
             </BuildableReference>
@@ -23,36 +23,40 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
+      buildConfiguration = "CLAN_c"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      buildConfiguration = "CLAN">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8F6158670994098900A6D941"
-            BuildableName = "CLAN.app"
+            BlueprintIdentifier = "8F568C33140595650034D37D"
+            BuildableName = "CLANc.app"
             BlueprintName = "Clan"
             ReferencedContainer = "container:Clan.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
    </TestAction>
    <LaunchAction
+      buildConfiguration = "CLAN_c"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "CLAN"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8F6158670994098900A6D941"
-            BuildableName = "CLAN.app"
+            BlueprintIdentifier = "8F568C33140595650034D37D"
+            BuildableName = "CLANc.app"
             BlueprintName = "Clan"
             ReferencedContainer = "container:Clan.xcodeproj">
          </BuildableReference>
@@ -61,26 +65,27 @@
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
+      buildConfiguration = "CLAN_c"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "CLAN"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8F6158670994098900A6D941"
-            BuildableName = "CLAN.app"
+            BlueprintIdentifier = "8F568C33140595650034D37D"
+            BuildableName = "CLANc.app"
             BlueprintName = "Clan"
             ReferencedContainer = "container:Clan.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "CLAN">
+      buildConfiguration = "CLAN_c">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "CLAN"
+      buildConfiguration = "CLAN_c"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
