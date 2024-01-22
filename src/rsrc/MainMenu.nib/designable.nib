@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment version="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -328,6 +328,17 @@
                                     <action selector="SelectF5Option:" target="-1" id="6nc-gF-eeg"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Make Selected Text RED" keyEquivalent="'" id="uOw-fM-h52">
+                                <connections>
+                                    <action selector="MakeSelectedTextRED:" target="-1" id="mjo-0k-2eI"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Reset Selected Text Color" keyEquivalent="'" id="ipo-Ir-ACE">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                <connections>
+                                    <action selector="ResetSelectedTextColor:" target="-1" id="Dky-F1-swa"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Reset options" id="VcR-5F-vRs">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -464,8 +475,8 @@
                                     <action selector="TrimTiers:" target="-1" id="d5i-UP-isR"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Show Line Numbers" id="x9j-Dh-mK4">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Show Line Numbers" keyEquivalent="l" id="x9j-Dh-mK4">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                 <connections>
                                     <action selector="showHideLineNumbers:" target="-1" id="cNB-dc-OzF"/>
                                 </connections>
@@ -568,8 +579,8 @@
                                     <action selector="createShowCommandsWindow:" target="490" id="CMD-hG-CdG"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Walker Controller" id="3Td-Fb-JY8">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Walker Controller" keyEquivalent="w" id="3Td-Fb-JY8">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                 <connections>
                                     <action selector="createWalkerControllerWindow:" target="XBn-Qj-Std" id="wlO-06-R5E"/>
                                 </connections>

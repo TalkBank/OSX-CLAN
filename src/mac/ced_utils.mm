@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2022 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
  */
 
@@ -706,13 +706,12 @@ char isCHATFile(FNType *fname) {
 					(ext[0] == 'T' && ext[1] == 'O' && (ext[2] == 'R' || iswdigit(ext[2]))) ||
 					(ext[0] == 'U' && ext[1] == 'T' && (ext[2] == 'F' || iswdigit(ext[2]))) ||
 					!strncmp(ext,"CHIP",4)  || !strncmp(ext,"DATE",4)  || !strncmp(ext,"KWAL",4)  ||
-					!strncmp(ext,"SYNC",4)  ||
+					!strncmp(ext,"SEG",3)  || !strncmp(ext,"SYNC",4)  ||
 					!strncmp(ext,"DELIM",5) || !strncmp(ext,"CHSTR",5) || !strncmp(ext,"INDNT",5) ||
 					!strncmp(ext,"COMBO",5) || !strncmp(ext,"FIXIT",5) || !strncmp(ext,"TORDR",5) ||
 					!strncmp(ext,"MEDIA",5) ||!strncmp(ext,"IPCORE",5) ||
 					!strncmp(ext,"LOWCAS",6)|| !strncmp(ext,"FXBLTS",6)|| !strncmp(ext,"CP2UTF",6)||
-					!strncmp(ext,"MGRASP",6)|| !strncmp(ext,"PMORTM",6)||
-					!strncmp(ext,"COMB",4)
+					!strncmp(ext,"MGRASP",6)|| !strncmp(ext,"PMORTM",6)|| !strncmp(ext,"COMB",4)
 					)
 					return('\002');
 			} else
@@ -777,39 +776,6 @@ unCH *cl_T(const char *st) {
 	strcpy(BigWBuf, st);
 	return(BigWBuf);
 }
-/*
-char my_isalnum(char c) {
-	return((char)isalnum((int)c))
-}
-
-char my_isalpha(char c) {
-	return((char)isalpha((int)c))
-}
-
-char my_isdigit(char c) {
-	return((char)isdigit((int)c))
-}
-
-char my_isspace(char c) {
-	return((char)isspace((int)c))
-}
-
-char my_islower(char c) {
-	return((char)islower((int)c))
-}
-
-char my_isupper(char c) {
-	return((char)isupper((int)c))
-}
-
-char my_tolower(char c) {
-	return((char)tolower((int)c))
-}
-
-char my_toupper(char c) {
-	return((char)toupper((int)c))
-}
-*/
 
 /*
 int LocateDir(const char *prompt, FNType *currentDir, char noDefault) {

@@ -2,7 +2,6 @@
 #include "cu.h"
 #include "check.h"
 #include "my_ctype.h"
-#include "MMedia.h"
 #import "Document.h"
 /*
 #ifdef _MAC_CODE
@@ -97,7 +96,6 @@ static char ced_isNumberShouldBeHere;
 static char ced_isArabic;
 static char	ced_isHebrew;
 static char ced_isGerman;
-static char ced_isBlob;
 static char ced_isCAFound;
 static char ced_isMultiBullets;
 static char ced_isCheckBullets;
@@ -150,7 +148,6 @@ void main_check_init(void) {
 	ced_isArabic = FALSE;
 	ced_isHebrew = FALSE;
 	ced_isGerman = FALSE;
-	ced_isBlob = FALSE;
 	ced_isCAFound = FALSE;
 	ced_isMultiBullets = FALSE;
 	ced_isCheckBullets = TRUE;
@@ -200,7 +197,6 @@ void ced_check_init(char first) {
 	ced_isArabic = FALSE;
 	ced_isHebrew = FALSE;
 	ced_isGerman = FALSE;
-	ced_isBlob = FALSE;
 	ced_isCAFound = FALSE;
 	ced_isMultiBullets = FALSE;
 	ced_isCheckBullets = TRUE;
@@ -393,7 +389,7 @@ f1:
 						if (uS.ismorfchar(s,t, &tFnt, CHECK_MORPHS, TRUE))
 							return(FALSE);
 					}
-					if (pat[k+1]=='%' && pat[k+2]=='%' && pat[k+3]==EOS && *ced_sp == '*') {
+					if (pat[k+1]=='%' && pat[k+2]=='%' && pat[k+3]==EOS && (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE))) {
 						s = s+l;
 						if (lf != s) {
 							while (lf != s)
@@ -458,7 +454,7 @@ f2:
 						if (uS.ismorfchar(s, m, &tFnt, CHECK_MORPHS, TRUE))
 							return(FALSE);
 					}
-					if (pat[k+1]=='%' && pat[k+2]=='%' && pat[k+3]==EOS && *ced_sp == '*') {
+					if (pat[k+1]=='%' && pat[k+2]=='%' && pat[k+3]==EOS && (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE))) {
 						lf = uS.sp_cp(s+t,s+j);
 						s = s+l;
 						if (lf != s) {
@@ -500,7 +496,7 @@ f2:
 
 		if (s[j] != pat[k]) {
 			if (pat[k+1] == '%' && pat[k+2] == '%') {
-				if (s[j] == EOS && pat[k+3] == EOS && *ced_sp == '*') {
+				if (s[j] == EOS && pat[k+3] == EOS && (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE))) {
 					s = s+l;
 					if (lf != s) {
 						while (lf != s)
@@ -581,7 +577,7 @@ f1:
 						if (uS.ismorfchar(s,t, &tFnt, CHECK_MORPHS, TRUE))
 							return(FALSE);
 					}
-					if (pat[k+1]=='%' && pat[k+2]=='%' && pat[k+3]==EOS && *ced_sp == '*') {
+					if (pat[k+1]=='%' && pat[k+2]=='%' && pat[k+3]==EOS && (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE))) {
 						s = s+l;
 						if (lf != s) {
 							while (lf != s)
@@ -646,7 +642,7 @@ f2:
 						if (uS.ismorfchar(s, m, &tFnt, CHECK_MORPHS, TRUE))
 							return(FALSE);
 					}
-					if (pat[k+1]=='%' && pat[k+2]=='%' && pat[k+3]==EOS && *ced_sp == '*') {
+					if (pat[k+1]=='%' && pat[k+2]=='%' && pat[k+3]==EOS && (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE))) {
 						lf = uS.sp_cp(s+t,s+j);
 						s = s+l;
 						if (lf != s) {
@@ -688,7 +684,7 @@ f2:
 
 		if (s[j] != pat[k]) {
 			if (pat[k+1] == '%' && pat[k+2] == '%') {
-				if (s[j] == EOS && pat[k+3] == EOS && *ced_sp == '*') {
+				if (s[j] == EOS && pat[k+3] == EOS && (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE))) {
 					s = s+l;
 					if (lf != s) {
 						while (lf != s)
@@ -769,7 +765,7 @@ f1:
 						if (uS.ismorfchar(s, t, &tFnt, CHECK_MORPHS, TRUE))
 							return(FALSE);
 					}
-					if (pat[k+1]=='%' && pat[k+2]=='%' && pat[k+3]==EOS && *ced_sp == '*') {
+					if (pat[k+1]=='%' && pat[k+2]=='%' && pat[k+3]==EOS && (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE))) {
 						s = s+l;
 						if (lf != s) {
 							while (lf != s)
@@ -834,7 +830,7 @@ f2:
 						if (uS.ismorfchar(s, m, &tFnt, CHECK_MORPHS, TRUE))
 							return(FALSE);
 					}
-					if (pat[k+1]=='%' && pat[k+2]=='%' && pat[k+3]==EOS && *ced_sp == '*') {
+					if (pat[k+1]=='%' && pat[k+2]=='%' && pat[k+3]==EOS && (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE))) {
 						lf = uS.sp_cp(s+t,s+j);
 						s = s+l;
 						if (lf != s) {
@@ -875,7 +871,7 @@ f2:
 
 		if (s[j] != pat[k]) {
 			if (pat[k+1] == '%' && pat[k+2] == '%') {
-				if (s[j] == EOS && pat[k+3] == EOS && *ced_sp == '*') {
+				if (s[j] == EOS && pat[k+3] == EOS && (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE))) {
 					s = s+l;
 					if (lf != s) {
 						while (lf != s)
@@ -1642,7 +1638,11 @@ static void ced_mess(short wh) {
 					sprintf(ced_err_message, "-Character %s must be used in pairs. See if any are unmatched.", err_item);
 				break;
 		case 118: strcpy(ced_err_message, "-Utterance delimiter must precede final bullet."); break;
-		case 119: strcpy(ced_err_message, "-Illegal to imbed code inside the scope of the same code."); break;
+		case 119: if (err_item[0] == EOS)
+					strcpy(ced_err_message, "iMissing word after code\n");
+				else
+					sprintf(ced_err_message, "-Missing word after code \"%s\"", err_item);
+				break;
 		case 120: if (ced_fav_lang[0] == EOS)
 					strcpy(ced_err_message, "-Please use three letter language code.");
 				else
@@ -1957,13 +1957,13 @@ static char ced_Tabs(unCH *line) {
 
 static char ced_Colon(unCH *line) {
 	register int  i;
-	register int  j;
+//	register int  j;
 	register char blf;
 	CHECK_IN_TIERS *ts;
 
 	if (isSpeaker(*line)) {
 		i = 0;
-		j = i;
+//		j = i;
 		blf = (line[i] == CED_HIDEN_C);
 		for (; line[i] && (line[i] != ':' || blf); i++) {
 			if (line[i] == CED_HIDEN_C)
@@ -2385,15 +2385,9 @@ static int ced_matchplate(TPLATES *tp, unCH *s, char charType) {
 	} else if (ses) {
 		return(144);
 	} else if (*s == '$') {
-		if (ced_isBlob)
-			return(FALSE);
-		else
-			return(32);
+		return(32);
 	} else {
-		if (ced_isBlob)
-			return(FALSE);
-		else
-			return(11);
+		return(11);
 	}
 }
 
@@ -3314,8 +3308,10 @@ static char ced_isThereStem(unCH *w, int pos) {
 }
 
 static char ced_CheckWords(unCH *w, int pos, unCH *templine, CHECK_IN_TIERS *ts) {
-	char capWErrFound, capWFound, digFound, isCompFound, paransFound;
-	int s, t, len, matchType, CAOffset, isATFound;
+//	char capWErrFound, capWFound, isCompFound;
+	char digFound, paransFound;
+//	int CAOffset;
+	int s, t, len, matchType, isATFound;
 
 	len = strlen(w) - 1;
 	if (ts->code[0] == '*' || 
@@ -3366,7 +3362,7 @@ static char ced_CheckWords(unCH *w, int pos, unCH *templine, CHECK_IN_TIERS *ts)
 			else
 				s = 0;
 		}
-		CAOffset = s;
+//		CAOffset = s;
 		if (w[s] == CED_HIDEN_C) ;
 		else if (uS.isRightChar(w,s,'[',&tFnt,TRUE) && uS.isRightChar(w,len,']',&tFnt,TRUE)) ;
 		else if (uS.isRightChar(w,s,'{',&tFnt,TRUE) && uS.isRightChar(w,len,'}',&tFnt,TRUE)) ;
@@ -3473,10 +3469,10 @@ static char ced_CheckWords(unCH *w, int pos, unCH *templine, CHECK_IN_TIERS *ts)
 					return(FALSE);
 		} else {
 			isATFound = 0;
-			capWFound = FALSE;
-			capWErrFound = FALSE;
+//			capWFound = FALSE;
+//			capWErrFound = FALSE;
+//			isCompFound = FALSE;
 			digFound = FALSE;
-			isCompFound = FALSE;
 			paransFound = FALSE;
 			if (uS.isRightChar(w,s,'0',&tFnt,TRUE))
 				s++;
@@ -3642,8 +3638,8 @@ static char ced_CheckWords(unCH *w, int pos, unCH *templine, CHECK_IN_TIERS *ts)
 								return(FALSE);
 						}
 					} else if (uS.isRightChar(w,s,'+',&tFnt,TRUE)) {
-						isCompFound = TRUE;
 /*
+						isCompFound = TRUE;
 						if (capWFound) {
 							if (check_err(95, pos+s-1, pos+s-1, templine))
 								return(FALSE);
@@ -3697,7 +3693,7 @@ static char ced_CheckWords(unCH *w, int pos, unCH *templine, CHECK_IN_TIERS *ts)
 //							}
 						}
 					} else if (uS.isRightChar(w,s,'\'',&tFnt,TRUE)) {
-						if (w[s+1] != EOS && (uS.isRightChar(w,s+1,'-',&tFnt,TRUE) || uS.isRightChar(w,s+1,'\'',&tFnt,TRUE) ||
+						if (w[s+1] != EOS && (uS.isRightChar(w,s+1,'\'',&tFnt,TRUE) ||
 								uS.isRightChar(w,s+1,'+',&tFnt,TRUE) ||
 								uS.isRightChar(w,s+1,'~',&tFnt,TRUE) || uS.isRightChar(w,s+1,'#',&tFnt,TRUE) ||
 								uS.isRightChar(w,s+1,'@',&tFnt,TRUE) || uS.isRightChar(w,s+1,'"',&tFnt,TRUE) ||
@@ -3843,8 +3839,10 @@ static char ced_CheckWords(unCH *w, int pos, unCH *templine, CHECK_IN_TIERS *ts)
 							uS.isRightChar(w,s+1,'^',&tFnt,TRUE) || uS.isRightChar(w,s+1,'~',&tFnt,TRUE) ||
 							uS.isRightChar(w,s+1,'*',&tFnt,TRUE) || uS.isRightChar(w,s+1,'+',&tFnt,TRUE) ||
 							uS.isRightChar(w,s+1,'\'',&tFnt,TRUE)) {
-							if (check_err(65, pos+s-1, pos+s-1, templine))
-								return(FALSE);
+							if (uS.isRightChar(w,s,'\'',&tFnt,TRUE) == FALSE) {
+								if (check_err(65, pos+s-1, pos+s-1, templine))
+									return(FALSE);
+							}
 						}
 					} else if (uS.isRightChar(w,s,'+',&tFnt,TRUE) || uS.isRightChar(w,s,'~',&tFnt,TRUE) || uS.isRightChar(w,s,'$',&tFnt,TRUE)) {
 						if (isFoundBar == 1) {
@@ -4649,7 +4647,7 @@ static char ced_ParseBlob(CHECK_IN_TIERS *ts, BOOL isMedia) {
 			if (hidenc) {
 				if (check_err(59,s-1,s-1,templine)) return(FALSE);
 			}
-			if (ced_sp[0] == '*' /* 2018-08-06 || ced_isBlob == FALSE */) {
+			if (ced_sp[0] == '*') {
 				if ((res=ced_checkBulletsConsist(&FirstBulletFound, ced_line, isMedia)) != 0) {
 					if (check_err(res,s-1,e-1,templine))
 						return(FALSE);
@@ -4713,7 +4711,7 @@ static char ced_isReplacementError(unCH *line, int s) {
 	if (uS.isRightChar(line, s, '.', &dFnt, MBF) && uS.isPause(line, s, NULL, NULL))
 		return(TRUE);
 	s++;
-	if (line[s] == '&' || line[s] == '+' || line[s] == '0')
+	if (line[s] == '&' || line[s] == '+') // 2023-02-24 || line[s] == '0')
 		return(TRUE);
 	return(FALSE);
 }
@@ -4907,10 +4905,13 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 			if (*st == '>')
 				isPoundSymFound = FALSE;
 /*
-			if (is_italic(tempAtt[s-1])) {
-				if (check_err(102,s-1,s-1,templine)) return(FALSE);
+			if (templine[s-1] == ATTMARKER && templine[s] == italic_start) {
+				if (check_err(102,s,s+2,templine)) return(FALSE);
 			}
 */
+			if (templine[s-1] == ';' && (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE))) {
+				if (check_err(48,s-1,s-1,templine)) return(FALSE);
+			}
 			if (*st == ',') {
 				if (!uS.isskip(templine,s,&tFnt,TRUE) && templine[s] != ',' && templine[s] != EOS && templine[s] != '\n') {
 					if (uS.HandleCAChars(templine+s, &matchType)) {
@@ -4941,7 +4942,7 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 					if (!strncmp(ced_sp, "%mor", 4) && ced_lastSpDelim[0] != EOS && ced_lastSpDelim[0] != templine[s-1]) {
 						if (check_err(94,s-1,s-1,templine)) return(FALSE);
 					}
-					if (*ced_sp == '*') {
+					if (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE)) {
 						ced_lastSpDelim[0] = templine[s-1];
 						ced_lastSpDelim[1] = EOS;
 					}
@@ -4967,7 +4968,7 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 			}
 		}
 		if (*st == EOS) {
-			if (*ced_sp == '*' && anb) {
+			if ((*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE)) && anb) {
 				if (check_err(51,s-1,s-1,templine)) return(FALSE);
 			}
 			break;
@@ -4996,7 +4997,7 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 		}
 		ced_CheckBrakets(templine,s-1,&sb,&pb,&ab,&cb,&anb);
 		e = s;
-		if (*st == '&' && *ced_sp == '*') {
+		if (*st == '&' && (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE))) {
 			if (templine[e] == '+' && (templine[e+1] < '!' || templine[e+1] > '?')) {
 				st++;
 				*st = templine[e];
@@ -5004,16 +5005,16 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 			}
 			while ((*++st=templine[e]) != EOS && !isSpace(*st) && *st != '\n' && *st != '>' && *st != '[' &&
 				   *st != ',' && *st != '+' && *st != '.' && *st != '?' && *st != '!') {
-				if (is_italic(tempAtt[e])) {
-					if (check_err(102,e-1,e-1,templine)) return(FALSE);
+				if (templine[e] == ATTMARKER && templine[e+1] == italic_start) {
+					if (check_err(102,e,e+2,templine)) return(FALSE);
 				}
 				e++;
 			}
 		} else {
 			while ((*++st=templine[e]) != EOS &&
 				   (!uS.isskip(templine,e,&tFnt,TRUE) || (uS.isRightChar(templine, e, '<', &tFnt, TRUE) && ced_line[0] == '+') || sq || hidenc || (*st == '.' && ts->UTD == 0))) {
-				if (is_italic(tempAtt[e])) {
-					if (check_err(102,e-1,e-1,templine)) return(FALSE);
+				if (templine[e] == ATTMARKER && templine[e+1] == italic_start) {
+					if (check_err(102,e,e+2,templine)) return(FALSE);
 				}
 				if (uS.isRightChar(templine, e, '(', &tFnt, TRUE) && uS.isPause(templine, e, NULL, &r)) {
 					if (!uS.isRightChar(ced_line, 0, '[', &tFnt, TRUE) && !ced_isGrouping(ced_line, templine, e)) {
@@ -5031,7 +5032,13 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 				else if (uS.isRightChar(templine, e-1, '[', &tFnt, TRUE))
 					sb++;
 			}
-			if (*ced_sp == '*') {
+			if (templine[e] == '>' && templine[e+1] == '[') {
+				if (check_err(93,e+1,e+1,templine)) return(FALSE);
+			}
+			if (templine[e-1] == ']' && templine[e] == '[') {
+				if (check_err(93,e,e,templine)) return(FALSE);
+			}
+			if (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE)) {
 				if (uS.IsUtteranceDel(templine, e)) {
 					if (ced_atUFound(templine, e)) {
 						e++;
@@ -5040,8 +5047,8 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 								uS.isRightChar(templine, e, '<', &tFnt, TRUE) || uS.isRightChar(templine, e, '>', &tFnt, TRUE) || 
 								uS.isRightChar(templine, e, '[', &tFnt, TRUE) || uS.isRightChar(templine, e, ']', &tFnt, TRUE))
 								break;
-							if (is_italic(tempAtt[e])) {
-								if (check_err(102,e-1,e-1,templine)) return(FALSE);
+							if (templine[e] == ATTMARKER && templine[e+1] == italic_start) {
+								if (check_err(102,e,e+2,templine)) return(FALSE);
 							}
 							e++;
 						}
@@ -5054,8 +5061,8 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 					while ((*++st=templine[e]) != EOS) {
 						if (isSpace(*st) || *st == '\n')
 							break;
-						if (is_italic(tempAtt[e])) {
-							if (check_err(102,e-1,e-1,templine)) return(FALSE);
+						if (templine[e] == ATTMARKER && templine[e+1] == italic_start) {
+							if (check_err(102,e,e+2,templine)) return(FALSE);
 						}
 						e++;
 					}
@@ -5069,8 +5076,8 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 				   !is_unCH_alnum(templine[e-1]) && templine[e-1]>=1 && templine[e-1]<=127) {
 				for (te++; uS.IsUtteranceDel(templine, te) || templine[te] == ',' || templine[te] == '<'; te++) {
 					*++st = templine[te];
-					if (is_italic(tempAtt[te])) {
-						if (check_err(102,te-1,te-1,templine)) return(FALSE);
+					if (templine[te] == ATTMARKER && templine[te+1] == italic_start) {
+						if (check_err(102,te,te+2,templine)) return(FALSE);
 					}
 				}
 				st++;
@@ -5082,7 +5089,7 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 				if (check_err(94,s-1,te-1,templine))
 					return(FALSE);
 			}
-			if (*ced_sp == '*')
+			if (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE))
 				strcpy(ced_lastSpDelim, ced_line);
 			isSpecialDelimFound = TRUE;
 		} else
@@ -5128,7 +5135,7 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 				 uS.isRightChar(ced_line,2,' ',&tFnt,TRUE))
 			isTextFound = TRUE;
 
-		if (*ced_sp == '*') {
+		if (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE)) {
 			if (anb && !uS.isRightChar(ced_line,0,'[',&tFnt,TRUE)) {
 				if (check_err(51,s-1,s-1,templine)) return(FALSE);
 			}
@@ -5148,7 +5155,8 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 			}
 			if (res == 0) {
 				if (templine[e] && templine[e+1] && 
-					(*ced_sp == '*' || (templine[e+1] != '\'' && templine[e+1] != '"' && !is_unCH_digit(templine[e+1])))) {
+					(*ced_sp == '*' /*(*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE))*/ ||
+					 (templine[e+1] != '\'' && templine[e+1] != '"' && !is_unCH_digit(templine[e+1])))) {
 					if (templine[e] == CED_HIDEN_C && e > 0) {
 						if (check_err(19,e,e-1,templine)) return(FALSE);
 					} else {
@@ -5167,7 +5175,7 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 						isSofterMatched != -1 || isLouderMatched != -1 || isLoPitchMatched!= -1 || isHiPitchMatched != -1||
 						isSmileMatched != -1  || isWhisperMatched != -1|| isYawnMatched != -1   || isSingingMatched != -1||
 						isPreciseMatched != -1|| isBreathyMatched != -1|| isLeftArrowMatched != -1) {
-						if (*ced_sp == '*') {
+						if (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE)) {
 							if (check_err(145,s+r-1,s+r-1,templine)) return(FALSE);
 						}
 					}
@@ -5282,7 +5290,7 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 		}
 		isLcodeFound = FALSE;
 		isLNumberShouldBeHere = ced_isNumberShouldBeHere;
-		if (*ced_sp == '*') {
+		if (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE)) {
 			j = strlen(ced_line) - 1;
 			if (!ced_isCAFound && j > 0 && ced_line[0] == '(' && ced_line[j] == ')') {
 				if (!uS.isPause(ced_line, 1, NULL, NULL) && strchr(ced_line+1, '(') == NULL) {
@@ -5308,7 +5316,7 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 				if (ced_line[1] == '+' && !DelFound) {
 					if (check_err(75,s-1,te-1,templine)) return(FALSE);
 				}
-				if (ced_line[1] == '+' && isBulletFound) {
+				if (*ced_sp == '*' && ced_line[1] == '+' && isBulletFound) {
 					if (check_err(108,s-1,te-1,templine)) return(FALSE);
 				}
 			}
@@ -5322,7 +5330,7 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 			if (!ced_CheckWords(ced_line, s, templine, ts)) return(FALSE);
 		}
 
-		if (*ced_sp == '*') {
+		if (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE)) {
 			ced_removeCAChars(ced_line);
 		}
 		if (ced_line[0]=='+' && (ced_line[1]=='"' || ced_line[1]=='^' || ced_line[1]=='<' || ced_line[1]==',' || ced_line[1]=='+') && ced_line[2]==EOS) {
@@ -5336,7 +5344,7 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 					isBulletFound = TRUE;
 			} else
 				isBulletFound = TRUE;
-			if (*ced_sp == '*' && ced_isPlayBullet(ced_line)) {
+			if (*ced_sp == '*') {
 				if (!isTextBetweenBulletsFound && (!ced_isMultiBullets || !isLastItemBullet || !ced_lastBulletOnTier(templine+e))) {
 					if (check_err(73,s-1,e-1,templine)) return(FALSE);
 				}
@@ -5356,7 +5364,7 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 			}
 			if (!ced_isPlayBullet(ced_line)) {
 				isTextBetweenBulletsFound = TRUE;
-			} else if ((ced_sp[0] == '*' /* 2018-08-06 || ced_isBlob == FALSE*/) && (!ced_isMultiBullets || ced_lastBulletOnTier(templine+e))) {
+			} else if ((ced_sp[0] == '*') && (!ced_isMultiBullets || ced_lastBulletOnTier(templine+e))) {
 				if ((res=ced_checkBulletsConsist(&FirstBulletFound, ced_line, isMedia)) != 0) {
 					if (check_err(res,s-1,e-1,templine))
 						return(FALSE);
@@ -5400,7 +5408,7 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 						break;
 					}
 				}
-				if (*ced_sp == '*') {
+				if (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE)) {
 					if (templine[s-1] == '[' && templine[s] != '+' && templine[s] != '-') {
 						for (r=s-2; r >= 0; r--) {
 							if (templine[r] == ')') {
@@ -5497,7 +5505,7 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 		if (check_err(21,s-2,s-2,templine)) return(FALSE);
 	}
 	if (!isTextFound) { if (check_err(70,-1,-1,templine)) return(FALSE); }
-	if (*ced_sp == '*') {
+	if (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE)) {
 		if (isFasterMatched != -1) {
 			t = uS.HandleCAChars(templine+isFasterMatched, NULL);
 			if (check_err(117, isFasterMatched-1, isFasterMatched+t-1, templine))
@@ -5593,9 +5601,23 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 
 static char ced_ParseScope(unCH *wline) {
 	int pos, temp, sqCnt;
+	char sq, bullet, isWordFound;
 
+	sq = FALSE;
+//	if (strncmp(wline, "put", 3) == 0)
+//		bullet = FALSE;
+	bullet = FALSE;
+	isWordFound = FALSE;
 	pos = strlen(wline) - 1;
 	while (pos >= 0) {
+		if (wline[pos] == ']')
+			sq = TRUE;
+		else if (wline[pos] == '[')
+			sq = FALSE;
+		else if (wline[pos] == 0x2022) {
+			bullet = !bullet;
+		}
+
 		if (uS.isRightChar(wline, pos, ']', &tFnt, TRUE)) {
 			sqCnt = 0;
 			temp = pos;
@@ -5604,14 +5626,26 @@ static char ced_ParseScope(unCH *wline) {
 					sqCnt++;
 				else if (uS.isRightChar(wline, pos, '[', &tFnt, TRUE))
 					sqCnt--;
+				if (wline[pos] == '[')
+					sq = FALSE;
 			}
+			if (wline[pos] == '[')
+				sq = FALSE;
 			if (pos >= 0) {
 				wline[temp] = EOS;
 				uS.isSqCodes(wline+pos+1, templine3, &tFnt, TRUE);
 				wline[temp] = ']';
+				if (isWordFound == FALSE && templine3[0] == '/') {
+					temp = (temp - pos) + 1;
+					if (check_err(119,pos,pos+temp-1,templine))
+						return(FALSE);
+				}
 			} else
 				pos = temp;
 		}
+		if (sq == FALSE && bullet == FALSE && !uS.isskip(wline,pos,&dFnt,MBF) &&
+			wline[pos] != 0x2022 && wline[pos] != '/' && wline[pos] != '+' && !uS.IsUtteranceDel(wline, pos))
+			isWordFound = TRUE;
 		pos--;
 	}
 	return(TRUE);
@@ -5702,7 +5736,6 @@ static char ced_CheckRest(NSTextView *textView, char *filePath, BOOL isMedia) {
 				ced_isArabic = FALSE;
 				ced_isHebrew = FALSE;
 				ced_isGerman = FALSE;
-				ced_isBlob= FALSE;
 				ced_isCAFound = FALSE;
 				ced_isMultiBullets = FALSE;
 				ced_isCheckBullets = TRUE;
@@ -5810,9 +5843,7 @@ static char ced_CheckRest(NSTextView *textView, char *filePath, BOOL isMedia) {
 					for (j=i; !uS.isskip(templine,j,&tFnt,TRUE) && templine[j] != '=' && templine[j] != '\n' && templine[j] != EOS; j++) ;
 					t = templine[j];
 					templine[j] = EOS;
-					if (!uS.mStricmp(templine+i, "heritage")) {
-						ced_isBlob = TRUE;
-					} else if (!strcmp(templine+i, "multi")) {
+					if (!strcmp(templine+i, "multi")) {
 						ced_isMultiBullets = TRUE;
 					} else if (!strcmp(templine+i, "bullets")) {
 						ced_isCheckBullets = FALSE;
@@ -5897,7 +5928,8 @@ static char ced_CheckRest(NSTextView *textView, char *filePath, BOOL isMedia) {
 						if ((s=strrchr(templineC2, '.')) != NULL)
 							*s = EOS;
 						u_strcpy(templine2, templineC2, UTTLINELEN);
-						if (uS.mStricmp(templine+i, templine2)) {
+						if (uS.mStricmp(templine+i, templine2) &&
+							uS.mStrnicmp(templine+i, "http", 4) != 0) {
 							s = strrchr(templineC2, '.');
 							if (s != NULL && (uS.mStricmp(s, ".elan") == 0 || uS.mStricmp(s, ".praat") == 0)) {
 								*s = EOS;
@@ -5999,9 +6031,6 @@ static char ced_CheckRest(NSTextView *textView, char *filePath, BOOL isMedia) {
 			} else if (ced_matchSpeaker(ced_headsp,ced_sp+1, FALSE)) {
 				if (ced_CodeErr(18))
 					return(FALSE);
-			} else if (ced_isBlob) {
-				if (!ced_ParseBlob(ts, isMedia))
-					return(FALSE);
 			} else {
 				if (!ced_ParseWords(ts, isMedia))
 					return(FALSE);
@@ -6018,9 +6047,6 @@ static char ced_CheckRest(NSTextView *textView, char *filePath, BOOL isMedia) {
 			if (isdone == 3) ;
 			else if ((ts=ced_FindTier(ced_codet,ced_sp)) == NULL) {
 				if (ced_CodeErr(17))
-					return(FALSE);
-			} else if (ced_isBlob) {
-				if (!ced_ParseBlob(ts, isMedia))
 					return(FALSE);
 			} else {
 				if (!ced_ParseWords(ts, isMedia))
@@ -6043,9 +6069,6 @@ static char ced_CheckRest(NSTextView *textView, char *filePath, BOOL isMedia) {
 			if (isdone != 3) {
 				if ((ts=ced_FindTier(ced_codet,ced_sp)) == NULL) {
 					if (ced_CodeErr(17)) return(FALSE);
-				} else if (ced_isBlob) {
-					if (!ced_ParseWords(ts, isMedia))
-						return(FALSE);
 				} else {
 					if (!ced_ParseWords(ts, isMedia))
 						return(FALSE);
@@ -6082,7 +6105,8 @@ static char ced_CheckRest(NSTextView *textView, char *filePath, BOOL isMedia) {
 						break;
 					}
 				}
-				if (!ced_ParseBlob(NULL, isMedia)) return(FALSE);
+				if (!ced_ParseBlob(NULL, isMedia))
+					return(FALSE);
 			}
 
 			if (tc == NULL) {

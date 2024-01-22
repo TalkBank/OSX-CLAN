@@ -20,7 +20,8 @@ static unCH input_str[UTTLINELEN+6];
 
 
 static void addToSTDOutput(char chr, char *st) {
-	long len, sLen;
+	long len;
+//	long sLen;
 
 	if (st == NULL) {
 		if (chr == '\n' || print_str_cnt >= UTTLINELEN) {
@@ -36,7 +37,7 @@ static void addToSTDOutput(char chr, char *st) {
 	} else {
 		len = 0L;
 repeatAdding:
-		sLen = len;
+//		sLen = len;
 		for (; st[len] != '\n' && st[len] != EOS && print_str_cnt < UTTLINELEN; len++) {
 			print_str[print_str_cnt++] = st[len];
 		}

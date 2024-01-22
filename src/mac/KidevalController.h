@@ -30,9 +30,16 @@
 	IBOutlet NSButton *yueCH;
 	IBOutlet NSButton *zhoCH;
 
-	IBOutlet NSButton *FreePlayCH;
-	IBOutlet NSButton *Chinese_zhoCH;
-	IBOutlet NSButton *Japanese_tdCH;
+	IBOutlet NSButton *EngToyplayCH;
+	IBOutlet NSButton *EngNarrativeCH;
+	IBOutlet NSButton *ZhoToyplayCH;
+	IBOutlet NSButton *ZhoNarrativeCH;
+	IBOutlet NSButton *NldToyplayCH;
+	IBOutlet NSButton *FraToyplayCH;
+	IBOutlet NSButton *FraNarrativeCH;
+	IBOutlet NSButton *JpnToyplayCH;
+	IBOutlet NSButton *SpaToyplayCH;
+	IBOutlet NSButton *SpaNarrativeCH;
 
 	IBOutlet NSButton *maleCH;
 	IBOutlet NSButton *femaleCH;
@@ -73,9 +80,16 @@
 - (IBAction)yueClicked:(id)sender;
 - (IBAction)zhoClicked:(id)sender;
 
-- (IBAction)FreePlayClicked:(id)sender;
-- (IBAction)Chinese_zhoClicked:(id)sender;
-- (IBAction)Japanese_tdClicked:(id)sender;
+- (IBAction)EngToyplayClicked:(id)sender;
+- (IBAction)EngNarrativeClicked:(id)sender;
+- (IBAction)ZhoToyplayClicked:(id)sender;
+- (IBAction)ZhoNarrativeClicked:(id)sender;
+- (IBAction)NldToyplayClicked:(id)sender;
+- (IBAction)FraToyplayClicked:(id)sender;
+- (IBAction)FraNarrativeClicked:(id)sender;
+- (IBAction)JpnToyplayClicked:(id)sender;
+- (IBAction)SpaToyplayClicked:(id)sender;
+- (IBAction)SpaNarrativeClicked:(id)sender;
 
 - (IBAction)maleClicked:(id)sender;
 - (IBAction)femaleClicked:(id)sender;

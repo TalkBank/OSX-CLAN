@@ -1,3 +1,4 @@
+#import "DocumentController.h"
 #import "DocumentWinController.h"
 #import "WalkerController.h"
 #import "cu.h"
@@ -16,8 +17,10 @@ BOOL DefWindowDims;
 BOOL isCursorPosRestore;
 char isUTFData;
 char isChatLineNums;
+char isDarkColor;// 2023-05-10
 char isUpdateCLAN;
 char F5Option;
+NSInteger AlphaColorPtr, ColorNumPtr; // 2023-07-21
 
 DocumentWindowController *gLastTextWinController;
 
@@ -292,6 +295,17 @@ static void SetOption(char *text) {
 			text[i] = EOS;
 			set_folders(2, text);
 		}
+	} else if (id == 2014) {
+		if (*text != EOS) {
+			AlphaColorPtr = atoi(text);
+			for (; *text && myIsAllDigit(*text); text++) ;
+			for (; *text && !myIsAllDigit(*text); text++) ;
+			if (*text != EOS) {
+				ColorNumPtr = atoi(text);
+			}
+		}
+	} else if (id == 2015) {
+		AutoSavePtr = atoi(text);
 	}
 }
 
@@ -354,6 +368,8 @@ static void WriteCedPrefs(FILE *fp) {
 	fprintf(fp, "%d=%d\n", 1995, doMixedSTWave);
 	fprintf(fp, "%d=%d\n", 1998, isChatLineNums);
 	fprintf(fp, "%d=%d\n", 2006, F5Option);
+	fprintf(fp, "%d=%d %d\n", 2014, AlphaColorPtr, ColorNumPtr);
+	fprintf(fp, "%d=%d\n", 2015, AutoSavePtr);
 }
 
 void WriteCedPreference(void) {
@@ -428,6 +444,7 @@ void LocalInit(void) {
 	dFnt.fontTable = NULL;
 	dFnt.isUTF = 1;
 */
+	isComRuning = false;
 	strcpy(dFnt.fontName, DEFAULT_FONT);
 	dFnt.fontId = DEFAULT_ID;
 	dFnt.fontSize = DEFAULT_SIZE;
@@ -470,6 +487,9 @@ void LocalInit(void) {
 		addFilename2Path(lib_dir, "lib/");
 		if (access(lib_dir, 0)) {
 			strcpy(lib_dir, "/Users/WORK/ClanW/(LIB)/");
+			if (access(lib_dir, 0)) {
+				strcpy(lib_dir, "/Users/WORK/ClanW/ь-LIB/");
+			}
 		}
 	} else {
 		strcpy(wd_dir, mFileName);
@@ -488,7 +508,11 @@ void LocalInit(void) {
 	DefWindowDims = FALSE;
 	isCursorPosRestore = TRUE;
 	isChatLineNums = FALSE;// 2020-09-18
+	isDarkColor = FALSE;// 2023-05-10
 	F5Option = EVERY_TIER;
+	AlphaColorPtr = 3;  // 2023-07-21
+	ColorNumPtr = 0;  // 2023-07-21
+	AutoSavePtr = 0; // 2023-09-15
 
 	NextTierName[0] = EOS;
 	strcpy(DisTier, "%MOR:");
@@ -512,6 +536,7 @@ void LocalInit(void) {
 	InitFileDialog();
 	InitKidevalOptions();
 	InitEvalOptions();
+	InitEvaldOptions();
 	main_check_init();
 	init_commands();
 

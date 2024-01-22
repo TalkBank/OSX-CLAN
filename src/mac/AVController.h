@@ -19,10 +19,8 @@ struct AVInfo {
 	char mediaFPath[CS_MAX_PATH+FILENAME_MAX]; // 2020-03-12
 	char mediaFName[CS_MAX_PATH+FILENAME_MAX];  // 2020-03-12
 	char isWhatType; // isAudio isVideo
-	long beg, end;
+	long beg, end, endContPlay, endWalker;
 	char playMode;
-	long endWalker;
-	long endContPlay;
 	NSWindow *docWindow;
 	NSTextView *textView;
 	struct AVInfoNextSeg *nextSegs;
@@ -34,13 +32,11 @@ struct AVInfo {
 	NSTextView *textView;
 	NSWindow *docWindow;
 @public
-	long beg, end, endContPlay;
+	long beg, end, endContPlay, endWalker, lastEndBullet;
 	char rMovieFile[CS_MAX_PATH+FILENAME_MAX];
 	char isWhatType; // isAudio isVideo
 	struct AVInfoNextSeg *nextSegs;
 	char playMode;
-	long endWalker;
-	long lastEndBullet;
 	BOOL isPlayerItemObserverSet;
 	void *playerItemContext;
 	AVAudioPlayer *audioPlayer;

@@ -120,11 +120,11 @@ void SetClanWinIcons(void) {
 	} else {
 		curProgNum = ProgNum;
 		[commandsWindow->fileInButton setHidden:NO];
-		if (curProgNum == EVAL || /*curProgNum == C_NNLA || */curProgNum == KIDEVAL)
+		if (curProgNum == EVAL || curProgNum == EVALD || curProgNum == KIDEVAL)
 			[commandsWindow->fileInButton setTitle:[NSString stringWithUTF8String:"Option"]];
 		else
 			[commandsWindow->fileInButton setTitle:[NSString stringWithUTF8String:"File In"]];
-		if (option_flags[ProgNum] & T_OPTION && /*curProgNum != C_NNLA && */curProgNum != EVAL && curProgNum != KIDEVAL) {
+		if (option_flags[ProgNum] & T_OPTION && curProgNum != EVAL && curProgNum != EVALD && curProgNum != KIDEVAL) {
 //			ControlCTRL(win, I_Tiers, ShowCtrl, 0);
 		} else {
 //			ControlCTRL(win, I_Tiers, HideCtrl, 0);
@@ -231,6 +231,7 @@ void SetClanWinIcons(void) {
 		if (clan_name[pi][0] != EOS)
 			cnt = [self poup_insertSorted:temp atLoc:cnt name:clan_name[pi]];
 	}
+	cnt = [self poup_insertSorted:temp atLoc:cnt name:"mor"];
 	for (pi=0; pi < cnt; pi++) {
 		str = [NSString stringWithUTF8String:temp[pi]];
 		[progsPopUp insertItemWithTitle:str atIndex:pi+1]; // 2020-02-20
@@ -280,7 +281,7 @@ void SetClanWinIcons(void) {
 
 	NSWindow *window = [self window];
 //	[window setIdentifier:@"Command"];
-	[window setRestorationClass:[self class]];
+//	[window setRestorationClass:[self class]];
 	[super windowDidLoad];  // It's documented to do nothing, but still a good idea to invoke...
 	isSettingSize = NO;
 	readAliases(1);
@@ -772,7 +773,8 @@ yank:
 
 	comStr = [commandString stringValue];
 
-//	dispatch_async(dispatch_get_main_queue(), ^(void){
+	HideClanWinIcons();
+	//	dispatch_async(dispatch_get_main_queue(), ^(void){
 
 //  DISPATCH_QUEUE_PRIORITY_HIGH
 //	DISPATCH_QUEUE_PRIORITY_DEFAULT

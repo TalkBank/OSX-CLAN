@@ -36,6 +36,8 @@
 	IBOutlet NSButton *Important_EventCH;
 	IBOutlet NSButton *StrokeCH;
 	IBOutlet NSButton *WindowCH;
+	IBOutlet NSButton *CommunicationCH;
+	IBOutlet NSButton *Illness_or_InjuryCH;
 }
 
 - (IBAction)sp_oneClicked:(id)sender;
@@ -78,6 +80,8 @@
 - (IBAction)Important_EventClicked:(id)sender;
 - (IBAction)StrokeClicked:(id)sender;
 - (IBAction)WindowClicked:(id)sender;
+- (IBAction)CommunicationClicked:(id)sender;
+- (IBAction)Illness_or_InjuryClicked:(id)sender;
 
 - (IBAction)OKClicked:(id)sender;
 - (IBAction)CancelClicked:(id)sender;

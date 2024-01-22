@@ -29,10 +29,10 @@ static unCH tempUserString[UTTLINELEN+2];
 
 - (void)windowDidLoad {
 
-	NSWindow *window = [self window];
+//	NSWindow *window = [self window];
 
 //	[window setIdentifier:@"Ids"];
-	[window setRestorationClass:[self class]];
+//	[window setRestorationClass:[self class]];
 	[super windowDidLoad];  // It's documented to do nothing, but still a good idea to invoke...
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowWillClose:) name:NSWindowWillCloseNotification object:self.window];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResize:) name:NSWindowDidResizeNotification object:self.window];

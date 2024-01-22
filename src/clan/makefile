@@ -55,12 +55,12 @@ MEGRASPH = megrasp/ksutil.h megrasp/maxent.h megrasp/blmvm.h
 
 all:	anvil2chat chains chat2anvil chat2ca chat2elan chat2praat chat2xmar check \
 	chip chstring codes combo combtier compound cooccur  dataclean dates delim dist \
-	dss elan2chat eval fixbullets fixit flo flucalc freq freqpos gem gemfreq \
+	dss elan2chat eval eval-d fixbullets fixit flo flucalc freq freqpos gem gemfreq \
 	gemlist indent ipsyn keymap kideval kwal lines lena2chat lipp2chat longtier \
 	lowcase makemod maxwd megrasp mlt mlu modrep mor mortable ort play2chat phonfreq \
 	post postlist postmodrules postmortem praat2chat posttrain \
 	quotes rely repeat retrace salt2chat script srt2chat sugar text2chat timedur \
-	tierorder trnfix uniq validateXWOR vocd wdlen test
+	tierorder trnfix uniq validateMFA vocd wdlen test
 
 anvil2chat:	  	$(DD)/anvil2chat
 chains:	  		$(DD)/chains
@@ -84,6 +84,7 @@ dist:			$(DD)/dist
 dss:			$(DD)/dss
 elan2chat:		$(DD)/elan2chat
 eval:			$(DD)/eval
+eval-d:			$(DD)/eval-d
 fixbullets:		$(DD)/fixbullets
 fixit:			$(DD)/fixit
 flo:			$(DD)/flo
@@ -134,7 +135,7 @@ timedur:		$(DD)/timedur
 tierorder:		$(DD)/tierorder
 trnfix:			$(DD)/trnfix
 uniq:			$(DD)/uniq
-validateXWOR:		$(DD)/validateXWOR
+validateMFA:		$(DD)/validateMFA
 vocd:			$(DD)/vocd
 wdlen:			$(DD)/wdlen
 
@@ -221,6 +222,9 @@ $(DD)/elan2chat: Elan2Chat.cpp cu.h common.h $(OBJ)/c_ver.o $(OBJ)/cut.o $(OBJ)/
 
 $(DD)/eval: eval.cpp cu.h common.h $(OBJ)/c_ver.o $(OBJ)/cut.o $(OBJ)/stp.o $(OBJ)/fntc.o
 	$(CC) $(CFLAGS) eval.cpp -o $(DD)/eval $(OBJ)/c_ver.o $(OBJ)/cut.o $(OBJ)/stp.o $(OBJ)/fntc.o
+
+$(DD)/eval-d: eval-d.cpp cu.h common.h $(OBJ)/c_ver.o $(OBJ)/cut.o $(OBJ)/stp.o $(OBJ)/fntc.o
+	$(CC) $(CFLAGS) eval-d.cpp -o $(DD)/eval-d $(OBJ)/c_ver.o $(OBJ)/cut.o $(OBJ)/stp.o $(OBJ)/fntc.o
 
 $(DD)/fixbullets: FixBullets.cpp cu.h common.h $(OBJ)/c_ver.o $(OBJ)/cut.o $(OBJ)/stp.o $(OBJ)/fntc.o
 	$(CC) $(CFLAGS) FixBullets.cpp -o $(DD)/fixbullets $(OBJ)/c_ver.o $(OBJ)/cut.o $(OBJ)/stp.o $(OBJ)/fntc.o
@@ -369,8 +373,8 @@ $(DD)/tierorder: tierorder.cpp cu.h common.h $(OBJ)/c_ver.o $(OBJ)/cut.o $(OBJ)/
 $(DD)/trnfix: TrnFix.cpp cu.h common.h $(OBJ)/c_ver.o $(OBJ)/cut.o $(OBJ)/stp.o $(OBJ)/fntc.o
 	$(CC) $(CFLAGS) TrnFix.cpp -o $(DD)/trnfix $(OBJ)/c_ver.o $(OBJ)/cut.o $(OBJ)/stp.o $(OBJ)/fntc.o
 
-$(DD)/validateXWOR: validateXWOR.cpp cu.h common.h $(OBJ)/c_ver.o $(OBJ)/cut.o $(OBJ)/stp.o $(OBJ)/fntc.o
-	$(CC) $(CFLAGS) validateXWOR.cpp -o $(DD)/validateXWOR $(OBJ)/c_ver.o $(OBJ)/cut.o $(OBJ)/stp.o $(OBJ)/fntc.o
+$(DD)/validateMFA: validateMFA.cpp cu.h common.h $(OBJ)/c_ver.o $(OBJ)/cut.o $(OBJ)/stp.o $(OBJ)/fntc.o
+	$(CC) $(CFLAGS) validateMFA.cpp -o $(DD)/validateMFA $(OBJ)/c_ver.o $(OBJ)/cut.o $(OBJ)/stp.o $(OBJ)/fntc.o
 
 $(DD)/uniq: uniq.cpp cu.h common.h $(OBJ)/c_ver.o $(OBJ)/cut.o $(OBJ)/stp.o $(OBJ)/fntc.o
 	$(CC) $(CFLAGS) uniq.cpp -o $(DD)/uniq $(OBJ)/c_ver.o $(OBJ)/cut.o $(OBJ)/stp.o $(OBJ)/fntc.o
@@ -410,6 +414,7 @@ clean:
 	dss \
 	elan2chat \
 	eval \
+	eval-d \
 	fixbullets \
 	fixit \
 	flo \
@@ -460,7 +465,7 @@ clean:
 	tierorder \
 	trnfix \
 	uniq \
-	validateXWOR \
+	validateMFA \
 	vocd \
 	wdlen \
 	test

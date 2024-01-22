@@ -62,7 +62,7 @@
 - (void)windowDidLoad {
     NSWindow *window = [self window];
     [window setIdentifier:@"LineNumber"];
-    [window setRestorationClass:[self class]];
+//    [window setRestorationClass:[self class]];
     [super windowDidLoad];  // It's documented to do nothing, but still a good idea to invoke...
 }
 

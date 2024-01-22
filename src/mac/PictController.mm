@@ -82,9 +82,8 @@ tryAgain:
 			*s = EOS;
 		strcpy(err_mess, "Can't locate picture filename:\n");
 		strcat(err_mess, pictFName);
-		strcat(err_mess, "\n or:\n");
+		strcat(err_mess, "\n");
 		if (!findFullPictName(pictFName, curDocPath)) {
-			strcat(err_mess, pictFName);
 			do_warning_sheet(err_mess, docWindow);
 			return;
 		}
@@ -131,7 +130,7 @@ tryAgain:
 
 	isSettingSize = NO;
 	NSLog(@"PictController: windowDidLoad\n");
-	[window setRestorationClass:[self class]];
+//	[window setRestorationClass:[self class]];
 	[super windowDidLoad];  // It's documented to do nothing, but still a good idea to invoke...
 	nPictFile = [NSString stringWithUTF8String:mPictFName];
 	theImage = [[NSImage alloc] initWithContentsOfURL:[NSURL fileURLWithPath:nPictFile]];

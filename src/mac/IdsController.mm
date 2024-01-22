@@ -1247,11 +1247,11 @@ static IdsController *IdsWindow = nil;
 
 - (void)windowDidLoad {
 
-	NSWindow *window = [self window];
+//	NSWindow *window = [self window];
 	OnlyIntegerValueFormatter *formatter = [[[OnlyIntegerValueFormatter alloc] init] autorelease];
 
 //	[window setIdentifier:@"Ids"];
-	[window setRestorationClass:[self class]];
+//	[window setRestorationClass:[self class]];
 	[super windowDidLoad];  // It's documented to do nothing, but still a good idea to invoke...
 /*
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{//TODO

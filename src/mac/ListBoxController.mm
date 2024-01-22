@@ -18,7 +18,7 @@ extern NSFont *defUniFont;
 	NSWindow *window = [self window];
 
 	[window setIdentifier:@"ListBox"];
-	[window setRestorationClass:[self class]];
+//	[window setRestorationClass:[self class]];
 	[super windowDidLoad];  // It's documented to do nothing, but still a good idea to invoke...
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowWillClose:) name:NSWindowWillCloseNotification object:self.window];
 	myTableView.doubleAction = @selector(doubleClick:);

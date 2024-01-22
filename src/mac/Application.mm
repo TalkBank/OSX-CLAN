@@ -26,11 +26,11 @@ extern struct DefWin PictWinSize; // 2021-05-01
 
 - (id)init
 {
-	int j;
+//	int j;
 
     self = [super init];
     if (self) {
-		j = 0;
+//		j = 0;
         // Initialization code here.
     }
     
@@ -169,13 +169,13 @@ extern struct DefWin PictWinSize; // 2021-05-01
 
 - (void)sendEvent:(NSEvent *)theEvent
 { // 2019-10-15
-	int j;
-	NSWindow *window;
+//	int j;
+//	NSWindow *window;
 
-	window = [theEvent window];
+//	window = [theEvent window];
 
 	if (([theEvent type] == NSKeyDown) && ([theEvent modifierFlags] & NSCommandKeyMask)) {
-		j = 0;
+//		j = 0;
 	}
 	[super sendEvent:theEvent];
 }

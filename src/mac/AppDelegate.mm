@@ -105,6 +105,16 @@ extern BOOL DefClan;
 		return(YES); // YES - means open on start-up, NO - means do not open
 }
 
+// 2023-02-15 beg
+- (void)applicationWillFinishLaunching:(NSNotification *)sender {
+#pragma unused (sender)
+	
+	activateBauerPatch = YES;
+	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"NSFullScreenMenuItemEverywhere"];
+//	[NSUserDefaults resetStandardUserDefaults];
+}
+// 2023-02-15 end
+
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
 #pragma unused (notification)
 	NSLog(@"applicationDidFinishLaunching\n");
@@ -118,11 +128,12 @@ extern BOOL DefClan;
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
 #pragma unused (sender)
-	short err = 0;
+//	short err = 0;
 	extern AEEventHandlerUPP hOpenFilePos;
 
 	NSLog(@"applicationShouldTerminate\n");
-	err = AERemoveEventHandler(758934755, 0, hOpenFilePos, false);
+//	err = 
+	AERemoveEventHandler(758934755, 0, hOpenFilePos, false);
 	return(NSTerminateNow); // NSTerminateNow - YES, NSTerminateCancel - NO, NSTerminateLater
 }
 

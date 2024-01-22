@@ -83,7 +83,34 @@ AVController *AVMediaPlayer = nil;
 	isSPFound = false;
 	while (pos < len) {	// Run through the whole text in NSTextStorage *text
 		ch = [textSt characterAtIndex:pos];
-		if (ch == 0x2022) {
+		if (ch == '\n') {
+			if (pos+5 < len) {
+				pos++;
+				bufLen = 0L;
+				for (j=pos; bufLen < 5; j++) {
+					ch = [textSt characterAtIndex:j];
+					bufU[bufLen++] = ch; 
+				}
+				bufU[bufLen] = EOS;
+				if (uS.mStricmp(bufU, "%wor:") == 0) {
+					while (pos < len) {
+						ch = [textSt characterAtIndex:pos];
+						if (ch == '\n') {
+							pos++;
+							if (pos < len) {
+								ch = [textSt characterAtIndex:pos];
+								if (ch == '*' || ch == '%' || ch == '@')
+									break;
+							} else
+								break;
+						}
+						pos++;
+					}
+					if (pos >= len)
+						break;;
+				}
+			}
+		} else if (ch == 0x2022) {
 			docWinCtrl = getDocWinController(docWindow);
 			bulletPosBeg = pos;
 			bulletPosEnd = [docWinCtrl isLegalBullet:pos bTest:&bType];
@@ -122,7 +149,9 @@ AVController *AVMediaPlayer = nil;
 						end = atol(bufEnd+1);
 						if (beg < endValue) {
 							isSPFound = true;
-							endContPlay = end;
+							endContPlay = [docWinCtrl findEndContPlay:textSt index:(NSUInteger)pos];
+							if (endContPlay == 0)
+								endContPlay = end;
 							if (docWinCtrl->SnTr.IsSoundOn == true) {
 								docWinCtrl->SnTr.BegF = [docWinCtrl conv_from_msec_rep:beg];
 								docWinCtrl->SnTr.EndF = [docWinCtrl conv_from_msec_rep:end];
@@ -388,9 +417,9 @@ AVController *AVMediaPlayer = nil;
 		rate = 1.0;
 	}
 	CMTime cmDuration;
-	long lduration;
+//	long lduration;
 	cmDuration = playerCurrentItem.duration;
-	lduration = CMTimeGetSeconds(cmDuration) * 1000.0000;
+//	lduration = CMTimeGetSeconds(cmDuration) * 1000.0000;
 	playerView.player.rate = 1.0;
 	[playerView.player seekToTime:(CMTime)CMTimeMake((int64_t)beg, 1000) //CMTimeMakeWithSeconds(bef, 1)
 				toleranceBefore:(CMTime)kCMTimeZero toleranceAfter:(CMTime)kCMTimeZero];
@@ -556,6 +585,11 @@ tryAgain:
 	AVURLAsset *clip;
 	NSKeyValueObservingOptions options;
 
+	if (AVinfo->playMode != Walker && AVinfo->playMode != F_five && AVinfo->beg >= AVinfo->end) {
+		do_warning_sheet("BEG mark must be smaller than END mark. PLease run CHECK command on this file.", AVinfo->docWindow);
+		return;
+	}
+
 	strcpy(err_mess, "Can't locate media filename:\n");
 	strcat(err_mess, AVinfo->mediaFPath);
 	addFilename2Path(err_mess, AVinfo->mediaFName);
@@ -701,7 +735,7 @@ tryAgain:
 	NSString *nMovieFile;
 
 	NSLog(@"AVController: windowDidLoad\n");
-	[window setRestorationClass:[self class]];
+//	[window setRestorationClass:[self class]];
 	[super windowDidLoad];  // It's documented to do nothing, but still a good idea to invoke...
 
 	isSettingSize = NO;

@@ -3,6 +3,7 @@
 #import "c_clan.h"
 #import "FileInController.h"
 #import "EvalController.h"
+#import "EvaldController.h"
 #import "KidevalController.h"
 #import "CommandsController.h"
 
@@ -310,14 +311,19 @@ static FileInController *FileInWindow = nil;
 		comStr = [commandsWindow->commandString stringValue];
 		FileInWindow->isCallKideval = false;
 		FileInWindow->isCallEval = false;
+		FileInWindow->isCallEvald = false;
 		if ([comStr length] >= 7) {
 			if ([comStr compare:@"kideval" options:NSCaseInsensitiveSearch range:NSMakeRange(0,7)] == NSOrderedSame) {
 				FileInWindow->isCallKideval = true;
+			} else if ([comStr compare:@"eval-d" options:NSCaseInsensitiveSearch range:NSMakeRange(0,6)] == NSOrderedSame) {
+				FileInWindow->isCallEvald = true;
 			} else if ([comStr compare:@"eval" options:NSCaseInsensitiveSearch range:NSMakeRange(0,4)] == NSOrderedSame) {
 				FileInWindow->isCallEval = true;
 			}
 		} else if ([comStr length] >= 4) {
-			if ([comStr compare:@"eval" options:NSCaseInsensitiveSearch range:NSMakeRange(0,4)] == NSOrderedSame) {
+			if ([comStr compare:@"eval-d" options:NSCaseInsensitiveSearch range:NSMakeRange(0,6)] == NSOrderedSame) {
+				FileInWindow->isCallEvald = true;
+			} else if ([comStr compare:@"eval" options:NSCaseInsensitiveSearch range:NSMakeRange(0,4)] == NSOrderedSame) {
 				FileInWindow->isCallEval = true;
 			}
 		}
@@ -332,7 +338,7 @@ static FileInController *FileInWindow = nil;
 	NSWindow *window = [self window];
 
 	[window setIdentifier:@"FileIn"];
-	[window setRestorationClass:[self class]];
+//	[window setRestorationClass:[self class]];
 	[super windowDidLoad];  // It's documented to do nothing, but still a good idea to invoke...
 /*
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{//TODO
@@ -781,6 +787,10 @@ static FileInController *FileInWindow = nil;
 				do_warning_sheet(err, [commandsWindow window]);
 		} else if (isCallEval) {
 			err = [EvalController EvalDialog];
+			if (err != NULL)
+				do_warning_sheet(err, [commandsWindow window]);
+		} else if (isCallEvald) {
+			err = [EvaldController EvaldDialog];
 			if (err != NULL)
 				do_warning_sheet(err, [commandsWindow window]);
 		}

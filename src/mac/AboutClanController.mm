@@ -13,7 +13,7 @@
 
 	NSWindow *window = [self window];
 	[window setIdentifier:@"AboutClan"];
-    [window setRestorationClass:[self class]];
+//    [window setRestorationClass:[self class]];
     [super windowDidLoad];  // It's documented to do nothing, but still a good idea to invoke...
 
 	[versionField setStringValue:[NSString stringWithUTF8String:VERSION]];

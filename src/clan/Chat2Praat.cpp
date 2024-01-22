@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2022 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -585,14 +585,14 @@ static void PrintAnnotations(int num, ALLTIERS *trs, char *s) {
 		if (anns->endD < 0.0)
 			anns->endD = AdjustEndTime(anns->begD, anns->nextAnnotation);
 
-		if (anns->begD > lastEnd)
+		if (isMFAC2Praat == FALSE && anns->begD > lastEnd)
 			num++;
 		num++;
 		lastEnd = anns->endD;
 //if (strcmp(trs->name, "*CHI") == 0)
 //fprintf(stderr, "%d-%s\n", num, anns->st);
 	}
-	if (xmaxD > lastEnd)
+	if (isMFAC2Praat == FALSE && xmaxD > lastEnd)
 		num++;
 	fprintf(fpout, "        intervals: size = %d\n", num);
 	
@@ -604,7 +604,10 @@ static void PrintAnnotations(int num, ALLTIERS *trs, char *s) {
 		if (anns->endD < 0.0)
 			anns->endD = AdjustEndTime(anns->begD, anns->nextAnnotation);
 
-		if (anns->begD > lastEnd) {
+		if (isMFAC2Praat == TRUE && (anns->endD-anns->begD) <= 0.2 && anns->nextAnnotation)
+			anns->endD = anns->nextAnnotation->begD;
+
+		if (isMFAC2Praat == FALSE && anns->begD > lastEnd) {
 			num++;
 			fprintf(fpout, "        intervals [%d]\n", num);
 			fprintf(fpout, "            xmin = %.3lf\n", lastEnd);
@@ -620,7 +623,7 @@ static void PrintAnnotations(int num, ALLTIERS *trs, char *s) {
 //if (strcmp(trs->name, "*CHI") == 0)
 //fprintf(stderr, "%d-%s\n", num, anns->st);
 	}
-	if (xmaxD > lastEnd) {
+	if (isMFAC2Praat == FALSE && xmaxD > lastEnd) {
 		num++;
 		fprintf(fpout, "        intervals [%d]\n", num);
 		fprintf(fpout, "            xmin = %.3lf\n", lastEnd);

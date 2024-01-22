@@ -34,6 +34,8 @@
 #define DEFAULT_THICKNESS	22.0
 #define RULER_MARGIN		5.0
 
+extern char isChatLineNums;
+
 @interface NoodleLineNumberView (Private)
 
 - (NSMutableArray *)lineIndices;
@@ -52,9 +54,9 @@
     if ((self = [super initWithScrollView:aScrollView orientation:NSVerticalRuler]) != nil)
     {
 		_linesToMarkers = [[NSMutableDictionary alloc] init];
-		
-        [self setClientView:[aScrollView documentView]];
-    }
+		keysCount = 0;
+		[self setClientView:[aScrollView documentView]];
+   }
     return self;
 }
 
@@ -147,22 +149,47 @@
 
 - (void)setClientView:(NSView *)aView
 {
-	id		oldClientView;
-	
-	oldClientView = [self clientView];
-	
-    if ((oldClientView != aView) && [oldClientView isKindOfClass:[NSTextView class]])
-    {
-		[[NSNotificationCenter defaultCenter] removeObserver:self name:NSTextStorageDidProcessEditingNotification object:[(NSTextView *)oldClientView textStorage]];
-    }
-    [super setClientView:aView];
-    if ((aView != nil) && [aView isKindOfClass:[NSTextView class]])
-    {
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:NSTextStorageDidProcessEditingNotification object:[(NSTextView *)aView textStorage]];
+	id oldClientView;
+	NSView *contentView = [[self scrollView] contentView];
 
+	[contentView setPostsBoundsChangedNotifications:YES];
+
+	oldClientView = [self clientView];
+
+	if ((oldClientView != aView) && [oldClientView isKindOfClass:[NSTextView class]])
+	{
+		[[NSNotificationCenter defaultCenter] removeObserver:self name:NSTextStorageDidProcessEditingNotification object:[(NSTextView *)oldClientView textStorage]];
+		
+//		[[NSNotificationCenter defaultCenter] removeObserver:self selector:@selector(scrollViewDidScroll:) name:NSScrollView.didLiveScrollNotification object:[self scrollView]];
+	}
+	[super setClientView:aView];
+	if ((aView != nil) && [aView isKindOfClass:[NSTextView class]])
+	{
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:NSTextStorageDidProcessEditingNotification object:[(NSTextView *)aView textStorage]];
+		
+
+
+		// a register for those notifications on the content view.
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(boundDidChange:)
+													 name:NSViewBoundsDidChangeNotification
+												   object:contentView];
+		
 		[self invalidateLineIndices];
-    }
+	}
 }
+
+- (void)boundDidChange:(NSNotification *)notification {
+	// get the changed content view from the notification
+	NSClipView *changedContentView=[notification object];
+	if ([[changedContentView documentView] isKindOfClass:[NSTextView class]])
+	{
+		[self invalidateLineIndices];
+		[self setNeedsDisplay:YES];
+		keysCount = 0;
+	}
+}
+
 
 - (NSMutableArray *)lineIndices
 {
@@ -182,14 +209,22 @@
 - (void)textDidChange:(NSNotification *)notification
 {
 #pragma unused (notification)
+	
 	// Invalidate the line indices. They will be recalculated and recached on demand.
-	[self invalidateLineIndices];
- 	[self setNeedsDisplay:YES];
+	if (isChatLineNums) {
+		if (keysCount < 2) {
+			[self invalidateLineIndices];
+			[self setNeedsDisplay:YES];
+			keysCount++;
+		}
+	}
 /* lxs
 	dispatch_sync(dispatch_get_main_queue(), ^{ // lxs
 		// Invalidate the line indices. They will be recalculated and recached on demand.
-		[self invalidateLineIndices];
-		[self setNeedsDisplay:YES];
+ 		if (isChatLineNums) {
+			[self invalidateLineIndices];
+			[self setNeedsDisplay:YES];
+ 		}
 	});
 */
 }
@@ -248,44 +283,44 @@
 
 - (void)calculateLines
 {
-    id              view;
-
-    view = [self clientView];
-    
-    if ([view isKindOfClass:[NSTextView class]])
-    {
-        NSUInteger      index, numberOfLines, stringLength, lineEnd, contentEnd;
-        NSString        *text;
-        CGFloat         oldThickness, newThickness;
-        
-        text = [view string];
-        stringLength = [text length];
-//        [_lineIndices release];
-        _lineIndices = [[NSMutableArray alloc] init];
-        
-        index = 0;
-        numberOfLines = 0;
-        
-        do
-        {
-            [_lineIndices addObject:[NSNumber numberWithUnsignedInteger:index]];
-            
-            index = NSMaxRange([text lineRangeForRange:NSMakeRange(index, 0)]);
-            numberOfLines++;
-        }
-        while (index < stringLength);
-
-        // Check if text ends with a new line.
-        [text getLineStart:NULL end:&lineEnd contentsEnd:&contentEnd forRange:NSMakeRange([[_lineIndices lastObject] unsignedIntegerValue], 0)];
-        if (contentEnd < lineEnd)
-        {
-            [_lineIndices addObject:[NSNumber numberWithUnsignedInteger:index]];
-        }
-
-        oldThickness = [self ruleThickness];
-        newThickness = [self requiredThickness];
-        if (fabs(oldThickness - newThickness) > 1)
-        {
+	id              view;
+	
+	view = [self clientView];
+	
+	if ([view isKindOfClass:[NSTextView class]])
+	{
+		NSUInteger      index, numberOfLines, stringLength, lineEnd, contentEnd;
+		NSString        *text;
+		CGFloat         oldThickness, newThickness;
+		
+		text = [view string];
+		stringLength = [text length];
+//		[_lineIndices release];
+		_lineIndices = [[NSMutableArray alloc] init];
+		
+		index = 0;
+		numberOfLines = 0;
+		
+		do
+		{
+			[_lineIndices addObject:[NSNumber numberWithUnsignedInteger:index]];
+			
+			index = NSMaxRange([text lineRangeForRange:NSMakeRange(index, 0)]);
+			numberOfLines++;
+		}
+		while (index < stringLength);
+		
+		// Check if text ends with a new line.
+		[text getLineStart:NULL end:&lineEnd contentsEnd:&contentEnd forRange:NSMakeRange([[_lineIndices lastObject] unsignedIntegerValue], 0)];
+		if (contentEnd < lineEnd)
+		{
+			[_lineIndices addObject:[NSNumber numberWithUnsignedInteger:index]];
+		}
+		
+		oldThickness = [self ruleThickness];
+		newThickness = [self requiredThickness];
+		if (fabs(oldThickness - newThickness) > 1)
+		{
 			NSInvocation			*invocation;
 			
 			// Not a good idea to resize the view during calculations (which can happen during
@@ -296,87 +331,87 @@
 			[invocation setArgument:&newThickness atIndex:2];
 			
 			[invocation performSelector:@selector(invoke) withObject:nil afterDelay:0.0];
-        }
+		}
 	}
 }
 
 - (NSUInteger)lineNumberForCharacterIndex:(NSUInteger)index inText:(NSString *)text
 {
-    NSUInteger			left, right, mid, lineStart;
+	NSUInteger			left, right, mid, lineStart;
 	NSMutableArray		*lines;
-
+	
 	lines = [self lineIndices];
 	
-    // Binary search
-    left = 0;
-    right = [lines count];
-
-    while ((right - left) > 1)
-    {
-        mid = (right + left) / 2;
-        lineStart = [[lines objectAtIndex:mid] unsignedIntegerValue];
-        
-        if (index < lineStart)
-        {
-            right = mid;
-        }
-        else if (index > lineStart)
-        {
-            left = mid;
-        }
-        else
-        {
-            return mid;
-        }
-    }
-    return left;
+	// Binary search
+	left = 0;
+	right = [lines count];
+	
+	while ((right - left) > 1)
+	{
+		mid = (right + left) / 2;
+		lineStart = [[lines objectAtIndex:mid] unsignedIntegerValue];
+		
+		if (index < lineStart)
+		{
+			right = mid;
+		}
+		else if (index > lineStart)
+		{
+			left = mid;
+		}
+		else
+		{
+			return mid;
+		}
+	}
+	return left;
 }
 
 - (NSDictionary *)textAttributes
 {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            [self font], NSFontAttributeName, 
-            [self textColor], NSForegroundColorAttributeName,
-            nil];
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			[self font], NSFontAttributeName, 
+			[self textColor], NSForegroundColorAttributeName,
+			nil];
 }
 
 - (NSDictionary *)markerTextAttributes
 {
-	    return [NSDictionary dictionaryWithObjectsAndKeys:
-            [self font], NSFontAttributeName, 
-            [self alternateTextColor], NSForegroundColorAttributeName,
-				nil];
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			[self font], NSFontAttributeName, 
+			[self alternateTextColor], NSForegroundColorAttributeName,
+			nil];
 }
 
 - (CGFloat)requiredThickness
 {
-    NSUInteger			lineCount, digits, i;
-    NSMutableString     *sampleString;
-    NSSize              stringSize;
-    
-    lineCount = [[self lineIndices] count];
-    digits = (NSUInteger)log10(lineCount) + 1;
+	NSUInteger			lineCount, digits, i;
+	NSMutableString     *sampleString;
+	NSSize              stringSize;
+	
+	lineCount = [[self lineIndices] count];
+	digits = (NSUInteger)log10(lineCount) + 1;
 	sampleString = [NSMutableString string];
-    for (i = 0; i < digits; i++)
-    {
-        // Use "8" since it is one of the fatter numbers. Anything but "1"
-        // will probably be ok here. I could be pedantic and actually find the fattest
+	for (i = 0; i < digits; i++)
+	{
+		// Use "8" since it is one of the fatter numbers. Anything but "1"
+		// will probably be ok here. I could be pedantic and actually find the fattest
 		// number for the current font but nah.
-        [sampleString appendString:@"8"];
-    }
-    
-    stringSize = [sampleString sizeWithAttributes:[self textAttributes]];
-
+		[sampleString appendString:@"8"];
+	}
+	
+	stringSize = [sampleString sizeWithAttributes:[self textAttributes]];
+	
 	// Round up the value. There is a bug on 10.4 where the display gets all wonky when scrolling if you don't
 	// return an integral value here.
-    return ceil(MAX(DEFAULT_THICKNESS, stringSize.width + RULER_MARGIN * 2));
+	return ceil(MAX(DEFAULT_THICKNESS, stringSize.width + RULER_MARGIN * 2));
 }
 
 // FIX RULER SCROLL
 /*
 - (void)setDocument:(Document*)document  // added by Terada (for Lion bug)
 {
-    _document = document;    
+	_document = document;    
 }
 */
 // END FIX RULER SCROLL
@@ -384,11 +419,10 @@
 - (void)drawHashMarksAndLabelsInRect:(NSRect)aRect
 {
 #pragma unused (aRect)
-    id			view;
+	id			view;
 	NSRect		bounds;
-    
-    
- 	bounds = [self bounds];
+
+	bounds = [self bounds];
 	view = [self clientView];
 	if (view == nil)
 		return;
@@ -402,91 +436,91 @@
 	{
 		[_backgroundColor set];
 		NSRectFill(bounds);
-        
+		
 		[[NSColor colorWithCalibratedWhite:0.58 alpha:1.0] set];
 		[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMaxX(bounds) - 0/5, NSMinY(bounds)) toPoint:NSMakePoint(NSMaxX(bounds) - 0.5, NSMaxY(bounds))];
 	}
-	
-    // view = [self clientView];
-	
-    if ([view isKindOfClass:[NSTextView class]])
-    {
-        NSLayoutManager			*layoutManager;
-        NSTextContainer			*container;
-        NSRect					visibleRect, markerRect;
-        NSRange					range, glyphRange, nullRange;
-        NSString				*text, *labelText;
-        NSUInteger				rectCount, index, line, count;
-        NSRectArray				rects;
-        CGFloat					ypos, yinset;
-        NSDictionary			*textAttributes, *currentTextAttributes;
-        NSSize					stringSize, markerSize;
+
+	// view = [self clientView];
+
+	if ([view isKindOfClass:[NSTextView class]])
+	{
+int t;
+		NSLayoutManager			*layoutManager;
+		NSTextContainer			*container;
+		NSRect					visibleRect, markerRect;
+		NSRange					range, glyphRange, nullRange;
+		NSString				*text, *labelText;
+		NSUInteger				rectCount, index, line, count;
+		NSRectArray				rects;
+		CGFloat					ypos, yinset;
+		NSDictionary			*textAttributes, *currentTextAttributes;
+		NSSize					stringSize, markerSize;
 		NoodleLineNumberMarker	*marker;
 		NSImage					*markerImage;
 		NSMutableArray			*lines;
 
-        layoutManager = [view layoutManager];
-        container = [view textContainer];
-        text = [view string];
-        nullRange = NSMakeRange(NSNotFound, 0);
-		
-		yinset = [view textContainerInset].height;        
-        visibleRect = [[[self scrollView] contentView] bounds];
+		layoutManager = [view layoutManager];
+		container = [view textContainer];
+		text = [view string];
+		nullRange = NSMakeRange(NSNotFound, 0);
 
-        textAttributes = [self textAttributes];
-		
+		yinset = [view textContainerInset].height;        
+		visibleRect = [[[self scrollView] contentView] bounds];
+
+		textAttributes = [self textAttributes];
+
 		lines = [self lineIndices];
 
-        // Find the characters that are currently visible
-        glyphRange = [layoutManager glyphRangeForBoundingRect:visibleRect inTextContainer:container];
-        range = [layoutManager characterRangeForGlyphRange:glyphRange actualGlyphRange:NULL];
-        
-        // Fudge the range a tad in case there is an extra new line at end.
-        // It doesn't show up in the glyphs so would not be accounted for.
-        range.length++;
-        
-        count = [lines count];
-        
-        
-        for (line = [self lineNumberForCharacterIndex:range.location inText:text]; line < count; line++)
-        {
-            index = [[lines objectAtIndex:line] unsignedIntegerValue];
-            
-            if (NSLocationInRange(index, range))
-            {
-                rects = [layoutManager rectArrayForCharacterRange:NSMakeRange(index, 0)
-                                     withinSelectedCharacterRange:nullRange
-                                                  inTextContainer:container
-                                                        rectCount:&rectCount];
+		// Find the characters that are currently visible
+		glyphRange = [layoutManager glyphRangeForBoundingRect:visibleRect inTextContainer:container];
+		range = [layoutManager characterRangeForGlyphRange:glyphRange actualGlyphRange:NULL];
+
+		// Fudge the range a tad in case there is an extra new line at end.
+		// It doesn't show up in the glyphs so would not be accounted for.
+		range.length++;
+
+		count = [lines count];
+
+		for (line = [self lineNumberForCharacterIndex:range.location inText:text]; line < count; line++)
+		{
+			index = [[lines objectAtIndex:line] unsignedIntegerValue];
+
+			if (NSLocationInRange(index, range))
+			{
+				rects = [layoutManager rectArrayForCharacterRange:NSMakeRange(index, 0)
+									 withinSelectedCharacterRange:nullRange
+												  inTextContainer:container
+														rectCount:&rectCount];
 				if (rects == nil)
 					break;
-                if (rectCount > 0)
-                {
-                    // Note that the ruler view is only as tall as the visible
-                    // portion. Need to compensate for the clipview's coordinates.
-                    ypos = yinset + NSMinY(rects[0]) - NSMinY(visibleRect);
+				if (rectCount > 0)
+				{
+					// Note that the ruler view is only as tall as the visible
+					// portion. Need to compensate for the clipview's coordinates.
+					ypos = yinset + NSMinY(rects[0]) - NSMinY(visibleRect);
 					
 					marker = [_linesToMarkers objectForKey:[NSNumber numberWithUnsignedInteger:line]];
 					
 					if (marker != nil)
 					{
 						
-                        markerImage = [marker image];
+						markerImage = [marker image];
 						markerSize = [markerImage size];
 						markerRect = NSMakeRect(0.0, 0.0, markerSize.width, markerSize.height);
-
+						
 						// Marker is flush right and centered vertically within the line.
 						markerRect.origin.x = NSWidth(bounds) - [markerImage size].width - 1.0;
 						markerRect.origin.y = ypos + NSHeight(rects[0]) / 2.0 - [marker imageOrigin].y;
-
-                        [markerImage drawInRect:markerRect fromRect:NSMakeRect(0, 0, markerSize.width, markerSize.height) operation:NSCompositeSourceOver fraction:1.0];
+						
+						[markerImage drawInRect:markerRect fromRect:NSMakeRect(0, 0, markerSize.width, markerSize.height) operation:NSCompositeSourceOver fraction:1.0];
 					}
-                    
-                    // Line numbers are internally stored starting at 0
-                    labelText = [NSString stringWithFormat:@"%jd", (intmax_t)line + 1];
-                    
-                    stringSize = [labelText sizeWithAttributes:textAttributes];
-
+					
+					// Line numbers are internally stored starting at 0
+					labelText = [NSString stringWithFormat:@"%jd", (intmax_t)line + 1];
+					
+					stringSize = [labelText sizeWithAttributes:textAttributes];
+					
 					if (marker == nil)
 					{
 						currentTextAttributes = textAttributes;
@@ -496,20 +530,24 @@
 						currentTextAttributes = [self markerTextAttributes];
 					}
 					
-                    // Draw string flush right, centered vertically within the line
-                    [labelText drawInRect:
-                       NSMakeRect(NSWidth(bounds) - stringSize.width - RULER_MARGIN,
-                                  ypos + (NSHeight(rects[0]) - stringSize.height) / 2.0,
-                                  NSWidth(bounds) - RULER_MARGIN * 2.0, NSHeight(rects[0]))
-                           withAttributes:currentTextAttributes];
-                }
-            }
+					// Draw string flush right, centered vertically within the line
+					markerRect = NSMakeRect(NSWidth(bounds) - stringSize.width - RULER_MARGIN,
+											ypos + (NSHeight(rects[0]) - stringSize.height) / 2.0, 
+											NSWidth(bounds) - RULER_MARGIN * 2.0,
+											NSHeight(rects[0]));
+					[labelText drawInRect:markerRect withAttributes:currentTextAttributes];
+				} else {
+					t = 0;
+				}
+			} else {
+				t = 0;
+			}
 			if (index > NSMaxRange(range))
 			{
 				break;
 			}
-        }
-    }
+		}
+	}
 }
 
 - (void)setMarkers:(NSArray *)markers

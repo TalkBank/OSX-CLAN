@@ -56,12 +56,17 @@
 #import "AppErrors.h"
 #import "AppMisc.h"
 
+extern CGFloat alphas[]; // 2023/07-21
+
+NSInteger AutoSaveTime[] = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 0};
+NSInteger AutoSavePtr;
+
 static NSDictionary *defaultValues() {
 	static NSDictionary *dict = nil;
 	NSLog(@"Controller: defaultValues\n");
 	if (!dict) { // 2019-08-20
 		dict = [[NSDictionary alloc] initWithObjectsAndKeys:
-				[NSNumber numberWithInteger:0], AutosavingDelay, // 30
+				[NSNumber numberWithInteger:AutoSaveTime[AutoSavePtr]], AutosavingDelay, // 30
 				[NSNumber numberWithBool:YES], NumberPagesWhenPrinting,
 				[NSNumber numberWithBool:YES], WrapToFitWhenPrinting,
 				[NSNumber numberWithBool:NO], RichText,

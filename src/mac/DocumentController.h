@@ -63,7 +63,11 @@
 
 - (void)beginOpenPanel:(NSOpenPanel *)openPanel forTypes:(NSArray *)types completionHandler:(void (^)(NSInteger result))completionHandler;
 
+
 - (void)displayDocument:(NSDocument *)doc;
 - (void)replaceTransientDocument:(NSArray *)documents;
 
 @end
+
+extern NSInteger AutoSaveTime[]; // 2023-09-15
+extern NSInteger AutoSavePtr; // 2023-09-15

@@ -116,7 +116,7 @@ struct SOUNDINFOC {
 #define SPEAKERNAMENUM 10
 #define SPEAKERNAMELEN 128
 
-@interface DocumentWindowController : NSWindowController <NSLayoutManagerDelegate, NSTextViewDelegate> {
+@interface DocumentWindowController : NSWindowController <NSLayoutManagerDelegate, NSTextViewDelegate, NSWindowDelegate> {
 	IBOutlet ScalingScrollView *scrollView;
 	NSLayoutManager *layoutMgr;
 	BOOL rulerIsBeingDisplayed;
@@ -124,6 +124,8 @@ struct SOUNDINFOC {
 	BOOL ShowParags;
 	NSString *textStOrig;
 	NSRange cursorRangeOrig;
+	NSRange lastBGCRange;
+	char *praatText;
 
 	BOOL isAddingChar; // 2021-07-14
 	char isF1_2Key;// 2019-10-20
@@ -144,6 +146,8 @@ struct SOUNDINFOC {
 	NSWindow *progSheet;
 	AVAssetExportSession *exportSession;
 // progress bar variables end
+	
+	BOOL isFullScreen;
 
 @public
 	IBOutlet NSSlider *LowerSlider;
@@ -160,8 +164,9 @@ struct SOUNDINFOC {
 	BOOL NoCodes;
 	BOOL MakeBackupFile;
 	BOOL CodingScheme;
-	BOOL PriorityCodes;
+	char PriorityCodes;
 	BOOL EnteredCode;
+	CGFloat titleBarHeight;
 	unCH OldCode[SPEAKERLEN];
 	FNType  *cod_fname;
 	int  FreqCountLimit;
@@ -193,6 +198,8 @@ struct SOUNDINFOC {
 
 /* Layout orientation sections */
 - (NSArray *)layoutOrientationSections;
+
+- (long)findEndContPlay:(NSString *)textSt index:(NSUInteger)pos;
 
 - (IBAction)ContinuousPlayback:(id)sender; // 2020-09-01
 
@@ -262,6 +269,11 @@ struct SOUNDINFOC {
 
 @end
 
+extern BOOL activateBauerPatch; // 2023-02-15
+extern CGFloat alphas[]; // 2023/07-21
+extern NSInteger AlphaColorPtr; // 2023-07-21
+extern NSInteger ColorNumPtr; // 2023-07-21
+
 // coder mode beg
 BOOL init_codes(const FNType *fname, char *fontName, DocumentWindowController *docWinController);
 extern int FindRightCode(int disp, DocumentWindowController *docWinController);
@@ -287,3 +299,4 @@ extern int MorDisambiguate(DocumentWindowController *docWinController);
 extern DocumentWindowController *gLastTextWinController;
 
 #define ScrollBarHeight 20
+

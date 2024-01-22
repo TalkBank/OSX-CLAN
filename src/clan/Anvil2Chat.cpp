@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2022 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -1600,7 +1600,6 @@ void call() {		/* this function is self-explanatory */
 	long beg, end;
 	long ln = 0L, tln = 0L;
 	long anvilID;
-	A2C_CHATTIERS *lastSpTier;
 
 	if (attsRoot == NULL) {
 		rd_AnvilAtts_f("attribs.cut", FALSE);
@@ -1731,7 +1730,6 @@ void call() {		/* this function is self-explanatory */
 	ResetXMLTree();
 	sortAnvilSpAndDepTiers();
 
-	lastSpTier = RootTiers;
 	refSp[0] = EOS;
 	while (getNextAnvilTier(utterance, &beg, &end, refSp, &anvilID)) {
 		if (ln > tln) {

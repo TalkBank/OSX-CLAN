@@ -17,6 +17,7 @@
 @public
 	BOOL isCallKideval;
 	BOOL isCallEval;
+	BOOL isCallEvald;
 }
 
 - (IBAction)foldersButtonClicked:(id)sender;

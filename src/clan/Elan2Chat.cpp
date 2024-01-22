@@ -1,8 +1,40 @@
 /**********************************************************************
-	"Copyright 1990-2022 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
+/*
+ To make %wor wrap:
+ Elan_refillNTline:
+
+	 if (isMultiBullets) {
+		 nt->isWrap = FALSE;
+	 } else {
+		 nt->isWrap = TRUE;
+	 }
+
+ --->
+
+ // 2023-08-03 override for %wor
+ //	if (isMultiBullets)
+ //		nt->isWrap = FALSE;
+ //	else
+		 nt->isWrap = TRUE;
+---------------------------
+ Elan_isSpecialCode:
+		 if (line[i] == HIDEN_C && isdigit(line[i+1]))
+			 bulletCnt++;
+		 if (bulletCnt > 1)
+			 return(FALSE);
+
+ --->
+
+ // 2023-08-03 override for %wor
+ //		if (line[i] == HIDEN_C && isdigit(line[i+1]))
+ //			bulletCnt++;
+ //		if (bulletCnt > 1)
+ //			return(FALSE);
+*/
 
 #define CHAT_MODE 0
 
@@ -52,7 +84,7 @@ void usage() {
 	printf("convert Elan XML files to CHAT files\n");
 	printf("Usage: elan2chat [b %s] filename(s)\n",mainflgs());
 	puts("+b: Specify that multiple bullets per line (default only one bullet per line).");
-	puts("+c: The input .eaf file was created by MFA aligner.");
+//	puts("+c: The input .eaf file was created by MFA aligner.");
 	mainusage(TRUE);
 }
 
@@ -95,11 +127,11 @@ void getflag(char *f, char *f1, int *i) {
 			isMultiBullets = TRUE;
 			no_arg_option(f);
 			break;
-		case 'c':
-			isMultiBullets = TRUE;
-			isMFA = TRUE;
-			no_arg_option(f);
-			break;
+//		case 'c':
+//			isMultiBullets = TRUE;
+//			isMFA = TRUE;
+//			no_arg_option(f);
+//			break;
 		default:
 			maingetflag(f-2,f1,i);
 			break;
@@ -170,11 +202,12 @@ static void Elan_refillNTline(ELANCHATTIERS *nt, char *ID, long beg, long end, c
 	else
 		templineC3[0] = EOS;
 
-	if (isMultiBullets) {
+/*	// 2023-08-03 override for %wor
+	if (isMultiBullets)
 		nt->isWrap = FALSE;
-	} else {
+	else
+*/
 		nt->isWrap = TRUE;
-	}
 	if (strlen(nt->ID)+strlen(ID) < IDSTRLEN)
 		strcat(nt->ID, ID);
 	nt->end = end;
@@ -292,7 +325,6 @@ static ELANCHATTIERS *Elan_add2Unmatched(void) {
 	nt->depTiers = NULL;
 	return(nt);
 }
-
 
 static char Elan_isUttDel(char *line) {
 	char bullet;
@@ -433,10 +465,9 @@ static char insertIntoMatchedRef(ELANCHATTIERS *nt, const char *refID, char *sp,
 	return(FALSE);
 }
 
-
-static void Elan_addToTiersID(char *ID, const char *refID, long beg, long end, char *sp, char *line, char isCreateEmpty) {
+static void Elan_addToTiersID(char *ID, const char *refID, long beg, long end, char *sp, char *line) {
 	int  IDn;
-	char isPostCodeFound, isJustPause;
+//	char isPostCodeFound, isJustPause;
 	ELANCHATTIERS *nt, *tnt, *resNT;
 
 	if (sp[0] == '%' && refID[0] == EOS) {
@@ -451,8 +482,8 @@ static void Elan_addToTiersID(char *ID, const char *refID, long beg, long end, c
 		nt->nextTier = NULL;
 	} else {
 		IDn = atoi(ID+1);
-		isJustPause = Elan_isLineJustPause(line);
-		isPostCodeFound = Elan_isPostCodes(line);
+//		isJustPause = Elan_isLineJustPause(line);
+//		isPostCodeFound = Elan_isPostCodes(line);
 		tnt= e2c_RootTiers;
 		nt = e2c_RootTiers;
 		while (nt != NULL) {
@@ -491,7 +522,7 @@ static void Elan_addToTiersID(char *ID, const char *refID, long beg, long end, c
 static void Elan_addToTiers(char *ID, const char *refID, long beg, long end, const char *refSp, char *sp, char *line, char isCreateEmpty) {
 	char isRefIDMatch, isPostCodeFound, isJustPause;
 	ELANCHATTIERS *nt, *tnt, *resNT;
-	
+
 	if (e2c_RootTiers == NULL) {
 		if ((e2c_RootTiers=NEW(ELANCHATTIERS)) == NULL)
 			out_of_mem();
@@ -508,8 +539,8 @@ static void Elan_addToTiers(char *ID, const char *refID, long beg, long end, con
 				isRefIDMatch = TRUE;
 				if (beg == 0L && end == 0L) {
 					if (resNT->sp[0] == '*') {
-						//						beg = resNT->beg;
-						//						end = resNT->end;
+//						beg = resNT->beg;
+//						end = resNT->end;
 						nt->depTiers = Elan_addDepTiers(resNT->depTiers, ID, beg, end, sp, line);
 					} else if (insertIntoMatchedRef(resNT, refID, sp, line) == FALSE) {
 						nt->depTiers = Elan_addDepTiers(nt->depTiers, ID, beg, end, sp, line);
@@ -557,7 +588,7 @@ static void Elan_addToTiers(char *ID, const char *refID, long beg, long end, con
 		}
 		if (nt == NULL) {
 			if (!isRefIDMatch && sp[0] == '%' && refID[0] != EOS) {
-				
+
 			}
 			if (sp[0] == '%' && refID[0] == EOS) {
 				if (isCreateEmpty) {
@@ -583,7 +614,7 @@ static void Elan_addToTiers(char *ID, const char *refID, long beg, long end, con
 		} else
 			nt = Elan_insertNT(nt, tnt);
 	}
-	
+
 	Elan_fillNT(nt, ID, beg, end, refSp, sp, line, TRUE);
 }
 
@@ -681,16 +712,18 @@ static void Elan_finalTimeSort(void) {
 }
 
 static char Elan_isSpecialCode(char isWrap, char *line) {
-	int i, bulletCnt;
+	int i;
+//	int bulletCnt = 0; // 2023-08-03
 
-	bulletCnt = 0;
 	for (i=0; line[i] != EOS; i++) {
 		if (strncmp(line+i, "[%%", 3) == 0)
 			return(FALSE);
+/* // 2023-08-03 override for %wor
 		if (line[i] == HIDEN_C && isdigit(line[i+1]))
 			bulletCnt++;
 		if (bulletCnt > 1)
 			return(FALSE);
+*/
 	}
 	return(isWrap);
 }
@@ -1242,12 +1275,8 @@ void call() {		/* this function is self-explanatory */
 			}
 			if (isParticipantsFound && !isOptionFound) {
 				if (isMultiBullets) {
-					if (isMFA == TRUE)
-						fprintf(fpout, "@Options:\tmulti\n");
-					else
-						fprintf(fpout, "@Options:\tmulti, heritage\n");
-				} else if (isMFA == FALSE)
-					fprintf(fpout, "@Options:\theritage\n");
+					fprintf(fpout, "@Options:\tmulti\n");
+				}
 				isOptionFound = TRUE;
 			}
 			isIDFound = TRUE;
@@ -1354,12 +1383,8 @@ void call() {		/* this function is self-explanatory */
 	}
 	if (!isOptionFound) {
 		if (isMultiBullets) {
-			if (isMFA == TRUE)
-				fprintf(fpout, "@Options:\tmulti\n");
-			else
-				fprintf(fpout, "@Options:\tmulti, heritage\n");
-		} else if (isMFA == FALSE)
-			fprintf(fpout, "@Options:\theritage\n");
+			fprintf(fpout, "@Options:\tmulti\n");
+		}
 	}
 	if (!isIDFound) {
 		for (i=0; i < 32; i++) {
@@ -1428,7 +1453,7 @@ void call() {		/* this function is self-explanatory */
 		}
 		Elan_makeText(utterance->line);
 		if (isMFA == TRUE)
-			Elan_addToTiersID(ID, refID, beg, end, utterance->speaker, utterance->line, FALSE);
+			Elan_addToTiersID(ID, refID, beg, end, utterance->speaker, utterance->line);
 		else
 			Elan_addToTiers(ID, refID, beg, end, refSp, utterance->speaker, utterance->line, FALSE);
 //		fprintf(fpout, "ID=%s, IDRef=%s; (%ld-%ld)\n", ID, refID, beg, end);

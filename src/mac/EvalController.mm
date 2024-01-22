@@ -20,7 +20,8 @@ extern char wd_dir[];
 
 static char AnomicTp, GlobalTp, BrocaTp, WernickeTp, TranssenTp, TransmotTp,
 	ConductionTp, ControlTp, NotAphByWab, MaleOnly, FemaleOnly, SpeechGm,
-	StrokeGm, WindowGm, Impevent, Umbrella, Cat, Flood, Cinderella, Sandwich;
+	StrokeGm, WindowGm, Impevent, Umbrella, Cat, Flood, Cinderella, Sandwich,
+	Communication, Illness_or_Injury;
 static char AgeRange[256];
 static char spCodeEv[SP_CODE_LAST][CODESTRLEN + 1];
 static BOOL spSetEv[SP_CODE_LAST];
@@ -46,6 +47,8 @@ void InitEvalOptions(void) {
 	Flood = 0;
 	Cinderella = 0;
 	Sandwich = 0;
+	Communication = 0;
+	Illness_or_Injury = 0;
 	AgeRange[0] = EOS;
 }
 
@@ -161,7 +164,7 @@ static EvalController *EvalWindow = nil;
 
 - (id)init {
 	EvalWindow = nil;
-	return [super initWithWindowNibName:@"Kideval"];
+	return [super initWithWindowNibName:@"Eval"];
 }
 
 + (const char *)EvalDialog;
@@ -213,7 +216,7 @@ static EvalController *EvalWindow = nil;
 	NSWindow *window = [self window];
 
 	[window setIdentifier:@"Eval"];
-	[window setRestorationClass:[self class]];
+//	[window setRestorationClass:[self class]];
 	[super windowDidLoad];  // It's documented to do nothing, but still a good idea to invoke...
 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowWillClose:) name:NSWindowWillCloseNotification object:self.window];
@@ -282,6 +285,8 @@ static EvalController *EvalWindow = nil;
 	Important_EventCH.state =  NSControlStateValueOff;
 	StrokeCH.state =   NSControlStateValueOff;
 	WindowCH.state =  NSControlStateValueOff;
+	CommunicationCH.state =  NSControlStateValueOff;
+	Illness_or_InjuryCH.state =  NSControlStateValueOff;
 	if (SpeechGm != 0)
 		SpeechCH.state =   NSControlStateValueOn;
 	if (StrokeGm != 0)
@@ -300,6 +305,10 @@ static EvalController *EvalWindow = nil;
 		CinderellaCH.state =  NSControlStateValueOn;
 	if (Sandwich != 0)
 		SandwichCH.state =   NSControlStateValueOn;
+	if (Communication != 0)
+		CommunicationCH.state =   NSControlStateValueOn;
+	if (Illness_or_Injury != 0)
+		Illness_or_InjuryCH.state =   NSControlStateValueOn;
 }
 
 
@@ -668,6 +677,8 @@ static EvalController *EvalWindow = nil;
 	Important_EventCH.state = NSControlStateValueOff;
 	StrokeCH.state = NSControlStateValueOff;
 	WindowCH.state = NSControlStateValueOff;
+	CommunicationCH.state = NSControlStateValueOff;
+	Illness_or_InjuryCH.state = NSControlStateValueOff;
 }
 
 - (IBAction)SelectAllGemsClicked:(NSButton *)sender
@@ -682,6 +693,8 @@ static EvalController *EvalWindow = nil;
 	Important_EventCH.state = NSControlStateValueOn;
 	StrokeCH.state = NSControlStateValueOn;
 	WindowCH.state = NSControlStateValueOn;
+	CommunicationCH.state = NSControlStateValueOn;
+	Illness_or_InjuryCH.state = NSControlStateValueOn;
 }
 
 
@@ -697,6 +710,8 @@ static EvalController *EvalWindow = nil;
 	Important_EventCH.state = NSControlStateValueOff;
 	StrokeCH.state = NSControlStateValueOff;
 	WindowCH.state = NSControlStateValueOff;
+	CommunicationCH.state = NSControlStateValueOff;
+	Illness_or_InjuryCH.state = NSControlStateValueOff;
 }
 
 - (IBAction)CatClicked:(NSButton *)sender
@@ -711,6 +726,8 @@ static EvalController *EvalWindow = nil;
 	Important_EventCH.state = NSControlStateValueOff;
 	StrokeCH.state = NSControlStateValueOff;
 	WindowCH.state = NSControlStateValueOff;
+	CommunicationCH.state = NSControlStateValueOff;
+	Illness_or_InjuryCH.state = NSControlStateValueOff;
 }
 
 - (IBAction)FloodClicked:(NSButton *)sender
@@ -725,6 +742,8 @@ static EvalController *EvalWindow = nil;
 	Important_EventCH.state = NSControlStateValueOff;
 	StrokeCH.state = NSControlStateValueOff;
 	WindowCH.state = NSControlStateValueOff;
+	CommunicationCH.state = NSControlStateValueOff;
+	Illness_or_InjuryCH.state = NSControlStateValueOff;
 }
 
 - (IBAction)CinderellaClicked:(NSButton *)sender
@@ -739,6 +758,8 @@ static EvalController *EvalWindow = nil;
 	Important_EventCH.state = NSControlStateValueOff;
 	StrokeCH.state = NSControlStateValueOff;
 	WindowCH.state = NSControlStateValueOff;
+	CommunicationCH.state = NSControlStateValueOff;
+	Illness_or_InjuryCH.state = NSControlStateValueOff;
 }
 
 - (IBAction)UmbrellaClicked:(NSButton *)sender
@@ -753,6 +774,8 @@ static EvalController *EvalWindow = nil;
 	Important_EventCH.state = NSControlStateValueOff;
 	StrokeCH.state = NSControlStateValueOff;
 	WindowCH.state = NSControlStateValueOff;
+	CommunicationCH.state = NSControlStateValueOff;
+	Illness_or_InjuryCH.state = NSControlStateValueOff;
 }
 
 - (IBAction)SandwichClicked:(NSButton *)sender
@@ -767,6 +790,8 @@ static EvalController *EvalWindow = nil;
 	Important_EventCH.state = NSControlStateValueOff;
 	StrokeCH.state = NSControlStateValueOff;
 	WindowCH.state = NSControlStateValueOff;
+	CommunicationCH.state = NSControlStateValueOff;
+	Illness_or_InjuryCH.state = NSControlStateValueOff;
 }
 
 - (IBAction)Important_EventClicked:(NSButton *)sender
@@ -781,6 +806,8 @@ static EvalController *EvalWindow = nil;
 	Important_EventCH.state = NSControlStateValueOn;
 	StrokeCH.state = NSControlStateValueOff;
 	WindowCH.state = NSControlStateValueOff;
+	CommunicationCH.state = NSControlStateValueOff;
+	Illness_or_InjuryCH.state = NSControlStateValueOff;
 }
 
 - (IBAction)StrokeClicked:(NSButton *)sender
@@ -795,6 +822,8 @@ static EvalController *EvalWindow = nil;
 	Important_EventCH.state = NSControlStateValueOff;
 	StrokeCH.state = NSControlStateValueOn;
 	WindowCH.state = NSControlStateValueOff;
+	CommunicationCH.state = NSControlStateValueOff;
+	Illness_or_InjuryCH.state = NSControlStateValueOff;
 }
 
 - (IBAction)WindowClicked:(NSButton *)sender
@@ -809,8 +838,40 @@ static EvalController *EvalWindow = nil;
 	Important_EventCH.state = NSControlStateValueOff;
 	StrokeCH.state = NSControlStateValueOff;
 	WindowCH.state = NSControlStateValueOn;
+	CommunicationCH.state = NSControlStateValueOff;
+	Illness_or_InjuryCH.state = NSControlStateValueOff;
 }
 
+- (IBAction)CommunicationClicked:(NSButton *)sender
+{
+#pragma unused (sender)
+	SpeechCH.state = NSControlStateValueOff;
+	CatCH.state = NSControlStateValueOff;
+	FloodCH.state = NSControlStateValueOff;
+	CinderellaCH.state = NSControlStateValueOff;
+	UmbrellaCH.state = NSControlStateValueOff;
+	SandwichCH.state = NSControlStateValueOff;
+	Important_EventCH.state = NSControlStateValueOff;
+	StrokeCH.state = NSControlStateValueOff;
+	WindowCH.state = NSControlStateValueOff;
+	CommunicationCH.state = NSControlStateValueOn;
+	Illness_or_InjuryCH.state = NSControlStateValueOff;
+}
+- (IBAction)Illness_or_InjuryClicked:(NSButton *)sender
+{
+#pragma unused (sender)
+	SpeechCH.state = NSControlStateValueOff;
+	CatCH.state = NSControlStateValueOff;
+	FloodCH.state = NSControlStateValueOff;
+	CinderellaCH.state = NSControlStateValueOff;
+	UmbrellaCH.state = NSControlStateValueOff;
+	SandwichCH.state = NSControlStateValueOff;
+	Important_EventCH.state = NSControlStateValueOff;
+	StrokeCH.state = NSControlStateValueOff;
+	WindowCH.state = NSControlStateValueOff;
+	CommunicationCH.state = NSControlStateValueOff;
+	Illness_or_InjuryCH.state = NSControlStateValueOn;
+}
 
 //	WriteCedPreference();
 
@@ -846,6 +907,8 @@ static EvalController *EvalWindow = nil;
 		Flood = (FloodCH.state == NSControlStateValueOn);
 		Cinderella = (CinderellaCH.state == NSControlStateValueOn);
 		Sandwich = (SandwichCH.state == NSControlStateValueOn);
+		Communication = (CommunicationCH.state == NSControlStateValueOn);
+		Illness_or_Injury = (Illness_or_InjuryCH.state == NSControlStateValueOn);
 
 		cStr = [AgeRangeField stringValue];
 		len = [cStr length];
@@ -858,8 +921,10 @@ static EvalController *EvalWindow = nil;
 		else
 			AgeRange[0] = EOS;
 
-		if (SpeechGm && StrokeGm && WindowGm && Impevent && Umbrella && Cat && Flood && Cinderella && Sandwich) {
-			SpeechGm = StrokeGm = WindowGm = Impevent = Umbrella = Cat = Flood = Cinderella = Sandwich = 0;
+		if (SpeechGm && StrokeGm && WindowGm && Impevent && Umbrella && Cat && Flood &&
+			Cinderella && Sandwich && Communication && Illness_or_Injury) {
+			SpeechGm = StrokeGm = WindowGm = Impevent = Umbrella = Cat = Flood = 0;
+			Cinderella = Sandwich = Communication = Illness_or_Injury = 0;
 		}
 
 		for (i=SP_CODE_FIRST-1; i < SP_CODE_LAST; i++) {
@@ -1063,6 +1128,16 @@ static EvalController *EvalWindow = nil;
 		if (Sandwich) {
 			strcat(templineC3, " +g\"");
 			strcat(templineC3, "Sandwich");
+			strcat(templineC3, "\"");
+		}
+		if (Communication) {
+			strcat(templineC3, " +g\"");
+			strcat(templineC3, "Communication");
+			strcat(templineC3, "\"");
+		}
+		if (Illness_or_Injury) {
+			strcat(templineC3, " +g\"");
+			strcat(templineC3, "Illness_or_Injury");
 			strcat(templineC3, "\"");
 		}
 		strcat(templineC3, " +u");

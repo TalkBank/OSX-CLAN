@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2022 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -132,9 +132,10 @@ ME_Model::BLMVMComputeFunctionGradient(BLMVM blmvm, BLMVMVec X,double *f,BLMVMVe
 #define __FUNCT__ "BLMVMComputeBounds"
 int
 ME_Model::BLMVMComputeBounds(BLMVM blmvm, BLMVMVec XL, BLMVMVec XU){
-  int info;
+//  int info;
   double *xl=XL->val,*xu=XU->val;
-  info=BLMVMLowerAndUpperBounds(xl,xu,XL->dim);
+//  info=
+	BLMVMLowerAndUpperBounds(xl,xu,XL->dim);
   return (0);
 }
 

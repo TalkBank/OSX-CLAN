@@ -4,9 +4,9 @@
 //
 
 #import "OptionsController.h"
+#import "DocumentController.h"
 #import "DocumentWinController.h"
 #import "Document.h"
-#import "Controller.h"
 #import "ced.h"
 #import "c_clan.h"
 
@@ -24,10 +24,11 @@ extern BOOL isCursorPosRestore;
 }
 
 - (void)windowDidLoad {
+	int i;
 	extern char ced_version[];
 
-	NSWindow *window = [self window];
-	[window setRestorationClass:[self class]];
+//	NSWindow *window = [self window];
+//	[window setRestorationClass:[self class]];
 	[super windowDidLoad];  // It's documented to do nothing, but still a good idea to invoke...
 
 	[disambiguateField setStringValue:[NSString stringWithUTF8String:DisTier]];
@@ -51,6 +52,30 @@ extern BOOL isCursorPosRestore;
 		doMixedSTWaveButton.state = NSControlStateValueOn;
 	else
 		doMixedSTWaveButton.state = NSControlStateValueOff;
+
+// 2023-07-21 beg
+	[alphaPopUp insertItemWithTitle:@"OFF"  atIndex:0];
+	for (i=0; alphas[i] != 0.0; i++) {
+		[alphaPopUp insertItemWithTitle:[NSString stringWithFormat:@"%.2f", alphas[i]] atIndex:i+1];
+	}
+	[alphaPopUp selectItemAtIndex:AlphaColorPtr]; // 2023-07-21
+	
+	[colorPopUp insertItemWithTitle:@"Selected Background Color" atIndex:0];
+	[colorPopUp insertItemWithTitle:@"Yellow Color" atIndex:1];
+	[colorPopUp insertItemWithTitle:@"Cyan Color" atIndex:2];
+	[colorPopUp insertItemWithTitle:@"Blue Color" atIndex:3];
+	[colorPopUp insertItemWithTitle:@"Orange Color" atIndex:4];
+	[colorPopUp insertItemWithTitle:@"Red Color" atIndex:5];
+	[colorPopUp selectItemAtIndex:ColorNumPtr]; // 2023-07-21
+// 2023-07-21 end
+
+// 2023-09-15 beg
+	[AutoSaveDelayPopUp insertItemWithTitle:@"OFF"  atIndex:0];
+	for (i=1; AutoSaveTime[i] != 0; i++) {
+		[AutoSaveDelayPopUp insertItemWithTitle:[NSString stringWithFormat:@"%ld", AutoSaveTime[i]] atIndex:i];
+	}
+	[AutoSaveDelayPopUp selectItemAtIndex:AutoSavePtr];
+// 2023-09-15 end
 
 }
 
@@ -181,7 +206,6 @@ extern BOOL isCursorPosRestore;
 
 - (void)controlTextDidChange:(NSNotification *)notification
 {
-	BOOL isChange;
 	NSUInteger len;
 	NSString *comStr;
 	unichar st[BUFSIZ];
@@ -192,7 +216,6 @@ extern BOOL isCursorPosRestore;
 		if (len < BUFSIZ) {
 			[comStr getCharacters:st range:NSMakeRange(0, len)];
 			st[len] = EOS;
-			isChange = false;
 			if (len >= 48) {
 				st[48] = EOS;
 				[disambiguateField setStringValue:[NSString stringWithCharacters:st length:strlen(st)]];
@@ -214,6 +237,80 @@ extern BOOL isCursorPosRestore;
 		}
 	}
 }
+
+// 2023-07-21 beg
+- (IBAction)optionsAlphaClicked:(NSPopUpButton *)sender
+{
+	Document *cDoc;
+	DocumentWindowController *winCtrl;
+	NSUInteger i, docsCnt, winCtrlCount;
+	NSArray *documents;
+	NSTextView *textView;
+	NSRange cursorRange;
+
+	AlphaColorPtr = [sender indexOfSelectedItem];
+	WriteCedPreference();
+	documents = [[NSDocumentController sharedDocumentController] documents];
+	docsCnt = [documents count];
+	for (i=0; i < docsCnt; i++) {
+		cDoc = [documents objectAtIndex:i];
+		if (cDoc != NULL && [cDoc get_wID] == DOCWIN) {
+			winCtrlCount = [[cDoc windowControllers] count];
+			for (i=0; i < winCtrlCount; i++) {             //firstObject
+				winCtrl = [[cDoc windowControllers] objectAtIndex:i];
+				textView = [winCtrl firstTextView];
+				cursorRange = [textView selectedRange];
+				dispatch_async(dispatch_get_main_queue(), ^{
+					[textView setSelectedRange:cursorRange];
+				});
+			}
+		}
+	}
+}
+
+- (IBAction)optionsColorClicked:(NSPopUpButton *)sender
+{
+	Document *cDoc;
+	DocumentWindowController *winCtrl;
+	NSUInteger i, docsCnt, winCtrlCount;
+	NSArray *documents;
+	NSTextView *textView;
+	NSRange cursorRange;
+
+	ColorNumPtr = [sender indexOfSelectedItem];
+	WriteCedPreference();
+	documents = [[NSDocumentController sharedDocumentController] documents];
+	docsCnt = [documents count];
+	for (i=0; i < docsCnt; i++) {
+		cDoc = [documents objectAtIndex:i];
+		if (cDoc != NULL && [cDoc get_wID] == DOCWIN) {
+			winCtrlCount = [[cDoc windowControllers] count];
+			for (i=0; i < winCtrlCount; i++) {             //firstObject
+				winCtrl = [[cDoc windowControllers] objectAtIndex:i];
+				textView = [winCtrl firstTextView];
+				cursorRange = [textView selectedRange];
+				dispatch_async(dispatch_get_main_queue(), ^{
+					[textView setSelectedRange:cursorRange];
+				});
+			}
+		}
+	}
+}
+// 2023-07-21 end
+
+// 2023-09-15 beg
+- (IBAction)autosaveDelayClicked:(NSPopUpButton *)sender
+{
+	DocumentController *docController;
+
+	AutoSavePtr = [sender indexOfSelectedItem];
+	WriteCedPreference();
+	
+	docController = [NSDocumentController sharedDocumentController];
+	docController.autosavingDelay = AutoSaveTime[AutoSavePtr];
+}
+// 2023-09-15 end
+
 - (IBAction)optionsCloseClicked:(NSButton *)sender
 {
 #pragma unused (sender)
@@ -226,9 +323,9 @@ extern BOOL isCursorPosRestore;
 // at this point, we can do any needed initialization before turning app control over to the user
 - (void)awakeFromNib
 {
-	int i;
+//	int i;
 
-	i = 12;
+//	i = 12;
 	// We don't actually need to do anything here, so it's empty
 }
 

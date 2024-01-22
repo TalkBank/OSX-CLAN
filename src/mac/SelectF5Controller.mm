@@ -37,8 +37,8 @@ static SelectF5Controller *SelectF5Window = nil;
 - (void)windowDidLoad {
 	NSWindow *window = [self window];
 
-	[window setIdentifier:@"Kideval"];
-	[window setRestorationClass:[self class]];
+	[window setIdentifier:@"SelectF5option"];
+//	[window setRestorationClass:[self class]];
 	[super windowDidLoad];  // It's documented to do nothing, but still a good idea to invoke...
 /*
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{//TODO

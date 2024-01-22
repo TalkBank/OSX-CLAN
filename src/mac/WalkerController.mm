@@ -30,10 +30,10 @@ WalkerController *WalkerControllerWindow = nil;
 - (void)windowDidLoad {
 
 	char numS[256];
-	NSWindow *window = [self window];
+//	NSWindow *window = [self window];
 	OnlyIntegerValueFormatter *formatter = [[[OnlyIntegerValueFormatter alloc] init] autorelease];
 
-	[window setRestorationClass:[self class]];
+//	[window setRestorationClass:[self class]];
 	[super windowDidLoad];  // It's documented to do nothing, but still a good idea to invoke...
 
 	uS.sprintf(numS, "%ld", PBC.step_length);

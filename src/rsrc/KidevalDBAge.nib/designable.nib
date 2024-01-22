@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -9,22 +10,29 @@
             <connections>
                 <outlet property="AgeRangField" destination="Uu0-L3-REn" id="coF-iD-Tqo"/>
                 <outlet property="CancelButton" destination="Ak2-Jd-2cm" id="BIF-cY-fVD"/>
-                <outlet property="Chinese_zhoCH" destination="46F-w6-lJO" id="r9d-J3-lW3"/>
                 <outlet property="ChooseDBField" destination="mL0-PP-wMi" id="uow-D8-834"/>
                 <outlet property="CompareDB" destination="ezz-yJ-gNm" id="XNJ-0m-LYk"/>
+                <outlet property="EngNarrativeCH" destination="pup-FW-bfz" id="rPO-x0-fEe"/>
+                <outlet property="EngToyplayCH" destination="eRi-Yc-RF8" id="EfV-os-rPr"/>
                 <outlet property="FiveCH" destination="Oks-p1-A6D" id="PNW-3O-D6j"/>
                 <outlet property="FiveHCH" destination="7rO-3Z-YR5" id="JSd-si-WwZ"/>
                 <outlet property="FourCH" destination="bVd-XC-WZM" id="C0n-eo-ET9"/>
                 <outlet property="FourHCH" destination="PMO-e3-Rw4" id="F5K-aC-bTB"/>
-                <outlet property="FreePlayCH" destination="eRi-Yc-RF8" id="X1b-L9-j62"/>
-                <outlet property="Japanese_tdCH" destination="bW3-K9-PV2" id="gJ1-6M-FTa"/>
+                <outlet property="FraNarrativeCH" destination="Gw3-8T-r1m" id="T4D-SO-dAe"/>
+                <outlet property="FraToyplayCH" destination="Rmg-w6-YwC" id="r2g-xo-hZ5"/>
+                <outlet property="JpnToyplayCH" destination="bW3-K9-PV2" id="gJ1-6M-FTa"/>
+                <outlet property="NldToyplayCH" destination="ovq-5e-aTL" id="hi7-GG-DbF"/>
                 <outlet property="OKbutton" destination="4Vd-ZJ-A4F" id="4tI-sz-INZ"/>
                 <outlet property="OneHCH" destination="TuS-RD-mLe" id="mh6-xT-Agw"/>
                 <outlet property="SEE_SLPField" destination="a1S-bV-bRz" id="CVO-bC-nCG"/>
+                <outlet property="SpaNarrativeCH" destination="HjM-Rs-8Ri" id="FzW-YW-Erq"/>
+                <outlet property="SpaToyplayCH" destination="hu7-Mx-n1r" id="PED-uU-PRb"/>
                 <outlet property="ThreeCH" destination="YvI-na-c87" id="NAv-fk-1o4"/>
                 <outlet property="ThreeHCH" destination="DfT-fE-SUV" id="qEY-fj-YxY"/>
                 <outlet property="TwoCH" destination="2Dy-y2-Rrr" id="zpZ-Qf-EXa"/>
                 <outlet property="TwoHCH" destination="COY-1P-oy5" id="h9M-PR-Udc"/>
+                <outlet property="ZhoNarrativeCH" destination="kry-pS-W9e" id="2KX-0f-aff"/>
+                <outlet property="ZhoToyplayCH" destination="46F-w6-lJO" id="7A4-Jp-aXI"/>
                 <outlet property="bothCH" destination="mG5-ZX-OwL" id="0Pd-Cm-Hmg"/>
                 <outlet property="chooseAgeRangeCH" destination="CSc-H2-QqP" id="d8S-Ps-8Z9"/>
                 <outlet property="doNotCompareDB" destination="1At-Qc-xIB" id="yxh-qH-cAV"/>
@@ -38,15 +46,15 @@
         <window title="Select KidEVAL options" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="100013" userLabel="Window" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="60" y="56" width="425" height="347"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="contentRect" x="60" y="56" width="425" height="419"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3440" height="1415"/>
             <value key="minSize" type="size" width="213" height="30"/>
-            <view key="contentView" autoresizesSubviews="NO" misplaced="YES" id="100014">
-                <rect key="frame" x="0.0" y="0.0" width="425" height="347"/>
+            <view key="contentView" autoresizesSubviews="NO" id="100014">
+                <rect key="frame" x="0.0" y="0.0" width="425" height="419"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="1At-Qc-xIB">
-                        <rect key="frame" x="22" y="318" width="203" height="21"/>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1At-Qc-xIB">
+                        <rect key="frame" x="22" y="389" width="203" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="do not compare to database" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wR5-Dn-VSm">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -56,8 +64,8 @@
                             <action selector="doNotCompareDBClicked:" target="-2" id="X74-rh-q6O"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="ezz-yJ-gNm">
-                        <rect key="frame" x="227" y="318" width="165" height="21"/>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ezz-yJ-gNm">
+                        <rect key="frame" x="227" y="389" width="165" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="compare to database" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="GFg-Cp-BRT">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -67,11 +75,11 @@
                             <action selector="CompareDBClicked:" target="-2" id="Ydv-BR-lUZ"/>
                         </connections>
                     </button>
-                    <box verticalHuggingPriority="750" misplaced="YES" boxType="separator" id="NET-QT-c1k">
-                        <rect key="frame" x="12" y="313" width="409" height="5"/>
+                    <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="NET-QT-c1k">
+                        <rect key="frame" x="12" y="384" width="409" height="5"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     </box>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="4Vd-ZJ-A4F">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Vd-ZJ-A4F">
                         <rect key="frame" x="303" y="1" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2zO-KR-v0f">
@@ -85,7 +93,7 @@ DQ
                             <action selector="OKClicked:" target="-2" id="a1x-ap-LiX"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="Ak2-Jd-2cm">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ak2-Jd-2cm">
                         <rect key="frame" x="49" y="1" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PTd-6g-9Yq">
@@ -99,8 +107,8 @@ Gw
                             <action selector="CancelClicked:" target="-2" id="Wmw-Nv-ad9"/>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="mL0-PP-wMi">
-                        <rect key="frame" x="44" y="286" width="326" height="21"/>
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mL0-PP-wMi">
+                        <rect key="frame" x="44" y="357" width="326" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Choose Database type below to compare input file to" id="8dL-ur-lYt">
                             <font key="font" metaFont="system"/>
@@ -108,8 +116,8 @@ Gw
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="a1S-bV-bRz">
-                        <rect key="frame" x="4" y="260" width="417" height="21"/>
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a1S-bV-bRz">
+                        <rect key="frame" x="4" y="331" width="417" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PLEASE SEE SLP MANUAL FOR RECOMMENDED INTERPRETATION" id="xha-Jc-3Zq">
                             <font key="font" metaFont="system"/>
@@ -117,7 +125,7 @@ Gw
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="Uu0-L3-REn">
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uu0-L3-REn">
                         <rect key="frame" x="14" y="108" width="81" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Age range:" id="7mO-zH-Jeo">
@@ -126,7 +134,7 @@ Gw
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="gvH-l7-7Mt">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gvH-l7-7Mt">
                         <rect key="frame" x="44" y="162" width="87" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Male only" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Ykb-gX-zdZ">
@@ -137,7 +145,7 @@ Gw
                             <action selector="maleClicked:" target="-2" id="fKk-JR-PCc"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="itk-Lw-OFs">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="itk-Lw-OFs">
                         <rect key="frame" x="128" y="162" width="105" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Female only" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Ey3-XL-8mO">
@@ -148,7 +156,7 @@ Gw
                             <action selector="femaleClicked:" target="-2" id="ZZr-Pi-Bkm"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="mG5-ZX-OwL">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mG5-ZX-OwL">
                         <rect key="frame" x="237" y="162" width="157" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Both Male and Female" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="6FO-lJ-lEU">
@@ -159,7 +167,7 @@ Gw
                             <action selector="bothClicked:" target="-2" id="rAh-2l-Uha"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="CSc-H2-QqP">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CSc-H2-QqP">
                         <rect key="frame" x="12" y="133" width="300" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Choose Age Range independent of input file" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="4on-oa-4pf">
@@ -170,40 +178,40 @@ Gw
                             <action selector="chooseAgeRangeClicked:" target="-2" id="er8-hA-Q2e"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="eRi-Yc-RF8">
-                        <rect key="frame" x="62" y="233" width="212" height="21"/>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eRi-Yc-RF8">
+                        <rect key="frame" x="62" y="304" width="128" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="check" title="typically-developing free play" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="HIS-S6-TCt">
+                        <buttonCell key="cell" type="check" title="English toyplay" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="HIS-S6-TCt">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="FreePlayClicked:" target="-2" id="Qf4-RX-377"/>
+                            <action selector="EngToyplayClicked:" target="-2" id="Qf4-RX-377"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="46F-w6-lJO">
-                        <rect key="frame" x="62" y="210" width="212" height="21"/>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="46F-w6-lJO">
+                        <rect key="frame" x="62" y="281" width="128" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="check" title="Chinese-ZHO" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Gq8-cN-ZvR">
+                        <buttonCell key="cell" type="check" title="Chinese toyplay" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Gq8-cN-ZvR">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="Chinese_zhoClicked:" target="-2" id="c03-Yo-K4e"/>
+                            <action selector="ZhoToyplayClicked:" target="-2" id="XXb-wi-VXT"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="bW3-K9-PV2">
-                        <rect key="frame" x="62" y="187" width="212" height="21"/>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bW3-K9-PV2">
+                        <rect key="frame" x="62" y="212" width="148" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="check" title="Japanese-TD" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="5CC-Ur-Jm4">
+                        <buttonCell key="cell" type="check" title="Japanese toyplay" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="5CC-Ur-Jm4">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="Japanese_tdClicked:" target="-2" id="Qp7-E0-fkj"/>
+                            <action selector="JpnToyplayClicked:" target="-2" id="Qp7-E0-fkj"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="TuS-RD-mLe">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TuS-RD-mLe">
                         <rect key="frame" x="62" y="81" width="88" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="1;6 - 1;11" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="8yh-ky-CJk">
@@ -214,7 +222,7 @@ Gw
                             <action selector="OneHClicked:" target="-2" id="CUW-8J-NZd"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="YvI-na-c87">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YvI-na-c87">
                         <rect key="frame" x="163" y="81" width="88" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="3; - 3;5" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="blB-sy-SI3">
@@ -225,7 +233,7 @@ Gw
                             <action selector="ThreeClicked:" target="-2" id="nJi-ic-2mL"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="PMO-e3-Rw4">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PMO-e3-Rw4">
                         <rect key="frame" x="271" y="81" width="88" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="4;6 - 4;11" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="UQR-2Q-kXk">
@@ -236,7 +244,7 @@ Gw
                             <action selector="FourHClicked:" target="-2" id="WOM-wG-OLq"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="2Dy-y2-Rrr">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Dy-y2-Rrr">
                         <rect key="frame" x="62" y="58" width="88" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="2; - 2;5" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="5In-WC-N1b">
@@ -247,7 +255,7 @@ Gw
                             <action selector="TwoClicked:" target="-2" id="XMh-w7-RLA"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="DfT-fE-SUV">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DfT-fE-SUV">
                         <rect key="frame" x="163" y="58" width="88" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="3;6 - 3;11" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="c7j-qI-eXp">
@@ -258,7 +266,7 @@ Gw
                             <action selector="ThreeHClicked:" target="-2" id="Rr2-bH-fRd"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="Oks-p1-A6D">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oks-p1-A6D">
                         <rect key="frame" x="271" y="58" width="88" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="5; - 5;5" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dW9-QA-IKp">
@@ -269,7 +277,7 @@ Gw
                             <action selector="FiveClicked:" target="-2" id="wtT-ei-XeT"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="COY-1P-oy5">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="COY-1P-oy5">
                         <rect key="frame" x="62" y="35" width="88" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="2;6 - 2;11" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bK9-q0-q7l">
@@ -280,7 +288,7 @@ Gw
                             <action selector="TwoHClicked:" target="-2" id="zS2-Mr-R5Z"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="bVd-XC-WZM">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bVd-XC-WZM">
                         <rect key="frame" x="163" y="35" width="88" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="4;- 4;5" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="xNV-RM-Vxd">
@@ -291,7 +299,7 @@ Gw
                             <action selector="FourClicked:" target="-2" id="RsO-TH-TaG"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="7rO-3Z-YR5">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7rO-3Z-YR5">
                         <rect key="frame" x="271" y="35" width="88" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="5;6 - 6;" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wA5-RR-KPd">
@@ -302,9 +310,86 @@ Gw
                             <action selector="FiveHClicked:" target="-2" id="LxN-AP-9KR"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pup-FW-bfz">
+                        <rect key="frame" x="226" y="304" width="144" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="English narrative" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Aah-vR-4m9">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="EngNarrativeClicked:" target="-2" id="jHh-pe-Y8i"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kry-pS-W9e">
+                        <rect key="frame" x="227" y="281" width="148" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Chinese narrative" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="VAX-ng-38x">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="ZhoNarrativeClicked:" target="-2" id="IRn-Fi-erl"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hu7-Mx-n1r">
+                        <rect key="frame" x="62" y="189" width="148" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Spanish toyplay" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wcB-9r-US7">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="SpaToyplayClicked:" target="-2" id="1gi-4R-xmX"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rmg-w6-YwC">
+                        <rect key="frame" x="62" y="234" width="148" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="French toyplay" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2Y5-6b-j4e">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="FraToyplayClicked:" target="-2" id="mng-bx-1ke"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gw3-8T-r1m">
+                        <rect key="frame" x="226" y="234" width="148" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="French narrative" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="sOK-CV-mHg">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="FraNarrativeClicked:" target="-2" id="5aL-BV-1kW"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ovq-5e-aTL">
+                        <rect key="frame" x="62" y="258" width="148" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Dutch toyplay" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="8By-GN-4qi">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="NldToyplayClicked:" target="-2" id="tpx-oe-oiN"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HjM-Rs-8Ri">
+                        <rect key="frame" x="226" y="189" width="148" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Spanish narrative" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="f7F-vT-ml6">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="SpaNarrativeClicked:" target="-2" id="Kbb-TR-Jmo"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="-5.5" y="-151.5"/>
+            <point key="canvasLocation" x="-478.5" y="-122.5"/>
         </window>
     </objects>
 </document>

@@ -195,7 +195,7 @@ static SelectMediaController *SelectMediaWindow = nil;
 	NSWindow *window = [self window];
 
 	[window setIdentifier:@"SelectMedia"];
-	[window setRestorationClass:[self class]];
+//	[window setRestorationClass:[self class]];
 	[super windowDidLoad];  // It's documented to do nothing, but still a good idea to invoke...
 /*
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{//TODO

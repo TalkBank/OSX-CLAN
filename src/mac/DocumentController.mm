@@ -233,8 +233,22 @@
 				tPos = pos + 2;
 				while (tPos < len) {
 					ch = [textSt characterAtIndex:tPos];
-					if (ch == '\n')
+					if (ch == '\n') {
+						endRange = NSMakeRange(pos, 2); // (NSUInteger pos, NSUInteger len)
+						[text replaceCharactersInRange:endRange withString:@""];
+						tPos -= 2;
+						if (cDoc->pos1C > pos)
+							cDoc->pos1C -= 2;
+						if (cDoc->pos2C > pos)
+							cDoc->pos2C -= 2;
+						endRange = NSMakeRange(pos, tPos-pos);
+						[text addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:endRange];
+						textSt = [text string];
+						len = [text length];
+						ch = [textSt characterAtIndex:pos];
+						isIncrementPos = false;
 						break;
+					}
 					if (ch == ATTMARKER) {
 						ch = [textSt characterAtIndex:tPos+1];
 						if (ch == error_end) {
@@ -252,8 +266,7 @@
 							if (cDoc->pos2C > tPos)
 								cDoc->pos2C -= 2;
 							endRange = NSMakeRange(pos, tPos-pos);
-							[text addAttribute:NSForegroundColorAttributeName value:[NSColor redColor]
-										 range:endRange];
+							[text addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:endRange];
 							textSt = [text string];
 							len = [text length];
 							ch = [textSt characterAtIndex:pos];
@@ -263,42 +276,54 @@
 					}
 					tPos++;
 				}
-			} else // 2020-07-27 end
-				if (ch == underline_start) { // 2021-07-12 beg
-					tPos = pos + 2;
-					while (tPos < len) {
-						ch = [textSt characterAtIndex:tPos];
-						if (ch == '\n')
-							break;
-						if (ch == ATTMARKER) {
-							ch = [textSt characterAtIndex:tPos+1];
-							if (ch == underline_end) {
-								endRange = NSMakeRange(pos, 2); // (NSUInteger pos, NSUInteger len)
-								[text replaceCharactersInRange:endRange withString:@""];
-								tPos -= 2;
-								endRange = NSMakeRange(tPos, 2); // (NSUInteger pos, NSUInteger len)
-								[text replaceCharactersInRange:endRange withString:@""];
-								if (cDoc->pos1C > pos)
-									cDoc->pos1C -= 2;
-								if (cDoc->pos2C > pos)
-									cDoc->pos2C -= 2;
-								if (cDoc->pos1C > tPos)
-									cDoc->pos1C -= 2;
-								if (cDoc->pos2C > tPos)
-									cDoc->pos2C -= 2;
-								endRange = NSMakeRange(pos, tPos-pos);              // @(NSUnderlineStyleThick)
-								[text addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlineStyleSingle)
-											 range:endRange];
-								textSt = [text string];
-								len = [text length];
-								ch = [textSt characterAtIndex:pos];
-								isIncrementPos = false;
-								break;
-							}
-						}
-						tPos++;
+			} else if (ch == underline_start) { // 2020-07-27 end // 2021-07-12 beg
+				tPos = pos + 2;
+				while (tPos < len) {
+					ch = [textSt characterAtIndex:tPos];
+					if (ch == '\n') {
+						endRange = NSMakeRange(pos, 2); // (NSUInteger pos, NSUInteger len)
+						[text replaceCharactersInRange:endRange withString:@""];
+						tPos -= 2;
+						if (cDoc->pos1C > pos)
+							cDoc->pos1C -= 2;
+						if (cDoc->pos2C > pos)
+							cDoc->pos2C -= 2;
+						endRange = NSMakeRange(pos, tPos-pos);              // @(NSUnderlineStyleThick)
+						[text addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlineStyleSingle) range:endRange];
+						textSt = [text string];
+						len = [text length];
+						ch = [textSt characterAtIndex:pos];
+						isIncrementPos = false;
+						break;
 					}
+					if (ch == ATTMARKER) {
+						ch = [textSt characterAtIndex:tPos+1];
+						if (ch == underline_end) {
+							endRange = NSMakeRange(pos, 2); // (NSUInteger pos, NSUInteger len)
+							[text replaceCharactersInRange:endRange withString:@""];
+							tPos -= 2;
+							endRange = NSMakeRange(tPos, 2); // (NSUInteger pos, NSUInteger len)
+							[text replaceCharactersInRange:endRange withString:@""];
+							if (cDoc->pos1C > pos)
+								cDoc->pos1C -= 2;
+							if (cDoc->pos2C > pos)
+								cDoc->pos2C -= 2;
+							if (cDoc->pos1C > tPos)
+								cDoc->pos1C -= 2;
+							if (cDoc->pos2C > tPos)
+								cDoc->pos2C -= 2;
+							endRange = NSMakeRange(pos, tPos-pos);              // @(NSUnderlineStyleThick)
+							[text addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlineStyleSingle) range:endRange];
+							textSt = [text string];
+							len = [text length];
+							ch = [textSt characterAtIndex:pos];
+							isIncrementPos = false;
+							break;
+						}
+					}
+					tPos++;
 				}
+			}
 		}  // 2021-07-12 end
 		if (isIncrementPos) {
 			pos++;
@@ -324,13 +349,13 @@
 }
 
 - (void)addDocument:(NSDocument *)newDoc {
-	int cnt; // 2019-09-04
-	Document *firstDoc;
-	NSArray *documents = [self documents];
-	cnt = [documents count];
-	if (cnt == 1) {
-		firstDoc = [documents objectAtIndex:0];
-	}
+//	int cnt; // 2019-09-04
+//	Document *firstDoc;
+//	NSArray *documents = [self documents];
+//	cnt = [documents count];
+//	if (cnt == 1) {
+//		firstDoc = [documents objectAtIndex:0];
+//	}
 	[super addDocument:newDoc];
 }
 

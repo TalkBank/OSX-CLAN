@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2022 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -76,8 +76,8 @@ int is_in_SEENTAGGING( char* ams )
 
 void list_brillword(FILE* out)
 {
-	int totalsize = 0;
-	int totalsizenoslack = 0;
+//	int totalsize = 0;
+//	int totalsizenoslack = 0;
 	hashiteratorinit( _brillword_hashdic_ );
 	loopr* l;
 	while ((l=hashiteratorloopCI( _brillword_hashdic_ ))) {
@@ -89,8 +89,8 @@ void list_brillword(FILE* out)
 			msgfile( out, " %s", s );
 		}
 		msgfile( out, "\n" );
-		totalsizenoslack += (((((l->e[0] * sizeof(Int4))-1) / 32)+1)*32);
-		totalsize += l->e[0] * sizeof(Int4);
+//		totalsizenoslack += (((((l->e[0] * sizeof(Int4))-1) / 32)+1)*32);
+//		totalsize += l->e[0] * sizeof(Int4);
 	}
 	msgfile( out, "\n" );
 	hashstat( _brillword_hashdic_, out );

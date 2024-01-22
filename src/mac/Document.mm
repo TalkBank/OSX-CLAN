@@ -97,6 +97,8 @@ extern char isMORXiMode;
 extern DocumentWindowController *getDocWinController(NSWindow *win);
 extern NSFont *defUniFont;
 extern NSFont *defCAFont;
+extern BOOL DefWindowDims;
+
 
 extern "C"
 {
@@ -107,7 +109,9 @@ extern "C"
 static char *bArgv[10];
 static char fbuffer[UTTLINELEN];
 
-char  tComWinDataChanged;
+char tComWinDataChanged;
+BOOL isComRuning = false;
+
 
 @implementation ProgressController
 
@@ -117,11 +121,6 @@ char  tComWinDataChanged;
 	}
 	return self;
 	//	return [super initWithWindowNibName:@"Commands"];
-}
-- (void)windowDidLoad {
-	int j;
-
-	j = 0;
 }
 
 @end
@@ -601,6 +600,7 @@ void RunCommand(NSString *comStr) {
 	isKillProgram = 0;
 	uS.remFrontAndBackBlanks(bufU);
 	u_strcpy(fbuffer, bufU, UTTLINELEN);
+	isComRuning = true;
 	if (fbuffer[0] != EOS) {
 		AddToClan_commands(fbuffer);
 //		set_CommandsInfo(win, TRUE);
@@ -690,6 +690,7 @@ void RunCommand(NSString *comStr) {
 //			tComWinDataChanged;
 //		}
 	}
+	isComRuning = false;
 	free(bufU);
 }
 
@@ -805,7 +806,7 @@ static void lExtractFileName(unCH *line, char *path, FNType *fname, char term) {
 char FindFileLine(char isTest, char *fPath, unCH *text) {
 	int i;
 	FNType fname[FNSize], *ext;
-	char isZeroFound = FALSE, isSpeakerNumber;
+	char isSpeakerNumber;
 	unCH *line;
 	long len;
 	long ln = 0L;
@@ -815,14 +816,12 @@ char FindFileLine(char isTest, char *fPath, unCH *text) {
 	NSArray *documents;
 	BOOL tIsCursorPosRestore;
 	extern BOOL isCursorPosRestore;
-//	extern char isDontAskDontTell;
 
 	if (text == NULL)
 		return(FALSE);
 	strncpy(ced_line, text, UTTLINELEN);
 	ced_line[UTTLINELEN] = EOS;
 	if (ced_line[0] == '0') {
-		isZeroFound = TRUE;
 		strcpy(ced_line, ced_line+1);
 	}
 	len = (long)strlen("@Comment:	");
@@ -888,8 +887,6 @@ char FindFileLine(char isTest, char *fPath, unCH *text) {
 			if (!system(FileName2))
 				return(TRUE);
 		}
-//		if (isZeroFound)
-//			isDontAskDontTell = TRUE;
 
 		documents = [[NSDocumentController sharedDocumentController] documents];
 		docsCnt = [documents count];
@@ -1036,7 +1033,31 @@ NSUInteger getUtts(NSUInteger pos, NSUInteger len, NSString *textSt) {
 		docFont = nil;
 		textStorage = [[NSTextStorage allocWithZone:[self zone]] init];
 
-		[self setBackgroundColor:[NSColor whiteColor]];
+#ifdef _OS_10_13// 2023-05-10
+		isDarkColor = FALSE;
+//		if (isDarkColor == TRUE)
+//			[self setBackgroundColor:[NSColor blackColor]];
+//		else
+//			[self setBackgroundColor:[NSColor whiteColor]];
+#else //_OS_10_13 2023-05-10
+		dispatch_async(dispatch_get_main_queue(), ^{
+			if (@available(macOS 10.14, *)) {// 2023-05-10
+				NSAppearance *currentAppearance = [NSApp effectiveAppearance];
+				NSString *appName = [currentAppearance name];
+				if ([appName isEqualToString:NSAppearanceNameDarkAqua] == YES)
+					isDarkColor = TRUE;
+				else
+					isDarkColor = FALSE;
+			} else {
+				isDarkColor = FALSE;
+			}
+//			if (isDarkColor == TRUE)
+//				[self setBackgroundColor:[NSColor blackColor]];
+//			else
+//				[self setBackgroundColor:[NSColor whiteColor]];
+		});
+#endif //_OS_10_13 2023-05-10
+
 		[self setEncodingForSaving:NoStringEncoding];
 		inDuplicate = NO;
 
@@ -1050,6 +1071,7 @@ NSUInteger getUtts(NSUInteger pos, NSUInteger len, NSString *textSt) {
 
 		[[self undoManager] enableUndoRegistration];
 	}
+	dispatch_source = NULL;
 	return self;
 }
 
@@ -1210,6 +1232,7 @@ NSUInteger getUtts(NSUInteger pos, NSUInteger len, NSString *textSt) {
 
 
 // 2019-09-10 2020-05-10 beg
+/*
 - (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError * _Nullable *)outError {
 #pragma unused (typeName, outError)
 	char buf[BUFSIZ];
@@ -1226,30 +1249,27 @@ NSUInteger getUtts(NSUInteger pos, NSUInteger len, NSString *textSt) {
 
 	text = [self textStorage];
 // 2020-05-09 beg
-/*
-	NSLayoutManager *tLayoutMgr;
-	NSTextContainer *textContainer;
-	NSTextView *textView;
-	NSValue *cursorValue;
+//	NSLayoutManager *tLayoutMgr;
+//	NSTextContainer *textContainer;
+//	NSTextView *textView;
+//	NSValue *cursorValue;
 
-	for (tLayoutMgr in [text layoutManagers]) {
-		for (textContainer in [tLayoutMgr textContainers]) {
-			textView = [textContainer textView];
-			if (textView) {
-				cursorValue = [[textView selectedRanges] objectAtIndex:0];
-				cursorRange = [cursorValue rangeValue];
-				topC = -1L;
-				skipTop = -1L;
-				pos1C = cursorRange.location;
-				skipP1 = 0L;
-				pos2C = pos1C + cursorRange.length;
-				skipP2 = 0L;
-			}
-		}
-	}
-*/
+//	for (tLayoutMgr in [text layoutManagers]) {
+//		for (textContainer in [tLayoutMgr textContainers]) {
+//			textView = [textContainer textView];
+//			if (textView) {
+//				cursorValue = [[textView selectedRanges] objectAtIndex:0];
+//				cursorRange = [cursorValue rangeValue];
+//				topC = -1L;
+//				skipTop = -1L;
+//				pos1C = cursorRange.location;
+//				skipP1 = 0L;
+//				pos2C = pos1C + cursorRange.length;
+//				skipP2 = 0L;
+//			}
+//		}
+//	}
 // 2020-05-09 end
-
 
 //	dispatch_async(dispatch_get_main_queue(), ^{
 //	});
@@ -1260,16 +1280,14 @@ NSUInteger getUtts(NSUInteger pos, NSUInteger len, NSString *textSt) {
 	NSColor *color;
 	while (pos < len) { // get speaker code in variable "suSt"
 		color = [text attribute:NSForegroundColorAttributeName atIndex:pos effectiveRange:&cursorRange];
-/*
-		CGFloat errRed, errGreen, errBlue, errAlpha;
-		CGFloat red, green, blue, alpha;
-		NSColor *color;
-		[[NSColor redColor] getRed:&errRed green:&errGreen blue:&errBlue alpha:&errAlpha];
-		color = [text attribute:NSForegroundColorAttributeName atIndex:pos effectiveRange:&range];
-		if (color != nil) {
-			[color getRed:&red green:&green blue:&blue alpha:&alpha];
-		}
-*/
+//		CGFloat errRed, errGreen, errBlue, errAlpha;
+//		CGFloat red, green, blue, alpha;
+//		NSColor *color;
+//		[[NSColor redColor] getRed:&errRed green:&errGreen blue:&errBlue alpha:&errAlpha];
+//		color = [text attribute:NSForegroundColorAttributeName atIndex:pos effectiveRange:&range];
+//		if (color != nil) {
+//			[color getRed:&red green:&green blue:&blue alpha:&alpha];
+//		}
 		if (color == [NSColor redColor]) {
 			attStr = [NSString stringWithFormat:@"%c%c", ATTMARKER, error_start];
 			posRange = NSMakeRange(pos, 0);
@@ -1469,7 +1487,197 @@ NSUInteger getUtts(NSUInteger pos, NSUInteger len, NSString *textSt) {
 	[text endEditing];
 	return writeSuccess;
 }
+*/
+// saveToURL
 // 2019-09-10 2020-05-10 end
+
+- (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError * _Nullable *)outError {
+#pragma unused (typeName, outError)
+	char buf[BUFSIZ];
+	long tPos1C, tPos2C;
+	unichar ch;
+	cCOLORTEXTLIST *tCT;
+	NSUInteger len, oPos, pos, tPos;
+	NSRange  cursorRange, posRange;
+	NSString *oTextSt, *textSt, *headerSt, *attStr;
+	NSTextStorage *text;
+	NSData *data;
+	NSColor *color;
+	BOOL isSkipIncrement, writeSuccess = NO;
+
+	[self cancelWatchFile]; // 2023-02-15
+
+	NSLog(@"Document: writeToURL\n");
+
+	text = [self textStorage];
+	oTextSt = [text string];
+
+//	dispatch_async(dispatch_get_main_queue(), ^{
+//	});
+	tPos1C = pos1C;
+	tPos2C = pos2C;
+	textSt = [oTextSt copy];
+
+	len = [textSt length];
+	oPos = 0;
+	pos = 0;
+	id isUnderlined;
+	NSInteger val;
+	while (oPos < len) {
+		color = [text attribute:NSForegroundColorAttributeName atIndex:oPos effectiveRange:&cursorRange];
+		isUnderlined = [text attribute:NSUnderlineStyleAttributeName atIndex:oPos effectiveRange:&cursorRange];
+		val = [isUnderlined integerValue];
+		isSkipIncrement = false;
+		if (val != 0) {
+			attStr = [NSString stringWithFormat:@"%c%c", ATTMARKER, underline_start];
+			posRange = NSMakeRange(pos, 0);
+			textSt = [textSt stringByReplacingCharactersInRange:posRange withString:attStr];
+			if (pos1C > oPos)
+				tPos1C += 2;
+			if (pos2C > oPos)
+				tPos2C += 2;
+			attStr = [NSString stringWithFormat:@"%c%c", ATTMARKER, underline_end];
+			pos = pos + cursorRange.length + 2;
+			posRange = NSMakeRange(pos, 0);
+			textSt = [textSt stringByReplacingCharactersInRange:posRange withString:attStr];
+			if (pos1C > oPos)
+				tPos1C += 2;
+			if (pos2C > oPos)
+				tPos2C += 2;
+			pos += 2;
+			oPos += cursorRange.length;
+			isSkipIncrement = true;
+		}
+		if (color == [NSColor redColor]) {
+			attStr = [NSString stringWithFormat:@"%c%c", ATTMARKER, error_start];
+			posRange = NSMakeRange(pos, 0);
+			textSt = [textSt stringByReplacingCharactersInRange:posRange withString:attStr];
+			if (pos1C > oPos)
+				tPos1C += 2;
+			if (pos2C > oPos)
+				tPos2C += 2;
+			attStr = [NSString stringWithFormat:@"%c%c", ATTMARKER, error_end];
+			pos = pos + cursorRange.length + 2;
+			posRange = NSMakeRange(pos, 0);
+			textSt = [textSt stringByReplacingCharactersInRange:posRange withString:attStr];
+			if (pos1C > oPos)
+				tPos1C += 2;
+			if (pos2C > oPos)
+				tPos2C += 2;
+			pos += 2;
+			oPos += cursorRange.length;
+			isSkipIncrement = true;
+		}
+		if (isSkipIncrement == false) {
+			pos++;
+			oPos++;
+		}
+	}
+
+	len = [textSt length];
+	pos = 0;
+	while (pos < len) { // get speaker code in variable "suSt"
+		ch = [textSt characterAtIndex:pos];
+		if (ch == '\n') {
+			tPos = pos;
+			while (tPos > 0) {
+				ch = [textSt characterAtIndex:tPos-1];
+				if (ch != ' ' && ch != '\t')
+					break;
+				tPos--;
+			}
+			if (tPos < pos) {
+				if (pos1C > pos)
+					tPos1C -= (pos - tPos);
+				if (pos2C > pos)
+					tPos2C -= (pos - tPos);
+				posRange = NSMakeRange(tPos, (pos - tPos + 1));
+				textSt = [textSt stringByReplacingCharactersInRange:posRange withString:@"\n"];
+				len = [textSt length];
+				pos = tPos;
+			} else
+				pos = tPos + 1;
+		} else
+			pos++;
+	}
+	if (pos >= len) {
+		tPos = pos;
+		while (tPos > 0) {
+			ch = [textSt characterAtIndex:tPos-1];
+			if (ch != ' ' && ch != '\t')
+				break;
+			tPos--;
+		}
+		if (tPos < pos) {
+			if (pos1C > pos)
+				tPos1C -= (pos - tPos);
+			if (pos2C > pos)
+				tPos2C -= (pos - tPos);
+			posRange = NSMakeRange(tPos, (pos - tPos));
+			textSt = [textSt stringByReplacingCharactersInRange:posRange withString:@""];
+			len = [textSt length];
+		}
+		if (tPos > len)
+			tPos = len;
+		if (tPos > 0) {
+			ch = [textSt characterAtIndex:tPos-1];
+			if (ch != '\n') {
+				posRange = NSMakeRange(tPos, 0);
+				textSt = [textSt stringByReplacingCharactersInRange:posRange withString:@"\n"];
+				len = [textSt length];
+			}
+		}
+	}
+
+// 2020-05-20 beg
+//	bulletStr = [[NSString alloc]initWithString:@"•"]; // 0x2022 - E2 80 A2
+//	bulletStr = [NSString stringWithString:@"•"]; // 0x2022 - E2 80 A2
+//	bulletStr = [NSString stringWithUTF8String:"\xe2\x80\xa2"]; // • - 0x2022 - E2 80 A2
+//	bulletStr = [NSString stringWithFormat:@"%C", 0x2022]; // • - 0x2022 - E2 80 A2
+	textSt = [textSt stringByReplacingOccurrencesOfString:@"•" withString:@"\x15"]; // 0x2022 - E2 80 A2
+
+	strcpy(buf, UTF8HEADER);
+	strcat(buf, "\n");
+	if (pidSt[0] != EOS) {// 2020-05-08 beg
+		strcat(buf, PIDHEADER);
+		strcat(buf, "\t");
+		strcat(buf, pidSt);
+		strcat(buf, "\n");// 2020-05-08 end
+	}
+	if (RootColorText != nil) {
+		strcat(buf, CKEYWORDHEADER);
+		strcat(buf, "\t");
+		for (tCT=RootColorText; tCT != NULL; tCT=tCT->nextCT) {
+			u_strcpy(templineC3, tCT->keyWord, UTTLINELEN);
+			strcat(buf, templineC3);
+			pos = strlen(buf);
+			uS.sprintf(buf+pos, " %d %d %d %d ", tCT->cWordFlag, tCT->red, tCT->green, tCT->blue);
+		}
+		strcat(buf, "\n");        // 2020-03-13 end
+	}
+	if (DefWindowDims == false) {
+		strcat(buf, WINDOWSINFO); // 2020-03-13 beg
+		strcat(buf, "\t");
+		sprintf(buf+strlen(buf), "%ld_%ld_%ld_%ld_%ld_%ld_%ld_%ld_%ld_%ld",
+				top, left, height, width, topC, skipTop, tPos1C, skipP1, tPos2C, skipP2);
+		strcat(buf, "\n");        // 2020-03-13 end
+	}
+//	headerSt = [[NSString alloc] initWithUTF8String:buf];
+//	[headerSt release]; // 2020-05-10
+	headerSt = [NSString stringWithUTF8String:buf];
+	textSt = [headerSt stringByAppendingString:textSt];
+// 2020-05-20 end
+	data = [textSt dataUsingEncoding:NSUTF8StringEncoding];
+	if (data) {
+		writeSuccess = [data writeToURL:absoluteURL atomically:true];
+	} else {
+		writeSuccess = NO;
+	}
+
+	[self watchFile:[absoluteURL path]]; // 2023-02-15
+
+	return writeSuccess;
+}
 
 /*
 void CleanMediaName(unCH *tMediaFileName) {// 2020-03-12
@@ -1884,7 +2092,7 @@ void CleanMediaName(unCH *tMediaFileName) {// 2020-03-12
 	id val;
 //	id paperSizeVal, viewSizeVal;
 	NSUInteger suSti, len, pos, tPos, endPos;
-	NSString *bulletStr, *textSt;
+	NSString *bulletStr, *errorStr, *textSt;
 	NSRange  endRange;
 	NSTextStorage *text = [self textStorage];
 	BOOL success; //, isIncrementPos;
@@ -1893,6 +2101,8 @@ void CleanMediaName(unCH *tMediaFileName) {// 2020-03-12
 	fileTypeToSet = nil;
 
 	[[self undoManager] disableUndoRegistration];
+
+	[self watchFile:[absoluteURL path]]; // 2023-02-15
 
 	[options setObject:absoluteURL forKey:NSBaseURLDocumentOption];
 	[options setObject:NSPlainTextDocumentType forKey:NSDocumentTypeDocumentOption]; // Force plain
@@ -2050,6 +2260,7 @@ void CleanMediaName(unCH *tMediaFileName) {// 2020-03-12
 //	bulletStr = [[NSString alloc]initWithString:@"•"]; // 0x2022 - E2 80 A2
 //	bulletStr = [NSString stringWithUTF8String:"\xe2\x80\xa2"]; // • - 0x2022 - E2 80 A2
 	bulletStr = [NSString stringWithFormat:@"%C", 0x2022]; // • - 0x2022 - E2 80 A2
+	errorStr = [NSString stringWithFormat:@"%C", 0xfffd];
 	textSt = [text string];
 	len = [text length];
 	[text beginEditing];
@@ -2061,6 +2272,13 @@ void CleanMediaName(unCH *tMediaFileName) {// 2020-03-12
 			endRange = NSMakeRange(pos, 1); // (NSUInteger pos, NSUInteger len)
 			[text replaceCharactersInRange:endRange withString:bulletStr];
 //			len = [text length]; // New length
+		} else if (ch == ATTMARKER && pos+1 < len) {
+			ch = [textSt characterAtIndex:pos+1];
+			if (SetTextAtt(NULL, ch, NULL) == FALSE) {
+				endRange = NSMakeRange(pos, 1); // (NSUInteger pos, NSUInteger len)
+				[text replaceCharactersInRange:endRange withString:errorStr];
+			} else if (ch != HIDEN_C)
+				pos++;
 		}
 		pos++;
 	}
@@ -2120,8 +2338,8 @@ void CleanMediaName(unCH *tMediaFileName) {// 2020-03-12
 		}
 	}
 */
-	[self setBackgroundColor:[NSColor whiteColor]];
-//	[self setBackgroundColor:(val = [docAttrs objectForKey:NSBackgroundColorDocumentAttribute]) ? val : [NSColor whiteColor]];
+//	CGColor *aColor = NSColor.textBackgroundColor.CGColor;
+//	[self setBackgroundColor:[NSColor blackColor /*whiteColor*/]];
 
 	// Set the document properties, generically, going through key value coding
 	[self setReadOnly:((val = [docAttrs objectForKey:NSReadOnlyDocumentAttribute]) && ([val integerValue] > 0))];
@@ -2183,9 +2401,11 @@ void CleanMediaName(unCH *tMediaFileName) {// 2020-03-12
 	NSTextStorage *text = [self textStorage];
 	// We now preserve base writing direction even for plain text, using the 10.6-introduced attribute enumeration API
 	[text enumerateAttribute:NSParagraphStyleAttributeName inRange:NSMakeRange(0, [text length]) options:0 usingBlock:^(id paragraphStyle, NSRange paragraphStyleRange, BOOL *stop){
+#pragma unused (stop)
 		NSWritingDirection writingDirection = paragraphStyle ? [(NSParagraphStyle *)paragraphStyle baseWritingDirection] : NSWritingDirectionNatural;
 		// We also preserve NSWritingDirectionAttributeName (new in 10.6)
 		[text enumerateAttribute:NSWritingDirectionAttributeName inRange:paragraphStyleRange options:0 usingBlock:^(id value, NSRange attributeRange, BOOL *stop){
+#pragma unused (stop)
 			[value retain];
 			[text setAttributes:textAttributes range:attributeRange];
 			if (value)
@@ -2687,7 +2907,25 @@ static void makeUnicodeString(unichar *st, const char *src) {
 }
 
 - (BOOL)revertToContentsOfURL:(NSURL *)url ofType:(NSString *)type error:(NSError **)outError {
-    BOOL success = [super revertToContentsOfURL:url ofType:type error:outError];
+	NSTextStorage *text;
+	NSLayoutManager *tLayoutMgr;
+	NSTextContainer *textContainer;
+	NSTextView *textView;
+	NSRange  cursorRange;
+
+	[self cancelWatchFile]; // 2023-02-15
+
+	text = [self textStorage];
+	for (tLayoutMgr in [text layoutManagers]) {
+		for (textContainer in [tLayoutMgr textContainers]) {
+			textView = [textContainer textView];
+			if (textView) {
+				cursorRange = [textView selectedRange];
+			}
+		}
+	}
+
+	BOOL success = [super revertToContentsOfURL:url ofType:type error:outError];
     if (success) {
         if (fileTypeToSet) {	// If we're reverting, NSDocument will set the file type behind out backs. This enables restoring that type.
             [self setFileType:fileTypeToSet];
@@ -2695,16 +2933,96 @@ static void makeUnicodeString(unichar *st, const char *src) {
             fileTypeToSet = nil;
         }
         [[self windowControllers] makeObjectsPerformSelector:@selector(setupTextViewForDocument)];
+
+		for (tLayoutMgr in [text layoutManagers]) {
+			for (textContainer in [tLayoutMgr textContainers]) {
+				textView = [textContainer textView];
+				if (textView) {
+					[textView setSelectedRange:cursorRange];
+					[textView scrollRangeToVisible:cursorRange]; // 2020-05-13
+				}
+			}
+		}
     }
     return success;
 }
+
+// 2023-02-15 beg
+- (void)revertDocumentToSaved:(id)sender {
+	[super revertDocumentToSaved:sender];
+}
+
+- (void)watchFile:(NSString*)fileName {
+	
+	if (! activateBauerPatch)
+		return;
+	
+	// if (![[self class] autosavesInPlace])
+	//      return;
+	
+	dispatch_queue_t queue = dispatch_get_main_queue();
+	int fildes = open([fileName UTF8String], O_EVTONLY);
+	
+	[self cancelWatchFile];
+	
+	dispatch_source = dispatch_source_create(DISPATCH_SOURCE_TYPE_VNODE,fildes,
+											 DISPATCH_VNODE_DELETE | DISPATCH_VNODE_WRITE | DISPATCH_VNODE_REVOKE,
+											 queue);
+	__block Document *blockSelf = self;
+	
+	dispatch_source_set_event_handler(dispatch_source, ^ {
+		if ([blockSelf hasUnautosavedChanges]) {
+			[blockSelf cancelWatchFile];
+		} else {
+			unsigned long flags = dispatch_source_get_data(dispatch_source);
+			if (flags & (DISPATCH_VNODE_WRITE)) {
+				NSError *outError = NULL;
+				[blockSelf revertToContentsOfURL:[blockSelf fileURL] ofType:[blockSelf fileType] error:&outError];
+			} else if (flags & (DISPATCH_VNODE_DELETE)) {
+				if ([[NSFileManager defaultManager] isReadableFileAtPath: [[blockSelf fileURL] path]]) {
+					NSError *outError = NULL;
+					if (![blockSelf revertToContentsOfURL:[blockSelf fileURL] ofType:[blockSelf fileType] error:&outError])
+						[blockSelf close];
+				} else {
+					[blockSelf close];
+				}
+			} else if (flags & (DISPATCH_VNODE_REVOKE)) {
+				[blockSelf close];
+			}
+		}
+		
+	});
+	
+	dispatch_source_set_cancel_handler(dispatch_source, ^ {
+		close(fildes);
+	});
+	
+	dispatch_resume(dispatch_source);
+}
+
+- (void)cancelWatchFile {
+
+	if (dispatch_source != NULL) {
+		dispatch_source_cancel(dispatch_source);
+		dispatch_release(dispatch_source);
+		dispatch_source = NULL;
+	}
+}
+
+- (void)close
+{
+	[self cancelWatchFile];
+
+	[super close];
+}
+// 2023-02-15 end
 
 @end
 
 @implementation Document (TextEditNSDocumentOverrides)
 
 + (BOOL)autosavesInPlace {
-    return NO; // 2019-08-28
+    return NO; // YES; 2023-02-15 // NO; 2019-08-28
 }
 
 + (BOOL)canConcurrentlyReadDocumentsOfType:(NSString *)typeName {
@@ -2788,6 +3106,8 @@ static BOOL isMCEDFileType(char *fpath) {
 - (void)saveToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation completionHandler:(void (^)(NSError *error))handler {
 	char fpath[FNSize];
 
+	if ([self isDocumentEdited] == false && DefWindowDims == TRUE)
+		return;
 	// Note that we do the breakUndoCoalescing call even during autosave, which means the user's undo of long typing will take them back to the last spot an autosave occured. This might seem confusing, and a more elaborate solution may be possible (cause an autosave without having to breakUndoCoalescing), but since this change is coming late in Leopard, we decided to go with the lower risk fix.
     [[self windowControllers] makeObjectsPerformSelector:@selector(breakUndoCoalescing)];
 	if ([absoluteURL getFileSystemRepresentation:fpath maxLength:FNSize] == NO)
@@ -2806,10 +3126,11 @@ static BOOL isMCEDFileType(char *fpath) {
 		[self performSynchronousFileAccessUsingBlock:^(void) {
 			currentSaveOperation = saveOperation;
 // 2022-07-12 beg
-			unichar ch;
-			NSUInteger len, pos, tPos;
-			NSRange  cursorRange, posRange;
-			NSString *textSt;
+//			unichar ch;
+//			NSUInteger len, pos, tPos;
+			NSRange  cursorRange;
+//			NSRange posRange;
+//			NSString *textSt;
 			NSTextStorage *text;
 			NSLayoutManager *tLayoutMgr;
 			NSTextContainer *textContainer;
@@ -2832,7 +3153,8 @@ static BOOL isMCEDFileType(char *fpath) {
 					}
 				}
 			}
-			
+
+/*			
 			[text beginEditing]; // 2020-07-30 beg
 			textSt = [text string];
 			len = [text length];
@@ -2892,6 +3214,8 @@ static BOOL isMCEDFileType(char *fpath) {
 					}
 				}
 			}
+			[text endEditing];  // 2020-07-30 beg
+
 			cursorRange = NSMakeRange(pos1C+skipP1, pos2C+skipP2-pos1C+skipP1);
 			for (tLayoutMgr in [text layoutManagers]) {
 				for (textContainer in [tLayoutMgr textContainers]) {
@@ -2902,9 +3226,8 @@ static BOOL isMCEDFileType(char *fpath) {
 					}
 				}
 			}
-			[text endEditing];  // 2020-07-30 beg
+*/
 // 2022-07-12 end
-
 			[super saveToURL:absoluteURL ofType:typeName forSaveOperation:saveOperation completionHandler:^(NSError *error) {
 				[self setEncodingForSaving:NoStringEncoding];   // This is set during prepareSavePanel:, but should be cleared for future save operation without save panel
 				if (error == nil) {

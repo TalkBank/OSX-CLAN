@@ -43,14 +43,15 @@
 
 @interface NoodleLineNumberView : NSRulerView
 {
-    // Array of character indices for the beginning of each line
-    NSMutableArray      *_lineIndices;
+	// Array of character indices for the beginning of each line
+	NSMutableArray      *_lineIndices;
 	// Maps line numbers to markers
 	NSMutableDictionary	*_linesToMarkers;
 	NSFont              *_font;
 	NSColor				*_textColor;
 	NSColor				*_alternateTextColor;
 	NSColor				*_backgroundColor;
+	int					keysCount;
 // FIX RULER SCROLL
 //    Document          *_document;
 // END FIX RULER SCROLL

@@ -70,26 +70,27 @@ cCOLORTEXTLIST {
 
 @interface Document : NSDocument /*<NSProgressReporting>*/ {
     // Book-keeping
-    BOOL setUpPrintInfoDefaults;/* YES the first time -printInfo is called */
+    BOOL setUpPrintInfoDefaults;// YES the first time -printInfo is called
     BOOL inDuplicate;
     // Document data
-    NSTextStorage *textStorage;	/* The (styled) text content of the document */
-    BOOL isReadOnly;			/* The document is locked and should not be modified */
-    NSColor *backgroundColor;	/* The color of the document's background */
-    NSSize viewSize;			/* The view size, as stored in an RTF document. Can be NSZeroSize */
-    BOOL usesDocScreenFonts;	/* The document allows using screen fonts */
+    NSTextStorage *textStorage;	// The (styled) text content of the document
+    BOOL isReadOnly;			// The document is locked and should not be modified
+    NSColor *backgroundColor;	// The color of the document's background
+    NSSize viewSize;			// The view size, as stored in an RTF document. Can be NSZeroSize
+    BOOL usesDocScreenFonts;	// The document allows using screen fonts
 	NSFont *docFont;
 	CGFloat fontHeight;
 
     // Information about how the document was created
-    NSArray *originalOrientationSections; /* An array of dictionaries. Each describing the text layout orientation for a page */
+    NSArray *originalOrientationSections; // An array of dictionaries. Each describing the text layout orientation for a page
     
     // Temporary information about how to save the document
-    NSStringEncoding documentEncodingForSaving;	 /* NSStringEncoding for saving the document */
-    NSSaveOperationType currentSaveOperation;    /* So we can know whether to use documentEncodingForSavingin -fileWrapperOfType:error: */
+    NSStringEncoding documentEncodingForSaving;	 // NSStringEncoding for saving the document
+    NSSaveOperationType currentSaveOperation;    // So we can know whether to use documentEncodingForSavingin -fileWrapperOfType:error:
 
     // Temporary information about document's desired file type
-    NSString *fileTypeToSet;		/* Actual file type determined during a read, and set after the read (which includes revert) is complete. */ 
+    NSString *fileTypeToSet;	// Actual file type determined during a read, and set after the read (which includes revert) is complete.
+	dispatch_source_t dispatch_source;
 @public
 	long top; // 2020-03-13
 	long left;
@@ -114,57 +115,57 @@ cCOLORTEXTLIST {
 
 #define kUTTypeCHAT @"org.talkbank"
 
-/* View size (as it should be saved in a RTF file) */
+// View size (as it should be saved in a RTF file)
 - (NSFont *)docFont;
 - (void)setDocFont:(NSFont *)newDocFont;
 
-/* View size (as it should be saved in a RTF file) */
+// View size (as it should be saved in a RTF file)
 - (CGFloat)fontHeight;
 - (void)setFontHeight:(CGFloat)newFontHeight;
 
-/* Is the document read-only? */
+// Is the document read-only?
 - (BOOL)isReadOnly;
 - (void)setReadOnly:(BOOL)flag;
 
-/* Document background color */
+// Document background color
 - (NSColor *)backgroundColor;
 - (void)setBackgroundColor:(NSColor *)color;
 
-/* Encoding of the document chosen when saving */
+// Encoding of the document chosen when saving
 - (NSUInteger)encodingForSaving;
 - (void)setEncodingForSaving:(NSUInteger)SaveEncoding;
 
-/* View size (as it should be saved in a RTF file) */
+// View size (as it should be saved in a RTF file)
 - (NSSize)viewSize;
 - (void)setViewSize:(NSSize)newSize;
 
-/* Attributes */ // This will _copy_ the contents of the NS[Attributed]String ts into the document's textStorage.
+// Attributes // This will _copy_ the contents of the NS[Attributed]String ts into the document's textStorage.
 - (NSTextStorage *)textStorage;
 - (void)setTextStorage:(id)ts;
 
-/* Page-oriented methods */
+// Page-oriented methods
 - (NSSize)paperSize;
 - (void)setPaperSize:(NSSize)size;
 
-/* Action methods */
+// Action methods
 - (IBAction)openSpecialCharacters:(id)sender;
 - (IBAction)openKeysList:(id)sender;
 
 - (IBAction)toggleReadOnly:(id)sender;
 
-/* Default text attributes for plain or rich text formats */
+// Default text attributes for plain or rich text formats
 - (NSDictionary *)defaultTextAttributes:(BOOL)forRichText;
 - (void)applyDefaultTextAttributes:(BOOL)forRichText;
 
-/* Layout orientation sections */
+// Layout orientation sections
 - (NSArray *)originalOrientationSections;
 - (void)setOriginalOrientationSections:(NSArray *)array;
 
-/* Screen fonts property */
+// Screen fonts property
 - (BOOL)usesDocScreenFonts;
 - (void)setDocUsesScreenFonts:(BOOL)aFlag;
 
-/* Document window's ID # 2019-09-06 */
+// Document window's ID # 2019-09-06
 - (void)set_wID:(unsigned short )num;
 - (unsigned short)get_wID;
 
@@ -176,3 +177,11 @@ extern NSUInteger getUtts(NSUInteger pos, NSUInteger len, NSString *textSt);
 @interface ProgressController : NSWindowController <NSLayoutManagerDelegate, NSTextFieldDelegate> {
 }
 @end
+
+@interface Document (FileWatching)
+
+- (void) watchFile:(NSString*)fileName; // 2023-02-15
+- (void) reloadFileOnExternalChange;
+@end
+
+extern BOOL isComRuning;

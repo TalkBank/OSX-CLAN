@@ -215,6 +215,8 @@ int ToTopLevel(int i, DocumentWindowController *docWinController) {
 		NSBeep();
 		return(9);
 	}
+	if (docWinController->RootCodesArr == NULL)
+		return(9);
 	if (docWinController->RootCodesArr[0] != docWinController->CurCode && i != -1) {
 		docWinController->FirstCodeOfPrevLevel = docWinController->CurFirstCodeOfPrevLevel;
 		MapArrToList(docWinController->CurCode, docWinController);
@@ -485,7 +487,6 @@ if (cursorRange.location+40 >= [text length]) dl = [text length]-cursorRange.loc
 }
 
 int GetCursorCode(int i, DocumentWindowController *docWinController) {
-	int  cd = -1;
 	BOOL isSpaceFound = false;
 	unCH *s;
 	unichar ch, lastCh;
@@ -592,7 +593,6 @@ if (pos+40 >= len) dl = len-pos; else dl = 40;
 				if (ch != '%')
 					pos = EndOfLine(pos, textSt, len);
 				AddCodeTier(docWinController->StartCodeArr[docWinController->CursorCodeArr]->code, TRUE, textView, pos, docWinController);
-				cd = 0;
 			} else {
 				docWinController->EnteredCode = '\001';
 				strcpy(spareTier1, "Please put text cursor at desired place on the \"");
@@ -710,10 +710,8 @@ int MoveCodeCursorRight(DocumentWindowController *docWinController) {
 }
 
 int GetFakeCursorCode(int i, DocumentWindowController *docWinController) {
-	NSUInteger pos, len;
-	NSTextStorage *text;
+	NSUInteger pos;
 	NSTextView *textView;
-	NSString *textSt;
 	NSRange cursorRange;
 
 	if (docWinController->EditorMode && i != -1) {
@@ -724,10 +722,7 @@ int GetFakeCursorCode(int i, DocumentWindowController *docWinController) {
 	}
 
 	textView = [docWinController firstTextView];
-	text = [textView textStorage];
-	textSt = [text string];
 	cursorRange = [textView selectedRange];
-	len = [text length];
 	pos = cursorRange.location;
 
 	if (docWinController->CurCode == docWinController->RootCodes) {
@@ -754,7 +749,6 @@ int GetFakeCursorCode(int i, DocumentWindowController *docWinController) {
 }
 
 static unCH *AddCodeToList(unCH *s) {
-	short cnt = 2;
 	CODESLIST *nc;
 
 	if (RootCodeList == NULL) {
@@ -766,7 +760,6 @@ static unCH *AddCodeToList(unCH *s) {
 		for (nc=RootCodeList; 1; nc=nc->next_code) {
 			if (strcmp(nc->cod,s) == 0)
 				return(nc->cod);
-			cnt++;
 			if (nc->next_code == NULL) {
 				nc->next_code = NEW(CODESLIST);
 				if (nc->next_code == NULL)
@@ -1347,14 +1340,10 @@ if (pos+40 >= len) dl = len-pos; else dl = 40;
 
 int MorDisambiguate(DocumentWindowController *docWinController) {
 	NSUInteger pos;
-	NSTextStorage *text;
 	NSTextView *textView;
-	NSString *textSt;
 	NSRange cursorRange;
 
 	textView = [docWinController firstTextView];
-	text = [textView textStorage];
-	textSt = [text string];
 	cursorRange = [textView selectedRange];
 	pos = cursorRange.location;
 	if (!FindCaretOnMor(textView, pos, docWinController)) {
