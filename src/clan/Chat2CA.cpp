@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2025 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -151,7 +151,7 @@ static long chat2ca_FindScope(long b, char *line, long i) {
 }
 
 static long analyze(long *b, long e) {
-	char isSPT, sq, isSLANT_UP, isSLANT_DOWN, isSTAR, isAddParans;
+	char isSPT, sq, isSLANT_UP, isSLANT_DOWN, isAddParans;
 	int  matchType;
 	long c, t, tt;
 
@@ -184,7 +184,6 @@ static long analyze(long *b, long e) {
 
 	sq = FALSE;
 	isSPT = TRUE;
-	isSTAR = FALSE;
 	isSLANT_UP = FALSE;
 	isAddParans = FALSE;
 	isSLANT_DOWN = FALSE;

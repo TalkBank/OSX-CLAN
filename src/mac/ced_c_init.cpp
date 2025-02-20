@@ -15,12 +15,16 @@ FNType prefsDir[FNSize];
 BOOL DefClan;
 BOOL DefWindowDims;
 BOOL isCursorPosRestore;
+BOOL AutoSetWorkigDir;
 char isUTFData;
 char isChatLineNums;
 char isDarkColor;// 2023-05-10
 char isUpdateCLAN;
 char F5Option;
-NSInteger AlphaColorPtr, ColorNumPtr; // 2023-07-21
+NSInteger AlphaColorPtr, HighlightColorNumPtr; // 2023-07-21
+NSInteger LemmasColorNumPtr; // 2024-04-17
+CGFloat CaretWidthPtr;  // 2024-06-13
+
 
 DocumentWindowController *gLastTextWinController;
 
@@ -301,11 +305,27 @@ static void SetOption(char *text) {
 			for (; *text && myIsAllDigit(*text); text++) ;
 			for (; *text && !myIsAllDigit(*text); text++) ;
 			if (*text != EOS) {
-				ColorNumPtr = atoi(text);
+				HighlightColorNumPtr = atoi(text);
 			}
 		}
 	} else if (id == 2015) {
 		AutoSavePtr = atoi(text);
+	} else if (id == 2016) {
+		if (*text != EOS) {
+			LemmasColorNumPtr = atoi(text);
+		}
+	} else if (id == 2024) {
+		if (*text != EOS) {
+			AutoSetWorkigDir = atoi(text);
+		}
+	} else if (id == 2929) {
+		if (*text != EOS) {
+			CaretWidthPtr = atoi(text);
+			if (CaretWidthPtr < 1.0)
+				CaretWidthPtr = 1.0;
+			else if (CaretWidthPtr > 5.0)
+				CaretWidthPtr = 5.0;
+		}
 	}
 }
 
@@ -368,8 +388,12 @@ static void WriteCedPrefs(FILE *fp) {
 	fprintf(fp, "%d=%d\n", 1995, doMixedSTWave);
 	fprintf(fp, "%d=%d\n", 1998, isChatLineNums);
 	fprintf(fp, "%d=%d\n", 2006, F5Option);
-	fprintf(fp, "%d=%d %d\n", 2014, AlphaColorPtr, ColorNumPtr);
+	fprintf(fp, "%d=%d %d\n", 2014, AlphaColorPtr, HighlightColorNumPtr);
 	fprintf(fp, "%d=%d\n", 2015, AutoSavePtr);
+	fprintf(fp, "%d=%d\n", 2016, LemmasColorNumPtr);
+	fprintf(fp, "%d=%d\n", 2024, AutoSetWorkigDir);
+	fprintf(fp, "%d=%.0f\n", 2929, CaretWidthPtr);
+	
 }
 
 void WriteCedPreference(void) {
@@ -486,9 +510,9 @@ void LocalInit(void) {
 		strcpy(lib_dir, home_dir);
 		addFilename2Path(lib_dir, "lib/");
 		if (access(lib_dir, 0)) {
-			strcpy(lib_dir, "/Users/WORK/ClanW/(LIB)/");
+			strcpy(lib_dir, "/Users/WORK/ClanW/µ_LIB/");
 			if (access(lib_dir, 0)) {
-				strcpy(lib_dir, "/Users/WORK/ClanW/ь-LIB/");
+				strcpy(lib_dir, "/Users/WORK/ClanW/(LIB)/");
 			}
 		}
 	} else {
@@ -507,11 +531,14 @@ void LocalInit(void) {
 	DefClan = TRUE;
 	DefWindowDims = FALSE;
 	isCursorPosRestore = TRUE;
+	AutoSetWorkigDir = TRUE;
 	isChatLineNums = FALSE;// 2020-09-18
 	isDarkColor = FALSE;// 2023-05-10
 	F5Option = EVERY_TIER;
 	AlphaColorPtr = 3;  // 2023-07-21
-	ColorNumPtr = 0;  // 2023-07-21
+	HighlightColorNumPtr = 0;  // 2023-07-21
+	LemmasColorNumPtr = 0;  // 2024-04-17
+	CaretWidthPtr = 2;  // 2024-06-13
 	AutoSavePtr = 0; // 2023-09-15
 
 	NextTierName[0] = EOS;

@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2025 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -1070,7 +1070,7 @@ static char findSpMatch(P2C_LINESEG *mwO, P2C_LINESEG *dw) {
 }
 
 static void matchDepTierToSpeakerTier(P2C_CHATTIERS *nt) {
-	char isOneToOne;
+//	char isOneToOne;
 	unsigned short wordCnt;
 	P2C_CHATTIERS *depT;
 	P2C_LINESEG *dw;
@@ -1085,7 +1085,7 @@ static void matchDepTierToSpeakerTier(P2C_CHATTIERS *nt) {
 		if (depT->lineSeg != NULL && timeMatch(nt, depT->lineSeg) && depT->lineSeg->nextSeg == NULL)
 			;
 		else {
-			isOneToOne = findSpMatch(nt->lineSeg, depT->lineSeg);
+			/*isOneToOne = */findSpMatch(nt->lineSeg, depT->lineSeg);
 /*
 			if (!isOneToOne) {
 				for (dw=depT->lineSeg; dw != NULL; dw=dw->nextSeg) {

@@ -160,12 +160,12 @@ extern NSFont *defUniFont;
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification {
 #pragma unused (notification)
-	NSUInteger row;
-	NSTableView *cTableView;
+//	NSUInteger row;
+//	NSTableView *cTableView;
 
 	NSLog(@"ListBoxController: tableViewSelectionDidChange\n");
-	cTableView = [notification object];
-	row = [myTableArray selectionIndex];
+//	cTableView = [notification object];
+//	row = [myTableArray selectionIndex];
 //	clickedRow = [myTableView clickedRow];
 //	clickedColumn = [myTableView clickedColumn];
 

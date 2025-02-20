@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2025 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -1367,14 +1367,14 @@ f1:
 /* fails if strange character found in string (illegal string) */
 BOOL fs_comp(STRING *big_fs, FEATTYPE *c_fs  /* compressed fs */) {
 	STRING *p;
-	int brace_ctr = 0;  /* keep track of {}'s */
+//	int brace_ctr = 0;  /* keep track of {}'s */
 	int bracket_ctr = 0;  /* keep track of []'s */
 	int type = ATOMIC;              /* ATOMIC OR or LIST */
 	int state = PARSE_FEAT;         /* state in parse */
 	FEATTYPE tmp_str[MAXCAT];
 	char token[MAX_WORD];
 	int feat_stack[20];
-	int tmp_cnt = 0;
+//	int tmp_cnt = 0;
 	FEATTYPE *tmp_p;
 	int feat_code = 0, val_code;
 	int i;
@@ -1391,7 +1391,7 @@ parse_loop:
 		switch (*p) {
 			case '{' :
 				state = PARSE_FEAT;
-				brace_ctr++;
+//				brace_ctr++;
 				p++; 
 				break;
 			case '[' :
@@ -1403,7 +1403,7 @@ parse_loop:
 				break;
 			case '}' :
 				state = PARSE_FEAT;  /* necessary? */
-				brace_ctr--;
+//				brace_ctr--;
 				p++; 
 				break;
 			case ']' :
@@ -1481,7 +1481,7 @@ parse_loop:
 						for (i=0; i < bracket_ctr; i++) {
 							*(tmp_p++) = 'f';
 							*(tmp_p++) = (FEATTYPE) feat_stack[i];
-							tmp_cnt += 2;
+//							tmp_cnt += 2;
 						}
 					}
 					if (type == STR) {
@@ -1490,7 +1490,7 @@ parse_loop:
 							*(tmp_p++) = (FEATTYPE)token[i];
 						}
 						*(tmp_p++) = '"';
-						tmp_cnt += 2 + i;
+//						tmp_cnt += 2 + i;
 					} else {
 /* 2009-10-13
 						if (isWildCharFound(token)) {
@@ -1559,7 +1559,7 @@ parse_loop:
 									break;
 							}
 							*(tmp_p++) = val_code;
-							tmp_cnt += 2;
+//							tmp_cnt += 2;
 						}
 					}
 					if ((type == ATOMIC) || (type == STR))

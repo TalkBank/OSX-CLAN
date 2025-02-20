@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22690"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,6 +14,8 @@
                 <outlet property="CompareDB" destination="ezz-yJ-gNm" id="XNJ-0m-LYk"/>
                 <outlet property="EngNarrativeCH" destination="pup-FW-bfz" id="rPO-x0-fEe"/>
                 <outlet property="EngToyplayCH" destination="eRi-Yc-RF8" id="EfV-os-rPr"/>
+                <outlet property="EngUNarrativeCH" destination="N54-Db-4CP" id="8UZ-GP-4aN"/>
+                <outlet property="EngUToyplayCH" destination="6d6-Yx-OQW" id="Si9-Nj-yGL"/>
                 <outlet property="FiveCH" destination="Oks-p1-A6D" id="PNW-3O-D6j"/>
                 <outlet property="FiveHCH" destination="7rO-3Z-YR5" id="JSd-si-WwZ"/>
                 <outlet property="FourCH" destination="bVd-XC-WZM" id="C0n-eo-ET9"/>
@@ -46,15 +48,15 @@
         <window title="Select KidEVAL options" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="100013" userLabel="Window" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="60" y="56" width="425" height="419"/>
+            <rect key="contentRect" x="60" y="56" width="425" height="457"/>
             <rect key="screenRect" x="0.0" y="0.0" width="3440" height="1415"/>
             <value key="minSize" type="size" width="213" height="30"/>
             <view key="contentView" autoresizesSubviews="NO" id="100014">
-                <rect key="frame" x="0.0" y="0.0" width="425" height="419"/>
+                <rect key="frame" x="0.0" y="0.0" width="425" height="457"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1At-Qc-xIB">
-                        <rect key="frame" x="22" y="389" width="203" height="21"/>
+                        <rect key="frame" x="22" y="418" width="203" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="do not compare to database" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wR5-Dn-VSm">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -65,7 +67,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ezz-yJ-gNm">
-                        <rect key="frame" x="227" y="389" width="165" height="21"/>
+                        <rect key="frame" x="227" y="418" width="165" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="compare to database" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="GFg-Cp-BRT">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -76,7 +78,7 @@
                         </connections>
                     </button>
                     <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="NET-QT-c1k">
-                        <rect key="frame" x="12" y="384" width="409" height="5"/>
+                        <rect key="frame" x="12" y="413" width="409" height="5"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     </box>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Vd-ZJ-A4F">
@@ -108,7 +110,7 @@ Gw
                         </connections>
                     </button>
                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mL0-PP-wMi">
-                        <rect key="frame" x="44" y="357" width="326" height="21"/>
+                        <rect key="frame" x="44" y="386" width="326" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Choose Database type below to compare input file to" id="8dL-ur-lYt">
                             <font key="font" metaFont="system"/>
@@ -117,7 +119,7 @@ Gw
                         </textFieldCell>
                     </textField>
                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a1S-bV-bRz">
-                        <rect key="frame" x="4" y="331" width="417" height="21"/>
+                        <rect key="frame" x="4" y="360" width="417" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PLEASE SEE SLP MANUAL FOR RECOMMENDED INTERPRETATION" id="xha-Jc-3Zq">
                             <font key="font" metaFont="system"/>
@@ -179,7 +181,7 @@ Gw
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eRi-Yc-RF8">
-                        <rect key="frame" x="62" y="304" width="128" height="21"/>
+                        <rect key="frame" x="62" y="333" width="128" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="English toyplay" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="HIS-S6-TCt">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -311,7 +313,7 @@ Gw
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pup-FW-bfz">
-                        <rect key="frame" x="226" y="304" width="144" height="21"/>
+                        <rect key="frame" x="226" y="333" width="144" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="English narrative" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Aah-vR-4m9">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -387,9 +389,31 @@ Gw
                             <action selector="SpaNarrativeClicked:" target="-2" id="Kbb-TR-Jmo"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6d6-Yx-OQW">
+                        <rect key="frame" x="62" y="306" width="159" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="EnglishUD toyplay" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="J3F-1D-i7B">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="EngUToyplayClicked:" target="-2" id="ZVx-zG-H6X"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N54-Db-4CP">
+                        <rect key="frame" x="227" y="306" width="166" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="EnglishUD narrative" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="LGr-Ee-t7h">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="EngUNarrativeClicked:" target="-2" id="zuA-0t-3eO"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="-478.5" y="-122.5"/>
+            <point key="canvasLocation" x="-500.5" y="-63.5"/>
         </window>
     </objects>
 </document>

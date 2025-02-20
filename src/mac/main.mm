@@ -83,12 +83,14 @@ static pascal OSErr OpenFilePos(AppleEvent *evt, AppleEvent *reply, long ref) {
 int main(int argc, char *argv[])
 {
 	int res;
-	short err = 0;
+	short err;
 
 	LocalInit();
 	hOpenFilePos = NewAEEventHandlerUPP((AEEventHandlerProcPtr)OpenFilePos);
 	err = AEInstallEventHandler(758934755, 0, hOpenFilePos, 0, false);
 	res = NSApplicationMain(argc, (const char **)argv);
 	err = AERemoveEventHandler(758934755, 0, hOpenFilePos, false);
+	if (err == 0) {
+	}
     return res;
 }

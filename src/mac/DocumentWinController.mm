@@ -312,6 +312,18 @@ CGFloat alphas[] = { 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60,
 		// Fallback on earlier versions
 	}
 #endif //_OS_10_13 2023-05-10
+
+// 2024-03-20 beg
+//	NSColor *insertionpointColor = [NSColor colorWithCalibratedRed:0.42 green:0.39 blue:0.77 alpha:1.0];
+//	[textView setInsertionPointColor: insertionpointColor];
+	if (isDarkColor)
+		[textView setInsertionPointColor:[NSColor whiteColor]];
+	else
+		[textView setInsertionPointColor:[NSColor blackColor]];
+// 2024-03-20 end
+
+//	NSRect rect = NSMakeRect(200, 150, 3, 20); //[textView visibleRect];
+
 	[textView setIdentifier:@"First Text View"];
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -463,8 +475,7 @@ CGFloat alphas[] = { 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60,
 - (void)configureTypingAttributesAndDefaultParagraphStyleForTextView:(NSTextView *)view {
 	NSLog(@"DocumentWinController: configureTypingAttributesAndDefaultParagraphStyleForTextView\n");
     Document *doc = [self document];
-    BOOL rich = NO;
-    NSDictionary *textAttributes = [doc defaultTextAttributes:rich];
+    NSDictionary *textAttributes = [doc defaultTextAttributes:NO];
     NSParagraphStyle *paragraphStyle = [textAttributes objectForKey:NSParagraphStyleAttributeName];
 
     [view setTypingAttributes:textAttributes];
@@ -571,6 +582,10 @@ CGFloat alphas[] = { 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60,
 					if (ch == ':') {
 						tpos++;
 						ch = [textSt characterAtIndex:tpos];
+						if (ch == '_') {
+							tpos++;
+							ch = [textSt characterAtIndex:tpos];
+						}
 						if (ch == '"')
 							tpos++;
 						i = 0;
@@ -762,6 +777,12 @@ static unichar CharToSpChar(unsigned short key, unsigned short num) { // CA CHAR
 			return(0x21BB); // 0xe2 86 bb
 		} else if (key == 'c' || key == 'C'){// laugh in a word
 			return(0x1F29); // 0xe1 bc a9
+		} else if (key == 'q' || key == 'Q'){// hurried start
+			return(0x2907); // 0xe2 a4 87
+		} else if (key == 'x' || key == 'X'){// sudden stop
+			return(0x2906); // 0xe2 a4 86
+		} else if (key == 't' || key == 'T'){// hardening overdot
+			return(0x2051); // 0xe2 81 91
 		} else
 			return(0);
 	} else if (num == 2) {
@@ -814,7 +835,7 @@ static unichar CharToSpChar(unsigned short key, unsigned short num) { // CA CHAR
 }
 // 2019-10-20 end
 
-#define EVENTSINPUT
+#define EVENTSINPUT_SETPAGESFORCE
 
 - (void)setPagesForce:(BOOL)force {
 	NSTextLayoutOrientation orientation = NSTextLayoutOrientationHorizontal;
@@ -839,11 +860,16 @@ static unichar CharToSpChar(unsigned short key, unsigned short num) { // CA CHAR
 
 	NSSize size = [scrollView contentSize];
 	NSTextContainer *textContainer;
-	NSTextView *textView;
+// 2024-06-13	NSTextView *textView;
+	CaretTextView *textView;
 
 //	textContainer = [[NSTextContainer allocWithZone:zone] initWithContainerSize:NSMakeSize(size.width, CGFLOAT_MAX)];
 	textContainer = [[NSTextContainer allocWithZone:zone] initWithContainerSize:NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX)]; // 2020-04-14
-	textView = [[NSTextView allocWithZone:zone] initWithFrame:NSMakeRect(0.0, 0.0, size.width, size.height) textContainer:textContainer];
+// 2024-06-13	textView = [[NSTextView allocWithZone:zone] initWithFrame:NSMakeRect(0.0, 0.0, size.width, size.height) textContainer:textContainer];
+	textView = [[CaretTextView allocWithZone:zone] initWithFrame:NSMakeRect(0.0, 0.0, size.width, size.height) textContainer:textContainer];
+	textView->mCaretWidth = 2.0;
+
+
 	// Insert the single container as the first container in the layout manager before removing the existing pages in order to preserve the shared view state.
 	[[self myLayoutManager] insertTextContainer:textContainer atIndex:0];
 
@@ -1459,21 +1485,28 @@ static unichar CharToSpChar(unsigned short key, unsigned short num) { // CA CHAR
 // 2020-09-22 end
 				} else if ([keys length] == 1) {
 					ch = [keys characterAtIndex:0];
-					if ([self isStopMovie]) {
+					if ((modFlags & NSCommandKeyMask) != 0 && 
+						AVMediaPlayer != nil && AVMediaPlayer->playMode == ESC_seven) { // ESC_seven mode
+//						ch = [keys characterAtIndex:0];
+					} else if ([self isStopMovie]) {
 						[AVMediaPlayer StopAV];
 						result = nil; // Don't process the event
 					} else if (isESCKey != 0) { // 2019-11-08 2020-05-07
 						isF1_2Key = 0;
 						isESCKey = 0;
-						if (ch == '8') { // 2020-08-27 beg
+						if (ch == '7') { // 2024-07-09 beg ESC-7
+							[self ContinuousInsertSpCodePlayback:self];
+							result = nil; // Don't process the event
+							// 2024-07-09 end
+						} else if (ch == '8') { // 2020-08-27 beg ESC-8
 							[self ContinuousPlayback:self]; // 2020-09-01
 							result = nil; // Don't process the event
 							// 2020-08-27 end
-						} else if (ch == '9') { // 2021-08-03 beg
+						} else if (ch == '9') { // 2021-08-03 beg ESC-9
 							[self ContinuousSkipPausePlayback:self]; // 2021-08-03
 							result = nil; // Don't process the event
 							// 2021-08-03 end
-						} else if (ch == 'l' || ch == 'L') {// 2020-08-28 beg
+						} else if (ch == 'l' || ch == 'L') {// 2020-08-28 beg ESC-L
 							[self CheckOpenedFile:self];
 							result = nil; // Don't process the event
 // 2020-08-28 end
@@ -1522,7 +1555,7 @@ static unichar CharToSpChar(unsigned short key, unsigned short num) { // CA CHAR
 													   keyCode:0
 									  ];
 						}
-					} else if (keyCode == 53) {
+					} else if (keyCode == 53) { // ESC
 						NSResponder *firstResponder = [[self window] firstResponder];
 						textView = [self firstTextView];
 						if (firstResponder == textView) {
@@ -1690,7 +1723,9 @@ tryAgainSonicMode:
 								[textSt getCharacters:templine4 range:charRange];
 								templine4[charRange.length] = EOS;
 								if (uS.mStrnicmp(templine4, "%gra:", 5) == 0 || uS.mStrnicmp(templine4, "%grt:", 5) == 0) {
-									[self ShowGRA:(NSUInteger)chrIndex];
+									[self ShowGRA:(NSUInteger)chrIndex graName:(char *)"%gra:" morName:(char *)"%mor:"];
+								} else if (uS.mStrnicmp(templine4, "%ugra:", 6) == 0) {
+									[self ShowGRA:(NSUInteger)chrIndex graName:(char *)"%ugra:" morName:(char *)"%umor:"];
 								} else {
 									extractPath(templineC4, cDoc->filePath);
 									if (FindFileLine(FALSE, templineC4, templine4)) {
@@ -1912,10 +1947,22 @@ tryAgainSonicMode:
 			cDoc->skipP2 = 0L;
 			cursorLine = 1;
 		} else {
-			dispatch_async(dispatch_get_main_queue(), ^{
+//			dispatch_async(dispatch_get_main_queue(), ^{ // 2024-10-29
+/*
+				NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
+
+ 				if (version.majorVersion > 15 || (version.majorVersion == 15 && version.minorVersion >= 1))
+					[text endEditing];
+				else
+					do_warning("not 15.1", 0);
+*/
 				[textView setSelectedRange:cursorRange];
 				[textView scrollRangeToVisible:cursorRange]; // 2020-05-13
-			});
+/*
+				if (version.majorVersion > 15 || (version.majorVersion == 15 && version.minorVersion >= 1))
+					[text beginEditing];
+*/
+//			});
 			cursorLine = [self countLineNumbers:cursorRange.location];
 		}
 	} else
@@ -2025,6 +2072,8 @@ tryAgainSonicMode:
 - (void)setSliderHidden:(BOOL)val {
 	LowerSlider.hidden = val;
 }
+
+#define WINDOWDIDLOAD
 
 - (void)windowDidLoad {
 	NSRect wFrame;
@@ -2143,12 +2192,14 @@ tryAgainSonicMode:
 			isDarkColor = TRUE;
 		else
 			isDarkColor = FALSE;
-	} else {
+	} else
 		isDarkColor = FALSE;
-	}
 #endif //_OS_10_13 2023-05-10
 	titleBarHeight = wFrame.size.height - [window contentRectForFrameRect:wFrame].size.height;
 // 2020-09-25 end
+
+	if (LemmasColorNumPtr > 0) // 2024-04-17
+		[self MakeAllLemmasColor];
 }
 
 // 2020-05-12 beg
@@ -2317,6 +2368,243 @@ tryAgainSonicMode:
 	}
 	return(endContPlay);
 }
+
+- (IBAction)ContinuousInsertSpCodePlayback:(id)sender { // 2024-07-09 beg
+#pragma unused (sender)
+	char buf[BUFSIZ], *bufEnd, fpath[FNSize], bType;
+	char FName[FILENAME_MAX], oldFName[FILENAME_MAX];
+	BOOL isSPFound, isSetHighlight, isSetFirstHighlight, isOldStyleBullets;
+	NSRange cursorRange;
+	unichar ch, bufU[BUFSIZ];
+	NSTextStorage *text;
+	NSTextView *textView;
+	NSString *textSt;
+	NSUInteger pos, j, len, bufLen, bulletPosBeg, bulletPosEnd;
+	Document *cDoc;
+	struct AVInfoNextSeg *cSeg;
+
+	isOldStyleBullets = false;
+	FName[0] = EOS;
+	oldFName[0] = EOS;
+	cDoc = [self document];
+	if (cDoc->filePath[0] == EOS) {
+		if ([[cDoc fileURL] getFileSystemRepresentation:fpath maxLength:FNSize] == YES)
+			strcpy(cDoc->filePath, fpath);
+		if (cDoc->filePath[0] == EOS) {
+			do_warning_sheet("Can't determine document's file path", [self window]);
+			return;
+		}
+	}
+	textView = [self firstTextView];
+	text = [textView textStorage];
+	textSt = [text string];
+	cursorRange = [textView selectedRange];
+	len = [text length];
+
+	pos = cursorRange.location;
+	if (pos >= len)
+		pos = len - 1;
+	isSPFound = false;
+	isSetHighlight = false;
+	isSetFirstHighlight = false;
+	j = pos;
+	if (j > 0) {
+		ch = [textSt characterAtIndex:j];
+		if (ch == '\n')
+			j--;
+	}
+	while (j > 0) {
+		ch = [textSt characterAtIndex:j];
+		if (ch == '\n' && j+1 < len) {
+			ch = [textSt characterAtIndex:j+1];
+			if (ch == '*') {
+				j++;
+				cursorRange.location = j;
+				isSPFound = true;
+				pos = j;
+				break;
+			}
+		}
+		j--;
+	}
+	if (isSPFound == false && pos < len) {
+		ch = [textSt characterAtIndex:pos+1];
+		if (ch == '*') {
+			cursorRange.location = pos+1;
+			isSPFound = true;
+		} else {
+			while (pos < len) {	// Run through the whole text in NSTextStorage *text
+				ch = [textSt characterAtIndex:pos];
+				if (ch == 0x2022) {
+					bulletPosBeg = pos;
+					bulletPosEnd = [self isLegalBullet:pos bTest:&bType];
+					if (bulletPosBeg < bulletPosEnd) {
+						if (bType == picBullet) {
+							bufLen = 0L;
+							for (pos=bulletPosBeg+6; pos < bulletPosEnd; pos++) {
+								ch = [textSt characterAtIndex:pos];
+								if (ch != '"')
+									bufU[bufLen++] = ch; 
+							}
+							bufU[bufLen] = EOS;
+							if (bufU[0] != EOS) {
+								extractPath(FileName1, cDoc->filePath);
+								UnicodeToUTF8(bufU, strlen(bufU), (unsigned char *)templineC2, NULL, UTTLINELEN);
+								strcpy(FileName2, templineC2);
+								[PictController openPict:FileName2 curDocPath:(FNType *)FileName1 docWin:[self window]];
+							}
+						}
+						pos = bulletPosEnd;
+					}
+				} else if (ch == '\n' || pos == 0) {
+					if (pos+1 < len) {
+						ch = [textSt characterAtIndex:pos+1];
+						if (ch == '*') {
+							pos++;
+							cursorRange.location = pos;
+							isSPFound = true;
+							break;
+						}
+					}
+				}
+				pos++;
+			}
+		}
+	}
+	theAVinfo.beg = -1L;
+	theAVinfo.end = -1L;
+	theAVinfo.nextSegs = nil; // 2021-07-30
+	cSeg = nil;
+	if (isSPFound) {
+		while (pos < len) {	// Run through the whole text in NSTextStorage *text
+			ch = [textSt characterAtIndex:pos];
+			if (ch == '\n') {
+				if (isSetHighlight) {
+					if (isSetFirstHighlight == false) {
+						isSetFirstHighlight = true;
+						cursorRange.length = pos - cursorRange.location; // 2020-12-02
+					}
+				}
+/*
+				if (pos+1 < len) {
+					ch = [textSt characterAtIndex:pos+1];
+					if (ch == '*' || ch == '%' || ch == '@') {
+						cursorRange.length = pos + 1 - cursorRange.location;
+						break;
+					}
+				} else if (pos+1 >= len) {
+					cursorRange.length = pos - cursorRange.location;
+					break;
+				}
+*/
+			} else if (ch == 0x2022) {
+				bulletPosBeg = pos;
+				bulletPosEnd = [self isLegalBullet:pos bTest:&bType];
+				if (bulletPosBeg < bulletPosEnd) {
+					if (bType == picBullet) {
+						bufLen = 0L;
+						for (pos=bulletPosBeg+6; pos < bulletPosEnd; pos++) {
+							ch = [textSt characterAtIndex:pos];
+							if (ch != '"')
+								bufU[bufLen++] = ch; 
+						}
+						bufU[bufLen] = EOS;
+						if (bufU[0] != EOS) {
+							extractPath(FileName1, cDoc->filePath);
+							UnicodeToUTF8(bufU, strlen(bufU), (unsigned char *)templineC2, NULL, UTTLINELEN);
+							strcpy(FileName2, templineC2);
+							[PictController openPict:FileName2 curDocPath:(FNType *)FileName1 docWin:[self window]];
+						}
+					} else {
+						if (bType == oldBullet) {
+							do_warning_sheet("Continuous playback does not work with old style bullets", [self window]);
+							return;
+//							bulletPosBeg++;
+//							bulletPosBeg = [self isOldBullet:FName txt:textSt tpos:bulletPosBeg tlen:len];
+//							bulletPosBeg--;
+//							isOldStyleBullets = true;
+						}
+						bufLen = 0L;
+						for (pos=bulletPosBeg+1; pos < bulletPosEnd; pos++) {
+							ch = [textSt characterAtIndex:pos];
+							buf[bufLen++] = (char)ch;
+						}
+						buf[bufLen] = EOS;
+						bufEnd = strchr(buf, '_');
+						if (buf[0] != EOS && bufEnd != NULL) {
+							if (theAVinfo.beg == -1) {
+								if (FName[0] != EOS) {
+									strcpy(theAVinfo.mediaFName, FName);
+									strcpy(oldFName, FName);
+								}
+								theAVinfo.beg = atol(buf);
+								theAVinfo.endContPlay = [self findEndContPlay:textSt index:(NSUInteger)pos];
+								if (theAVinfo.endContPlay == 0)
+									theAVinfo.endContPlay = atol(bufEnd+1);
+								theAVinfo.end = atol(bufEnd+1);
+							} else if (strchr(buf, '-') != NULL || uS.mStricmp(oldFName, FName)) {
+								if (theAVinfo.nextSegs == nil) {
+									theAVinfo.nextSegs = NEW(struct AVInfoNextSeg);
+									cSeg = theAVinfo.nextSegs;
+								} else {
+									for (cSeg=theAVinfo.nextSegs; cSeg->nextSeg != nil; cSeg=cSeg->nextSeg) ;
+									cSeg->nextSeg = NEW(struct AVInfoNextSeg);
+									cSeg = cSeg->nextSeg;
+								}
+								if (cSeg == nil) {
+									break;
+								}
+								cSeg->nextSeg = nil;
+								if (FName[0] != EOS) {
+									strcpy(cSeg->mediaFName, FName);
+									strcpy(oldFName, FName);
+								}
+								cSeg->beg = atol(buf);
+								cSeg->end = atol(bufEnd+1);
+							} else {
+								if (cSeg == nil)
+									theAVinfo.end = atol(bufEnd+1);
+								else
+									cSeg->end = atol(bufEnd+1);
+							}
+							isSetHighlight = true;
+						}
+					}
+					pos = bulletPosEnd;
+				}
+			}
+			pos++;
+		}
+	}
+	if (isSetHighlight && cDoc != NULL) {
+		if (isOldStyleBullets == false) {
+			if ([self getCurrentMediaName:textSt MaxLen:len showErr:true] == false) {
+				return;
+			}
+			strcpy(theAVinfo.mediaFName, cDoc->mediaFileName);
+		}
+		strcpy(theAVinfo.mediaFPath, cDoc->filePath);
+		bufEnd = strrchr(theAVinfo.mediaFPath, '/');
+		if (bufEnd != NULL) {
+			*(bufEnd+1) = EOS;
+		}
+		if (theAVinfo.beg >= 0L || theAVinfo.end > 0L) {
+			if (SnTr.IsSoundOn == true) {
+				SnTr.BegF = [self conv_from_msec_rep:theAVinfo.beg];
+				SnTr.EndF = [self conv_from_msec_rep:theAVinfo.endContPlay];
+				[self DisplayEndF];
+			}
+			[textView setSelectedRange:cursorRange];
+			[textView scrollRangeToVisible:cursorRange];
+			theAVinfo.playMode = ESC_seven;
+			theAVinfo.textView = textView;
+			theAVinfo.docWindow = [self window];
+			[AVController createAndPlayAV:&theAVinfo];
+			[cDoc showWindows];
+		}
+	}
+	isF1_2Key = 0;
+} // 2024-07-09 end
 
 - (IBAction)ContinuousPlayback:(id)sender { // 2020-09-01 beg
 #pragma unused (sender)
@@ -4812,6 +5100,254 @@ static void remAllBlanks(unCH *st) {
 	[SelectF5Controller SelectF5Dialog:[self window]];
 } // 2020-12-09 end
 
+// 2024-04-17 beg
+- (void)MakeAllLemmasColor { // 2024-04-17 beg
+	Document *cDoc = [self document];
+	NSTextStorage *text;
+	NSString *textSt;
+	NSUInteger pos, len, bufI;
+	unichar ch, bufU[BUFSIZ+1];
+	NSRange  lemmaRange;
+	NSColor *lemmasColor;
+/*
+// 2024-10-29
+	NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
+
+	if (version.majorVersion < 15 || (version.majorVersion == 15 && version.minorVersion < 1)) {
+		do_warning("Color Lemmas only work on MacOS 15.1 or greater", 0);
+		LemmasColorNumPtr = 0;
+		return;
+	}
+*/
+	if (LemmasColorNumPtr == 1)
+		lemmasColor = [NSColor blueColor];
+	else if (LemmasColorNumPtr == 2)
+		lemmasColor = [NSColor orangeColor];
+	else if (LemmasColorNumPtr == 3)
+		lemmasColor = [NSColor magentaColor];
+	else if (LemmasColorNumPtr == 4)
+		lemmasColor = [NSColor purpleColor];
+	else if (LemmasColorNumPtr == 5)
+		lemmasColor = [NSColor brownColor];
+	else
+		lemmasColor = [NSColor blackColor];
+
+	text = [cDoc textStorage];
+	textSt = [text string];
+	len = [text length];
+	ch = '\n';
+	pos = 0;
+	[text beginEditing];
+	while (pos < len) {
+		if (ch != '\n')
+			ch = [textSt characterAtIndex:pos];
+		if (ch == '\n') {
+			pos++;
+			if (pos < len) {
+				ch = [textSt characterAtIndex:pos];
+				if (ch == '*' || ch == '%' || ch == '@') {
+					for (bufI=0; bufI < BUFSIZ && pos < len && ch != '\n'; pos++) {
+						ch = [textSt characterAtIndex:pos];
+						bufU[bufI++] = ch;
+						if (ch == ':')
+							break;
+					}
+					bufU[bufI] = EOS;
+					if (ch == ':' && uS.mStricmp(bufU, "%mor:") == 0) {
+						while (pos < len) {
+							ch = [textSt characterAtIndex:pos];
+							if (ch == '|')
+								lemmaRange.location = pos+1;
+							if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '-' || ch == '&' || ch == '=' || ch == '~') {
+								if (lemmaRange.location > 0) {
+									lemmaRange.length = pos - lemmaRange.location;
+									[text addAttribute:NSForegroundColorAttributeName value:lemmasColor range:lemmaRange];
+								}
+								lemmaRange.location = 0;
+							}
+							if (ch == '\n') {
+								ch = [textSt characterAtIndex:pos+1];
+								if (ch == '*' || ch == '%' || ch == '@' || pos >= len) {
+									break;
+								} else
+									pos++;
+							} else
+								pos++;
+						}
+					}
+				}
+			}
+		}
+		if (ch != '\n')
+			pos++;
+	}
+	[text endEditing];
+}
+// 2024-04-17 end
+
+// 2024-02-14 beg
+- (void)colorUtt:(NSColor *)color index:(NSUInteger)pos { // 2024-02-14 beg
+	Document *cDoc = [self document];
+	NSRange  endRange;
+	NSTextStorage *text;
+	NSString *textSt;
+	NSUInteger tpos, len;
+	unichar ch;
+	
+	text = [cDoc textStorage];
+	textSt = [text string];
+	len = [text length];
+	tpos = pos;
+	while (tpos > 0) {
+		ch = [textSt characterAtIndex:pos];
+		if (ch == '*' || ch == '%' || ch == '@') {
+			if (tpos > 0) {
+				ch = [textSt characterAtIndex:tpos-1];
+				if (ch == '\n')
+					break;
+			} else
+				break;
+		}
+		tpos--;
+	}
+	endRange.location = tpos;
+	
+	tpos = pos;
+	while (tpos < len) {
+		ch = [textSt characterAtIndex:tpos];
+		if (ch == '\n') {
+			tpos++;
+			if (tpos < len) {
+				ch = [textSt characterAtIndex:tpos];
+				if (ch == '*' || ch == '%' || ch == '@') {
+					endRange.length = tpos - endRange.location - 1;
+					[text beginEditing];
+					[text addAttribute:NSForegroundColorAttributeName value:color range:endRange];
+					[text endEditing];
+					break;
+				} else {
+					endRange.length = tpos - endRange.location - 1;
+					[text beginEditing];
+					[text addAttribute:NSForegroundColorAttributeName value:color range:endRange];
+					[text endEditing];
+					endRange.location = tpos;
+				}
+			} else {
+				endRange.length = tpos - endRange.location - 1;
+				[text beginEditing];
+				[text addAttribute:NSForegroundColorAttributeName value:color range:endRange];
+				[text endEditing];
+				break;
+			}
+		}
+		tpos++;
+	}
+}
+
+- (IBAction)MakeAllSelectedTextRED:(id)sender { // 2024-02-14 beg
+#pragma unused (sender)
+	NSValue *cursorValue;
+	NSRange  endRange;
+	Document *cDoc = [self document];
+	NSTextStorage *text;
+	NSString *textSt;
+	NSTextView *textView;
+	NSUInteger pos, tpos, end, len;
+	NSUInteger bufI, bufLen;
+	unichar ch, bufU[BUFSIZ+1];
+
+	textView = [self firstTextView];
+	cursorValue = [[textView selectedRanges] objectAtIndex:0];
+	endRange = [cursorValue rangeValue];
+	if (endRange.length == 0) {
+		do_warning_sheet("Please select text first", [self window]);
+	} else {
+		text = [cDoc textStorage];
+		textSt = [text string];
+		len = [text length];
+		pos = endRange.location;
+		end = pos + endRange.length;
+		bufLen = 0L;
+		for (; bufLen < BUFSIZ && pos < end; pos++) {
+			ch = [textSt characterAtIndex:pos];
+			bufU[bufLen++] = ch; 
+		}
+		bufU[bufLen] = EOS;
+		
+		pos = 0;
+		while (pos < len) {
+			ch = [textSt characterAtIndex:pos];
+			if (ch == bufU[0]) {
+				tpos = pos + 1;
+				bufI = 1;
+				while (tpos < len && bufI < bufLen) {
+					ch = [textSt characterAtIndex:tpos];
+					if (ch != bufU[bufI])
+						break;
+					tpos++;
+					bufI++;
+				}
+				if (tpos < len &&  bufI == bufLen) {
+					[self colorUtt:[NSColor redColor] index:pos];
+				}
+			}
+			pos++;
+		}
+	}
+} // 2024-02-14 end
+
+- (IBAction)ResetAllSelectedTextColor:(id)sender { // 2024-02-14 beg
+#pragma unused (sender)
+	NSValue *cursorValue;
+	NSRange  endRange;
+	Document *cDoc = [self document];
+	NSTextStorage *text;
+	NSString *textSt;
+	NSTextView *textView;
+	NSUInteger pos, tpos, end, len;
+	NSUInteger bufI, bufLen;
+	unichar ch, bufU[BUFSIZ+1];
+
+	textView = [self firstTextView];
+	cursorValue = [[textView selectedRanges] objectAtIndex:0];
+	endRange = [cursorValue rangeValue];
+	if (endRange.length == 0) {
+		do_warning_sheet("Please select text first", [self window]);
+	} else {
+		text = [cDoc textStorage];
+		textSt = [text string];
+		len = [text length];
+		pos = endRange.location;
+		end = pos + endRange.length;
+		bufLen = 0L;
+		for (; bufLen < BUFSIZ && pos < end; pos++) {
+			ch = [textSt characterAtIndex:pos];
+			bufU[bufLen++] = ch; 
+		}
+		bufU[bufLen] = EOS;
+		
+		pos = 0;
+		while (pos < len) {
+			ch = [textSt characterAtIndex:pos];
+			if (ch == bufU[0]) {
+				tpos = pos + 1;
+				bufI = 1;
+				while (tpos < len && bufI < bufLen) {
+					ch = [textSt characterAtIndex:tpos];
+					if (ch != bufU[bufI])
+						break;
+					tpos++;
+					bufI++;
+				}
+				if (tpos < len &&  bufI == bufLen) {
+					[self colorUtt:[NSColor blackColor] index:pos];
+				}
+			}
+			pos++;
+		}
+	}
+} // 2024-02-14 end
+
 - (IBAction)MakeSelectedTextRED:(id)sender { // 2023-06-05 beg
 #pragma unused (sender)
 	NSValue *cursorValue;
@@ -4832,6 +5368,50 @@ static void remAllBlanks(unCH *st) {
 		[text endEditing];
 	}
 } // 2023-06-05 end
+
+- (void)cleanupText:(NSRange)endRange {
+	BOOL isChanged;
+	unichar ch;
+	NSUInteger len, pos;
+	NSRange delRange;
+	Document *cDoc = [self document];
+	NSTextStorage *text;
+	NSTextView *textView;
+	NSString *textSt;
+
+	isChanged = false;
+	textView = [self firstTextView];
+	text = [cDoc textStorage];
+//	[text beginEditing];
+	textSt = [text string];
+	pos = endRange.location;
+	len = endRange.location+endRange.length;
+	while (pos < len) {	// Run through the whole text in NSTextStorage *text
+		ch = [textSt characterAtIndex:pos];
+		if (ch == ATTMARKER) { // 2020-07-27 beg
+			ch = [textSt characterAtIndex:pos+1];
+			if (ch == error_start || ch == error_end) {
+				delRange = NSMakeRange(pos, 2);
+				[text replaceCharactersInRange:delRange withString:@""];
+				[textView didChangeText];
+				[[textView undoManager] setActionName:@"SpCode"];
+				len -= 2;
+				textSt = [text string];
+				isChanged = true;
+			} else
+				pos++;
+		} else
+			pos++;
+	}
+//	[text endEditing];
+	endRange.length = len;
+	if (len != [text length] && isChanged == true)
+		isChanged = false;
+	if (isChanged == true && len == [text length]) {
+		endRange.length = len;
+		[textView setSelectedRange:endRange];
+	}
+}
 
 - (IBAction)ResetSelectedTextColor:(id)sender { // 2023-06-05 beg
 #pragma unused (sender)
@@ -4854,6 +5434,7 @@ static void remAllBlanks(unCH *st) {
 //		else
 			[text addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:endRange];
 		[text endEditing];
+		[self cleanupText:endRange];
 	}
 } // 2023-06-05 end
 
@@ -6086,11 +6667,13 @@ static void convertToURLText(char *to, char *from) {
 	}
 }
 
-- (void)ShowGRA:(NSUInteger)chrIndex{
+- (void)ShowGRA:(NSUInteger)chrIndex graName:(char *)graSt morName:(char *)morSt {
 	char jpgTag[20];
+	int  lenName;
 	FILE *fp;
 	unichar ch;
 	unichar code[BUFSIZ];
+	char errMess[512];
 	Document *cDoc;
 	NSTextStorage *text;
 	NSTextView *textView;
@@ -6102,6 +6685,7 @@ static void convertToURLText(char *to, char *from) {
 	cDoc = [self document];
 	if (cDoc == nil)
 		return;
+	lenName = strlen(graSt);
 	textView = [self firstTextView];
 	text = [textView textStorage];
 	textSt = [text string];
@@ -6116,18 +6700,18 @@ static void convertToURLText(char *to, char *from) {
 		if (ch == '\n') {
 			ch = [textSt characterAtIndex:pos+1];
 			if (ch == (unCH)'%') {
-				if (pos+6 >= len) {
+				if (pos+lenName+1 >= len) {
 					break;
 				} else {
-					[textSt getCharacters:code range:NSMakeRange(pos+1, 5)];
-					code[5] = EOS;
-					if (uS.mStricmp(code, "%gra:") == 0) {
+					[textSt getCharacters:code range:NSMakeRange(pos+1, lenName)];
+					code[lenName] = EOS;
+					if (uS.mStricmp(code, graSt) == 0) {
 						gra = pos+1;
 						graf = true;
 					} else if (uS.mStricmp(code, "%grt:") == 0) {
 						grt = pos+1;
 						grtf = true;
-					} else if (uS.mStricmp(code, "%mor:") == 0) {
+					} else if (uS.mStricmp(code, morSt) == 0) {
 						mor = pos+1;
 						morf = true;
 					} else if (uS.mStricmp(code, "%trn:") == 0){
@@ -6145,16 +6729,16 @@ static void convertToURLText(char *to, char *from) {
 	if (pos == 0 && templineC3[0] == EOS) {
 		ch = [textSt characterAtIndex:pos];
 		if (ch == (unCH)'%') {
-			if (pos+5 < len) {
-				[textSt getCharacters:code range:NSMakeRange(pos, 5)];
-				code[5] = EOS;
-				if (uS.mStricmp(code, "%gra:") == 0) {
+			if (pos+lenName < len) {
+				[textSt getCharacters:code range:NSMakeRange(pos, lenName)];
+				code[lenName] = EOS;
+				if (uS.mStricmp(code, graSt) == 0) {
 					gra = pos;
 					graf = true;
 				} else if (uS.mStricmp(code, "%grt:") == 0) {
 					grt = pos;
 					grtf = true;
-				} else if (uS.mStricmp(code, "%mor:") == 0) {
+				} else if (uS.mStricmp(code, morSt) == 0) {
 					mor = pos;
 					morf = true;
 				} else if (uS.mStricmp(code, "%trn:") == 0){
@@ -6173,18 +6757,18 @@ static void convertToURLText(char *to, char *from) {
 			ch = [textSt characterAtIndex:pos+1];
 			if (ch == (unCH)'%') {
 				pos++;
-				if (pos+5 >= len) {
+				if (pos+lenName >= len) {
 					break;
 				} else {
-					[textSt getCharacters:code range:NSMakeRange(pos, 5)];
-					code[5] = EOS;
-					if (uS.mStricmp(code, "%gra:") == 0) {
+					[textSt getCharacters:code range:NSMakeRange(pos, lenName)];
+					code[lenName] = EOS;
+					if (uS.mStricmp(code, graSt) == 0) {
 						gra = pos;
 						graf = true;
 					} else if (uS.mStricmp(code, "%grt:") == 0) {
 						grt = pos;
 						grtf = true;
-					} else if (uS.mStricmp(code, "%mor:") == 0) {
+					} else if (uS.mStricmp(code, morSt) == 0) {
 						mor = pos;
 						morf = true;
 					} else if (uS.mStricmp(code, "%trn:") == 0){
@@ -6204,11 +6788,13 @@ static void convertToURLText(char *to, char *from) {
 		[self fillup_templine:textSt curPos:gra length:len tier:templine4];
 		UnicodeToUTF8(templine4, strlen(templine4), (unsigned char *)templineC, NULL, UTTLINELEN);
 	} else {
-		do_warning_sheet("Can't find %grt or %gra tier.", [self window]);
+		sprintf(errMess, "Can't find %%grt: or %s tier.", graSt);
+		do_warning_sheet(errMess, [self window]);
 		return;
 	}
 	if (trnf == false && morf == false) {
-		do_warning_sheet("Can't find %trn or %mor tier.", [self window]);
+		sprintf(errMess, "Can't find %%trn: or %s tier.", morSt);
+		do_warning_sheet(errMess, [self window]);
 		return;
 	}
 	if (trnf && grtf) {
@@ -6224,7 +6810,8 @@ static void convertToURLText(char *to, char *from) {
 		[self fillup_templine:textSt curPos:trn length:len tier:templine4];
 		UnicodeToUTF8(templine4, strlen(templine4), (unsigned char *)templineC2, NULL, UTTLINELEN);
 	} else {
-		do_warning_sheet("Can't find %trn or %mor tier.", [self window]);
+		sprintf(errMess, "Can't find %%trn: or %s tier.", morSt);
+		do_warning_sheet(errMess, [self window]);
 		return;
 	}
 	if (templineC3[0] == EOS) {
@@ -7036,7 +7623,7 @@ static void convertToURLText(char *to, char *from) {
 
 - (void)windowDidExpose:(NSNotification *)notification {
 #pragma unused (notification)
-
+	
 }
 
 - (void)windowDidBecomeKey:(NSNotification *)notification {
@@ -7069,7 +7656,7 @@ static void convertToURLText(char *to, char *from) {
 	if (!isSettingSize) {   // There is potential for recursion, but typically this is prevented in NSWindow which doesn't call this method if the frame doesn't change. However, just in case...
 		isSettingSize = YES;
 		NSSize viewSize = [[scrollView class] contentSizeForFrameSize:[scrollView frame].size hasHorizontalScroller:[scrollView hasHorizontalScroller] hasVerticalScroller:[scrollView hasVerticalScroller] borderType:[scrollView borderType]];
-
+		
 		viewSize.width -= (defaultTextPadding() * 2.0);
 		[[self document] setViewSize:viewSize];
 		isSettingSize = NO;
@@ -7089,7 +7676,7 @@ static void convertToURLText(char *to, char *from) {
 	NSRect wFrame = [window frame];
 	Document *cDoc = [self document];
 	unsigned short wID;
-
+	
 	wID = [cDoc get_wID];
 	if (wID == CLANWIN) {// 2020-05-14
 		if (ClanOutSize.top != wFrame.origin.y || ClanOutSize.left != wFrame.origin.x ||
@@ -7141,19 +7728,19 @@ static void convertToURLText(char *to, char *from) {
 		scrollFrame.size.height = wFrame.size.height - (tFontHeight * [lowerView getRowsCnt]) - titleBarHeight;
 		[scrollView setFrameOrigin:scrollFrame.origin];
 		[scrollView setFrameSize:scrollFrame.size];
-//		scrollFrame = [scrollView frame];
+		//		scrollFrame = [scrollView frame];
 		viewSize = [scrollBar contentSizeForFrameSize:scrollFrame.size
-					horizontalScrollerClass:hasHScroller ? [NSScroller class] : Nil
-					verticalScrollerClass: hasVScroller? [NSScroller class] : Nil
-					borderType:[scrollView borderType]
-					controlSize:NSControlSizeRegular // NSRegularControlSize
-					scrollerStyle:scrollerStyle];
-//		viewSize = [scrollBar contentSizeForFrameSize:scrollFrame.size hasHorizontalScroller:hasHScroller hasVerticalScroller:hasVScroller borderType:[scrollView borderType]];
+							  horizontalScrollerClass:hasHScroller ? [NSScroller class] : Nil
+								verticalScrollerClass: hasVScroller? [NSScroller class] : Nil
+										   borderType:[scrollView borderType]
+										  controlSize:NSControlSizeRegular // NSRegularControlSize
+										scrollerStyle:scrollerStyle];
+		//		viewSize = [scrollBar contentSizeForFrameSize:scrollFrame.size hasHorizontalScroller:hasHScroller hasVerticalScroller:hasVScroller borderType:[scrollView borderType]];
 		viewSize.width -= (defaultTextPadding() * 2.0);
-
+		
 		[cDoc setViewSize:viewSize];
-
-//		lowerFrame = [lowerView frame];
+		
+		//		lowerFrame = [lowerView frame];
 		lowerFrame.origin.y = 0;
 		lowerFrame.origin.x = 0;
 		lowerFrame.size.height = (tFontHeight * [lowerView getRowsCnt]);
@@ -7176,7 +7763,7 @@ static void convertToURLText(char *to, char *from) {
 	Document *cDoc = [self document];
 	long lowerRowsOffset;
 	unsigned short wID;
-
+	
 	wID = [cDoc get_wID];
 	if (wID == CLANWIN) {// 2020-05-14
 		if (ClanOutSize.top != wFrame.origin.y || ClanOutSize.left != wFrame.origin.x ||
@@ -7237,7 +7824,7 @@ static void convertToURLText(char *to, char *from) {
 	NSString *textSt;
 	unichar uc;
 	NSUInteger cursorLine, index, beg;
-
+	
 	textView = [self firstTextView];
 	text = [textView textStorage];
 	textSt = [text string];
@@ -7267,13 +7854,13 @@ static void convertToURLText(char *to, char *from) {
 /* Text view delegation messages */
 - (void)textViewDidChangeSelection:(NSNotification *)notification {
 #pragma unused (notification)
-// 2020-05-06 2020-05-07 beg
+	// 2020-05-06 2020-05-07 beg
 	NSValue *cursorValue;
 	NSRange endRange, cursorRange;
 	NSFont *font, *oldFont;
 	NSTextView *textView;
 	NSTextStorage *text;
-//	unichar ch;
+	//	unichar ch;
 	NSUInteger beg, end;
 	NSString *textSt;
 	NSUInteger cursorPos, nCursorPoint, cursorLine;
@@ -7284,7 +7871,7 @@ static void convertToURLText(char *to, char *from) {
 	CGFloat oldFontHeight, newFontHeight;
 	Document *cDoc;
 	unsigned short wID;
-
+	
 	textView = [self firstTextView];
 	if (textView == nil)
 		return;
@@ -7292,18 +7879,18 @@ static void convertToURLText(char *to, char *from) {
 	if (text == nil)
 		return;
 	len = [text length];
-//	textSt = [text string];
+	//	textSt = [text string];
 	cursorValue = [[textView selectedRanges] objectAtIndex:0];
 	cursorRange = [cursorValue rangeValue];
 	cursorPos = cursorRange.location;
-/*
-	cursorLine = 1;
-	for (index=0; index < cursorPos; index++) {
-		if ([textSt characterAtIndex:index] == '\n')
-			cursorLine++;
-	}
-*/
-
+	/*
+	 cursorLine = 1;
+	 for (index=0; index < cursorPos; index++) {
+	 if ([textSt characterAtIndex:index] == '\n')
+	 cursorLine++;
+	 }
+	 */
+	
 	id isUnderlined; // 2021-07-14 beg
 	NSInteger val;
 	NSColor *color;
@@ -7319,7 +7906,7 @@ static void convertToURLText(char *to, char *from) {
 		if (color == [NSColor redColor]) {
 			[text addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:endRange];
 		}
-
+		
 	} // 2021-07-14 end
 	isAddingChar = false;
 	if (cursorPos > 0) {
@@ -7328,7 +7915,7 @@ static void convertToURLText(char *to, char *from) {
 			for (tLayoutMgr in [text layoutManagers]) {
 				nCursorPoint = cursorPos;
 				while (YES) {
-//					uc = [textSt characterAtIndex:(nCursorPoint)];
+					//					uc = [textSt characterAtIndex:(nCursorPoint)];
 					indexG = [tLayoutMgr glyphIndexForCharacterAtIndex:nCursorPoint];
 					prop = [tLayoutMgr propertyForGlyphAtIndex:indexG];
 					if (prop == NSGlyphPropertyNull) {
@@ -7350,7 +7937,7 @@ static void convertToURLText(char *to, char *from) {
 	cursorLine = [self countLineNumbersAndRange:cursorPos range:&endRange];
 	[self setStatusLine:cursorLine extraMess:ced_err_message isUpdateDisplay:YES];
 	ced_err_message[0] = EOS;
-
+	
 	cDoc = [self document];
 	if (cDoc == nil)
 		return;
@@ -7374,99 +7961,99 @@ static void convertToURLText(char *to, char *from) {
 		[cDoc setFontHeight:newFontHeight];
 		[lowerView setLowerFont:font];
 		[lowerView setLowerFontHeight:newFontHeight];
-
+		
 		[self setupWindowForDocument];
 	} // 2020-09-24 end
-
-// 2020-05-06 2020-05-07 end
-// 2023-07-21 beg
+	
+	// 2020-05-06 2020-05-07 end
+	// 2023-07-21 beg
 	if (lastBGCRange.length != 0) {
 		if (lastBGCRange.location >= len) {
 		} else {
 			textSt = [text string];
-/* // 2023-08-02 beg
-			end = lastBGCRange.location;
-			while (end < len) {	// Run through the text to '\n' in NSTextStorage *text
-				ch = [textSt characterAtIndex:end];
-				if (ch == '\n') {
-					end++;
-					break;
-				}
-				end++;
-			}
-			lastBGCRange.length = end - lastBGCRange.location;
-*/ // 2023-08-02 end
+			/* // 2023-08-02 beg
+			 end = lastBGCRange.location;
+			 while (end < len) {	// Run through the text to '\n' in NSTextStorage *text
+			 ch = [textSt characterAtIndex:end];
+			 if (ch == '\n') {
+			 end++;
+			 break;
+			 }
+			 end++;
+			 }
+			 lastBGCRange.length = end - lastBGCRange.location;
+			 */ // 2023-08-02 end
 			beg = lastBGCRange.location;
 			end = NSMaxRange([textSt lineRangeForRange:NSMakeRange(beg, 0)]);
 			lastBGCRange = NSMakeRange(beg,end-beg);
-
+			
 			[text addAttribute:NSBackgroundColorAttributeName value:[NSColor clearColor] range:lastBGCRange];
 			[textView setNeedsDisplay:YES];
-//			[textView display];
+			//			[textView display];
 		}
 	}
 	wID = [cDoc get_wID];
 	if (wID == CLANWIN && isComRuning == true) {
 		lastBGCRange = NSMakeRange(0,0);
 	} else if (cursorRange.length == 0 && AlphaColorPtr > 0) {
-/*
-		unichar ch;
-		NSUInteger beg = 0, end = 0;
-		NSString *textSt;
-		
-		textSt = [text string];
-		len = [text length];
-		if (len == 0) {
-			return;
-		} 
-		beg = cursorRange.location;
-		if (beg >= len) {
-			beg--;
-			ch = [textSt characterAtIndex:beg];
-			if (ch == '\n') {
-				if (lastBGCRange.location != 0 || lastBGCRange.length != 0) {
-					[text addAttribute:NSBackgroundColorAttributeName value:[NSColor clearColor] range:lastBGCRange];
-				}
-				return;
-			}
-		} else {
-			ch = [textSt characterAtIndex:beg];
-			if (ch == '\n') {
-				end = beg + 1;
-				beg--;
-			}
-		}
-		while (beg > 0) {	// Run through the whole text in NSTextStorage *text
-			ch = [textSt characterAtIndex:beg];
-			if (ch == '\n') {
-				beg++;
-				break;
-			}
-			beg--;
-		}
-		if (end == 0) {
-			end = cursorRange.location;
-			while (end < len) {	// Run through the whole text in NSTextStorage *text
-				ch = [textSt characterAtIndex:end];
-				if (ch == '\n') {
-					end++;
-					break;
-				}
-				end++;
-			}
-		}
-		lastBGCRange = NSMakeRange(beg,end-beg);
-*/
+		/*
+		 unichar ch;
+		 NSUInteger beg = 0, end = 0;
+		 NSString *textSt;
+		 
+		 textSt = [text string];
+		 len = [text length];
+		 if (len == 0) {
+		 return;
+		 } 
+		 beg = cursorRange.location;
+		 if (beg >= len) {
+		 beg--;
+		 ch = [textSt characterAtIndex:beg];
+		 if (ch == '\n') {
+		 if (lastBGCRange.location != 0 || lastBGCRange.length != 0) {
+		 [text addAttribute:NSBackgroundColorAttributeName value:[NSColor clearColor] range:lastBGCRange];
+		 }
+		 return;
+		 }
+		 } else {
+		 ch = [textSt characterAtIndex:beg];
+		 if (ch == '\n') {
+		 end = beg + 1;
+		 beg--;
+		 }
+		 }
+		 while (beg > 0) {	// Run through the whole text in NSTextStorage *text
+		 ch = [textSt characterAtIndex:beg];
+		 if (ch == '\n') {
+		 beg++;
+		 break;
+		 }
+		 beg--;
+		 }
+		 if (end == 0) {
+		 end = cursorRange.location;
+		 while (end < len) {	// Run through the whole text in NSTextStorage *text
+		 ch = [textSt characterAtIndex:end];
+		 if (ch == '\n') {
+		 end++;
+		 break;
+		 }
+		 end++;
+		 }
+		 }
+		 lastBGCRange = NSMakeRange(beg,end-beg);
+		 */
 		backgroundColor = [NSColor selectedTextBackgroundColor];
-		if (ColorNumPtr == 1)
+		if (HighlightColorNumPtr == 1)
 			backgroundColor = [NSColor yellowColor];
-		else if (ColorNumPtr == 2)
+		else if (HighlightColorNumPtr == 2)
 			backgroundColor = [NSColor cyanColor];
-		else if (ColorNumPtr == 3)
+		else if (HighlightColorNumPtr == 3)
 			backgroundColor = [NSColor blueColor];
-		else if (ColorNumPtr == 4)
+		else if (HighlightColorNumPtr == 4)
 			backgroundColor = [NSColor orangeColor];
-		else if (ColorNumPtr == 5)
+		else if (HighlightColorNumPtr == 5)
 			backgroundColor = [NSColor redColor];
 		lastBGCRange = endRange;
 		[text addAttribute:NSBackgroundColorAttributeName
@@ -7475,7 +8062,7 @@ static void convertToURLText(char *to, char *from) {
 	} else {
 		lastBGCRange = NSMakeRange(0,0);
 	}
-// 2023-07-21 end
+	// 2023-07-21 end
 }
 
 /* Layout manager delegation message */
@@ -7492,7 +8079,7 @@ static void convertToURLText(char *to, char *from) {
 	NSUInteger layoutI, textI, len;
 	NSTextStorage *myTextStorage;
 	NSGlyphProperty modProps[glyphRange.length];
-
+	
 	// First, make sure we'll be able to access the NSTextStorage.
 	myTextStorage = [lLayoutManager textStorage];
 	if (myTextStorage == nil) {
@@ -7507,7 +8094,7 @@ static void convertToURLText(char *to, char *from) {
 		textI = charIndexes[layoutI]; // glyphRange.location;
 		ch = [utf16CodeUnits characterAtIndex:textI];
 		textI++;
-
+		
 		if (ShowParags == YES) { // 2019-11-08 2019-11-21 2019-11-26 2020-05-07
 			modProps[layoutI] = props[layoutI];
 		} else {
@@ -7527,51 +8114,51 @@ static void convertToURLText(char *to, char *from) {
 			}
 		}
 	}
-
-//	[lLayoutManager setGlyphs:glyphs properties:props characterIndexes:charIndexes font:aFont forGlyphRange:glyphRange];
+	
+	//	[lLayoutManager setGlyphs:glyphs properties:props characterIndexes:charIndexes font:aFont forGlyphRange:glyphRange];
 	[lLayoutManager setGlyphs:glyphs properties:modProps characterIndexes:charIndexes font:aFont forGlyphRange:glyphRange];
-
+	
 	return glyphRange.length; // 0 - for default
 }
 
 -(void)windowDidChangeOcclusionState:(NSNotification *)notification {
-//	int j;
+	//	int j;
 	NSWindow *win = notification.object;
-
+	
 	if (win.occlusionState & NSWindowOcclusionStateVisible) {
-//		j = 0;
+		//		j = 0;
 	} else {
-//		j = 0;
+		//		j = 0;
 	}
 }
 
 - (void)layoutManager:(NSLayoutManager *)layoutManager didCompleteLayoutForTextContainer:(NSTextContainer *)textContainer atEnd:(BOOL)layoutFinishedFlag {
 #pragma unused (layoutManager, textContainer, layoutFinishedFlag)
-//	BOOL j;
-//	NSWindow *win;
-//	NSTextView *textView;
-
-//	j = YES;
-//	win = [self window];
-//	[win disableScreenUpdatesUntilFlush];
-//	[win displayIfNeeded];
-//	win.viewsNeedDisplay = YES;
-//	[win display];
-
-//	textView = [textContainer textView];
-//	[textView setNeedsDisplay:YES];
-//	[textView displayIfNeeded];
-//	[textView layoutSubtreeIfNeeded];
-//	textView.needsDisplay = YES;
-//	[textView display];
-
-//	j = [win viewsNeedDisplay];
-//	j = [win allowsConcurrentViewDrawing];
-
-//	CALayer *layer = textView.layer;
-//	[layer setNeedsDisplay];
-//	[layer displayIfNeeded];
-
+	//	BOOL j;
+	//	NSWindow *win;
+	//	NSTextView *textView;
+	
+	//	j = YES;
+	//	win = [self window];
+	//	[win disableScreenUpdatesUntilFlush];
+	//	[win displayIfNeeded];
+	//	win.viewsNeedDisplay = YES;
+	//	[win display];
+	
+	//	textView = [textContainer textView];
+	//	[textView setNeedsDisplay:YES];
+	//	[textView displayIfNeeded];
+	//	[textView layoutSubtreeIfNeeded];
+	//	textView.needsDisplay = YES;
+	//	[textView display];
+	
+	//	j = [win viewsNeedDisplay];
+	//	j = [win allowsConcurrentViewDrawing];
+	
+	//	CALayer *layer = textView.layer;
+	//	[layer setNeedsDisplay];
+	//	[layer displayIfNeeded];
+	
 }
 
 - (void)textViewDidChangeTypingAttributes:(NSNotification *)notification { // 2020-09-24 beg
@@ -7580,16 +8167,16 @@ static void convertToURLText(char *to, char *from) {
 	NSFont *font, *oldFont;
 	CGFloat oldFontHeight, newFontHeight;
 #pragma unused (notification)
-
+	
 	if (cDoc == nil)
 		return;
 	oldFontHeight = [cDoc fontHeight];
 	text = [cDoc textStorage];
-//	if (text == nil)
-//		return;
-//	font = [text font];
-//	if (font == nil)
-//		return;
+	//	if (text == nil)
+	//		return;
+	//	font = [text font];
+	//	if (font == nil)
+	//		return;
 	if ([cDoc docFont] == nil) {
 		if (cDoc->isCAFont)
 			[cDoc setDocFont:defCAFont];
@@ -7608,7 +8195,7 @@ static void convertToURLText(char *to, char *from) {
 		[cDoc setFontHeight:newFontHeight];
 		[lowerView setLowerFont:font];
 		[lowerView setLowerFontHeight:newFontHeight];
-
+		
 		[self setupWindowForDocument];
 	}
 }// 2020-09-24 end
@@ -7616,7 +8203,7 @@ static void convertToURLText(char *to, char *from) {
 - (BOOL)textView:(NSTextView *)textView clickedOnLink:(id)link atIndex:(NSUInteger)charIndex {
 #pragma unused (charIndex, textView)
 	NSURL *linkURL = nil;
-
+	
 	if ([link isKindOfClass:[NSURL class]]) {	// Handle NSURL links
 		linkURL = link;
 	} else if ([link isKindOfClass:[NSString class]]) {	// Handle NSString links
@@ -7659,28 +8246,28 @@ static void convertToURLText(char *to, char *from) {
 			if ([workspace openURL:linkURL]) return YES;
 		}
 	}
-
+	
 	// We only get here on failure... Because we beep, we return YES to indicate "success", so the text system does no further processing.
 	NSBeep();
-    return YES;
+	return YES;
 }
 
 - (NSURL *)textView:(NSTextView *)textView URLForContentsOfTextAttachment:(NSTextAttachment *)textAttachment atIndex:(NSUInteger)charIndex {
 #pragma unused (charIndex, textView)
-    NSURL *attachmentURL = nil;
-    NSString *name = [[textAttachment fileWrapper] filename];
-
-    if (name) {
-        Document *document = [self document];
-        NSURL *docURL = [document fileURL];
-
-        if (!docURL) docURL = [document autosavedContentsFileURL];
-
-        if (docURL && [docURL isFileURL])
+	NSURL *attachmentURL = nil;
+	NSString *name = [[textAttachment fileWrapper] filename];
+	
+	if (name) {
+		Document *document = [self document];
+		NSURL *docURL = [document fileURL];
+		
+		if (!docURL) docURL = [document autosavedContentsFileURL];
+		
+		if (docURL && [docURL isFileURL])
 			attachmentURL = [docURL URLByAppendingPathComponent:name];
-    }
-    
-    return attachmentURL;
+	}
+	
+	return attachmentURL;
 }
 
 - (NSArray *)textView:(NSTextView *)view writablePasteboardTypesForCell:(id <NSTextAttachmentCell>)cell atIndex:(NSUInteger)charIndex {
@@ -7705,8 +8292,100 @@ static void convertToURLText(char *to, char *from) {
 	return NO;
 }
 
+- (BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)charRange replacementString:(NSString *)toSt {
+//	int i = 0;
+	return(true);
+}
+
 @end
 
+// 2024-06-13 beg
+@implementation CaretTextView // 2024-03-27 beg
+
+- (void)_drawInsertionPointInRect:(NSRect)rect color:(NSColor *)color {
+
+	if (CaretWidthPtr == 5) {
+		NSRange charRange = NSMakeRange(self.selectedRange.location, 1);
+		NSRect glyphRect = [[self layoutManager] boundingRectForGlyphRange:charRange inTextContainer:[self textContainer]];
+		if (glyphRect.size.width == 0 ||
+			[[NSCharacterSet newlineCharacterSet]
+			 characterIsMember:[[self string] characterAtIndex:self.selectedRange.location]]) {
+			glyphRect = rect;
+		}
+		if (glyphRect.size.width < 3.0)
+			color = [color colorWithAlphaComponent:1];
+		else
+			color = [color colorWithAlphaComponent:0.4];
+		[color set];
+		NSRectFillUsingOperation(glyphRect, NSCompositeSourceOver); // NSCompositingOperationSourceOver
+		mCaretWidth = glyphRect.size.width;
+	} else {
+//		[self lockFocus];
+		rect.size.width = CaretWidthPtr;
+		NSRectFillUsingOperation(rect, NSCompositingOperationSourceOver); // NSCompositingOperationClear
+//		[self unlockFocus];
+//		[self setNeedsDisplayInRect:rect avoidAdditionalLayout:false];
+	}
+	// We do not call super calls since the method in the super class uses NSRectFill and calling it results in filling the rect with the color without transparency.
+}
+
+- (void)drawInsertionPointInRect:(NSRect)rect color:(NSColor *)color turnedOn:(BOOL)flag {
+//	NSBezierPath *path;
+
+	if (CaretWidthPtr == 5) {
+		if (rect.size.width == 1.0)
+			rect.size.width = 2;
+	}
+//	rect.size.width = CaretWidthPtr;
+//	path = [NSBezierPath bezierPathWithOvalInRect:rect];
+//	path = [NSBezierPath bezierPathWithRect:rect];
+//	[path setClip];
+
+	// Call super class first.
+	[super drawInsertionPointInRect:rect color:color turnedOn:flag];
+	// Then tell the view to redraw to clear a caret.
+	if (!flag){
+		[self setNeedsDisplay:YES];
+	}
+}
+
+- (void)setNeedsDisplayInRect:(NSRect)rect {
+	if (CaretWidthPtr == 5) {
+//		if (mCaretWidth < 0.0 || mCaretWidth > 50.0)
+//			mCaretWidth = CaretWidthPtr;
+		rect.size.width = mCaretWidth;
+	} else {
+		rect.size.width = CaretWidthPtr;
+	}
+	[super setNeedsDisplayInRect:rect];
+}
+
+@end // 2024-03-27 end
+// 2024-06-13 end
+
+/*
+---------------------------------
+	   open override func drawInsertionPoint(in rect: NSRect, color: NSColor, turnedOn flag: Bool) {
+		   
+		   var rect = rect
+		   rect.size.width = caretWidth
+
+		   let path = NSBezierPath(roundedRect: rect,
+								   xRadius: radius,
+								   yRadius: radius)
+		   path.setClip()
+
+		   super.drawInsertionPoint(in: rect,
+									color: caretColor,
+									turnedOn: flag)
+	   }
+
+	   open override func setNeedsDisplay(_ rect: NSRect, avoidAdditionalLayout flag: Bool) {
+		   var rect = rect
+		   rect.size.width += displayAdjustment
+		   super.setNeedsDisplay(rect, avoidAdditionalLayout: flag)
+	   }
+*/
 
 @implementation DocumentWindowController(NSMenuValidation)
 
@@ -7821,7 +8500,7 @@ static void convertToURLText(char *to, char *from) {
 }
 /*
 - (NSMenu *)textView:(NSTextView *)view menu:(NSMenu *)menu forEvent:(NSEvent *)event atIndex:(NSUInteger)charIndex {
-    // Removing layout orientation menu item in multipage mode for enforcing the document-wide setting
+	// Removing layout orientation menu item in multipage mode for enforcing the document-wide setting
 	return menu;
 }
 */
@@ -8689,58 +9368,7 @@ BOOL rightMouseButtonDown = (mouseButtonMask & (1 << 1)) != 0;
 
 }
 // sonic mode end
-/*
-- (void)InsertionPointHighlightedLine:(BOOL)isDraw {
-	NSValue *cursorValue;
-	NSRange cursorRange;
-	NSWindow *win = [self window];
-	NSRect wFrame = [win frame];
-	DocumentWindowController *docWinCtrl;
-	NSTextView *textView;
-	NSGraphicsContext *currentContext = [NSGraphicsContext currentContext];
-	CGContextRef context = (CGContextRef)[currentContext graphicsPort];
-	CGRect fillRect;
 
-	docWinCtrl = getDocWinController(win);
-	textView = [docWinCtrl firstTextView];
-	if (textView == nil)
-		return;
-	cursorValue = [[textView selectedRanges] objectAtIndex:0];
-	cursorRange = [cursorValue rangeValue];
-
-//	for insertionRange in textLayoutManager.insertionPointSelections.flatMap(\.textRanges) {
-//		textLayoutManager.enumerateTextLayoutFragments(from: insertionRange.location) { layoutFragment in
-//			context.saveGState()
-//			context.setFillColor(selectedLineHighlightColor.cgColor)
-
-			fillRect.origin.y = lowerFontHeight * 2;
-			fillRect.origin.x = 0;
-			fillRect.size = CGSizeMake(wFrame.size.width, lowerFontHeight);
-//			CGContextSetFillColorWithColor(context, [NSColor redColor].CGColor);
-			CGContextSetFillColorWithColor(context, [NSColor selectedTextBackgroundColor].CGColor);
-			CGContextSetLineWidth(context, 1.0);
-			CGContextSetAlpha(context, 0.25);
-			CGContextFillRect(context, fillRect);
-
-
-//			fillRect = CGRect(
-//				origin: CGPoint(
-//					x: bounds.minX,
-//					y: layoutFragment.layoutFragmentFrame.origin.y
-//				),
-//				size: CGSize(
-//					width: textContainer.size.width,
-//					height: layoutFragment.layoutFragmentFrame.height
-//				)
-//			)
-//			context.fill(fillRect)
-//			context.restoreGState()
-//			return false
-//		}
-//	}
-
-}
-*/
 - (void)drawRect:(NSRect)rect { // 2020-04-28 form "TextArcCocoaSmall"
 	int index, row;
 	unCH *code;
@@ -8754,6 +9382,7 @@ BOOL rightMouseButtonDown = (mouseButtonMask & (1 << 1)) != 0;
 	CGSize  stringSize;
 	CGPoint textPosition;
 	NSDictionary *attsW = nil, *attsB = nil;
+	NSTextView *textView;
 	DocumentWindowController *docWinCtrl;
 	// Initialize the text matrix to a known value
 
@@ -8767,10 +9396,22 @@ BOOL rightMouseButtonDown = (mouseButtonMask & (1 << 1)) != 0;
 			isDarkColor = TRUE;
 		else
 			isDarkColor = FALSE;
-	} else {
+	} else
 		isDarkColor = FALSE;
-	}
 #endif //_OS_10_13 2023-05-10
+// 2024-03-20 beg
+	docWinCtrl = getDocWinController(win);
+	if (docWinCtrl != nil) {
+		textView = [docWinCtrl firstTextView];
+		if (textView != nil) {
+			if (isDarkColor)
+				[textView setInsertionPointColor:[NSColor whiteColor]];
+			else
+				[textView setInsertionPointColor:[NSColor blackColor]];
+		}
+	}
+// 2024-03-20 end
+
 	CGContextRef context = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
 	CGContextSetTextMatrix(context, CGAffineTransformIdentity);
 
@@ -8781,6 +9422,7 @@ BOOL rightMouseButtonDown = (mouseButtonMask & (1 << 1)) != 0;
 		[[NSColor whiteColor] set];
 
 	rect.size.height= lowerFontHeight * rowsNum;
+	rect.origin.y = 0;
  	NSRectFill(rect);
 	CGContextSaveGState(context);
 
@@ -8825,10 +9467,7 @@ BOOL rightMouseButtonDown = (mouseButtonMask & (1 << 1)) != 0;
 	[string drawAtPoint:textPosition withAttributes:attsW];
 //	[string drawInRect:stringRect withAttributes:attsW];
 
-//	[self InsertionPointHighlightedLine:true];
-
 	if (rowsNum > STATUSBARROWS) {
-		docWinCtrl = getDocWinController(win);
 		if (docWinCtrl->SnTr.IsSoundOn == true) {
 			docWinCtrl->LowerSlider.integerValue = docWinCtrl->SnTr.WBegF;
 			[self drawWaveForm:docWinCtrl];

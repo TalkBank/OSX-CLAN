@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2025 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -184,11 +184,10 @@ static long findBeg(char *line, AttTYPE *attLine, long i, long *cnt) {
 }
 
 static long IDQuoteAndBreak(char *line, AttTYPE *attLine, long *cnt) {
-	char sq, dq;
+	char sq;
 	long i;
 
 	sq = FALSE;
-	dq = FALSE;
 	for (i=strlen(line)-1; i > 0L; i--) {
 		if (line[i] == ']')
 			sq = TRUE;

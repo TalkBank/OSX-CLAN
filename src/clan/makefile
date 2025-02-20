@@ -3,23 +3,26 @@
 DD  = ../unix/bin
 OBJ = ../unix/obj
 
-# for Apple Unix AND FreeBSD >= 3.2:
-#	CC = g++
-# for Apple prior to MacOS 11 Big Sur, uncomment next one
-#	CFLAGS = -O -DUNX -DAPPLEUNX -fwritable-strings -fshort-wchar -Wcomment -Wdeprecated-declarations -Wempty-body -arch i386
+# for most OS:
+	CC = g++
+
 # for Apple MacOS 11 Big Sur and later, uncomment next one
-#	CFLAGS = -O -DUNX -DAPPLEUNX -fwritable-strings -fshort-wchar -Wcomment -Wdeprecated-declarations -Wempty-body
+#	CFLAGS = -O -DUNX -DAPPLEUNX -fwritable-strings -fshort-wchar -Wcomment -Wno-deprecated-declarations -Wempty-body
+
+# for Apple prior to MacOS 11 Big Sur, uncomment next one
+#	CFLAGS = -O -DUNX -DAPPLEUNX -fwritable-strings -fshort-wchar -Wcomment -Wno-deprecated-declarations -Wempty-body -arch i386
+
+# for Ubuntu 20.04.6, uncomment next one
+#	CFLAGS = -O -DUNX -Wno-deprecated -Wno-deprecated-declarations -Wno-narrowing
+
+# for Ubuntu 20.04.6 Browser Server, uncomment next one
+#	CFLAGS = -O -DCLAN_SRV -DUNX -Wno-deprecated -Wno-deprecated-declarations -Wno-narrowing
+
+# for Apple MacOS 11 Big Sur and later Browser Server, uncomment next one
+#	CFLAGS = -O -DCLAN_SRV -DUNX -DAPPLEUNX -fwritable-strings -fshort-wchar -Wcomment -Wno-deprecated-declarations -Wempty-body
+
+
 # do not uncomment this line: -m32
-#
-# Debian 'sid' distribution
-#	CC = g++
-# for Linux:
-#	CC = g++
-# for Linux g++ 4.4.1-4ubuntu9 compiler:
-#	CC = g++
-# Other machines:
-#	CC = gcc
-LIB = -lcurses -ltermcap
 
 # for SUN SPARC station:
 #	CFLAGS = -O2 -DUNX -fwritable-strings
@@ -28,12 +31,14 @@ LIB = -lcurses -ltermcap
 # Linux on Intel and most other machines:
 # 	CFLAGS = -O -DUNX -fwritable-strings -Wall
 # for Linux g++ 4.4.1-4ubuntu9 compiler:
-#	CFLAGS = -DUNX -Wno-deprecated -Wno-deprecated-declarations
+#	CFLAGS = -DUNX -Wno-deprecated -Wno-deprecated-declarations -Wno-narrowing
 # if previous doesn't work try:
 #	CFLAGS = -DUNX -fwritable-strings
 # OR
 #	CFLAGS = -O -DUNX -DERRNO -fwritable-strings
 #	CFLAGS = -DUNX -DERRNO -fwritable-strings
+
+LIB = -lcurses -ltermcap
 
 MORFILES = mor/arules.cpp mor/crules.cpp mor/drules.cpp mor/globals.cpp \
 		   mor/lex-trie.cpp mor/morlib.cpp mor/mor.cpp

@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="OptionsPanelController">
             <connections>
                 <outlet property="AutoSaveDelayPopUp" destination="PsX-vB-M81" id="WNM-oD-vkU"/>
+                <outlet property="AutoSetWorkigDirButton" destination="nnH-Do-rut" id="rSK-hX-a4e"/>
                 <outlet property="CloseButton" destination="zDv-0I-U5X" id="rEk-jf-aGi"/>
                 <outlet property="NewfilePosSizeButton" destination="tcy-Kj-VmW" id="0fP-7N-XMZ"/>
                 <outlet property="OpenCommandsButton" destination="73l-gm-wUD" id="mBV-D3-cM5"/>
                 <outlet property="RestoreCursorButton" destination="rKh-i4-3uI" id="m08-nB-3ZJ"/>
                 <outlet property="alphaPopUp" destination="ihj-vR-nEQ" id="fTX-2N-2UK"/>
-                <outlet property="colorPopUp" destination="cET-J5-Pec" id="rnB-Se-Frt"/>
+                <outlet property="caretWidthPopUp" destination="67b-yf-NzY" id="7cZ-Z7-1Wv"/>
                 <outlet property="disambiguateField" destination="Axq-3c-vAV" id="a43-D3-mvF"/>
                 <outlet property="doMixedSTWaveButton" destination="JND-5x-Hi7" id="7vK-lo-WGd"/>
+                <outlet property="highlightColorPopUp" destination="cET-J5-Pec" id="rnB-Se-Frt"/>
+                <outlet property="lemmasColorPopUp" destination="s1u-67-Pgf" id="Gsx-tP-3ED"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="pGh-YS-gvQ"/>
             </connections>
         </customObject>
@@ -25,14 +28,14 @@
         <window title="CLAN Options" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g" userLabel="CLANOptions">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="326"/>
             <rect key="screenRect" x="0.0" y="0.0" width="3440" height="1415"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <rect key="frame" x="0.0" y="0.0" width="480" height="326"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="73l-gm-wUD">
-                        <rect key="frame" x="18" y="138" width="264" height="26"/>
+                        <rect key="frame" x="18" y="192" width="264" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Open Commands window at startup" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="kWk-aa-VV0">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -57,7 +60,7 @@ DQ
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tcy-Kj-VmW">
-                        <rect key="frame" x="18" y="160" width="339" height="26"/>
+                        <rect key="frame" x="18" y="216" width="339" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Use Newfile's window Position and Size for all files" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="6aY-5y-pdE">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -68,7 +71,7 @@ DQ
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rKh-i4-3uI">
-                        <rect key="frame" x="235" y="110" width="227" height="26"/>
+                        <rect key="frame" x="235" y="166" width="227" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Restore cursor on file open" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FXr-CM-R6A">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -78,8 +81,8 @@ DQ
                             <action selector="optionsRestoreCursorClicked:" target="-2" id="lOm-Om-kpK"/>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bXl-yE-mFO">
-                        <rect key="frame" x="18" y="226" width="155" height="22"/>
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bXl-yE-mFO">
+                        <rect key="frame" x="18" y="282" width="155" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Tier for disambiguation:" id="jGf-4w-bXx">
                             <font key="font" metaFont="system"/>
@@ -87,8 +90,8 @@ DQ
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mx7-Px-X1c">
-                        <rect key="frame" x="18" y="193" width="101" height="22"/>
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mx7-Px-X1c">
+                        <rect key="frame" x="18" y="249" width="101" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Autosave Delay:" id="anZ-BY-3pm">
                             <font key="font" metaFont="system"/>
@@ -96,8 +99,8 @@ DQ
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Axq-3c-vAV">
-                        <rect key="frame" x="179" y="226" width="136" height="22"/>
+                    <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Axq-3c-vAV">
+                        <rect key="frame" x="179" y="282" width="136" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="bJm-gU-zdR">
                             <font key="font" metaFont="system"/>
@@ -110,7 +113,7 @@ DQ
                         </connections>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JND-5x-Hi7">
-                        <rect key="frame" x="18" y="110" width="212" height="26"/>
+                        <rect key="frame" x="18" y="167" width="212" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Show mixed stereo sound wave" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="hTb-XD-Oaf">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -120,8 +123,8 @@ DQ
                             <action selector="optionsdoMixedSTWaveClicked:" target="-1" id="uyT-Mc-ENg"/>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4UA-H8-JgL">
-                        <rect key="frame" x="18" y="81" width="110" height="22"/>
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4UA-H8-JgL">
+                        <rect key="frame" x="18" y="109" width="110" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Cursor line alpha:" id="Qmq-Vu-4tL">
                             <font key="font" metaFont="system"/>
@@ -130,11 +133,11 @@ DQ
                         </textFieldCell>
                     </textField>
                     <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ihj-vR-nEQ">
-                        <rect key="frame" x="131" y="79" width="69" height="25"/>
+                        <rect key="frame" x="131" y="107" width="69" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <popUpButtonCell key="cell" type="push" title="OFF" bezelStyle="rounded" alignment="left" scrollable="YES" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="Qg6-RT-bXu" id="Dmd-0f-bw7">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="menu"/>
+                            <font key="font" metaFont="message"/>
                             <menu key="menu" id="4KR-h1-cKe">
                                 <items>
                                     <menuItem title="OFF" state="on" id="Qg6-RT-bXu"/>
@@ -145,8 +148,8 @@ DQ
                             <action selector="optionsAlphaClicked:" target="-2" id="Bcj-7D-qnw"/>
                         </connections>
                     </popUpButton>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GjX-b1-7wU">
-                        <rect key="frame" x="215" y="81" width="51" height="22"/>
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GjX-b1-7wU">
+                        <rect key="frame" x="215" y="109" width="51" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Color:" id="qlc-9I-pyU">
                             <font key="font" metaFont="system"/>
@@ -155,11 +158,11 @@ DQ
                         </textFieldCell>
                     </textField>
                     <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cET-J5-Pec">
-                        <rect key="frame" x="257" y="79" width="205" height="25"/>
+                        <rect key="frame" x="259" y="107" width="205" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <popUpButtonCell key="cell" type="push" title="Selected Background Color" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="u8M-1E-wZU" id="TGY-gT-TLY">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="menu"/>
+                            <font key="font" metaFont="message"/>
                             <menu key="menu" id="Cfm-2e-Grb">
                                 <items>
                                     <menuItem title="Selected Background Color" state="on" id="u8M-1E-wZU"/>
@@ -170,8 +173,8 @@ DQ
                             <action selector="optionsColorClicked:" target="-2" id="Oym-Fe-Sya"/>
                         </connections>
                     </popUpButton>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yek-j5-Unw">
-                        <rect key="frame" x="198" y="193" width="72" height="22"/>
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yek-j5-Unw">
+                        <rect key="frame" x="198" y="249" width="72" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Seconds" id="dtW-ux-7im">
                             <font key="font" metaFont="system"/>
@@ -180,11 +183,11 @@ DQ
                         </textFieldCell>
                     </textField>
                     <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PsX-vB-M81">
-                        <rect key="frame" x="123" y="191" width="70" height="25"/>
+                        <rect key="frame" x="123" y="247" width="70" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <popUpButtonCell key="cell" type="push" title="OFF" bezelStyle="rounded" alignment="left" scrollable="YES" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="rIm-zu-ML8" id="M0P-bn-Fpa">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="menu"/>
+                            <font key="font" metaFont="message"/>
                             <menu key="menu" id="nKy-3W-fiC">
                                 <items>
                                     <menuItem title="OFF" state="on" id="rIm-zu-ML8"/>
@@ -195,9 +198,70 @@ DQ
                             <action selector="autosaveDelayClicked:" target="-2" id="yQ9-Ux-dAM"/>
                         </connections>
                     </popUpButton>
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zNJ-fl-woE">
+                        <rect key="frame" x="18" y="76" width="214" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Color lemmas on %mor tier:" id="oI4-3T-g3i">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s1u-67-Pgf">
+                        <rect key="frame" x="197" y="74" width="173" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <popUpButtonCell key="cell" type="push" title="Default color" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="2DF-5F-IEB" id="jAb-bq-CJa">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="message"/>
+                            <menu key="menu" id="qDf-ap-kZA">
+                                <items>
+                                    <menuItem title="Default color" state="on" id="2DF-5F-IEB"/>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                        <connections>
+                            <action selector="optionsLemmasColorClicked:" target="-2" id="Yoj-Pf-h8K"/>
+                        </connections>
+                    </popUpButton>
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aqd-sm-QJ1">
+                        <rect key="frame" x="18" y="48" width="157" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Text cursor (caret) width:" id="Qfd-5M-rS8">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="67b-yf-NzY">
+                        <rect key="frame" x="176" y="46" width="63" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <popUpButtonCell key="cell" type="push" title="1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="c6p-x3-2Tc" id="3Nx-Lb-6BI">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="message"/>
+                            <menu key="menu" id="uPb-xc-fX2">
+                                <items>
+                                    <menuItem title="1" state="on" id="c6p-x3-2Tc"/>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                        <connections>
+                            <action selector="optionsCaretWidthClicked:" target="-2" id="jzV-oh-Rg2"/>
+                        </connections>
+                    </popUpButton>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nnH-Do-rut">
+                        <rect key="frame" x="18" y="142" width="339" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Auto set &quot;working&quot; folder to data file's folder" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="7YD-HZ-L8D">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="optionsAutoSetWorkigDirClicked:" target="-2" id="JLh-4A-C4j"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="51" y="118"/>
+            <point key="canvasLocation" x="257" y="151"/>
         </window>
     </objects>
 </document>

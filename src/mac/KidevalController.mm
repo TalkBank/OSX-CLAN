@@ -21,9 +21,10 @@ extern char wd_dir[];
 static int  m_AgeAuto;
 static char IndyAgeTp, OneHTp, TwoTp, TwoHTp, ThreeTp, ThreeHTp, FourTp, FourHTp, FiveTp, FiveHTp,
 	MaleOnly, FemaleOnly, BothGen,
-	Lang_EngTp, Lang_FraTp, Lang_SpaTp, Lang_JpnTp, Lang_YueTp, Lang_ZhoTp,
+	Lang_EngTp, Lang_EngUTp, Lang_FraTp, Lang_SpaTp, Lang_JpnTp, Lang_YueTp, Lang_ZhoTp,
 	NotCmpDBTp, CmpDBTp, LinkAgeTp,
 	DBEngToyplayTp, DBEngNarrativeTp,
+	DBEngUToyplayTp,DBEngUNarrativeTp,
 	DBZhoToyplayTp, DBZhoNarrativeTp,
 	DBNldToyplayTp,
 	DBFraToyplayTp, DBFraNarrativeTp,
@@ -37,6 +38,8 @@ static BOOL spSetKEv[SP_CODE_LAST];
 void InitKidevalOptions(void) {
 	DBEngToyplayTp = TRUE;
 	DBEngNarrativeTp = FALSE;
+	DBEngUToyplayTp = FALSE;
+	DBEngUNarrativeTp = FALSE;
 	DBZhoToyplayTp = FALSE;
 	DBZhoNarrativeTp = FALSE;
 	DBNldToyplayTp = FALSE;
@@ -109,8 +112,8 @@ static char getSpNamesFromFile(int *cnt, char *fname, char isFoundFile) {
 			code = s;
 			s = strchr(templineC3, '|');
 			if (s != NULL) {
-				if (Lang_EngTp == FALSE && Lang_FraTp == FALSE && Lang_SpaTp == FALSE && Lang_JpnTp == FALSE &&
-					Lang_YueTp == FALSE && Lang_ZhoTp == FALSE) {
+				if (Lang_EngTp == FALSE && Lang_EngUTp == FALSE && Lang_FraTp == FALSE && Lang_SpaTp == FALSE &&
+					Lang_JpnTp == FALSE && Lang_YueTp == FALSE && Lang_ZhoTp == FALSE) {
 					*s = EOS;
 					e = strchr(code, ',');
 					if (e == NULL) {
@@ -121,6 +124,8 @@ static char getSpNamesFromFile(int *cnt, char *fname, char isFoundFile) {
 						*e = EOS;
 					if (uS.mStricmp(code, "eng") == 0) {
 						Lang_EngTp = TRUE;
+					} else if (uS.mStricmp(code, "engu") == 0) {
+						Lang_EngUTp = TRUE;
 					} else if (uS.mStricmp(code, "fra") == 0) {
 						Lang_FraTp = TRUE;
 					} else if (uS.mStricmp(code, "spa") == 0) {
@@ -236,6 +241,7 @@ static KidevalController *KidevalWindow = nil;
 		return("Internal Error!");
 	if (KidevalWindow == nil) {
 		Lang_EngTp = FALSE;
+		Lang_EngUTp = FALSE;
 		Lang_FraTp = FALSE;
 		Lang_SpaTp = FALSE;
 		Lang_JpnTp = FALSE;
@@ -321,6 +327,7 @@ static KidevalController *KidevalWindow = nil;
 
 
 	engCH.state = NSControlStateValueOff;
+	engUCH.state = NSControlStateValueOff;
 	fraCH.state = NSControlStateValueOff;
 	spaCH.state = NSControlStateValueOff;
 	jpnCH.state = NSControlStateValueOff;
@@ -328,6 +335,8 @@ static KidevalController *KidevalWindow = nil;
 	zhoCH.state = NSControlStateValueOff;
 	if (Lang_EngTp)
 		engCH.state = NSControlStateValueOn;
+	else if (Lang_EngUTp)
+		engUCH.state = NSControlStateValueOn;
 	else if (Lang_FraTp)
 		fraCH.state = NSControlStateValueOn;
 	else if (Lang_SpaTp)
@@ -350,6 +359,8 @@ static KidevalController *KidevalWindow = nil;
 
 	EngToyplayCH.state    = NSControlStateValueOff;
 	EngNarrativeCH.state  = NSControlStateValueOff;
+	EngUToyplayCH.state   = NSControlStateValueOff;
+	EngUNarrativeCH.state = NSControlStateValueOff;
 	ZhoToyplayCH.state = NSControlStateValueOff;
 	ZhoNarrativeCH.state = NSControlStateValueOff;
 	NldToyplayCH.state = NSControlStateValueOff;
@@ -361,7 +372,11 @@ static KidevalController *KidevalWindow = nil;
 	if (DBEngToyplayTp)
 		EngToyplayCH.state    = NSControlStateValueOn;
 	else if (DBEngNarrativeTp)
-		EngNarrativeCH.state    = NSControlStateValueOn;
+		EngNarrativeCH.state  = NSControlStateValueOn;
+	else if (DBEngUToyplayTp)
+		EngUToyplayCH.state   = NSControlStateValueOn;
+	else if (DBEngUNarrativeTp)
+		EngUNarrativeCH.state = NSControlStateValueOn;
 	else if (DBZhoToyplayTp)
 		ZhoToyplayCH.state = NSControlStateValueOn;
 	else if (DBZhoNarrativeTp)
@@ -621,6 +636,23 @@ static KidevalController *KidevalWindow = nil;
 #pragma unused (sender)
 
 	engCH.state = NSControlStateValueOn;
+	engUCH.state = NSControlStateValueOff;
+	fraCH.state = NSControlStateValueOff;
+	spaCH.state = NSControlStateValueOff;
+	jpnCH.state = NSControlStateValueOff;
+	yueCH.state = NSControlStateValueOff;
+	zhoCH.state = NSControlStateValueOff;
+
+	[[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
+
+}
+
+- (IBAction)engUClicked:(NSButton *)sender
+{
+#pragma unused (sender)
+
+	engCH.state = NSControlStateValueOff;
+	engUCH.state = NSControlStateValueOn;
 	fraCH.state = NSControlStateValueOff;
 	spaCH.state = NSControlStateValueOff;
 	jpnCH.state = NSControlStateValueOff;
@@ -635,28 +667,31 @@ static KidevalController *KidevalWindow = nil;
 {
 #pragma unused (sender)
 
-	[engCH setState:NSControlStateValueOff];
-	[fraCH setState:NSControlStateValueOn];
-	[spaCH setState:NSControlStateValueOff];
-	[jpnCH setState:NSControlStateValueOff];
-	[yueCH setState:NSControlStateValueOff];
-	[zhoCH setState:NSControlStateValueOff];
+	engCH.state = NSControlStateValueOff;
+	engUCH.state = NSControlStateValueOff;
+	fraCH.state = NSControlStateValueOn;
+	spaCH.state = NSControlStateValueOff;
+	jpnCH.state = NSControlStateValueOff;
+	yueCH.state = NSControlStateValueOff;
+	zhoCH.state = NSControlStateValueOff;
 
 	[[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
 
 /*
 	[spaCH setNextState];
  	[engCH setNextState];
+	[engUCH setNextState];
 	button.selected = Yes;
 	button.highlighted = NO;
 	button.enabled = Yes;
 
-	engCH.state = NSControlStateValueOff;
-	fraCH.state = NSControlStateValueOn;
-	spaCH.state = NSControlStateValueOff;
-	jpnCH.state = NSControlStateValueOff;
-	yueCH.state = NSControlStateValueOff;
-	zhoCH.state = NSControlStateValueOff;
+	[engCH setState:NSControlStateValueOff];
+	[engUCH setState:NSControlStateValueOff];
+ 	[fraCH setState:NSControlStateValueOn];
+	[spaCH setState:NSControlStateValueOff];
+	[jpnCH setState:NSControlStateValueOff];
+	[yueCH setState:NSControlStateValueOff];
+	[zhoCH setState:NSControlStateValueOff];
 */
 //	[[self window] displayIfNeeded];
 }
@@ -666,6 +701,7 @@ static KidevalController *KidevalWindow = nil;
 #pragma unused (sender)
 
 	engCH.state = NSControlStateValueOff;
+	engUCH.state = NSControlStateValueOff;
 	fraCH.state = NSControlStateValueOff;
 	spaCH.state = NSControlStateValueOn;
 	jpnCH.state = NSControlStateValueOff;
@@ -681,6 +717,7 @@ static KidevalController *KidevalWindow = nil;
 #pragma unused (sender)
 
 	engCH.state = NSControlStateValueOff;
+	engUCH.state = NSControlStateValueOff;
 	fraCH.state = NSControlStateValueOff;
 	spaCH.state = NSControlStateValueOff;
 	jpnCH.state = NSControlStateValueOn;
@@ -696,6 +733,7 @@ static KidevalController *KidevalWindow = nil;
 #pragma unused (sender)
 
 	engCH.state = NSControlStateValueOff;
+	engUCH.state = NSControlStateValueOff;
 	fraCH.state = NSControlStateValueOff;
 	spaCH.state = NSControlStateValueOff;
 	jpnCH.state = NSControlStateValueOff;
@@ -711,6 +749,7 @@ static KidevalController *KidevalWindow = nil;
 #pragma unused (sender)
 
 	engCH.state = NSControlStateValueOff;
+	engUCH.state = NSControlStateValueOff;
 	fraCH.state = NSControlStateValueOff;
 	spaCH.state = NSControlStateValueOff;
 	jpnCH.state = NSControlStateValueOff;
@@ -728,6 +767,8 @@ static KidevalController *KidevalWindow = nil;
 
 	EngToyplayCH.state    = NSControlStateValueOn;
 	EngNarrativeCH.state  = NSControlStateValueOff;
+	EngUToyplayCH.state    = NSControlStateValueOff;
+	EngUNarrativeCH.state  = NSControlStateValueOff;
 	ZhoToyplayCH.state = NSControlStateValueOff;
 	ZhoNarrativeCH.state = NSControlStateValueOff;
 	NldToyplayCH.state = NSControlStateValueOff;
@@ -739,6 +780,8 @@ static KidevalController *KidevalWindow = nil;
 
 	DBEngToyplayTp = (EngToyplayCH.state == NSControlStateValueOn);
 	DBEngNarrativeTp = (EngNarrativeCH.state == NSControlStateValueOn);
+	DBEngUToyplayTp = (EngUToyplayCH.state == NSControlStateValueOn);
+	DBEngUNarrativeTp = (EngUNarrativeCH.state == NSControlStateValueOn);
 	DBZhoToyplayTp = (ZhoToyplayCH.state == NSControlStateValueOn);
 	DBZhoNarrativeTp = (ZhoNarrativeCH.state == NSControlStateValueOn);
 	DBNldToyplayTp = (NldToyplayCH.state == NSControlStateValueOn);
@@ -755,6 +798,8 @@ static KidevalController *KidevalWindow = nil;
 
 	EngToyplayCH.state    = NSControlStateValueOff;
 	EngNarrativeCH.state  = NSControlStateValueOn;
+	EngUToyplayCH.state    = NSControlStateValueOff;
+	EngUNarrativeCH.state  = NSControlStateValueOff;
 	ZhoToyplayCH.state = NSControlStateValueOff;
 	ZhoNarrativeCH.state = NSControlStateValueOff;
 	NldToyplayCH.state = NSControlStateValueOff;
@@ -766,6 +811,38 @@ static KidevalController *KidevalWindow = nil;
 
 	DBEngToyplayTp = (EngToyplayCH.state == NSControlStateValueOn);
 	DBEngNarrativeTp = (EngNarrativeCH.state == NSControlStateValueOn);
+	DBEngUToyplayTp = (EngUToyplayCH.state == NSControlStateValueOn);
+	DBEngUNarrativeTp = (EngUNarrativeCH.state == NSControlStateValueOn);
+	DBZhoToyplayTp = (ZhoToyplayCH.state == NSControlStateValueOn);
+	DBZhoNarrativeTp = (ZhoNarrativeCH.state == NSControlStateValueOn);
+	DBNldToyplayTp = (NldToyplayCH.state == NSControlStateValueOn);
+	DBFraToyplayTp = (FraToyplayCH.state == NSControlStateValueOn);
+	DBFraNarrativeTp = (FraNarrativeCH.state == NSControlStateValueOn);
+	DBJpnToyplayTp = (JpnToyplayCH.state == NSControlStateValueOn);
+	DBSpaToyplayTp = (SpaToyplayCH.state == NSControlStateValueOn);
+	DBSpaNarrativeTp = (SpaNarrativeCH.state == NSControlStateValueOn);
+}
+- (IBAction) EngUToyplayClicked:(NSButton *)sender
+{
+#pragma unused (sender)
+
+	EngToyplayCH.state    = NSControlStateValueOff;
+	EngNarrativeCH.state  = NSControlStateValueOff;
+	EngUToyplayCH.state    = NSControlStateValueOn;
+	EngUNarrativeCH.state  = NSControlStateValueOff;
+	ZhoToyplayCH.state = NSControlStateValueOff;
+	ZhoNarrativeCH.state = NSControlStateValueOff;
+	NldToyplayCH.state = NSControlStateValueOff;
+	FraToyplayCH.state = NSControlStateValueOff;
+	FraNarrativeCH.state = NSControlStateValueOff;
+	JpnToyplayCH.state = NSControlStateValueOff;
+	SpaToyplayCH.state = NSControlStateValueOff;
+	SpaNarrativeCH.state = NSControlStateValueOff;
+
+	DBEngToyplayTp = (EngToyplayCH.state == NSControlStateValueOn);
+	DBEngNarrativeTp = (EngNarrativeCH.state == NSControlStateValueOn);
+	DBEngUToyplayTp = (EngUToyplayCH.state == NSControlStateValueOn);
+	DBEngUNarrativeTp = (EngUNarrativeCH.state == NSControlStateValueOn);
 	DBZhoToyplayTp = (ZhoToyplayCH.state == NSControlStateValueOn);
 	DBZhoNarrativeTp = (ZhoNarrativeCH.state == NSControlStateValueOn);
 	DBNldToyplayTp = (NldToyplayCH.state == NSControlStateValueOn);
@@ -776,12 +853,44 @@ static KidevalController *KidevalWindow = nil;
 	DBSpaNarrativeTp = (SpaNarrativeCH.state == NSControlStateValueOn);
 }
 
+- (IBAction)EngUNarrativeClicked:(NSButton *)sender
+{
+#pragma unused (sender)
+
+	EngToyplayCH.state    = NSControlStateValueOff;
+	EngNarrativeCH.state  = NSControlStateValueOff;
+	EngUToyplayCH.state    = NSControlStateValueOff;
+	EngUNarrativeCH.state  = NSControlStateValueOn;
+	ZhoToyplayCH.state = NSControlStateValueOff;
+	ZhoNarrativeCH.state = NSControlStateValueOff;
+	NldToyplayCH.state = NSControlStateValueOff;
+	FraToyplayCH.state = NSControlStateValueOff;
+	FraNarrativeCH.state = NSControlStateValueOff;
+	JpnToyplayCH.state = NSControlStateValueOff;
+	SpaToyplayCH.state = NSControlStateValueOff;
+	SpaNarrativeCH.state = NSControlStateValueOff;
+
+	DBEngToyplayTp = (EngToyplayCH.state == NSControlStateValueOn);
+	DBEngNarrativeTp = (EngNarrativeCH.state == NSControlStateValueOn);
+	DBEngUToyplayTp = (EngUToyplayCH.state == NSControlStateValueOn);
+	DBEngUNarrativeTp = (EngUNarrativeCH.state == NSControlStateValueOn);
+	DBZhoToyplayTp = (ZhoToyplayCH.state == NSControlStateValueOn);
+	DBZhoNarrativeTp = (ZhoNarrativeCH.state == NSControlStateValueOn);
+	DBNldToyplayTp = (NldToyplayCH.state == NSControlStateValueOn);
+	DBFraToyplayTp = (FraToyplayCH.state == NSControlStateValueOn);
+	DBFraNarrativeTp = (FraNarrativeCH.state == NSControlStateValueOn);
+	DBJpnToyplayTp = (JpnToyplayCH.state == NSControlStateValueOn);
+	DBSpaToyplayTp = (SpaToyplayCH.state == NSControlStateValueOn);
+	DBSpaNarrativeTp = (SpaNarrativeCH.state == NSControlStateValueOn);
+}
 - (IBAction)ZhoToyplayClicked:(NSButton *)sender
 {
 #pragma unused (sender)
 
 	EngToyplayCH.state    = NSControlStateValueOff;
 	EngNarrativeCH.state  = NSControlStateValueOff;
+	EngUToyplayCH.state    = NSControlStateValueOff;
+	EngUNarrativeCH.state  = NSControlStateValueOff;
 	ZhoToyplayCH.state = NSControlStateValueOn;
 	ZhoNarrativeCH.state = NSControlStateValueOff;
 	NldToyplayCH.state = NSControlStateValueOff;
@@ -793,6 +902,8 @@ static KidevalController *KidevalWindow = nil;
 
 	DBEngToyplayTp = (EngToyplayCH.state == NSControlStateValueOn);
 	DBEngNarrativeTp = (EngNarrativeCH.state == NSControlStateValueOn);
+	DBEngUToyplayTp = (EngUToyplayCH.state == NSControlStateValueOn);
+	DBEngUNarrativeTp = (EngUNarrativeCH.state == NSControlStateValueOn);
 	DBZhoToyplayTp = (ZhoToyplayCH.state == NSControlStateValueOn);
 	DBZhoNarrativeTp = (ZhoNarrativeCH.state == NSControlStateValueOn);
 	DBNldToyplayTp = (NldToyplayCH.state == NSControlStateValueOn);
@@ -809,6 +920,8 @@ static KidevalController *KidevalWindow = nil;
 
 	EngToyplayCH.state    = NSControlStateValueOff;
 	EngNarrativeCH.state  = NSControlStateValueOff;
+	EngUToyplayCH.state    = NSControlStateValueOff;
+	EngUNarrativeCH.state  = NSControlStateValueOff;
 	ZhoToyplayCH.state = NSControlStateValueOff;
 	ZhoNarrativeCH.state = NSControlStateValueOn;
 	NldToyplayCH.state = NSControlStateValueOff;
@@ -820,6 +933,8 @@ static KidevalController *KidevalWindow = nil;
 
 	DBEngToyplayTp = (EngToyplayCH.state == NSControlStateValueOn);
 	DBEngNarrativeTp = (EngNarrativeCH.state == NSControlStateValueOn);
+	DBEngUToyplayTp = (EngUToyplayCH.state == NSControlStateValueOn);
+	DBEngUNarrativeTp = (EngUNarrativeCH.state == NSControlStateValueOn);
 	DBZhoToyplayTp = (ZhoToyplayCH.state == NSControlStateValueOn);
 	DBZhoNarrativeTp = (ZhoNarrativeCH.state == NSControlStateValueOn);
 	DBNldToyplayTp = (NldToyplayCH.state == NSControlStateValueOn);
@@ -836,6 +951,8 @@ static KidevalController *KidevalWindow = nil;
 
 	EngToyplayCH.state    = NSControlStateValueOff;
 	EngNarrativeCH.state  = NSControlStateValueOff;
+	EngUToyplayCH.state    = NSControlStateValueOff;
+	EngUNarrativeCH.state  = NSControlStateValueOff;
 	ZhoToyplayCH.state = NSControlStateValueOff;
 	ZhoNarrativeCH.state = NSControlStateValueOff;
 	NldToyplayCH.state = NSControlStateValueOn;
@@ -847,6 +964,8 @@ static KidevalController *KidevalWindow = nil;
 
 	DBEngToyplayTp = (EngToyplayCH.state == NSControlStateValueOn);
 	DBEngNarrativeTp = (EngNarrativeCH.state == NSControlStateValueOn);
+	DBEngUToyplayTp = (EngUToyplayCH.state == NSControlStateValueOn);
+	DBEngUNarrativeTp = (EngUNarrativeCH.state == NSControlStateValueOn);
 	DBZhoToyplayTp = (ZhoToyplayCH.state == NSControlStateValueOn);
 	DBZhoNarrativeTp = (ZhoNarrativeCH.state == NSControlStateValueOn);
 	DBNldToyplayTp = (NldToyplayCH.state == NSControlStateValueOn);
@@ -863,6 +982,8 @@ static KidevalController *KidevalWindow = nil;
 
 	EngToyplayCH.state    = NSControlStateValueOff;
 	EngNarrativeCH.state  = NSControlStateValueOff;
+	EngUToyplayCH.state    = NSControlStateValueOff;
+	EngUNarrativeCH.state  = NSControlStateValueOff;
 	ZhoToyplayCH.state = NSControlStateValueOff;
 	ZhoNarrativeCH.state = NSControlStateValueOff;
 	NldToyplayCH.state = NSControlStateValueOff;
@@ -874,6 +995,8 @@ static KidevalController *KidevalWindow = nil;
 
 	DBEngToyplayTp = (EngToyplayCH.state == NSControlStateValueOn);
 	DBEngNarrativeTp = (EngNarrativeCH.state == NSControlStateValueOn);
+	DBEngUToyplayTp = (EngUToyplayCH.state == NSControlStateValueOn);
+	DBEngUNarrativeTp = (EngUNarrativeCH.state == NSControlStateValueOn);
 	DBZhoToyplayTp = (ZhoToyplayCH.state == NSControlStateValueOn);
 	DBZhoNarrativeTp = (ZhoNarrativeCH.state == NSControlStateValueOn);
 	DBNldToyplayTp = (NldToyplayCH.state == NSControlStateValueOn);
@@ -890,6 +1013,8 @@ static KidevalController *KidevalWindow = nil;
 
 	EngToyplayCH.state    = NSControlStateValueOff;
 	EngNarrativeCH.state  = NSControlStateValueOff;
+	EngUToyplayCH.state    = NSControlStateValueOff;
+	EngUNarrativeCH.state  = NSControlStateValueOff;
 	ZhoToyplayCH.state = NSControlStateValueOff;
 	ZhoNarrativeCH.state = NSControlStateValueOff;
 	NldToyplayCH.state = NSControlStateValueOff;
@@ -901,6 +1026,8 @@ static KidevalController *KidevalWindow = nil;
 
 	DBEngToyplayTp = (EngToyplayCH.state == NSControlStateValueOn);
 	DBEngNarrativeTp = (EngNarrativeCH.state == NSControlStateValueOn);
+	DBEngUToyplayTp = (EngUToyplayCH.state == NSControlStateValueOn);
+	DBEngUNarrativeTp = (EngUNarrativeCH.state == NSControlStateValueOn);
 	DBZhoToyplayTp = (ZhoToyplayCH.state == NSControlStateValueOn);
 	DBZhoNarrativeTp = (ZhoNarrativeCH.state == NSControlStateValueOn);
 	DBNldToyplayTp = (NldToyplayCH.state == NSControlStateValueOn);
@@ -917,6 +1044,8 @@ static KidevalController *KidevalWindow = nil;
 
 	EngToyplayCH.state    = NSControlStateValueOff;
 	EngNarrativeCH.state  = NSControlStateValueOff;
+	EngUToyplayCH.state    = NSControlStateValueOff;
+	EngUNarrativeCH.state  = NSControlStateValueOff;
 	ZhoToyplayCH.state = NSControlStateValueOff;
 	ZhoNarrativeCH.state = NSControlStateValueOff;
 	NldToyplayCH.state = NSControlStateValueOff;
@@ -928,6 +1057,8 @@ static KidevalController *KidevalWindow = nil;
 
 	DBEngToyplayTp = (EngToyplayCH.state == NSControlStateValueOn);
 	DBEngNarrativeTp = (EngNarrativeCH.state == NSControlStateValueOn);
+	DBEngUToyplayTp = (EngUToyplayCH.state == NSControlStateValueOn);
+	DBEngUNarrativeTp = (EngUNarrativeCH.state == NSControlStateValueOn);
 	DBZhoToyplayTp = (ZhoToyplayCH.state == NSControlStateValueOn);
 	DBZhoNarrativeTp = (ZhoNarrativeCH.state == NSControlStateValueOn);
 	DBNldToyplayTp = (NldToyplayCH.state == NSControlStateValueOn);
@@ -944,6 +1075,8 @@ static KidevalController *KidevalWindow = nil;
 
 	EngToyplayCH.state    = NSControlStateValueOff;
 	EngNarrativeCH.state  = NSControlStateValueOff;
+	EngUToyplayCH.state    = NSControlStateValueOff;
+	EngUNarrativeCH.state  = NSControlStateValueOff;
 	ZhoToyplayCH.state = NSControlStateValueOff;
 	ZhoNarrativeCH.state = NSControlStateValueOff;
 	NldToyplayCH.state = NSControlStateValueOff;
@@ -955,6 +1088,8 @@ static KidevalController *KidevalWindow = nil;
 
 	DBEngToyplayTp = (EngToyplayCH.state == NSControlStateValueOn);
 	DBEngNarrativeTp = (EngNarrativeCH.state == NSControlStateValueOn);
+	DBEngUToyplayTp = (EngUToyplayCH.state == NSControlStateValueOn);
+	DBEngUNarrativeTp = (EngUNarrativeCH.state == NSControlStateValueOn);
 	DBZhoToyplayTp = (ZhoToyplayCH.state == NSControlStateValueOn);
 	DBZhoNarrativeTp = (ZhoNarrativeCH.state == NSControlStateValueOn);
 	DBNldToyplayTp = (NldToyplayCH.state == NSControlStateValueOn);
@@ -971,6 +1106,8 @@ static KidevalController *KidevalWindow = nil;
 
 	EngToyplayCH.state    = NSControlStateValueOff;
 	EngNarrativeCH.state  = NSControlStateValueOff;
+	EngUToyplayCH.state    = NSControlStateValueOff;
+	EngUNarrativeCH.state  = NSControlStateValueOff;
 	ZhoToyplayCH.state = NSControlStateValueOff;
 	ZhoNarrativeCH.state = NSControlStateValueOff;
 	NldToyplayCH.state = NSControlStateValueOff;
@@ -982,6 +1119,8 @@ static KidevalController *KidevalWindow = nil;
 
 	DBEngToyplayTp = (EngToyplayCH.state == NSControlStateValueOn);
 	DBEngNarrativeTp = (EngNarrativeCH.state == NSControlStateValueOn);
+	DBEngUToyplayTp = (EngUToyplayCH.state == NSControlStateValueOn);
+	DBEngUNarrativeTp = (EngUNarrativeCH.state == NSControlStateValueOn);
 	DBZhoToyplayTp = (ZhoToyplayCH.state == NSControlStateValueOn);
 	DBZhoNarrativeTp = (ZhoNarrativeCH.state == NSControlStateValueOn);
 	DBNldToyplayTp = (NldToyplayCH.state == NSControlStateValueOn);
@@ -1196,6 +1335,7 @@ static KidevalController *KidevalWindow = nil;
 	FiveHTp = (FiveHCH.state == NSControlStateValueOn);
 
 	Lang_EngTp = (engCH.state == NSControlStateValueOn);
+	Lang_EngUTp= (engUCH.state == NSControlStateValueOn);
 	Lang_FraTp = (fraCH.state == NSControlStateValueOn);
 	Lang_SpaTp = (spaCH.state == NSControlStateValueOn);
 	Lang_JpnTp = (jpnCH.state == NSControlStateValueOn);
@@ -1210,6 +1350,8 @@ static KidevalController *KidevalWindow = nil;
 	CmpDBTp = (CompareDB.state == NSControlStateValueOn);
 	DBEngToyplayTp = (EngToyplayCH.state == NSControlStateValueOn);
 	DBEngNarrativeTp = (EngNarrativeCH.state == NSControlStateValueOn);
+	DBEngUToyplayTp = (EngUToyplayCH.state == NSControlStateValueOn);
+	DBEngUNarrativeTp = (EngUNarrativeCH.state == NSControlStateValueOn);
 	DBZhoToyplayTp = (ZhoToyplayCH.state == NSControlStateValueOn);
 	DBZhoNarrativeTp = (ZhoNarrativeCH.state == NSControlStateValueOn);
 	DBNldToyplayTp = (NldToyplayCH.state == NSControlStateValueOn);
@@ -1235,6 +1377,12 @@ static KidevalController *KidevalWindow = nil;
 		} else if (DBEngNarrativeTp) {
 			dbSt = "narrative";
 			langSt = "eng";
+		} else if (DBEngUToyplayTp) {
+			dbSt = "toyplay";
+			langSt = "engu";
+		} else if (DBEngUNarrativeTp) {
+			dbSt = "narrative";
+			langSt = "engu";
 		} else if (DBZhoToyplayTp) {
 			dbSt = "toyplay";
 			langSt = "zho";
@@ -1342,6 +1490,8 @@ static KidevalController *KidevalWindow = nil;
 
 		if (Lang_EngTp == TRUE) {
 			langSt = "eng";
+		} else if (Lang_EngUTp == TRUE) {
+			langSt = "engu";
 		} else if (Lang_FraTp == TRUE) {
 			langSt = "fra";
 		} else if (Lang_SpaTp == TRUE) {
@@ -1427,9 +1577,9 @@ static KidevalController *KidevalWindow = nil;
 // at this point, we can do any needed initialization before turning app control over to the user
 - (void)awakeFromNib
 {
-	int i;
+//	int i;
 
-	i = 12;
+//	i = 12;
 	// We don't actually need to do anything here, so it's empty
 }
 

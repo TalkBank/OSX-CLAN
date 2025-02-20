@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2025 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -195,7 +195,7 @@ void cWorkSpace::ListNS()
 		vmRead( tmp.m_Name, iadr, MaxNameSA );
 		tmp.m_VirtualAddress = vmReadLong( iadr + (long32)(MaxNameSA) );
 		tmp.m_NextSA = vmReadLong( iadr + (long32)(MaxNameSA+sizeof(long32)) );
-		fprintf(stderr,"%s %lx %lx\n", tmp.m_Name, tmp.m_VirtualAddress, tmp.m_NextSA);
+		fprintf(stderr,"%s %x %x\n", tmp.m_Name, tmp.m_VirtualAddress, tmp.m_NextSA);
 		iadr = tmp.m_NextSA;	
 	}
 }

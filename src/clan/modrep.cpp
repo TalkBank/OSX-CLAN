@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2025 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -579,7 +579,7 @@ static void addExcelCols_Rows(char *keyword, int count) {
 }
 
 static void modrep_treeprint(struct mod_s *p, char *sp) {
-	struct rep_s *r, *tr;
+	struct rep_s *r;
 
 	if (p != NULL) {
 		modrep_treeprint(p->left, sp);
@@ -594,7 +594,6 @@ static void modrep_treeprint(struct mod_s *p, char *sp) {
 					fprintf(fpout,"    %3u %s\n", r->count, r->word);
 				else
 					addExcelCols_Rows(r->word, r->count);
-				tr = r;
 				r = r->nextRep;
 			}
 			if (isExcel)
@@ -690,10 +689,10 @@ static void ProcessLines(SPEAKERS *tsp, char WhichLine, char OtherSP, char zeroL
 	while (1) {
 		if (WhichLine == MODLINE) {
 			if (OtherSP == '*') {
-				punc = punctuation;
-				punctuation = GlobalPunctuation;
+				punc = cutt_punctuation;
+				cutt_punctuation = GlobalPunctuation;
 				wi1 = getneww(ModWord,wi1);
-				punctuation = punc;
+				cutt_punctuation = punc;
 			} else
 				wi1 = getneww(ModWord,wi1);
 			wi2 = getword(utterance->speaker, uttline, RepWord, NULL, wi2);
@@ -709,10 +708,10 @@ static void ProcessLines(SPEAKERS *tsp, char WhichLine, char OtherSP, char zeroL
 		} else {
 			wi1 = getword(utterance->speaker, uttline, ModWord, NULL, wi1);
 			if (OtherSP == '*') {
-				punc = punctuation;
-				punctuation = GlobalPunctuation;
+				punc = cutt_punctuation;
+				cutt_punctuation = GlobalPunctuation;
 				wi2 = getneww(RepWord,wi2);
-				punctuation = punc;
+				cutt_punctuation = punc;
 			} else
 				wi2 = getneww(RepWord,wi2);
 			if (zeroLine != NONLINE) {

@@ -3,841 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "maingetflag:cutt.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "wd[0]">
-            </PersistentString>
-            <PersistentString
-               value = "wd[1]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ced_ParseWords(check_in_tiers*, signed char):check_in.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "templine">
-            </PersistentString>
-            <PersistentString
-               value = "ced_line+0">
-            </PersistentString>
-            <PersistentString
-               value = "templine+r">
-            </PersistentString>
-            <PersistentString
-               value = "templine+k">
-            </PersistentString>
-            <PersistentString
-               value = "ced_line+r">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[CommandsPanelController(Delegation) windowDidMove:](NSNotification *):CommandsPanelController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "ClanWinSize">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "flucalc_FindSpeaker(char*, char*, char*, char):flucalc.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "ts-&gt;sp">
-            </PersistentString>
-            <PersistentString
-               value = "ts-&gt;fname">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "GetCurCode(NSTextView*, unsigned long, DocumentWindowController*):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "sp+0">
-            </PersistentString>
-            <PersistentString
-               value = "bufU+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "combo_call():combo.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "utterance">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "EndCurTierGotoNext(int, DocumentWindowController*):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "bufU+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController findAndPlayTargetBullet:](NSUInteger):DocumentWinController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "buf">
-            </PersistentString>
-            <PersistentString
-               value = "bufU+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "isWord(char*, char*, int, int):validateXWOR.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "wor+i">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "flucalc_pr_result():flucalc.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "ts-&gt;morSyllables">
-            </PersistentString>
-            <PersistentString
-               value = "ts-&gt;morWords">
-            </PersistentString>
-            <PersistentString
-               value = "ts-&gt;allWords">
-            </PersistentString>
-            <PersistentString
-               value = "ts-&gt;isSyllableLang">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ced_OverAll(NSTextView*):check_in.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "templine">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[AVController windowDidLoad]():AVController.mm">
-      </ContextState>
-      <ContextState
-         contextName = "addIDs(NSTextView*):check_in.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "sp+0">
-            </PersistentString>
-            <PersistentString
-               value = "templineW1+0">
-            </PersistentString>
-            <PersistentString
-               value = "ced_line+0">
-            </PersistentString>
-            <PersistentString
-               value = "languages+0">
-            </PersistentString>
-            <PersistentString
-               value = "templine4+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController blinkCursorLine]():DocumentWinController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "templine+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "parse_utter(real_utterance_struct*):chip_utl.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "utterance-&gt;line+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::__42-[DocumentWindowController setPagesForce:]_block_invoke(NSEvent *):DocumentWinController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "templineW">
-            </PersistentString>
-            <PersistentString
-               value = "wFrame">
-            </PersistentString>
-            <PersistentString
-               value = "bufU+0">
-            </PersistentString>
-            <PersistentString
-               value = "AVMediaPlayer-&gt;lastEndBullet">
-            </PersistentString>
-            <PersistentString
-               value = "currentTimeL">
-            </PersistentString>
-            <PersistentString
-               value = "templine4+0">
-            </PersistentString>
-            <PersistentString
-               value = "mouseWinLoc">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "main:main.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "argv[3]">
-            </PersistentString>
-            <PersistentString
-               value = "argv[0]">
-            </PersistentString>
-            <PersistentString
-               value = "argv[1]">
-            </PersistentString>
-            <PersistentString
-               value = "argv[2]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[Document(TextEditNSDocumentOverrides) updateChangeCount:](NSDocumentChangeType):Document.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "[self fileType]">
-            </PersistentString>
-            <PersistentString
-               value = "kUTTypeText">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FindBulletTime(char, char*, int, float*, float*):flucalc.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "line+i">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::write_commands1977(FILE *):mac_recall.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "clan_commands[i]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController ShowGRA:](NSUInteger):DocumentWinController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "code+0">
-            </PersistentString>
-            <PersistentString
-               value = "templineC4+0">
-            </PersistentString>
-            <PersistentString
-               value = "templineC2+0">
-            </PersistentString>
-            <PersistentString
-               value = "templine4+0">
-            </PersistentString>
-            <PersistentString
-               value = "templineC+0">
-            </PersistentString>
-            <PersistentString
-               value = "templineC1">
-            </PersistentString>
-            <PersistentString
-               value = "jpgTag+0">
-            </PersistentString>
-            <PersistentString
-               value = "templineC3+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "createFullFakeMorForSpeaker(char*, char*):cutt.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "morWsC.morWsI">
-            </PersistentString>
-            <PersistentString
-               value = "morWsC.morWs">
-            </PersistentString>
-            <PersistentString
-               value = "spTier+posSp">
-            </PersistentString>
-            <PersistentString
-               value = "morWsC">
-            </PersistentString>
-            <PersistentString
-               value = "mor_tier + t">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "MorDisambiguate(DocumentWindowController*):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "docWinController-&gt;lowerView-&gt;rowsNum">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "LocalInit:ced_c_init.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "home_dir+i">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "filterwords:cutt.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "wline+pos">
-            </PersistentString>
-            <PersistentString
-               value = "wline+temp">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "addFilePath(char const*, int, char**):kideval.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "wd_dir+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FindNextGivenTier(NSTextView*, unsigned long, char*):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "bufU+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController(SonicModeCode) SonicMode:](id):DocumentWinController.mm">
-      </ContextState>
-      <ContextState
-         contextName = "cUStr::sprintf(unsigned short*, unsigned short const*, ...):stringparser.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "ced_CheckWords(unsigned short*, int, unsigned short*, check_in_tiers*):check_in.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "w+s">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[CommandsPanelController(Delegation) windowDidResize:](NSNotification *):CommandsPanelController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "ClanWinSize">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "temp_call():validateXWOR.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "compareMainWorTiers(char*, char*):validateXWOR.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "wor+w">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[IdsController windowWillClose:](NSNotification *):IdsController.mm">
-      </ContextState>
-      <ContextState
-         contextName = "::-[IdsController updateHeadersInText]():IdsController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "templine+0">
-            </PersistentString>
-            <PersistentString
-               value = "sp+0">
-            </PersistentString>
-            <PersistentString
-               value = "ced_line+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "HiLightMatch(unsigned long, NSTextView*):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "bufU+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "getRoles(DepfileDefs*):IdsController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "templine+b">
-            </PersistentString>
-            <PersistentString
-               value = "templine+e">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ced_ParseScope(unsigned short*):ced_check_in.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "wline+pos">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "convertToURLText(char*, char*):DocumentWinController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "from+ifr">
-            </PersistentString>
-            <PersistentString
-               value = "templineC1">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[Document writeToURL:ofType:error:](NSURL *, NSString *, NSError **):Document.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "NSPlainTextDocumentType">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FindTextCodeLine(unsigned short*, NSTextView*, unsigned long):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "bufU+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController(SonicMode) soundwindow:](AVInfo *):mac_sound.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "fmtDesc">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "addToSTDOutput(char, char*):cl_io.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "uPrint_str+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "filterMORScop(char*, char):cutt.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "wline+pos">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::FindFileLine(char, char *, unichar *):Document.mm">
-      </ContextState>
-      <ContextState
-         contextName = "::-[CommandsController controlTextDidChange:](NSNotification *):CommandsController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "spareTier3">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ced_CheckRest(NSTextView*, char*, signed char):check_in.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "templine+i">
-            </PersistentString>
-            <PersistentString
-               value = "templine">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::getwholeutter():cutt.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "utterance-&gt;line">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FindTextCodeLine(unsigned short*, NSTextView*, unsigned long, DocumentWindowController*):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "bufU+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ToTopLevel(int, DocumentWindowController*):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "sp+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController(SonicMode) SonicMode:](id):mac_sound.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "mach_msg_trap:(null)">
-         <PersistentStrings>
-            <PersistentString
-               value = "isMORXiMode">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[LowerTextView DrawSoundCursor:part:](DocumentWindowController *, BOOL):DocumentWinController.mm">
-      </ContextState>
-      <ContextState
-         contextName = "pc_add_each_line(linesRec*, char, char, char, char*, char*, long, long):Play2Chat.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "sp">
-            </PersistentString>
-            <PersistentString
-               value = "bt">
-            </PersistentString>
-            <PersistentString
-               value = "et">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController(SonicModeCode) readMedia:](BOOL):DocumentWinController.mm">
-      </ContextState>
-      <ContextState
-         contextName = "filterscop(char const*, char*, char):cutt.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "wline">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "findmatch(char*):combo.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "utterance-&gt;line">
-            </PersistentString>
-            <PersistentString
-               value = "outLine+k">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[Document getColorInfo:AtIndex:MaxLen:](NSString *, NSUInteger, NSUInteger):Document.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "buf+i">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "check_call():check.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "oldfname">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::+[SelectMediaController SelectMediaDialog:str:](DocumentWindowController *, unichar *):SelectMediaController.mm">
-      </ContextState>
-      <ContextState
-         contextName = "elan2chat_call():Elan2Chat.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "utterance-&gt;speaker+0">
-            </PersistentString>
-            <PersistentString
-               value = "utterance-&gt;line+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "makeSpeakersList():KidevalController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "cl_argv">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[LowerTextView drawWaveForm:](DocumentWindowController *):DocumentWinController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "pixels">
-            </PersistentString>
-            <PersistentString
-               value = "docWinCtrl-&gt;SnTr.WBegF">
-            </PersistentString>
-            <PersistentString
-               value = "docWinCtrl-&gt;SnTr.SoundFileSize">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::LocalInit():c_init.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "home_dir">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "isMatchCaret(NSTextView*, unsigned long, int):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "bufU+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "findNextWord(char*, long*, int):lowcase.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "PositionCursor(NSTextView*, unsigned long, DocumentWindowController*):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "bufU+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "init_codes(char const*, char*, DocumentWindowController*):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "ced_lineC+end">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[Document(TextEditNSDocumentOverrides) writableTypesForSaveOperation:ignoreTemporaryState:](NSSaveOperationType, BOOL):Document.mm">
-      </ContextState>
-      <ContextState
-         contextName = "-[Document init]:Document.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "isDarkColor">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "CheckC(NSTextView*, char*, signed char):check_in.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "ced_err_message">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController findTargetBullet:](NSUInteger):DocumentWinController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "buf+0">
-            </PersistentString>
-            <PersistentString
-               value = "bufU+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "printTiers(char*, char*, char*, char, char):segment.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "spareTier3">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::+[AVController createAndPlayAV:](AVInfo *):AVController.mm">
-      </ContextState>
-      <ContextState
-         contextName = "defaultValues():Controller.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "AutoSaveTime[AutoSavePtr]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "PrintOutDSSTable:dss.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "line+0">
-            </PersistentString>
-            <PersistentString
-               value = "points[i]">
-            </PersistentString>
-            <PersistentString
-               value = "line+i">
-            </PersistentString>
-            <PersistentString
-               value = "spareTier1+0">
-            </PersistentString>
-            <PersistentString
-               value = "TotalsAcrossPoints[i]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "preprocess_word(char*, char*):mor.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "word[0]">
-            </PersistentString>
-            <PersistentString
-               value = "word[1]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "mfa2chat_call():Mfa2Chat.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "oldfname">
-            </PersistentString>
-            <PersistentString
-               value = "RootTiers">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "add_a_file(char*, f_list*, int*):SelectMediaController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "fl-&gt;fname">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[Document getWindowInfo:AtIndex:MaxLen:](NSString *, NSUInteger, NSUInteger):Document.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "buf+i">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[Document printInfo]():Document.mm">
-      </ContextState>
-      <ContextState
-         contextName = "::-[LowerTextView drawRect:](NSRect):DocumentWinController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "code">
-            </PersistentString>
-            <PersistentString
-               value = "docWinController-&gt;EditorMode">
-            </PersistentString>
-            <PersistentString
-               value = "docWinController-&gt;StartCodeArr[4]">
-            </PersistentString>
-            <PersistentString
-               value = "docWinController-&gt;RootCodesArr[index]-&gt;code">
-            </PersistentString>
-            <PersistentString
-               value = "index">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "freedefwdptr:cutt.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "tt-&gt;word">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[Document readFromURL:ofType:error:](NSURL *, NSString *, NSError **):Document.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "suSt+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::FindFileLine(char, unichar *):Document.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "line+len">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "cUStr::IsUtteranceDel(unsigned short const*, int):stringparser.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "st[pos]">
-            </PersistentString>
-            <PersistentString
-               value = "sp+pos">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController(SonicModeCode) DisplayEndF:](BOOL):DocumentWinController.mm">
-      </ContextState>
-      <ContextState
-         contextName = "createMorUttline:cutt.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "mor_tier">
-            </PersistentString>
-            <PersistentString
-               value = "new_mor_tier">
-            </PersistentString>
-            <PersistentString
-               value = "spTier+i">
-            </PersistentString>
-            <PersistentString
-               value = "spTier">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[Document setFileType:](NSString *):Document.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "kUTTypeText">
-            </PersistentString>
-            <PersistentString
-               value = "NSPasteboardTypeString">
-            </PersistentString>
-            <PersistentString
-               value = "kUTTypePlainText">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController SelectMediaFile:](id):DocumentWinController.mm">
-      </ContextState>
-      <ContextState
          contextName = "::delFromRecall(int):mac_recall.cpp">
          <PersistentStrings>
             <PersistentString
@@ -848,285 +13,6 @@
             </PersistentString>
             <PersistentString
                value = "clan_commands">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ced_ParseWords(check_in_tiers*, bool):ced_check_in.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "templine+0">
-            </PersistentString>
-            <PersistentString
-               value = "templine+e">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController SetNextTierName:](id):DocumentWinController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "str+0">
-            </PersistentString>
-            <PersistentString
-               value = "NextTierName+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "isWord(char*, int, int):validateXWOR.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "wor[w]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::+[IdsController setIDs:](DocumentWindowController *):IdsController.mm">
-      </ContextState>
-      <ContextState
-         contextName = "getTypes(char*):kideval.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "ke_Activity+0">
-            </PersistentString>
-            <PersistentString
-               value = "ke_Design+0">
-            </PersistentString>
-            <PersistentString
-               value = "ke_Group+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "addToSpArr(char*):EvalController.mm">
-      </ContextState>
-      <ContextState
-         contextName = "::-[CLANApplication terminate:](id):Application.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "thePict">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "compareTiers(char*, char*):validateXWOR.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "xwor+w">
-            </PersistentString>
-            <PersistentString
-               value = "main+m">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "Mfa_addToTiers(__sFILE*, ChatTiers*, long, long, char*, char*, char*, char):Mfa2Chat.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "GetCursorCode(int, DocumentWindowController*):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "sp+0">
-            </PersistentString>
-            <PersistentString
-               value = "docWinController-&gt;cod_fname">
-            </PersistentString>
-            <PersistentString
-               value = "bufU+0">
-            </PersistentString>
-            <PersistentString
-               value = "docWinController-&gt;StartCodeArr[docWinController-&gt;CursorCodeArr]-&gt;code">
-            </PersistentString>
-            <PersistentString
-               value = "templine1+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController getCurrentMediaName:MaxLen:showErr:](NSString *, NSUInteger, BOOL):DocumentWinController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "suSt+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "check_getwholeutter(NSString*, int):check_in.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "templine+324">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[LowerTextView CheckNewF:newCol:direction:](SOUNDINFOC *, long, char *):DocumentWinController.mm">
-      </ContextState>
-      <ContextState
-         contextName = "::delFromFolderList(int, int):mac_folders.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "wd_folders[index]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ProcessSound(SILAVINFO*, SilenceList*):silence-mac.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "AVinfo">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController findRightPos:view:](NSTextStorage *, NSTextView *):DocumentWinController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "bufU+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "persuade_fix_outputUtts(persuade_fix_utterance*):persuade_fix.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "root_utts">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "freq_call():freq.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "uttline+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[Document(TextEditNSDocumentOverrides) checkAutosavingSafetyAfterChangeAndReturnError:](NSError **):Document.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "[self fileType]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController(Delegation) layoutManager:shouldGenerateGlyphs:properties:characterIndexes:font:forGlyphRange:](NSLayoutManager *, const CGGlyph *, const NSGlyphProperty *, const NSUInteger *, NSFont *, NSRange):DocumentWinController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "glyphRange">
-            </PersistentString>
-            <PersistentString
-               value = "props[i]">
-            </PersistentString>
-            <PersistentString
-               value = "[myTextStorage length]">
-            </PersistentString>
-            <PersistentString
-               value = "modProps[layoutI]">
-            </PersistentString>
-            <PersistentString
-               value = "charIndexes">
-            </PersistentString>
-            <PersistentString
-               value = "charIndexes[layoutI]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "addAltLabels(char*):corelex.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "root">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "getSpTierText(unsigned long, NSTextView*):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "templine2+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "bulletTime(char*, int):corelex.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "line+i">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[AVController createAndPlayAV:](id):AVController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "MoviePlayer">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[FileInController windowWillClose:](NSNotification *):FileInController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "spareTier3">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::printout(const char *, char *, unsigned short *, unsigned short *, char):cutt.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "sp+splen">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController exportToWave:isSendToAnalyzer:](AVInfo *, BOOL):DocumentWinController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "AVinfo">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "check_ParseScope(char*):check.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "line+pos">
-            </PersistentString>
-            <PersistentString
-               value = "isWordFound">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[Document(TextEditNSDocumentOverrides) fileWrapperOfType:error:](NSString *, NSError **):Document.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "NSReadOnlyDocumentAttribute">
-            </PersistentString>
-            <PersistentString
-               value = "dict">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DeleteCodeIfEmpty(NSTextView*, unsigned long, DocumentWindowController*):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "bufU+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[Document documentPropertyToAttributeNameMappings]():Document.mm">
-      </ContextState>
-      <ContextState
-         contextName = "::+[KidevalController kidevalDialog]():KidevalController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "cl_argv">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1142,57 +28,45 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "freespeakers(kideval_speakers*):kideval.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController(SonicModeCode) soundwindow:](AVInfo *):DocumentWinController.mm">
+         contextName = "::-[FileInController windowWillClose:](NSNotification *):FileInController.mm">
          <PersistentStrings>
             <PersistentString
-               value = "AVinfo">
+               value = "spareTier3">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "countCols(levelsp_tnode*):corelex.cpp">
+         contextName = "FillInCodes(__sFILE*, int, int*, long*, DocumentWindowController*):codes.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "w[j]">
+               value = "ced_line+ThisLevel+offset">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "::-[Document(TextEditNSDocumentOverrides) checkAutosavingSafetyAndReturnError:](NSError **):Document.mm">
+         contextName = "filterMORScop(char*, char):cutt.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "[self isConverted]">
-            </PersistentString>
-            <PersistentString
-               value = "[self fileType]">
-            </PersistentString>
-            <PersistentString
-               value = "[self isLossy]">
+               value = "wline+pos">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "check_err(int, int, int, unsigned short*):check_in.cpp">
+         contextName = "DeleteCodeIfEmpty(NSTextView*, unsigned long, DocumentWindowController*):codes.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "ced_err_message">
-            </PersistentString>
-            <PersistentString
-               value = "templine+i">
-            </PersistentString>
-            <PersistentString
-               value = "err_itemU+0">
+               value = "bufU+0">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "::__51-[DocumentWindowController(SonicMode) soundwindow:]_block_invoke():mac_sound.cpp">
+         contextName = "silence_call():silence-mac.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "::-[AVController createAndPlayAV:](id):AVController.mm">
          <PersistentStrings>
             <PersistentString
-               value = "rows">
+               value = "MoviePlayer">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1205,13 +79,92 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "printword(char*, result_rec*, int, char*, char, char):mor.cpp">
+         contextName = "persuade_fix_outputUtts(persuade_fix_utterance*):persuade_fix.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "templineC4+0">
+               value = "root_utts">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ced_CheckWords(unsigned short*, int, unsigned short*, check_in_tiers*):check_in.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "w+s">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FindRedirect(char*):ced_cl_exec.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "redirect_out.fp">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ced_CheckWords(unsigned short*, int, unsigned short*, check_in_tiers*):ced_check_in.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "w+s">
             </PersistentString>
             <PersistentString
-               value = "word_list[i]">
+               value = "w+s+t">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "dss_findmatch:dss.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "txt">
+            </PersistentString>
+            <PersistentString
+               value = "ts-&gt;name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "getTypes(char*):kideval.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "ke_Design+0">
+            </PersistentString>
+            <PersistentString
+               value = "ke_Activity+0">
+            </PersistentString>
+            <PersistentString
+               value = "ke_Group+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "EndCurTierGotoNext(int, DocumentWindowController*):codes.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "bufU+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "freq_call():freq.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "uttline+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "countColTimes(levelsp_tnode*):corelex.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "utterance-&gt;line">
+            </PersistentString>
+            <PersistentString
+               value = "p-&gt;count[col-&gt;num]">
+            </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;line+i">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1239,41 +192,130 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "compareFiles():validateXWOR.cpp">
+         contextName = "Elan_fillNT(ElanChatTiers*, char const*, long, long, char const*, char const*, char const*, char):Elan2Chat.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "temp_call():validateXWOR.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "::__93-[Document(TextEditNSDocumentOverrides) saveToURL:ofType:forSaveOperation:completionHandler:]_block_invoke_2(NSError *):Document.mm">
+      </ContextState>
+      <ContextState
+         contextName = "morifyLine(char*):combo.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "ffile">
-            </PersistentString>
-            <PersistentString
-               value = "utterance-&gt;line">
-            </PersistentString>
-            <PersistentString
-               value = "utterance-&gt;speaker">
-            </PersistentString>
-            <PersistentString
-               value = "sfile">
+               value = "line+i">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "exclude:cutt.cpp">
+         contextName = "FindTextCodeLine(unsigned short*, NSTextView*, unsigned long):codes.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "bufU+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "freq_FindSpeaker(char*, char*, char):freq.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "getcom:salt2chat.cpp">
          <PersistentStrings>
             <PersistentString
                value = "uttline+0">
             </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;line+0">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "addIxesMatchPat(Ixes*, int, char*, char const*):corelex.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "addword:cutt.cpp">
+         contextName = "ced_ParseWords(check_in_tiers*, signed char):check_in.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "defwdptr">
+               value = "templine">
             </PersistentString>
             <PersistentString
-               value = "wd+i">
+               value = "ced_line+0">
+            </PersistentString>
+            <PersistentString
+               value = "templine+r">
+            </PersistentString>
+            <PersistentString
+               value = "templine+k">
+            </PersistentString>
+            <PersistentString
+               value = "ced_line+r">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "addIDs(NSTextView*):check_in.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "sp+0">
+            </PersistentString>
+            <PersistentString
+               value = "templineW1+0">
+            </PersistentString>
+            <PersistentString
+               value = "ced_line+0">
+            </PersistentString>
+            <PersistentString
+               value = "languages+0">
+            </PersistentString>
+            <PersistentString
+               value = "templine4+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "makeSpeakersList():KidevalController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "cl_argv">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "play2chat_call():Play2Chat.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "et">
+            </PersistentString>
+            <PersistentString
+               value = "templineC">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "checkForandAddAts:cp@s.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "sp-&gt;line+spi">
+            </PersistentString>
+            <PersistentString
+               value = "ort-&gt;line+orti">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[AVController windowDidLoad]():AVController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "FindAndChange(char*, unsigned short*, long):convort.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+pos">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[AVController PlayAV]():AVController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "MoviePlayer-&gt;playerView.player.rate">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1286,139 +328,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "::-[DocumentWindowController(SonicModeCode) conv_from_msec_rep:](double):DocumentWinController.mm">
-      </ContextState>
-      <ContextState
-         contextName = "fillUpEngTdFilePaths(int, char**):kideval.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "argv[4]+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "Elan_addToTiers(char*, char const*, long, long, char const*, char*, char*, char):Elan2Chat.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "line">
-            </PersistentString>
-            <PersistentString
-               value = "sp">
-            </PersistentString>
-            <PersistentString
-               value = "refSp">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "execute:cl_exec.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "wd_dir">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "Elan_add2Unmatched():Elan2Chat.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "::__93-[Document(TextEditNSDocumentOverrides) saveToURL:ofType:forSaveOperation:completionHandler:]_block_invoke_2(NSError *):Document.mm">
-      </ContextState>
-      <ContextState
-         contextName = "OutputToScreen(unsigned short*):Document.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "st">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "call_test_mode(char):mor.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "uttline+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "Elan_addUnmacthed():Elan2Chat.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController convertACCtoWAV:outputURL:](NSURL *, NSURL *):DocumentWinController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "srcFormat">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::__54-[DocumentWindowController setHasMultiplePages:force:]_block_invoke(NSEvent *):DocumentWinController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "ShowParags">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::changeBullet(char *, unsigned short *):cutt.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "line+i">
-            </PersistentString>
-            <PersistentString
-               value = "cMediaFileName+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::__58-[DocumentWindowController exportToWave:isSendToAnalyzer:]_block_invoke():DocumentWinController.mm">
-      </ContextState>
-      <ContextState
-         contextName = "freq_getflag(char*, char*, int*):freq.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "(f-2)">
-            </PersistentString>
-            <PersistentString
-               value = "f">
-            </PersistentString>
-            <PersistentString
-               value = "*(f+2)">
-            </PersistentString>
-            <PersistentString
-               value = "*(f+1)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "Mfa_addToTiers(ChatTiers*, long, long, char*, char*, char*, char):Mfa2Chat.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "AddCodeTier(unsigned short*, char, NSTextView*, unsigned long, DocumentWindowController*):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "templineW+0">
-            </PersistentString>
-            <PersistentString
-               value = "bufU+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[NoodleLineNumberView drawHashMarksAndLabelsInRect:]:NoodleLineNumberView.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "range">
-            </PersistentString>
-            <PersistentString
-               value = "line">
-            </PersistentString>
-            <PersistentString
-               value = "index">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "-[LowerTextView drawRect:]:DocumentWinController.mm">
          <PersistentStrings>
             <PersistentString
@@ -1427,100 +336,27 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "::RecallCommand(short):mac_recall.cpp">
+         contextName = "Mfa_addToTiers(ChatTiers*, long, long, char*, char*, char*, char):Mfa2Chat.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "parseSaltTier:salt2chat.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "clan_commands[curCommand]">
+               value = "utterance-&gt;line+0">
+            </PersistentString>
+            <PersistentString
+               value = "uttline+0">
+            </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;line+pos">
+            </PersistentString>
+            <PersistentString
+               value = "s+0">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "FindCaretOnMor(NSTextView*, unsigned long, DocumentWindowController*):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "sp+0">
-            </PersistentString>
-            <PersistentString
-               value = "bufU+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "flucalc_call():flucalc.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "word+0">
-            </PersistentString>
-            <PersistentString
-               value = "utterance-&gt;tuttline">
-            </PersistentString>
-            <PersistentString
-               value = "ts-&gt;IWDur">
-            </PersistentString>
-            <PersistentString
-               value = "utterance-&gt;speaker ">
-            </PersistentString>
-            <PersistentString
-               value = "utterance-&gt;line+j">
-            </PersistentString>
-            <PersistentString
-               value = "wm">
-            </PersistentString>
-            <PersistentString
-               value = "utterance-&gt;line">
-            </PersistentString>
-            <PersistentString
-               value = "ts-&gt;UTTDur">
-            </PersistentString>
-            <PersistentString
-               value = "ts-&gt;morSyllables">
-            </PersistentString>
-            <PersistentString
-               value = "ws">
-            </PersistentString>
-            <PersistentString
-               value = "utterance-&gt;line+i">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[Document docFont]():Document.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "docFont">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::InitOptions():cutt.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "GetNextMorString(unsigned long, unsigned short*, DocumentWindowController*):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "templine3+0">
-            </PersistentString>
-            <PersistentString
-               value = "bufU+0">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::+[Document isRichTextType:](NSString *):Document.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "kUTTypeUTF8PlainText">
-            </PersistentString>
-            <PersistentString
-               value = "kUTTypePlainText">
-            </PersistentString>
-            <PersistentString
-               value = "kUTTypeText">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::__40-[CommandsController commandRunClicked:]_block_invoke():CommandsController.mm">
+         contextName = "Mfa_addToTiers(__sFILE*, ChatTiers*, long, long, char*, char*, char*, char):Mfa2Chat.cpp">
       </ContextState>
       <ContextState
          contextName = "ud2chat_call():Ud2Chat.cpp">
@@ -1537,57 +373,115 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Elan_fillNT(ElanChatTiers*, char const*, long, long, char const*, char const*, char const*, char):Elan2Chat.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "post_file(char*, int, int, int, char*, int, int, char**, int, int, int):postana.cpp">
+         contextName = "::-[Document setFileType:](NSString *):Document.mm">
          <PersistentStrings>
             <PersistentString
-               value = "option_flags[CLAN_PROG_NUM]">
+               value = "kUTTypeText">
             </PersistentString>
             <PersistentString
-               value = "(option_flags[CLAN_PROG_NUM] &amp; (1L &lt;&lt; 14))">
+               value = "kUTTypePlainText">
+            </PersistentString>
+            <PersistentString
+               value = "NSPasteboardTypeString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "checkItem(char*, int, int):Ud2Chat.cpp">
+         contextName = "LocalInit:ced_c_init.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "home_dir+i">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "addIxesMatchPat(Ixes*, int, char*, char const*):corelex.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "check_CheckRest:check.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "utterance-&gt;line+0">
+            </PersistentString>
+            <PersistentString
+               value = "uttline+i">
+            </PersistentString>
+            <PersistentString
+               value = "utterance">
+            </PersistentString>
+            <PersistentString
+               value = "uttline+j">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "countCols(levelsp_tnode*):corelex.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "w[j]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "check_ParseScope(char*):check.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+pos">
+            </PersistentString>
+            <PersistentString
+               value = "isWordFound">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "convertEngNumber(char*, char*):num2word.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "buf[blockNum+1]">
+            </PersistentString>
+            <PersistentString
+               value = "buf[blockNum]">
+            </PersistentString>
+            <PersistentString
+               value = "buf[blockNum+2]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "prepSpTier(char*):cutt.cpp">
          <PersistentStrings>
             <PersistentString
                value = "line+j">
             </PersistentString>
             <PersistentString
-               value = "line+e">
-            </PersistentString>
-            <PersistentString
-               value = "line+b">
+               value = "line+i">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ProcessSound(SILAVINFO*, SilenceList*):silence.cpp">
+         contextName = "::+[KidevalController kidevalDialog]():KidevalController.mm">
          <PersistentStrings>
             <PersistentString
-               value = "sampleSize">
+               value = "cl_argv">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "corelex_call():corelex.cpp">
+         contextName = "addword:cutt.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "uttline">
+               value = "defwdptr">
+            </PersistentString>
+            <PersistentString
+               value = "wd+i">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "SetSPRoleParticipants(char*):cutt.cpp">
+         contextName = "replacePOS(char*, int, char*):Ud2Chat.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "sp+0">
-            </PersistentString>
-            <PersistentString
-               value = "templineC+0">
+               value = "line +b">
             </PersistentString>
             <PersistentString
                value = "line+e">
@@ -1595,37 +489,54 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__42-[DocumentWindowController setPagesForce:]_block_invoke:DocumentWinController.mm">
+         contextName = "flucalc_FindSpeaker(char*, char*, char*, char):flucalc.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "window">
+               value = "ts-&gt;sp">
             </PersistentString>
             <PersistentString
-               value = "wFrame">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[DocumentWindowController(Delegation) windowDidResize:]:DocumentWinController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "cDoc">
+               value = "ts-&gt;fname">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "::-[AVController PlayAV]():AVController.mm">
+         contextName = "isMonoWordPreCode(char*, int):flucalc.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "MoviePlayer-&gt;playerView.player.rate">
+               value = "utterance">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "roles_call():roles.cpp">
+         contextName = "kideval_process_tier(kideval_speakers*, database*):kideval.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "utterance-&gt;speaker+0">
+               value = "uttline+i">
+            </PersistentString>
+            <PersistentString
+               value = "word">
+            </PersistentString>
+            <PersistentString
+               value = "w[j]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "cUStr::IsUtteranceDel(unsigned short const*, int):stringparser.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "st[pos]">
+            </PersistentString>
+            <PersistentString
+               value = "sp+pos">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "temp_call:cp@s.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "utterance">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1638,19 +549,153 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "duplicateCodeMorWs(char*, int, char, morWsCom*):cutt.cpp">
+         contextName = "CheckC(NSTextView*, char*, signed char):check_in.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "morWsC-&gt;morWsI">
+               value = "ced_err_message">
             </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FindAndChange(char*, unsigned short*, long):chstring.cpp">
+         <PersistentStrings>
             <PersistentString
-               value = "angWsCnt">
+               value = "line+pos">
             </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "check_getwholeutter(NSString*, int):check_in.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "templine+324">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FindBulletTime(char, char*, int, float*, float*):flucalc.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+i">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "skipSubCodeWs(char*, int):cutt.cpp">
+         <PersistentStrings>
             <PersistentString
                value = "wline+pos">
             </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "checkUtteranceDelimiter(stutterance*):tierorder.cpp">
+         <PersistentStrings>
             <PersistentString
-               value = "morWsC-&gt;morWs">
+               value = "utt-&gt;line+e">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "salt2chat_call:salt2chat.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "utterance-&gt;line+0">
+            </PersistentString>
+            <PersistentString
+               value = "uttline+0">
+            </PersistentString>
+            <PersistentString
+               value = "spareTier3+0">
+            </PersistentString>
+            <PersistentString
+               value = "utterance">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController(SonicModeCode) DisplayEndF:](BOOL):DocumentWinController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController(SonicModeCode) soundwindow]():DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "SnTr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "main:main.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "argv[3]">
+            </PersistentString>
+            <PersistentString
+               value = "argv[0]">
+            </PersistentString>
+            <PersistentString
+               value = "argv[1]">
+            </PersistentString>
+            <PersistentString
+               value = "argv[2]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "kideval_pr_result():kideval.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "DB_type">
+            </PersistentString>
+            <PersistentString
+               value = "ke_script_file">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[Document documentPropertyToAttributeNameMappings]():Document.mm">
+      </ContextState>
+      <ContextState
+         contextName = "checktier:cutt.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "headtier">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "elan2chat_call:Elan2Chat.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "ced_ReadDepFile:ced_check_in.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "tp-&gt;pattern+i">
+            </PersistentString>
+            <PersistentString
+               value = "tp-&gt;pattern+1">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HiLightMatch(unsigned long, NSTextView*):codes.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "bufU+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "pc_add_each_line(linesRec*, char, char, char, char*, char*, long, long):Play2Chat.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "sp">
+            </PersistentString>
+            <PersistentString
+               value = "bt">
+            </PersistentString>
+            <PersistentString
+               value = "et">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1669,63 +714,146 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "prepSpTier(char*):cutt.cpp">
+         contextName = "speaker_add_speaker:speaker.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "line+j">
+               value = "oldfname">
             </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "freeColsP(all_cols*):kideval.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "::getMediaName(char *, char *, long):cutt.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "tMediaFileName+i">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AddToUttElems(char const*, char, char, char):flupos.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "init_codes(char const*, char*, DocumentWindowController*):codes.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "ced_lineC+end">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "isWord(char*, int, int):validateXWOR.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "wor[w]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "isFeat(char*):mor_fix.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+oi">
+            </PersistentString>
+            <PersistentString
+               value = "feats[j]">
+            </PersistentString>
+            <PersistentString
+               value = "line+oi+len">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "convort_call():convort.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "::write_commands1977(FILE *):mac_recall.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "clan_commands[i]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "compareTiers(char*, char*):validateXWOR.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "xwor+w">
+            </PersistentString>
+            <PersistentString
+               value = "main+m">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "add_deptier(chip_data*, char*, char*):chiputil.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController(SonicModeCode) readMedia:](BOOL):DocumentWinController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "MkSpeaker(char*, unsigned short*):chstring.cpp">
+         <PersistentStrings>
             <PersistentString
                value = "line+i">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "::-[DocumentWindowController(SonicModeCode) soundwindow]():DocumentWinController.mm">
+         contextName = "parse_utter(real_utterance_struct*):chip_utl.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "SnTr">
+               value = "utter">
+            </PersistentString>
+            <PersistentString
+               value = "uttline">
+            </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;line+0">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "kwal_call():kwal.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "::-[Document isRichText]():Document.mm">
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController isOldBullet:txt:tpos:tlen:](char *, NSString *, NSUInteger, NSUInteger):DocumentWinController.mm">
+         contextName = "::-[Document(TextEditNSDocumentOverrides) checkAutosavingSafetyAndReturnError:](NSError **):Document.mm">
          <PersistentStrings>
             <PersistentString
-               value = "bufU+0">
+               value = "[self isConverted]">
+            </PersistentString>
+            <PersistentString
+               value = "[self fileType]">
+            </PersistentString>
+            <PersistentString
+               value = "[self isLossy]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "createNewId(IDSs*, int):IdsController.mm">
-      </ContextState>
-      <ContextState
-         contextName = "kideval_pr_result():kideval.cpp">
+         contextName = "exclude:cutt.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "DB_type">
-            </PersistentString>
-            <PersistentString
-               value = "ke_script_file">
+               value = "uttline+0">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "statfreq_readinfile_writefile(__sFILE*):freq.cpp">
+         contextName = "createFullFakeMorForSpeaker(char*, char*):cutt.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "fname+0">
+               value = "morWsC.morWsI">
             </PersistentString>
             <PersistentString
-               value = "templineC+i">
+               value = "morWsC.morWs">
             </PersistentString>
             <PersistentString
-               value = "templineC+0">
+               value = "spTier+posSp">
+            </PersistentString>
+            <PersistentString
+               value = "morWsC">
+            </PersistentString>
+            <PersistentString
+               value = "mor_tier + t">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1744,6 +872,168 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "::-[Document(TextEditNSDocumentOverrides) fileWrapperOfType:error:](NSString *, NSError **):Document.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "NSReadOnlyDocumentAttribute">
+            </PersistentString>
+            <PersistentString
+               value = "dict">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController findAndPlayTargetBullet:isKeyPress:](NSUInteger, BOOL):DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "theAVinfo.mediaFName">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SetSPRoleParticipants(char*):cutt.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "templineC+0">
+            </PersistentString>
+            <PersistentString
+               value = "sp+0">
+            </PersistentString>
+            <PersistentString
+               value = "line+e">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "statfreq_readinfile_writefile(__sFILE*):freq.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "fname+0">
+            </PersistentString>
+            <PersistentString
+               value = "templineC+i">
+            </PersistentString>
+            <PersistentString
+               value = "templineC+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProcessSound(SILAVINFO*, SilenceList*):silence.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "sampleSize">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "check_CheckRest():check.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "utterance-&gt;line+i">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "addToSpArr(char*):EvalController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "::-[CLANApplication terminate:](id):Application.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "thePict">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "duplicateCodeMorWs(char*, int, char, morWsCom*):cutt.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "wline+tempPos">
+            </PersistentString>
+            <PersistentString
+               value = "morWsC-&gt;morWsI">
+            </PersistentString>
+            <PersistentString
+               value = "angWsCnt">
+            </PersistentString>
+            <PersistentString
+               value = "wline+pos">
+            </PersistentString>
+            <PersistentString
+               value = "morWsC-&gt;morWs">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::FindFileLine(char, unichar *):Document.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+len">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[Document getColorInfo:AtIndex:MaxLen:](NSString *, NSUInteger, NSUInteger):Document.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "buf+i">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ced_ParseScope(unsigned short*):ced_check_in.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "wline+pos">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::getwholeutter():cutt.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "utterance-&gt;line">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "cedUtil::check_patmat:ced_check_in.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "s+t">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "roles_call():roles.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "utterance-&gt;speaker+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[Document(TextEditNSDocumentOverrides) writableTypesForSaveOperation:ignoreTemporaryState:](NSSaveOperationType, BOOL):Document.mm">
+      </ContextState>
+      <ContextState
+         contextName = "::+[AVController createAndPlayAV:](AVInfo *):AVController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "freq_pr_result():freq.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController findAndPlayTargetBullet:](NSUInteger):DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "buf">
+            </PersistentString>
+            <PersistentString
+               value = "bufU+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ipsyn_call():ipsyn.cpp">
          <PersistentStrings>
             <PersistentString
@@ -1752,48 +1042,479 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "speaker_add_speaker:speaker.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "oldfname">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "morifyLine(char*):combo.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "line+i">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[IdsController controlTextDidChange:](NSNotification *):IdsController.mm">
-         <PersistentStrings>
-            <PersistentString
-               value = "st+i">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "freq_FindSpeaker(char*, char*, char):freq.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "::getMediaName(char *, char *, long):cutt.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "tMediaFileName+i">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "fixit_call():fixit.cpp">
       </ContextState>
       <ContextState
          contextName = "::-[ListBoxController windowDidLoad]():ListBoxController.mm">
       </ContextState>
       <ContextState
-         contextName = "::-[DocumentWindowController sendToSoundAnalyzer:Tier:](AVInfo *, char *):DocumentWinController.mm">
+         contextName = "chstring_found(char*, int, char*):chstring.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "buf+0">
+               value = "line+pos">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "getwholeutter:cutt.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "-[DocumentWindowController(Delegation) windowDidResize:]:DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "cDoc">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "cmdi_main(int, char**):cmdi.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "PIDcnt">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[Document writeToURL:ofType:error:](NSURL *, NSString *, NSError **):Document.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "NSPlainTextDocumentType">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PrintOutDSSTable:dss.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+0">
+            </PersistentString>
+            <PersistentString
+               value = "points[i]">
+            </PersistentString>
+            <PersistentString
+               value = "line+i">
+            </PersistentString>
+            <PersistentString
+               value = "spareTier1+0">
+            </PersistentString>
+            <PersistentString
+               value = "TotalsAcrossPoints[i]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::__40-[CommandsController commandRunClicked:]_block_invoke():CommandsController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "PositionCursor(NSTextView*, unsigned long, DocumentWindowController*):codes.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "bufU+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[Document readFromURL:ofType:error:](NSURL *, NSString *, NSError **):Document.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "suSt+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "createMorUttline:cutt.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "mor_tier">
+            </PersistentString>
+            <PersistentString
+               value = "new_mor_tier">
+            </PersistentString>
+            <PersistentString
+               value = "spTier+i">
+            </PersistentString>
+            <PersistentString
+               value = "spTier">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::printout(const char *, char *, unsigned short *, unsigned short *, char):cutt.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "sp+splen">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController SetNextTierName:](id):DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "str+0">
+            </PersistentString>
+            <PersistentString
+               value = "NextTierName+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "printTiers(char*, char*, char*, char, char):segment.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "spareTier3">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "rely_call():rely.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "uttline">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "maketierchoice:cutt.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "ts+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FindNextGivenTier(NSTextView*, unsigned long, char*):codes.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "bufU+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "addItem2UttLoc(stutterance*, long, char*, long, long):tierorder.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "utt-&gt;line+p-1">
+            </PersistentString>
+            <PersistentString
+               value = "line+b">
+            </PersistentString>
+            <PersistentString
+               value = "line+e">
+            </PersistentString>
+            <PersistentString
+               value = "utt-&gt;line+p">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "convertToURLText(char*, char*):DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "from+ifr">
+            </PersistentString>
+            <PersistentString
+               value = "templineC1">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[DocumentWindowController getTextAndSendToSoundAnalyzer:]:DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "end">
+            </PersistentString>
+            <PersistentString
+               value = "pos">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "eval_pr_result:eval.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "spareTier2">
+            </PersistentString>
+            <PersistentString
+               value = "ts-&gt;morf">
+            </PersistentString>
+            <PersistentString
+               value = "ts-&gt;mluUtt">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ced_CheckRest(NSTextView*, char*, signed char):check_in.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "templine+i">
+            </PersistentString>
+            <PersistentString
+               value = "templine">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "change(char*, unsigned short*, int, int, int, char*):convort.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+pos">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "dss_storepat:dss.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "ln[s1]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "addAltLabels(char*):corelex.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "root">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "addPostcode2Utterance(stutterance*, int, char*, long, long):tierorder.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+b">
+            </PersistentString>
+            <PersistentString
+               value = "utt-&gt;line+p">
+            </PersistentString>
+            <PersistentString
+               value = "line+e">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController convertACCtoWAV:outputURL:](NSURL *, NSURL *):DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "srcFormat">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::__54-[DocumentWindowController setHasMultiplePages:force:]_block_invoke(NSEvent *):DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "ShowParags">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::get_next_obj_command(int *):mac_recall.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "clan_commands[*i]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController getCurrentMediaName:MaxLen:showErr:](NSString *, NSUInteger, BOOL):DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "suSt+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "chstring_call():chstring.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "utterance">
+            </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;speaker+j">
+            </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;speaker+j+i">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "getNextElanTier:Elan2Chat.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "utterance">
+            </PersistentString>
+            <PersistentString
+               value = "tier_id">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "medialine_call:medialine.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "uttline">
+            </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;line+29">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CompareFilesTiers():validateXWOR.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "sfile">
+            </PersistentString>
+            <PersistentString
+               value = "ffile">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ToTopLevel(int, DocumentWindowController*):codes.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "sp+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "cutt_cleanUpLine:cutt.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "LanguagesTable[tDefLanguage]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::changeBullet(char *, unsigned short *):cutt.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+i">
+            </PersistentString>
+            <PersistentString
+               value = "cMediaFileName+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[LowerTextView drawRect:](NSRect):DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "code">
+            </PersistentString>
+            <PersistentString
+               value = "docWinController-&gt;EditorMode">
+            </PersistentString>
+            <PersistentString
+               value = "docWinController-&gt;StartCodeArr[4]">
+            </PersistentString>
+            <PersistentString
+               value = "docWinController-&gt;RootCodesArr[index]-&gt;code">
+            </PersistentString>
+            <PersistentString
+               value = "index">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController(Delegation) layoutManager:shouldGenerateGlyphs:properties:characterIndexes:font:forGlyphRange:](NSLayoutManager *, const CGGlyph *, const NSGlyphProperty *, const NSUInteger *, NSFont *, NSRange):DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "glyphRange">
+            </PersistentString>
+            <PersistentString
+               value = "props[i]">
+            </PersistentString>
+            <PersistentString
+               value = "[myTextStorage length]">
+            </PersistentString>
+            <PersistentString
+               value = "modProps[layoutI]">
+            </PersistentString>
+            <PersistentString
+               value = "charIndexes">
+            </PersistentString>
+            <PersistentString
+               value = "charIndexes[layoutI]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "freespeakers(kideval_speakers*):kideval.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "OpenDBFile(__sFILE*, database*, char*):kideval.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "ke_Activity+0">
+            </PersistentString>
+            <PersistentString
+               value = "ke_Design+0">
+            </PersistentString>
+            <PersistentString
+               value = "templineC+t">
+            </PersistentString>
+            <PersistentString
+               value = "ke_Group+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "dss_call():dss.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "check_CheckWords:check.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "w+s">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Elan_addToTiers(char*, char const*, long, long, char const*, char*, char*, char):Elan2Chat.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line">
+            </PersistentString>
+            <PersistentString
+               value = "sp">
+            </PersistentString>
+            <PersistentString
+               value = "refSp">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "matchToMorElems:cutt.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController findRightPos:view:](NSTextStorage *, NSTextView *):DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "bufU+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "check_call():check.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "oldfname">
+            </PersistentString>
+            <PersistentString
+               value = "redirect_out.fp">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GetCurCode(NSTextView*, unsigned long, DocumentWindowController*):codes.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "sp+0">
+            </PersistentString>
+            <PersistentString
+               value = "bufU+0">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1827,40 +1548,113 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "checktier:cutt.cpp">
+         contextName = "addAllItems(stutterance*, tierOrderT*, char*):tierorder.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "headtier">
+               value = "TB-&gt;line+b">
+            </PersistentString>
+            <PersistentString
+               value = "TB-&gt;line+e">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "isMatchCaret(NSTextView*, unsigned long):codes.cpp">
+         contextName = "eval_call():eval.cpp">
          <PersistentStrings>
+            <PersistentString
+               value = "utterance-&gt;line+i">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[Document isRichText]():Document.mm">
+      </ContextState>
+      <ContextState
+         contextName = "GetCursorCode(int, DocumentWindowController*):codes.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "sp+0">
+            </PersistentString>
+            <PersistentString
+               value = "docWinController-&gt;cod_fname">
+            </PersistentString>
             <PersistentString
                value = "bufU+0">
             </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController exportToWave:](BOOL):DocumentWinController.mm">
-      </ContextState>
-      <ContextState
-         contextName = "-[DocumentWindowController getTextAndSendToSoundAnalyzer:]:DocumentWinController.mm">
-         <PersistentStrings>
             <PersistentString
-               value = "end">
+               value = "docWinController-&gt;StartCodeArr[docWinController-&gt;CursorCodeArr]-&gt;code">
             </PersistentString>
             <PersistentString
-               value = "pos">
+               value = "templine1+0">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "checkGraItem(char*, int, int):Ud2Chat.cpp">
+         contextName = "elan2chat_call():Elan2Chat.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "p-&gt;from+i">
+               value = "utterance-&gt;speaker+0">
+            </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;line+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "call_mor():mor.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "utterance">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "createUtt(utt_elems*, char*, char*):flupos.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "templineC3+0">
+            </PersistentString>
+            <PersistentString
+               value = "line+b">
+            </PersistentString>
+            <PersistentString
+               value = "line+e">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController(SonicModeCode) soundwindow:](AVInfo *):DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "AVinfo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "findmatch(char*):combo.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "utterance-&gt;line">
+            </PersistentString>
+            <PersistentString
+               value = "outLine+k">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ced_getwholeutter(NSString*, int):check_in.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "cUStr::sprintf(unsigned short*, unsigned short const*, ...):stringparser.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "createUtt(char*, char*):flupos.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "root_elem">
+            </PersistentString>
+            <PersistentString
+               value = "line+e">
             </PersistentString>
             <PersistentString
                value = "line+b">
@@ -1868,19 +1662,35 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "OpenDBFile(__sFILE*, database*, char*):kideval.cpp">
+         contextName = "filterscop(char const*, char*, char):cutt.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "ke_Activity+0">
+               value = "wline">
             </PersistentString>
             <PersistentString
-               value = "ke_Design+0">
+               value = "wline+pos">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "call_test_mode(char):mor.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "uttline+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "checkItem(char*, int, int):Ud2Chat.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+j">
             </PersistentString>
             <PersistentString
-               value = "templineC+t">
+               value = "line+e">
             </PersistentString>
             <PersistentString
-               value = "ke_Group+0">
+               value = "line+b">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1896,57 +1706,8 @@
             <PersistentString
                value = "word+0">
             </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ced_getwholeutter(NSString*, int):check_in.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "chstring_call():chstring.cpp">
-         <PersistentStrings>
             <PersistentString
-               value = "utterance">
-            </PersistentString>
-            <PersistentString
-               value = "utterance-&gt;speaker+j">
-            </PersistentString>
-            <PersistentString
-               value = "utterance-&gt;speaker+j+i">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FillInCodes(__sFILE*, int, int*, long*, DocumentWindowController*):codes.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "ced_line+ThisLevel+offset">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "kwal_getflag(char*, char*, int*):kwal.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "f-2">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "CompareFilesTiers():validateXWOR.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "sfile">
-            </PersistentString>
-            <PersistentString
-               value = "ffile">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "maketierchoice:cutt.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "ts+0">
+               value = "uttline+s-1">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1959,21 +1720,639 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "replacePOS(char*, int, char*):Ud2Chat.cpp">
+         contextName = "::LocalInit():c_init.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "line +b">
-            </PersistentString>
-            <PersistentString
-               value = "line+e">
+               value = "home_dir">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "::get_next_obj_command(int *):mac_recall.cpp">
+         contextName = "::+[Document isRichTextType:](NSString *):Document.mm">
          <PersistentStrings>
             <PersistentString
-               value = "clan_commands[*i]">
+               value = "kUTTypeUTF8PlainText">
+            </PersistentString>
+            <PersistentString
+               value = "kUTTypePlainText">
+            </PersistentString>
+            <PersistentString
+               value = "kUTTypeText">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[Document(TextEditNSDocumentOverrides) updateChangeCount:](NSDocumentChangeType):Document.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self fileType]">
+            </PersistentString>
+            <PersistentString
+               value = "kUTTypeText">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "compareMainWorTiers(char*, char*):validateXWOR.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "wor+w">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController sendToSoundAnalyzer:Tier:](AVInfo *, char *):DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "buf+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Elan_add2Unmatched():Elan2Chat.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "isWord(char*, char*, int, int):validateXWOR.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "wor+i">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[LowerTextView DrawSoundCursor:part:](DocumentWindowController *, BOOL):DocumentWinController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "fixit_pr_result():fixit.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "utterance-&gt;line">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PrintRow(char (*) [40], char*, float, char, __sFILE*):dss.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+rpos">
+            </PersistentString>
+            <PersistentString
+               value = "line+l_index">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[CommandsPanelController(Delegation) windowDidResize:](NSNotification *):CommandsPanelController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "ClanWinSize">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Elan_addUnmacthed():Elan2Chat.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "mach_msg_trap:(null)">
+         <PersistentStrings>
+            <PersistentString
+               value = "isMORXiMode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "kideval_process_tier:kideval.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "utterance-&gt;speaker+0">
+            </PersistentString>
+            <PersistentString
+               value = "ts-&gt;morf">
+            </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;line+0">
+            </PersistentString>
+            <PersistentString
+               value = "uttline+0">
+            </PersistentString>
+            <PersistentString
+               value = "isSkip">
+            </PersistentString>
+            <PersistentString
+               value = "spareTier1+0">
+            </PersistentString>
+            <PersistentString
+               value = "spareTier3+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[LowerTextView drawWaveForm:](DocumentWindowController *):DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "docWinCtrl-&gt;SnTr.WBegF">
+            </PersistentString>
+            <PersistentString
+               value = "pixels">
+            </PersistentString>
+            <PersistentString
+               value = "docWinCtrl-&gt;SnTr.SoundFileSize">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MorDisambiguate(DocumentWindowController*):codes.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "docWinController-&gt;lowerView-&gt;rowsNum">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "add_a_file(char*, f_list*, int*):SelectMediaController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "fl-&gt;fname">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "excludedef:cutt.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "twd-&gt;word">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "freedefwdptr:cutt.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "defwdptr">
+            </PersistentString>
+            <PersistentString
+               value = "tt-&gt;word">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "eval_process_tier:eval.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "spareTier3+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[DocumentWindowController MakeAllSelectedTextsRED:]:DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "bufU+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "parseline:salt2chat.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "st+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController exportToWave:](BOOL):DocumentWinController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "::+[SelectMediaController SelectMediaDialog:str:](DocumentWindowController *, unichar *):SelectMediaController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "mlu_call:mlu.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "uttline+pos">
+            </PersistentString>
+            <PersistentString
+               value = "morf">
+            </PersistentString>
+            <PersistentString
+               value = "localmorf">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::__51-[DocumentWindowController(SonicMode) soundwindow:]_block_invoke():mac_sound.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "rows">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FindCaretOnMor(NSTextView*, unsigned long, DocumentWindowController*):codes.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "sp+0">
+            </PersistentString>
+            <PersistentString
+               value = "bufU+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "isExcludeScope:cutt.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "ScopWdPtr[i]+3">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController findTargetBullet:](NSUInteger):DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "buf+0">
+            </PersistentString>
+            <PersistentString
+               value = "bufU+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "kwal_getflag(char*, char*, int*):kwal.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "f-2">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "chstring_found:chstring.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+pos">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "kideval_add2col(all_cols*, char, char*, char const*, int):kideval.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "pat+i">
+            </PersistentString>
+            <PersistentString
+               value = "pat2+1">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ced_OverAll(NSTextView*):check_in.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "templine">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LowerTextView mouseDown:]:DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "pSnTr-&gt;HScale">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController(SonicModeCode) SonicMode:](id):DocumentWinController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "chiputil_call():chiputil.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "root_utt">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "check_CheckFixes:check.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "word[pos]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "chstring_call:chstring.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "::-[IdsController controlTextDidChange:](NSNotification *):IdsController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "st+i">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[CommandsPanelController(Delegation) windowDidMove:](NSNotification *):CommandsPanelController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "ClanWinSize">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController ShowGRA:](NSUInteger):DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "code+0">
+            </PersistentString>
+            <PersistentString
+               value = "templineC4+0">
+            </PersistentString>
+            <PersistentString
+               value = "templineC2+0">
+            </PersistentString>
+            <PersistentString
+               value = "templine4+0">
+            </PersistentString>
+            <PersistentString
+               value = "templineC+0">
+            </PersistentString>
+            <PersistentString
+               value = "templineC1">
+            </PersistentString>
+            <PersistentString
+               value = "jpgTag+0">
+            </PersistentString>
+            <PersistentString
+               value = "templineC3+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "flucalc_pr_result():flucalc.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "ts-&gt;morSyllables">
+            </PersistentString>
+            <PersistentString
+               value = "ts-&gt;morWords">
+            </PersistentString>
+            <PersistentString
+               value = "ts-&gt;allWords">
+            </PersistentString>
+            <PersistentString
+               value = "ts-&gt;isSyllableLang">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[Document init]:Document.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "isDarkColor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[DocumentWindowController MakeAllLemmasColor:]:DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "ch">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "defaultValues():Controller.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "AutoSaveTime[AutoSavePtr]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "freq_getflag(char*, char*, int*):freq.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "(f-2)">
+            </PersistentString>
+            <PersistentString
+               value = "f">
+            </PersistentString>
+            <PersistentString
+               value = "*(f+2)">
+            </PersistentString>
+            <PersistentString
+               value = "*(f+1)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "make_DSS_tier:dss.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "stack">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController(SonicModeCode) readMedia]():DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "reader.status">
+            </PersistentString>
+            <PersistentString
+               value = "totalCnt">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[EvalController setButton:index:](NSButton *, int):EvalController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "make_replacement_str(char*, char*, int, char*, char*):chstring.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "old_s+j">
+            </PersistentString>
+            <PersistentString
+               value = "old_pat+k">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::__42-[DocumentWindowController setPagesForce:]_block_invoke(NSEvent *):DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "templineW">
+            </PersistentString>
+            <PersistentString
+               value = "wFrame">
+            </PersistentString>
+            <PersistentString
+               value = "bufU+0">
+            </PersistentString>
+            <PersistentString
+               value = "AVMediaPlayer-&gt;lastEndBullet">
+            </PersistentString>
+            <PersistentString
+               value = "currentTimeL">
+            </PersistentString>
+            <PersistentString
+               value = "templine4+0">
+            </PersistentString>
+            <PersistentString
+               value = "mouseWinLoc">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::__58-[DocumentWindowController exportToWave:isSendToAnalyzer:]_block_invoke():DocumentWinController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "execute:cl_exec.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "wd_dir">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[CommandsController controlTextDidChange:](NSNotification *):CommandsController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "spareTier3">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "addAndSortDepTiers(tierOrderT*, stutterance*):tierorder.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "interact_file():chip.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "::-[LowerTextView CheckNewF:newCol:direction:](SOUNDINFOC *, long, char *):DocumentWinController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "bulletTime(char*, int, char*):corelex.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line">
+            </PersistentString>
+            <PersistentString
+               value = "line+i">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[Document printInfo]():Document.mm">
+      </ContextState>
+      <ContextState
+         contextName = "createSessionCHATFile(Path_Tree*, char*):PID.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "PID_Self+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "compareFiles():validateXWOR.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "ffile">
+            </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;line">
+            </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;speaker">
+            </PersistentString>
+            <PersistentString
+               value = "sfile">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "filterwords:cutt.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "wline+pos">
+            </PersistentString>
+            <PersistentString
+               value = "wline+temp">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "preprocess_word(char*, char*):mor.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "word[0]">
+            </PersistentString>
+            <PersistentString
+               value = "word[1]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FindTextCodeLine(unsigned short*, NSTextView*, unsigned long, DocumentWindowController*):codes.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "bufU+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "check_err(int, int, int, unsigned short*):check_in.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "ced_err_message">
+            </PersistentString>
+            <PersistentString
+               value = "templine+i">
+            </PersistentString>
+            <PersistentString
+               value = "err_itemU+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "fillUpEngTdFilePaths(int, char**):kideval.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "argv[4]+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::InitOptions():cutt.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController(SonicMode) SonicMode:](id):mac_sound.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "num2word_call():num2word.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+j">
+            </PersistentString>
+            <PersistentString
+               value = "line+i">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "temp_call:fwm.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "uttline+offset">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "tierorder_call():tierorder.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "RootTier">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1995,13 +2374,296 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "::-[EvalController setButton:index:](NSButton *, int):EvalController.mm">
-      </ContextState>
-      <ContextState
-         contextName = "::-[DocumentWindowController findAndPlayTargetBullet:isKeyPress:](NSUInteger, BOOL):DocumentWinController.mm">
+         contextName = "OutputToScreen(unsigned short*):Document.mm">
          <PersistentStrings>
             <PersistentString
-               value = "theAVinfo.mediaFName">
+               value = "st">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::delFromFolderList(int, int):mac_folders.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "wd_folders[index]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "findNextWord(char*, long*, int):lowcase.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "ced_ParseWords(check_in_tiers*, bool):ced_check_in.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "templine+0">
+            </PersistentString>
+            <PersistentString
+               value = "templine+e">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController(SonicMode) soundwindow:](AVInfo *):mac_sound.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "fmtDesc">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "getCodeData(char*, int, char):flupos.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+0">
+            </PersistentString>
+            <PersistentString
+               value = "line+e">
+            </PersistentString>
+            <PersistentString
+               value = "root_elem">
+            </PersistentString>
+            <PersistentString
+               value = "line+b">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AddCodeTier(unsigned short*, char, NSTextView*, unsigned long, DocumentWindowController*):codes.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "templineW+0">
+            </PersistentString>
+            <PersistentString
+               value = "bufU+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "post_file(char*, int, int, int, char*, int, int, char**, int, int, int):postana.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "option_flags[CLAN_PROG_NUM]">
+            </PersistentString>
+            <PersistentString
+               value = "(option_flags[CLAN_PROG_NUM] &amp; (1L &lt;&lt; 14))">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "corelex_call():corelex.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "uttline">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[IdsController updateHeadersInText]():IdsController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "templine+0">
+            </PersistentString>
+            <PersistentString
+               value = "sp+0">
+            </PersistentString>
+            <PersistentString
+               value = "ced_line+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController(SonicModeCode) conv_from_msec_rep:](double):DocumentWinController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "GetNextMorString(unsigned long, unsigned short*, DocumentWindowController*):codes.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "templine3+0">
+            </PersistentString>
+            <PersistentString
+               value = "bufU+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "checkGraItem(char*, int, int):Ud2Chat.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "p-&gt;from+i">
+            </PersistentString>
+            <PersistentString
+               value = "line+b">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FindAndChange:chstring.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+pos">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController exportToWave:isSendToAnalyzer:](AVInfo *, BOOL):DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "AVinfo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProcessSound(SILAVINFO*, SilenceList*):silence-mac.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "pixelCnt">
+            </PersistentString>
+            <PersistentString
+               value = "AVinfo">
+            </PersistentString>
+            <PersistentString
+               value = "templineC+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "createNewId(IDSs*, int):IdsController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "::-[IdsController windowWillClose:](NSNotification *):IdsController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "getRoles(DepfileDefs*):IdsController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "templine+b">
+            </PersistentString>
+            <PersistentString
+               value = "templine+e">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[Document docFont]():Document.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "docFont">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__42-[DocumentWindowController setPagesForce:]_block_invoke:DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "window">
+            </PersistentString>
+            <PersistentString
+               value = "wFrame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "flupos_call():flupos.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "root_elem">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "isMatchCaret(NSTextView*, unsigned long):codes.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "bufU+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "flupos_init(char):flupos.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "getSpTierText(unsigned long, NSTextView*):codes.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "templine2+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::RecallCommand(short):mac_recall.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "clan_commands[curCommand]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "outputParticipants:medialine.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "flucalc_call():flucalc.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "word+0">
+            </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;tuttline">
+            </PersistentString>
+            <PersistentString
+               value = "ts-&gt;IWDur">
+            </PersistentString>
+            <PersistentString
+               value = "ws">
+            </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;speaker ">
+            </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;line+j">
+            </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;line+wi">
+            </PersistentString>
+            <PersistentString
+               value = "wm">
+            </PersistentString>
+            <PersistentString
+               value = "ts-&gt;UTTDur">
+            </PersistentString>
+            <PersistentString
+               value = "ts-&gt;morSyllables">
+            </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;line+i">
+            </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;line">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "bulletTime(char*, int):corelex.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+i">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "changeUtteranceDelimiter(stutterance*, char*, long, long):tierorder.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "utt-&gt;line+oe">
+            </PersistentString>
+            <PersistentString
+               value = "utt-&gt;line+ob">
+            </PersistentString>
+            <PersistentString
+               value = "line+b">
+            </PersistentString>
+            <PersistentString
+               value = "line+e">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -2009,66 +2671,50 @@
          contextName = "prTSResults(kideval_speakers*, char*):kideval.cpp">
       </ContextState>
       <ContextState
-         contextName = "play2chat_call():Play2Chat.cpp">
+         contextName = "tang2chat_call:tang2chat.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "et">
+               value = "uttline+oPos">
             </PersistentString>
             <PersistentString
-               value = "templineC">
+               value = "uttline+0">
+            </PersistentString>
+            <PersistentString
+               value = "spareTier1+pos">
+            </PersistentString>
+            <PersistentString
+               value = "utterance-&gt;speaker">
+            </PersistentString>
+            <PersistentString
+               value = "spareTier1+ti">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[LowerTextView mouseDown:]:DocumentWinController.mm">
+         contextName = "printword(char*, result_rec*, int, char*, char, char):mor.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "pSnTr-&gt;HScale">
+               value = "templineC4+0">
+            </PersistentString>
+            <PersistentString
+               value = "word_list[i]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "matchToMorElems:cutt.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "cutt_cleanUpLine:cutt.cpp">
+         contextName = "::-[DocumentWindowController isOldBullet:txt:tpos:tlen:](char *, NSString *, NSUInteger, NSUInteger):DocumentWinController.mm">
          <PersistentStrings>
             <PersistentString
-               value = "LanguagesTable[tDefLanguage]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "countColTimes(levelsp_tnode*):corelex.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "utterance-&gt;line">
-            </PersistentString>
-            <PersistentString
-               value = "p-&gt;count[col-&gt;num]">
-            </PersistentString>
-            <PersistentString
-               value = "utterance-&gt;line+i">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "freq_pr_result():freq.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "bulletTime(char*, int, char*):corelex.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "line">
-            </PersistentString>
-            <PersistentString
-               value = "line+i">
+               value = "bufU+0">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "outputUtts(flo_utterance*):flo.cpp">
          <PersistentStrings>
+            <PersistentString
+               value = "utt-&gt;tuttline+i">
+            </PersistentString>
             <PersistentString
                value = "utt-&gt;line+0">
             </PersistentString>
@@ -2078,18 +2724,146 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "::-[DocumentWindowController(SonicModeCode) readMedia]():DocumentWinController.mm">
+         contextName = "maingetflag:cutt.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "reader.status">
+               value = "wd[0]">
             </PersistentString>
             <PersistentString
-               value = "totalCnt">
+               value = "wd[1]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "getwholeutter:cutt.cpp">
+         contextName = "findSource(chip_data*, char*):chiputil.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+j">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "isMatchCaret(NSTextView*, unsigned long, int):codes.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "bufU+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "addFilePath(char const*, int, char**):kideval.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "wd_dir+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AddItem(items*, char const*, char, char):flupos.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "::FindFileLine(char, char *, unichar *):Document.mm">
+      </ContextState>
+      <ContextState
+         contextName = "mfa2chat_call():Mfa2Chat.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "oldfname">
+            </PersistentString>
+            <PersistentString
+               value = "RootTiers">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NoodleLineNumberView drawHashMarksAndLabelsInRect:]:NoodleLineNumberView.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "range">
+            </PersistentString>
+            <PersistentString
+               value = "line">
+            </PersistentString>
+            <PersistentString
+               value = "index">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController SelectMediaFile:](id):DocumentWinController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "change(char*, unsigned short*, int, int, char*, char*):chstring.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "line+pos">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[Document getWindowInfo:AtIndex:MaxLen:](NSString *, NSUInteger, NSUInteger):Document.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "buf+i">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[DocumentWindowController blinkCursorLine]():DocumentWinController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "templine+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "createWordFeats:ipsyn.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "utt-&gt;graLine+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "combo_call():combo.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "utterance">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "kwal_call():kwal.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "::+[IdsController setIDs:](DocumentWindowController *):IdsController.mm">
+      </ContextState>
+      <ContextState
+         contextName = "addToSTDOutput(char, char*):cl_io.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "uPrint_str+0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "::-[Document(TextEditNSDocumentOverrides) checkAutosavingSafetyAfterChangeAndReturnError:](NSError **):Document.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self fileType]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "checkOpenWdDepfile:cutt.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "dp-&gt;d_name+0">
+            </PersistentString>
+            <PersistentString
+               value = "mFileName+0">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

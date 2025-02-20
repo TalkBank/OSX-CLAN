@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2025 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
  */
 
@@ -349,6 +349,8 @@ void do_warning(const char *str, int delay) { // 2019-12-05
 	dispatch_async(dispatch_get_main_queue(), ^{
 		NSInteger NSModalResponse;
 		NSModalResponse = [alert runModal];
+		if (NSModalResponse ==0) {
+		}
 	});
 //	NSWindow *window = [alert window];
 //	[window close];
@@ -705,13 +707,14 @@ char isCHATFile(FNType *fname) {
 					(ext[0] == 'T' && ext[1] == 'M' && (ext[2] == 'P' || iswdigit(ext[2]))) ||
 					(ext[0] == 'T' && ext[1] == 'O' && (ext[2] == 'R' || iswdigit(ext[2]))) ||
 					(ext[0] == 'U' && ext[1] == 'T' && (ext[2] == 'F' || iswdigit(ext[2]))) ||
-					!strncmp(ext,"CHIP",4)  || !strncmp(ext,"DATE",4)  || !strncmp(ext,"KWAL",4)  ||
-					!strncmp(ext,"SEG",3)  || !strncmp(ext,"SYNC",4)  ||
+					!strncmp(ext,"CHIP",4)  || !strncmp(ext,"DATE",4) || !strncmp(ext,"KWAL",4) ||
+					!strncmp(ext,"ROLES",3) || !strncmp(ext,"SEG",3)  || !strncmp(ext,"SYNC",4) ||
 					!strncmp(ext,"DELIM",5) || !strncmp(ext,"CHSTR",5) || !strncmp(ext,"INDNT",5) ||
 					!strncmp(ext,"COMBO",5) || !strncmp(ext,"FIXIT",5) || !strncmp(ext,"TORDR",5) ||
-					!strncmp(ext,"MEDIA",5) ||!strncmp(ext,"IPCORE",5) ||
+					!strncmp(ext,"MEDIA",5) ||!strncmp(ext,"IPCORE",5) || !strncmp(ext,"CHIPU",5) ||
 					!strncmp(ext,"LOWCAS",6)|| !strncmp(ext,"FXBLTS",6)|| !strncmp(ext,"CP2UTF",6)||
-					!strncmp(ext,"MGRASP",6)|| !strncmp(ext,"PMORTM",6)|| !strncmp(ext,"COMB",4)
+					!strncmp(ext,"MGRASP",6)|| !strncmp(ext,"PMORTM",6)|| !strncmp(ext,"COMB",4)  ||
+					!strncmp(ext,"NUM2WORD",8)
 					)
 					return('\002');
 			} else
@@ -723,9 +726,10 @@ char isCHATFile(FNType *fname) {
 				for (i++; i < j; i++)
 					ext[k++] = towupper(fname[i]);
 				ext[k] = EOS;
-				if (!strncmp(ext,"KWAL",4)  || !strncmp(ext,"KIDEVAL",3)|| !strncmp(ext,"MLT",3)  || !strncmp(ext,"MLU",3)   ||
-					!strncmp(ext,"OUT",3)   || !strncmp(ext,"MRTBL",5) || !strncmp(ext,"TIMDUR",6) || !strncmp(ext,"VOCD",4) ||
-					!strncmp(ext,"WDLEN",5) || !strncmp(ext,"FLUCALC",5) || !strncmp(ext,"SCRIPT",3))
+				if (!strncmp(ext,"KWAL",4)  || !strncmp(ext,"KIDEVAL",3) || !strncmp(ext,"MLT",3)  ||
+					!strncmp(ext,"MLU",3)   || !strncmp(ext,"MLUMOR",6)  ||
+					!strncmp(ext,"OUT",3)   || !strncmp(ext,"MRTBL",5)   || !strncmp(ext,"TIMDUR",6) || !strncmp(ext,"VOCD",4) ||
+					!strncmp(ext,"WDLEN",5) || !strncmp(ext,"FLUCALC",5) || !strncmp(ext,"FLUPOS",5) || !strncmp(ext,"SCRIPT",3))
 					return('\005');
 			}
 		}

@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2025 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -221,7 +221,7 @@ msg ("process rule : <%s>\n", text_of_rule );
 			next2, curtag;
 	char    atempstr2[256];
 
-	const int TOCHECK = 0;
+//	const int TOCHECK = 0;
 	const int OLD = 1;
 	const int NOUV = 2;
 	const int WHEN = 3;
@@ -515,7 +515,7 @@ int process_a_rule_along_the_text( char* text_of_rule, char** word_corpus_array,
 			next2, curtag;
 	char    atempstr2[256];
 
-	const int TOCHECK = 0;
+//	const int TOCHECK = 0;
 	const int OLD = 1;
 	const int NOUV = 2;
 	const int WHEN = 3;

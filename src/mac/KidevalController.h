@@ -24,6 +24,7 @@
 	IBOutlet NSButton *sp_eightCH;
 
 	IBOutlet NSButton *engCH;
+	IBOutlet NSButton *engUCH;
 	IBOutlet NSButton *fraCH;
 	IBOutlet NSButton *spaCH;
 	IBOutlet NSButton *jpnCH;
@@ -32,6 +33,8 @@
 
 	IBOutlet NSButton *EngToyplayCH;
 	IBOutlet NSButton *EngNarrativeCH;
+	IBOutlet NSButton *EngUToyplayCH;
+	IBOutlet NSButton *EngUNarrativeCH;
 	IBOutlet NSButton *ZhoToyplayCH;
 	IBOutlet NSButton *ZhoNarrativeCH;
 	IBOutlet NSButton *NldToyplayCH;
@@ -74,6 +77,7 @@
 - (IBAction)sp_eightClicked:(id)sender;
 
 - (IBAction)engClicked:(id)sender;
+- (IBAction)engUClicked:(id)sender;
 - (IBAction)fraClicked:(id)sender;
 - (IBAction)spaClicked:(id)sender;
 - (IBAction)jpnClicked:(id)sender;
@@ -82,6 +86,8 @@
 
 - (IBAction)EngToyplayClicked:(id)sender;
 - (IBAction)EngNarrativeClicked:(id)sender;
+- (IBAction)EngUToyplayClicked:(id)sender;
+- (IBAction)EngUNarrativeClicked:(id)sender;
 - (IBAction)ZhoToyplayClicked:(id)sender;
 - (IBAction)ZhoNarrativeClicked:(id)sender;
 - (IBAction)NldToyplayClicked:(id)sender;

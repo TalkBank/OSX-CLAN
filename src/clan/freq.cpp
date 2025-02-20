@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2025 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 /*
@@ -403,6 +403,7 @@ void init(char first) {
 			if (zeroMatch) {
 				if (wdptr != NULL && isFoundWildCard(TRUE)) {
 					fprintf(stderr,"Can't use +d5 option if a word or words specified with +s option have wild cards (* %% _) or duplicates\n");
+					fprintf(stderr,"For wild cards (* %% _) try adding \\ in front of the wild card, for example: \\*\n");
 					cutt_exit(0);
 				}
 				if (wdptr == NULL && !isMORSearch() && !isGRASearch() && !isLangSearch()) {
@@ -1544,12 +1545,11 @@ static void separateRepeatSegments(char *wline, int beg, int end) {
 
 static void filterRepeatSegs(char *wline) {
 	int pos, temp, i;
-	char res, pa;
+	char res;
 
 	pos = 0;
 	do {
 		for (; uS.isskip(wline,pos,&dFnt,MBF) && wline[pos] && !uS.isRightChar(wline,pos,'[',&dFnt,MBF); pos++) ;
-		pa = FALSE;
 		if (wline[pos]) {
 			temp = pos;
 			if (!nomap) {
@@ -1589,7 +1589,6 @@ static void filterRepeatSegs(char *wline) {
 				} while (1) ;
 			} else if (uS.isRightChar(wline, pos, '(', &dFnt, MBF) && uS.isPause(wline, pos, NULL,  &i)) {
 				pos = i + 1;
-				pa = TRUE;
 			} else {
 				do {
 					if (UTF8_IS_LEAD((unsigned char)wline[pos])) {

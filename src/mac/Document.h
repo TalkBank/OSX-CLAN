@@ -110,6 +110,7 @@ cCOLORTEXTLIST {
 	BOOL rawTextInput;
 	BOOL ShowPercentOfFile;
 	BOOL isCAFont;
+	BOOL isHebrewData;
 
 }
 

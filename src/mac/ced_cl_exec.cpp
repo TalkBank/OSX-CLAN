@@ -1324,6 +1324,9 @@ static void ren(void) {
 			args.set_uppercase = TRUE;
 		} else if ((cl_argv[i][0]=='-' || cl_argv[i][0]=='+') && cl_argv[i][1]=='f') {
 			args.force = TRUE;
+		} else if ((cl_argv[i][0]=='-' || cl_argv[i][0]=='+') && cl_argv[i][1]=='1') {
+			fprintf(stderr,"\n*** Illegal option: +1\n");
+			return;
 		} else if (args.arg1[0] == EOS) {
 			uS.str2FNType(args.arg1, 0L, cl_argv[i]);
 		} else 

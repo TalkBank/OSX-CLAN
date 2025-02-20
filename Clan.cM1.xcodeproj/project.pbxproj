@@ -24,6 +24,8 @@
 		8F19B1312502B3BC0002A10A /* IdsController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F19B12F2502B3BC0002A10A /* IdsController.mm */; };
 		8F19B1342502C8E80002A10A /* Ids.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8F19B1332502C8E80002A10A /* Ids.nib */; };
 		8F19B1352502C8E80002A10A /* Ids.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8F19B1332502C8E80002A10A /* Ids.nib */; };
+		8F22C9A42B64294B0074C3B5 /* slice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F22C9A32B64294B0074C3B5 /* slice.cpp */; };
+		8F22C9A52B64294B0074C3B5 /* slice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F22C9A32B64294B0074C3B5 /* slice.cpp */; };
 		8F2B33D91C6935D8006540CD /* fontconvert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F2B33D81C6935D8006540CD /* fontconvert.cpp */; };
 		8F2B33DA1C6935D8006540CD /* fontconvert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F2B33D81C6935D8006540CD /* fontconvert.cpp */; };
 		8F2E72D21B963BB0000E9B06 /* DocumentWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8F2E72D11B963BB0000E9B06 /* DocumentWindow.nib */; };
@@ -54,6 +56,8 @@
 		8F3FBCCF234BC41700DCCAFE /* Docs.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 8F3FBCCD234BC41700DCCAFE /* Docs.iconset */; };
 		8F44D2C525CE1E37002681BD /* codes-p.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F44D2C425CE1E36002681BD /* codes-p.cpp */; };
 		8F44D2C625CE1E37002681BD /* codes-p.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F44D2C425CE1E36002681BD /* codes-p.cpp */; };
+		8F44DF782B729FDD00CD2F1A /* chiputil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F44DF772B729FDD00CD2F1A /* chiputil.cpp */; };
+		8F44DF792B729FDD00CD2F1A /* chiputil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F44DF772B729FDD00CD2F1A /* chiputil.cpp */; };
 		8F4F171E2703997C00AEE639 /* PrintPanelAccessoryController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F4F171C2703997B00AEE639 /* PrintPanelAccessoryController.mm */; };
 		8F4F171F2703997C00AEE639 /* PrintPanelAccessoryController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F4F171C2703997B00AEE639 /* PrintPanelAccessoryController.mm */; };
 		8F4FEDD2250D6074009C19A8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F4FEDD1250D6074009C19A8 /* Info.plist */; };
@@ -92,6 +96,10 @@
 		8F720A6B29A019D60061FBE2 /* ced_wind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F720A6929A019D60061FBE2 /* ced_wind.cpp */; };
 		8F7362D12B51C742005AE2C3 /* roles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F7362D02B51C742005AE2C3 /* roles.cpp */; };
 		8F7362D22B51C742005AE2C3 /* roles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F7362D02B51C742005AE2C3 /* roles.cpp */; };
+		8F7595802B8E6FA400049F9F /* num2word.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F75957F2B8E6FA400049F9F /* num2word.cpp */; };
+		8F7595812B8E6FA400049F9F /* num2word.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F75957F2B8E6FA400049F9F /* num2word.cpp */; };
+		8F76E8842C937FF200244CDF /* tang2chat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F76E8832C937FF200244CDF /* tang2chat.cpp */; };
+		8F76E8852C937FF200244CDF /* tang2chat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F76E8832C937FF200244CDF /* tang2chat.cpp */; };
 		8F782C6E1C5AC3D50023460A /* mul.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F782C6D1C5AC3D50023460A /* mul.cpp */; };
 		8F782C6F1C5AC3D50023460A /* mul.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F782C6D1C5AC3D50023460A /* mul.cpp */; };
 		8F844B8F1D66426B00AF536E /* freq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F844B8E1D66426B00AF536E /* freq.cpp */; };
@@ -110,6 +118,8 @@
 		8F97C54A250023C10046D735 /* FileIn.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8F97C548250023C10046D735 /* FileIn.nib */; };
 		8F97C54D250027760046D735 /* FileInController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F97C54C250027760046D735 /* FileInController.mm */; };
 		8F97C54E250027760046D735 /* FileInController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F97C54C250027760046D735 /* FileInController.mm */; };
+		8F9C29DE2D4B3E8800B621F5 /* fwm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C29DD2D4B3E8800B621F5 /* fwm.cpp */; };
+		8F9C29DF2D4B3E8800B621F5 /* fwm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F9C29DD2D4B3E8800B621F5 /* fwm.cpp */; };
 		8FA518C02703DF62006DF786 /* PrintPanelAccessory.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8FA518BF2703DF62006DF786 /* PrintPanelAccessory.nib */; };
 		8FA518C12703DF62006DF786 /* PrintPanelAccessory.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8FA518BF2703DF62006DF786 /* PrintPanelAccessory.nib */; };
 		8FA518C32703E141006DF786 /* PrintAccessory.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8FA518C22703E140006DF786 /* PrintAccessory.strings */; };
@@ -118,6 +128,8 @@
 		8FA978C1140C2751008E6476 /* c_ver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FA978BF140C2751008E6476 /* c_ver.cpp */; };
 		8FA985342A9940C200E2C9D8 /* merge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FA985332A9940C200E2C9D8 /* merge.cpp */; };
 		8FA985352A9940C200E2C9D8 /* merge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FA985332A9940C200E2C9D8 /* merge.cpp */; };
+		8FAC02982CC04333008615E5 /* mlumor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAC02972CC04333008615E5 /* mlumor.cpp */; };
+		8FAC02992CC04333008615E5 /* mlumor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAC02972CC04333008615E5 /* mlumor.cpp */; };
 		8FC31D6F25DB2F8500528BDC /* SelectMediaController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8FC31D6E25DB2F8400528BDC /* SelectMediaController.mm */; };
 		8FC31D7025DB2F8500528BDC /* SelectMediaController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8FC31D6E25DB2F8400528BDC /* SelectMediaController.mm */; };
 		8FC31D7225DB348400528BDC /* SelectMedia.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8FC31D7125DB348400528BDC /* SelectMedia.nib */; };
@@ -132,8 +144,8 @@
 		8FC90016250A123F00DDE92F /* KidevalDB.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8FC90014250A123F00DDE92F /* KidevalDB.nib */; };
 		8FC90018250A124A00DDE92F /* KidevalDBAge.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8FC90017250A124900DDE92F /* KidevalDBAge.nib */; };
 		8FC90019250A124A00DDE92F /* KidevalDBAge.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8FC90017250A124900DDE92F /* KidevalDBAge.nib */; };
-		8FCA35B12B4704850079160A /* id-age_fix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCA35B02B4704850079160A /* id-age_fix.cpp */; };
-		8FCA35B22B4704850079160A /* id-age_fix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCA35B02B4704850079160A /* id-age_fix.cpp */; };
+		8FCCFAC72C5ADA7C0023B141 /* PID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCCFAC62C5ADA7C0023B141 /* PID.cpp */; };
+		8FCCFAC82C5ADA7C0023B141 /* PID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCCFAC62C5ADA7C0023B141 /* PID.cpp */; };
 		8FD281662A4F79E60040BB45 /* convort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD281652A4F79E60040BB45 /* convort.cpp */; };
 		8FD281672A4F79E60040BB45 /* convort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD281652A4F79E60040BB45 /* convort.cpp */; };
 		8FD4906E25150C1700B17D92 /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD4906C25150C1700B17D92 /* NoodleLineNumberMarker.m */; };
@@ -268,8 +280,6 @@
 		8FD86792249030EF00C35ABE /* longtier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD86764249030EF00C35ABE /* longtier.cpp */; };
 		8FD86793249030EF00C35ABE /* Chat2Srt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD86765249030EF00C35ABE /* Chat2Srt.cpp */; };
 		8FD86794249030EF00C35ABE /* Chat2Srt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD86765249030EF00C35ABE /* Chat2Srt.cpp */; };
-		8FD86795249030EF00C35ABE /* cmdi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD86766249030EF00C35ABE /* cmdi.cpp */; };
-		8FD86796249030EF00C35ABE /* cmdi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD86766249030EF00C35ABE /* cmdi.cpp */; };
 		8FD86797249030EF00C35ABE /* Chat2Anvil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD86767249030EF00C35ABE /* Chat2Anvil.cpp */; };
 		8FD86798249030EF00C35ABE /* Chat2Anvil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD86767249030EF00C35ABE /* Chat2Anvil.cpp */; };
 		8FD86799249030EF00C35ABE /* Chat2CA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD86768249030EF00C35ABE /* Chat2CA.cpp */; };
@@ -304,8 +314,6 @@
 		8FD867C72490317600C35ABE /* tierorder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD867AA2490317500C35ABE /* tierorder.cpp */; };
 		8FD867C82490317600C35ABE /* medialine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD867AB2490317500C35ABE /* medialine.cpp */; };
 		8FD867C92490317600C35ABE /* medialine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD867AB2490317500C35ABE /* medialine.cpp */; };
-		8FD867CA2490317600C35ABE /* olac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD867AC2490317600C35ABE /* olac.cpp */; };
-		8FD867CB2490317600C35ABE /* olac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD867AC2490317600C35ABE /* olac.cpp */; };
 		8FD867CC2490317600C35ABE /* retrace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD867AD2490317600C35ABE /* retrace.cpp */; };
 		8FD867CD2490317600C35ABE /* retrace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD867AD2490317600C35ABE /* retrace.cpp */; };
 		8FD867D02490317600C35ABE /* uniq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD867AF2490317600C35ABE /* uniq.cpp */; };
@@ -404,6 +412,8 @@
 		8FD923A5250716A600F724D7 /* Kideval.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8FD923A3250716A600F724D7 /* Kideval.nib */; };
 		8FE1FCC9251B08B9000209D4 /* IntegerFormater.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1FCC7251B08B9000209D4 /* IntegerFormater.mm */; };
 		8FE1FCCA251B08B9000209D4 /* IntegerFormater.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1FCC7251B08B9000209D4 /* IntegerFormater.mm */; };
+		8FEBB8542BE2E3FA00F3F1EB /* flupos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FEBB8532BE2E3FA00F3F1EB /* flupos.cpp */; };
+		8FEBB8552BE2E3FA00F3F1EB /* flupos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FEBB8532BE2E3FA00F3F1EB /* flupos.cpp */; };
 		8FF181DA2507250200E842BA /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8FF181D92507250100E842BA /* Application.mm */; };
 		8FF181DB2507250200E842BA /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8FF181D92507250100E842BA /* Application.mm */; };
 		8FF181DE2507251C00E842BA /* EditorWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8FF181DC2507251B00E842BA /* EditorWindow.mm */; };
@@ -453,6 +463,7 @@
 		8F19B12F2502B3BC0002A10A /* IdsController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = IdsController.mm; path = src/mac/IdsController.mm; sourceTree = "<group>"; };
 		8F19B1322502B3C50002A10A /* IdsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IdsController.h; path = src/mac/IdsController.h; sourceTree = "<group>"; };
 		8F19B1332502C8E80002A10A /* Ids.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Ids.nib; path = src/rsrc/Ids.nib; sourceTree = "<group>"; };
+		8F22C9A32B64294B0074C3B5 /* slice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = slice.cpp; path = src/clan/slice.cpp; sourceTree = "<group>"; };
 		8F27C25219D49DC50038802F /* Document.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Document.h; path = src/mac/Document.h; sourceTree = "<group>"; };
 		8F2B33D81C6935D8006540CD /* fontconvert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fontconvert.cpp; path = src/clan/fontconvert.cpp; sourceTree = "<group>"; };
 		8F2B33DB1C6935E0006540CD /* fontconvert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = fontconvert.h; path = src/clan/fontconvert.h; sourceTree = "<group>"; };
@@ -478,6 +489,7 @@
 		8F3F3A912582BE5B00089161 /* SelectF5Controller.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SelectF5Controller.mm; path = src/mac/SelectF5Controller.mm; sourceTree = "<group>"; };
 		8F3FBCCD234BC41700DCCAFE /* Docs.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; name = Docs.iconset; path = src/rsrc/Docs.iconset; sourceTree = "<group>"; };
 		8F44D2C425CE1E36002681BD /* codes-p.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "codes-p.cpp"; path = "src/clan/codes-p.cpp"; sourceTree = "<group>"; };
+		8F44DF772B729FDD00CD2F1A /* chiputil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chiputil.cpp; path = src/clan/chiputil.cpp; sourceTree = "<group>"; };
 		8F4F171C2703997B00AEE639 /* PrintPanelAccessoryController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PrintPanelAccessoryController.mm; path = src/mac/PrintPanelAccessoryController.mm; sourceTree = "<group>"; };
 		8F4F171D2703997C00AEE639 /* PrintPanelAccessoryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintPanelAccessoryController.h; path = src/mac/PrintPanelAccessoryController.h; sourceTree = "<group>"; };
 		8F4FEDD1250D6074009C19A8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = src/rsrc/Info.plist; sourceTree = "<group>"; };
@@ -508,6 +520,8 @@
 		8F720A6829A0147A0061FBE2 /* AppMisc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppMisc.h; path = src/mac/AppMisc.h; sourceTree = "<group>"; };
 		8F720A6929A019D60061FBE2 /* ced_wind.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ced_wind.cpp; path = src/mac/ced_wind.cpp; sourceTree = "<group>"; };
 		8F7362D02B51C742005AE2C3 /* roles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = roles.cpp; path = src/clan/roles.cpp; sourceTree = "<group>"; };
+		8F75957F2B8E6FA400049F9F /* num2word.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = num2word.cpp; path = src/clan/num2word.cpp; sourceTree = "<group>"; };
+		8F76E8832C937FF200244CDF /* tang2chat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tang2chat.cpp; path = src/clan/tang2chat.cpp; sourceTree = "<group>"; };
 		8F782C611C5AA3BC0023460A /* cu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cu.h; path = src/clan/cu.h; sourceTree = "<group>"; };
 		8F782C621C5AA42F0023460A /* my_ctype.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = my_ctype.h; path = src/clan/my_ctype.h; sourceTree = "<group>"; };
 		8F782C631C5AA45B0023460A /* progs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = progs.h; path = src/clan/progs.h; sourceTree = "<group>"; };
@@ -525,10 +539,12 @@
 		8F97C54B250027630046D735 /* FileInController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileInController.h; path = src/mac/FileInController.h; sourceTree = "<group>"; };
 		8F97C54C250027760046D735 /* FileInController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FileInController.mm; path = src/mac/FileInController.mm; sourceTree = "<group>"; };
 		8F98D30E270413E1005FAB4C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		8F9C29DD2D4B3E8800B621F5 /* fwm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = fwm.cpp; path = src/clan/fwm.cpp; sourceTree = "<group>"; };
 		8FA518BF2703DF62006DF786 /* PrintPanelAccessory.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = PrintPanelAccessory.nib; path = src/rsrc/PrintPanelAccessory.nib; sourceTree = "<group>"; };
 		8FA518C22703E140006DF786 /* PrintAccessory.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = PrintAccessory.strings; path = src/rsrc/PrintAccessory.strings; sourceTree = "<group>"; };
 		8FA978BF140C2751008E6476 /* c_ver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = c_ver.cpp; path = src/clan/c_ver.cpp; sourceTree = "<group>"; };
 		8FA985332A9940C200E2C9D8 /* merge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = merge.cpp; path = src/clan/merge.cpp; sourceTree = "<group>"; };
+		8FAC02972CC04333008615E5 /* mlumor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = mlumor.cpp; path = src/clan/mlumor.cpp; sourceTree = "<group>"; };
 		8FC31D6D25DB2F6900528BDC /* SelectMediaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectMediaController.h; path = src/mac/SelectMediaController.h; sourceTree = "<group>"; };
 		8FC31D6E25DB2F8400528BDC /* SelectMediaController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SelectMediaController.mm; path = src/mac/SelectMediaController.mm; sourceTree = "<group>"; };
 		8FC31D7125DB348400528BDC /* SelectMedia.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = SelectMedia.nib; path = src/rsrc/SelectMedia.nib; sourceTree = "<group>"; };
@@ -540,8 +556,8 @@
 		8FC90011250A123700DDE92F /* KidevalNoDB.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = KidevalNoDB.nib; path = src/rsrc/KidevalNoDB.nib; sourceTree = "<group>"; };
 		8FC90014250A123F00DDE92F /* KidevalDB.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = KidevalDB.nib; path = src/rsrc/KidevalDB.nib; sourceTree = "<group>"; };
 		8FC90017250A124900DDE92F /* KidevalDBAge.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = KidevalDBAge.nib; path = src/rsrc/KidevalDBAge.nib; sourceTree = "<group>"; };
-		8FCA35B02B4704850079160A /* id-age_fix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "id-age_fix.cpp"; path = "src/clan/id-age_fix.cpp"; sourceTree = "<group>"; };
 		8FCCE3B424915393007AAB27 /* longdef.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = longdef.hpp; path = src/clan/post/longdef.hpp; sourceTree = "<group>"; };
+		8FCCFAC62C5ADA7C0023B141 /* PID.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PID.cpp; path = src/clan/PID.cpp; sourceTree = "<group>"; };
 		8FD281652A4F79E60040BB45 /* convort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = convort.cpp; path = src/clan/convort.cpp; sourceTree = "<group>"; };
 		8FD4906A25150C1600B17D92 /* NoodleLineNumberMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoodleLineNumberMarker.h; path = src/mac/NoodleLineNumberMarker.h; sourceTree = "<group>"; };
 		8FD4906B25150C1600B17D92 /* NoodleLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoodleLineNumberView.h; path = src/mac/NoodleLineNumberView.h; sourceTree = "<group>"; };
@@ -619,7 +635,6 @@
 		8FD86763249030EF00C35ABE /* lippUTF2Chat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lippUTF2Chat.cpp; path = src/clan/lippUTF2Chat.cpp; sourceTree = "<group>"; };
 		8FD86764249030EF00C35ABE /* longtier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = longtier.cpp; path = src/clan/longtier.cpp; sourceTree = "<group>"; };
 		8FD86765249030EF00C35ABE /* Chat2Srt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Chat2Srt.cpp; path = src/clan/Chat2Srt.cpp; sourceTree = "<group>"; };
-		8FD86766249030EF00C35ABE /* cmdi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cmdi.cpp; path = src/clan/cmdi.cpp; sourceTree = "<group>"; };
 		8FD86767249030EF00C35ABE /* Chat2Anvil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Chat2Anvil.cpp; path = src/clan/Chat2Anvil.cpp; sourceTree = "<group>"; };
 		8FD86768249030EF00C35ABE /* Chat2CA.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Chat2CA.cpp; path = src/clan/Chat2CA.cpp; sourceTree = "<group>"; };
 		8FD86769249030EF00C35ABE /* lab2chat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lab2chat.cpp; path = src/clan/lab2chat.cpp; sourceTree = "<group>"; };
@@ -637,7 +652,6 @@
 		8FD867A92490317500C35ABE /* rtf2chat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = rtf2chat.cpp; path = src/clan/rtf2chat.cpp; sourceTree = "<group>"; };
 		8FD867AA2490317500C35ABE /* tierorder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tierorder.cpp; path = src/clan/tierorder.cpp; sourceTree = "<group>"; };
 		8FD867AB2490317500C35ABE /* medialine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = medialine.cpp; path = src/clan/medialine.cpp; sourceTree = "<group>"; };
-		8FD867AC2490317600C35ABE /* olac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = olac.cpp; path = src/clan/olac.cpp; sourceTree = "<group>"; };
 		8FD867AD2490317600C35ABE /* retrace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = retrace.cpp; path = src/clan/retrace.cpp; sourceTree = "<group>"; };
 		8FD867AF2490317600C35ABE /* uniq.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = uniq.cpp; path = src/clan/uniq.cpp; sourceTree = "<group>"; };
 		8FD867D6249032A600C35ABE /* morlib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = morlib.cpp; path = src/clan/mor/morlib.cpp; sourceTree = "<group>"; };
@@ -724,6 +738,7 @@
 		8FDE06FC2412D5AB00DC7B1B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8FE1FCC7251B08B9000209D4 /* IntegerFormater.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = IntegerFormater.mm; path = src/mac/IntegerFormater.mm; sourceTree = "<group>"; };
 		8FE1FCC8251B08B9000209D4 /* IntegerFormater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntegerFormater.h; path = src/mac/IntegerFormater.h; sourceTree = "<group>"; };
+		8FEBB8532BE2E3FA00F3F1EB /* flupos.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = flupos.cpp; path = src/clan/flupos.cpp; sourceTree = "<group>"; };
 		8FF181D92507250100E842BA /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Application.mm; path = src/mac/Application.mm; sourceTree = "<group>"; };
 		8FF181DC2507251B00E842BA /* EditorWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = EditorWindow.mm; path = src/mac/EditorWindow.mm; sourceTree = "<group>"; };
 		8FF181DD2507251C00E842BA /* EditorWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditorWindow.h; path = src/mac/EditorWindow.h; sourceTree = "<group>"; };
@@ -1005,6 +1020,7 @@
 				8FD866ED24902F4900C35ABE /* chip.h */,
 				8FD866EE24902F5600C35ABE /* chip.cpp */,
 				8FD866F124902F6200C35ABE /* chip_utl.cpp */,
+				8F44DF772B729FDD00CD2F1A /* chiputil.cpp */,
 				8F44D2C425CE1E36002681BD /* codes-p.cpp */,
 				8FD866F824902F8400C35ABE /* combo.cpp */,
 				8FD866F724902F8400C35ABE /* cooccur.cpp */,
@@ -1017,6 +1033,7 @@
 				8F15CC5028AEBEA2009A660F /* eval-d.cpp */,
 				8FD8670424902FA900C35ABE /* flo.cpp */,
 				8FD8670624902FA900C35ABE /* flucalc.cpp */,
+				8FEBB8532BE2E3FA00F3F1EB /* flupos.cpp */,
 				8F844B8E1D66426B00AF536E /* freq.cpp */,
 				8FD8671024902FDA00C35ABE /* freqpos.cpp */,
 				8FD8670D24902FDA00C35ABE /* gem.cpp */,
@@ -1032,6 +1049,7 @@
 				8FD8672D2490303700C35ABE /* mllib.cpp */,
 				8FD867392490306F00C35ABE /* mlt.cpp */,
 				8FD867302490306E00C35ABE /* mlu.cpp */,
+				8FAC02972CC04333008615E5 /* mlumor.cpp */,
 				8FD867352490306E00C35ABE /* modrep.cpp */,
 				8FD867382490306F00C35ABE /* mortable.cpp */,
 				8FD867312490306E00C35ABE /* phonfreq.cpp */,
@@ -1048,7 +1066,7 @@
 		8F903AD6286E281F008F41DC /* TEMP */ = {
 			isa = PBXGroup;
 			children = (
-				8FCA35B02B4704850079160A /* id-age_fix.cpp */,
+				8F9C29DD2D4B3E8800B621F5 /* fwm.cpp */,
 			);
 			name = TEMP;
 			sourceTree = "<group>";
@@ -1085,7 +1103,6 @@
 				8FD86765249030EF00C35ABE /* Chat2Srt.cpp */,
 				8FD8675E249030EE00C35ABE /* Chat2Xmar.cpp */,
 				8FD86756249030EE00C35ABE /* chstring.cpp */,
-				8FD86766249030EF00C35ABE /* cmdi.cpp */,
 				8FD8675B249030EE00C35ABE /* combtier.cpp */,
 				8FD281652A4F79E60040BB45 /* convort.cpp */,
 				8FD8675D249030EE00C35ABE /* Cp2UTF8.cpp */,
@@ -1104,10 +1121,11 @@
 				8FD86762249030EF00C35ABE /* makemod.cpp */,
 				8FD867AB2490317500C35ABE /* medialine.cpp */,
 				8FA985332A9940C200E2C9D8 /* merge.cpp */,
-				8FD867AC2490317600C35ABE /* olac.cpp */,
+				8F75957F2B8E6FA400049F9F /* num2word.cpp */,
 				8FD867A02490317400C35ABE /* ort.cpp */,
 				8FD867A52490317500C35ABE /* Play2Chat.cpp */,
 				8FD867A12490317400C35ABE /* Praat2Chat.cpp */,
+				8FCCFAC62C5ADA7C0023B141 /* PID.cpp */,
 				8FD867A32490317500C35ABE /* Quotes.cpp */,
 				8FD867A22490317500C35ABE /* repeat.cpp */,
 				8FD867AD2490317600C35ABE /* retrace.cpp */,
@@ -1116,7 +1134,9 @@
 				8FD867A82490317500C35ABE /* salt2chat.cpp */,
 				8FF8FE3329D7708700471E57 /* silence-mac.cpp */,
 				8FFA91B028A2AC9500D94BB0 /* segment.cpp */,
+				8F22C9A32B64294B0074C3B5 /* slice.cpp */,
 				8FD867A42490317500C35ABE /* Srt2Chat.cpp */,
+				8F76E8832C937FF200244CDF /* tang2chat.cpp */,
 				8FD8679F2490317400C35ABE /* text2chat.cpp */,
 				8FD867AA2490317500C35ABE /* tierorder.cpp */,
 				8FD867A72490317500C35ABE /* TrnFix.cpp */,
@@ -1378,6 +1398,7 @@
 				8FD867452490306F00C35ABE /* modrep.cpp in Sources */,
 				8FD867282490301400C35ABE /* keymap.cpp in Sources */,
 				8FD82FB32864AA1A00FC9189 /* ced_cl_vars.cpp in Sources */,
+				8F22C9A42B64294B0074C3B5 /* slice.cpp in Sources */,
 				8FD867432490306F00C35ABE /* timedur.cpp in Sources */,
 				8FD868102490338000C35ABE /* hashbsc.cpp in Sources */,
 				8FD867C02490317600C35ABE /* TrnFix.cpp in Sources */,
@@ -1391,12 +1412,12 @@
 				8FFE191825F9617E0012D2F9 /* NoodleLineNumberView.mm in Sources */,
 				8FD867E1249032A700C35ABE /* crules.cpp in Sources */,
 				8FF384A2263D5E2400E583C8 /* PictController.mm in Sources */,
+				8F9C29DE2D4B3E8800B621F5 /* fwm.cpp in Sources */,
 				8F34CDCA1C5963E70014FF46 /* stringparser.cpp in Sources */,
 				8FD86818249033A300C35ABE /* input.cpp in Sources */,
 				8F31A2E1236A997900099B0B /* AppDelegate.mm in Sources */,
 				8FD868472490347200C35ABE /* tags.cpp in Sources */,
 				8FA978C0140C2751008E6476 /* c_ver.cpp in Sources */,
-				8FD867CA2490317600C35ABE /* olac.cpp in Sources */,
 				8FD868322490340F00C35ABE /* postana.cpp in Sources */,
 				8FD86823249033F300C35ABE /* msg.cpp in Sources */,
 				8F6D7FEC1B9A3357002F8158 /* LinePanelController.mm in Sources */,
@@ -1425,13 +1446,16 @@
 				8FD8676B249030EF00C35ABE /* Lena2Chat.cpp in Sources */,
 				8FD867BA2490317600C35ABE /* Srt2Chat.cpp in Sources */,
 				8FD867BC2490317600C35ABE /* Play2Chat.cpp in Sources */,
+				8FCCFAC72C5ADA7C0023B141 /* PID.cpp in Sources */,
 				8F720A6A29A019D60061FBE2 /* ced_wind.cpp in Sources */,
 				8FD9239B2506E9D200F724D7 /* KidevalController.mm in Sources */,
 				8FD867B62490317600C35ABE /* repeat.cpp in Sources */,
 				8FD8670724902FA900C35ABE /* flo.cpp in Sources */,
+				8FEBB8542BE2E3FA00F3F1EB /* flupos.cpp in Sources */,
 				8FD8673B2490306F00C35ABE /* mlu.cpp in Sources */,
 				8FD86859249034CD00C35ABE /* dcompute.cpp in Sources */,
 				8FD8670B24902FA900C35ABE /* flucalc.cpp in Sources */,
+				8F76E8842C937FF200244CDF /* tang2chat.cpp in Sources */,
 				8FD8674F2490306F00C35ABE /* postmortem.cpp in Sources */,
 				8F44D2C525CE1E37002681BD /* codes-p.cpp in Sources */,
 				8FD8676F249030EF00C35ABE /* DataCleanUp.cpp in Sources */,
@@ -1457,9 +1481,9 @@
 				8F6D7FE31B9A333C002F8158 /* DocumentController.mm in Sources */,
 				8FD86789249030EF00C35ABE /* Chat2Praat.cpp in Sources */,
 				8FD867E7249032A700C35ABE /* mor.cpp in Sources */,
-				8FD86795249030EF00C35ABE /* cmdi.cpp in Sources */,
 				8FD867F72490330400C35ABE /* brillanx.cpp in Sources */,
 				8FD8679B249030EF00C35ABE /* lab2chat.cpp in Sources */,
+				8F44DF782B729FDD00CD2F1A /* chiputil.cpp in Sources */,
 				8FD8670924902FA900C35ABE /* eval.cpp in Sources */,
 				8FD868032490332200C35ABE /* contextrl.cpp in Sources */,
 				8FC36C5C2519CB8700A02448 /* WalkerController.mm in Sources */,
@@ -1474,6 +1498,7 @@
 				8FD86791249030EF00C35ABE /* longtier.cpp in Sources */,
 				8FD8671A24902FDB00C35ABE /* gemlist.cpp in Sources */,
 				8FD866E324902EA200C35ABE /* chains.cpp in Sources */,
+				8FAC02982CC04333008615E5 /* mlumor.cpp in Sources */,
 				8FD86783249030EF00C35ABE /* Cp2UTF8.cpp in Sources */,
 				8FD868712490354F00C35ABE /* blmvm.cpp in Sources */,
 				8FD8674B2490306F00C35ABE /* mortable.cpp in Sources */,
@@ -1487,6 +1512,7 @@
 				8FD867B22490317600C35ABE /* ort.cpp in Sources */,
 				8FD8674D2490306F00C35ABE /* mlt.cpp in Sources */,
 				8F32585C261BF7B800962B80 /* pp.cpp in Sources */,
+				8F7595802B8E6FA400049F9F /* num2word.cpp in Sources */,
 				8FD82FAB2864AA1A00FC9189 /* ced_sendpraat.cpp in Sources */,
 				8F870A511D81DDA500558812 /* AboutClanController.mm in Sources */,
 				8FD8678B249030EF00C35ABE /* lowcase.cpp in Sources */,
@@ -1519,7 +1545,6 @@
 				8FF181DA2507250200E842BA /* Application.mm in Sources */,
 				8FD866EB24902F2600C35ABE /* check.cpp in Sources */,
 				8FD866E724902EA200C35ABE /* c-qpa.cpp in Sources */,
-				8FCA35B12B4704850079160A /* id-age_fix.cpp in Sources */,
 				8FF8FE3429D7708700471E57 /* silence-mac.cpp in Sources */,
 				8FD867C62490317600C35ABE /* tierorder.cpp in Sources */,
 				8FD8682C2490340F00C35ABE /* postmodrules.cpp in Sources */,
@@ -1567,6 +1592,7 @@
 				8FD867462490306F00C35ABE /* modrep.cpp in Sources */,
 				8FD867292490301400C35ABE /* keymap.cpp in Sources */,
 				8FD82FB42864AA1A00FC9189 /* ced_cl_vars.cpp in Sources */,
+				8F22C9A52B64294B0074C3B5 /* slice.cpp in Sources */,
 				8FD867442490306F00C35ABE /* timedur.cpp in Sources */,
 				8FD868112490338000C35ABE /* hashbsc.cpp in Sources */,
 				8FD867C12490317600C35ABE /* TrnFix.cpp in Sources */,
@@ -1580,12 +1606,12 @@
 				8FFE191925F9617E0012D2F9 /* NoodleLineNumberView.mm in Sources */,
 				8FD867E2249032A700C35ABE /* crules.cpp in Sources */,
 				8FF384A3263D5E2400E583C8 /* PictController.mm in Sources */,
+				8F9C29DF2D4B3E8800B621F5 /* fwm.cpp in Sources */,
 				8F34CDCB1C5963E70014FF46 /* stringparser.cpp in Sources */,
 				8FD86819249033A300C35ABE /* input.cpp in Sources */,
 				8F31A2E2236A997900099B0B /* AppDelegate.mm in Sources */,
 				8FD868482490347200C35ABE /* tags.cpp in Sources */,
 				8FA978C1140C2751008E6476 /* c_ver.cpp in Sources */,
-				8FD867CB2490317600C35ABE /* olac.cpp in Sources */,
 				8FD868332490340F00C35ABE /* postana.cpp in Sources */,
 				8FD86824249033F300C35ABE /* msg.cpp in Sources */,
 				8F6D7FED1B9A3357002F8158 /* LinePanelController.mm in Sources */,
@@ -1614,13 +1640,16 @@
 				8FD8676C249030EF00C35ABE /* Lena2Chat.cpp in Sources */,
 				8FD867BB2490317600C35ABE /* Srt2Chat.cpp in Sources */,
 				8FD867BD2490317600C35ABE /* Play2Chat.cpp in Sources */,
+				8FCCFAC82C5ADA7C0023B141 /* PID.cpp in Sources */,
 				8F720A6B29A019D60061FBE2 /* ced_wind.cpp in Sources */,
 				8FD9239C2506E9D200F724D7 /* KidevalController.mm in Sources */,
 				8FD867B72490317600C35ABE /* repeat.cpp in Sources */,
 				8FD8670824902FA900C35ABE /* flo.cpp in Sources */,
+				8FEBB8552BE2E3FA00F3F1EB /* flupos.cpp in Sources */,
 				8FD8673C2490306F00C35ABE /* mlu.cpp in Sources */,
 				8FD8685A249034CD00C35ABE /* dcompute.cpp in Sources */,
 				8FD8670C24902FA900C35ABE /* flucalc.cpp in Sources */,
+				8F76E8852C937FF200244CDF /* tang2chat.cpp in Sources */,
 				8FD867502490306F00C35ABE /* postmortem.cpp in Sources */,
 				8F44D2C625CE1E37002681BD /* codes-p.cpp in Sources */,
 				8FD86770249030EF00C35ABE /* DataCleanUp.cpp in Sources */,
@@ -1646,9 +1675,9 @@
 				8F6D7FE41B9A333C002F8158 /* DocumentController.mm in Sources */,
 				8FD8678A249030EF00C35ABE /* Chat2Praat.cpp in Sources */,
 				8FD867E8249032A700C35ABE /* mor.cpp in Sources */,
-				8FD86796249030EF00C35ABE /* cmdi.cpp in Sources */,
 				8FD867F82490330400C35ABE /* brillanx.cpp in Sources */,
 				8FD8679C249030EF00C35ABE /* lab2chat.cpp in Sources */,
+				8F44DF792B729FDD00CD2F1A /* chiputil.cpp in Sources */,
 				8FD8670A24902FA900C35ABE /* eval.cpp in Sources */,
 				8FD868042490332200C35ABE /* contextrl.cpp in Sources */,
 				8FC36C5D2519CB8700A02448 /* WalkerController.mm in Sources */,
@@ -1663,6 +1692,7 @@
 				8FD86792249030EF00C35ABE /* longtier.cpp in Sources */,
 				8FD8671B24902FDB00C35ABE /* gemlist.cpp in Sources */,
 				8FD866E424902EA200C35ABE /* chains.cpp in Sources */,
+				8FAC02992CC04333008615E5 /* mlumor.cpp in Sources */,
 				8FD86784249030EF00C35ABE /* Cp2UTF8.cpp in Sources */,
 				8FD868722490354F00C35ABE /* blmvm.cpp in Sources */,
 				8FD8674C2490306F00C35ABE /* mortable.cpp in Sources */,
@@ -1676,6 +1706,7 @@
 				8FD867B32490317600C35ABE /* ort.cpp in Sources */,
 				8FD8674E2490306F00C35ABE /* mlt.cpp in Sources */,
 				8F32585D261BF7B800962B80 /* pp.cpp in Sources */,
+				8F7595812B8E6FA400049F9F /* num2word.cpp in Sources */,
 				8FD82FAC2864AA1A00FC9189 /* ced_sendpraat.cpp in Sources */,
 				8F870A521D81DDA500558812 /* AboutClanController.mm in Sources */,
 				8FD8678C249030EF00C35ABE /* lowcase.cpp in Sources */,
@@ -1708,7 +1739,6 @@
 				8FF181DB2507250200E842BA /* Application.mm in Sources */,
 				8FD866EC24902F2600C35ABE /* check.cpp in Sources */,
 				8FD866E824902EA200C35ABE /* c-qpa.cpp in Sources */,
-				8FCA35B22B4704850079160A /* id-age_fix.cpp in Sources */,
 				8FF8FE3529D7708700471E57 /* silence-mac.cpp in Sources */,
 				8FD867C72490317600C35ABE /* tierorder.cpp in Sources */,
 				8FD8682D2490340F00C35ABE /* postmodrules.cpp in Sources */,

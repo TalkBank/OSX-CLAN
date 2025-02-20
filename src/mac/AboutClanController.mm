@@ -17,7 +17,7 @@
     [super windowDidLoad];  // It's documented to do nothing, but still a good idea to invoke...
 
 	[versionField setStringValue:[NSString stringWithUTF8String:VERSION]];
-	[infoField setStringValue:[NSString stringWithUTF8String:"For help on CLAN please download the manual from http://childes.talkbank.org. Send specific questions to macw@cmu.edu. c 1990-2021"]];
+	[infoField setStringValue:[NSString stringWithUTF8String:"For help on CLAN please download the manual from http://childes.talkbank.org. Send specific questions to macw@cmu.edu. c 1990-2024"]];
 }
 
 /* Reopen the line panel when the app's persistent state is restored. 

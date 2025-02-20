@@ -5,6 +5,7 @@ enum {
 	stopped = 1,
 	oneBullet,
 	F_five,
+	ESC_seven,
 	ESC_eight,
 	Walker
 } ;

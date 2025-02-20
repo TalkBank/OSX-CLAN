@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2025 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -261,8 +261,8 @@ void add_rules_dic(AMBTAG at, int atsz, TAG nc)
 void list_rules(FILE* out)
 {
 	int j;
-	int totalsize = 0;
-	int totalsizenoslack = 0;
+//	int totalsize = 0;
+//	int totalsizenoslack = 0;
 
 //	hashstat( _rules_hashdic_, out );
 	hashiteratorinit( _rules_hashdic_ );
@@ -308,10 +308,10 @@ void list_rules(FILE* out)
 		msgfile( out," ==> ");
 		print_bimultclass( (int*)l->e, out );
 		msgfile( out, "\n" );
-		totalsizenoslack += (((((l->e[0] * sizeof(Int4))-1) / 32)+1)*32);
-//		totalsizenoslack += number_of_ambtag(a) * sizeof(Int4);
-		totalsize += l->e[0] * sizeof(Int4);
-//		totalsize += number_of_ambtag(a) * sizeof(Int4);
+//		totalsizenoslack += (((((l->e[0] * sizeof(Int4))-1) / 32)+1)*32);
+//-		totalsizenoslack += number_of_ambtag(a) * sizeof(Int4);
+//		totalsize += l->e[0] * sizeof(Int4);
+//-		totalsize += number_of_ambtag(a) * sizeof(Int4);
 #endif
 	}
 	msgfile( out, "\n" );
@@ -456,8 +456,8 @@ int get_local_word( char* ams )
 
 void list_localword(FILE* out)
 {
-	int totalsize = 0;
-	int totalsizenoslack = 0;
+//	int totalsize = 0;
+//	int totalsizenoslack = 0;
 // 2006-02-20	int wdmat = 0;
 	hashiteratorinit( _localword_hashdic_ );
 	loopr* l;
@@ -467,8 +467,8 @@ void list_localword(FILE* out)
 		for (int i=0; i<(l->e[0]-2) ; i++) 
 			msgfile( out, "%d,", l->e[i+1] );
 		msgfile( out, "%d]\n", l->e[l->e[0]-1] );
-		totalsizenoslack += (((((l->e[0] * sizeof(Int4))-1) / 32)+1)*32);
-		totalsize += l->e[0] * sizeof(Int4);
+//		totalsizenoslack += (((((l->e[0] * sizeof(Int4))-1) / 32)+1)*32);
+//		totalsize += l->e[0] * sizeof(Int4);
 	}
 	msgfile( out, "\n" );
 	hashstat( _localword_hashdic_, out );

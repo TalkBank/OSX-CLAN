@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2025 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -243,10 +243,10 @@ apply_drules(
 	char lop_cat[MAX_WORD];
 	STRING *p_surf;
 	FEATTYPE *p_cat;
-	STRING *p_stem;
+//	STRING *p_stem;
 	STRING *n_surf;
 	FEATTYPE *n_cat;
-	STRING *n_stem;
+//	STRING *n_stem;
 
 	char cat_tmp[MAXCAT];
 	char word_tmp[MAX_WORD];
@@ -337,7 +337,7 @@ apply_drules(
 			for (i = num_prev; i > 0; i--) {
 				p_surf = prev_stack[i].surface;
 				p_cat = prev_stack[i].cat;
-				p_stem = prev_stack[i].stem;  /* not using stem yet */
+//				p_stem = prev_stack[i].stem;  /* not using stem yet */
 				cur_cond = cur_rule->prev_cond_list;
 				while (cur_cond != NULL){
 					if (DEBUG_CLAN & 8){
@@ -408,7 +408,7 @@ next_loop:
 			for (i = num_next; i > 0; i--) {
 				n_surf = next_stack[i].surface;
 				n_cat = next_stack[i].cat;
-				n_stem = next_stack[i].stem;  /* not using stem yet */
+//				n_stem = next_stack[i].stem;  /* not using stem yet */
 				cur_cond = cur_rule->next_cond_list;
 				while (cur_cond != NULL) {
 					if (DEBUG_CLAN & 8) {
@@ -559,12 +559,10 @@ print_drules(DRULE_PTR rulelist) {
   DRULE_PTR drule_tmp;
   CRULE_COND_PTR drule_cond_tmp;
   char word_tmp[MAX_WORD];
-  int clause_ctr;
   fprintf(debug_fp,"\n*** print drules ***\n");
 
   drule_tmp = rulelist;
   while (drule_tmp != NULL){
-    clause_ctr = 0;
     fprintf(debug_fp,"rulename: %s\n",drule_tmp->name);
     drule_cond_tmp = drule_tmp->choose_list;
     fprintf(debug_fp,"  choose\n");

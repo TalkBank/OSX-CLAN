@@ -614,12 +614,11 @@ static IDSTYPE *add_to_IDs(IDSTYPE *rootIDs, DEPFDEFS *Roles_Ses, unCH *lang, un
 
 static IDSTYPE *handleParticipants(IDSTYPE *rootIDs, DEPFDEFS *Roles_Ses, unCH *line) {
 	unCH sp[SPEAKERLEN];
-	unCH *s, *e, t, wc, tchFound;
+	unCH *s, *e, t, wc;
 	short cnt = 0;
 
 	for (; *line && (*line == ' ' || *line == '\t'); line++) ;
 	s = line;
-	tchFound = FALSE;
 	sp[0] = EOS;
 	while (*s) {
 		if (*line == ',' || isSpace(*line) || *line == '\n' || *line == EOS) {
@@ -1408,7 +1407,7 @@ static IdsController *IdsWindow = nil;
 #pragma unused (sender)
 	NSInteger len;
 	NSInteger menuPos;
-	NSString *menuStr;
+//	NSString *menuStr;
 
 	NSLog(@"IdsController: racePopUpClicked\n");
 	menuPos = [sender indexOfSelectedItem];
@@ -1416,8 +1415,8 @@ static IdsController *IdsWindow = nil;
 		return;
 	len = [usersPopUp numberOfItems] - 1;
 	while (len >= menuPos) {
-		menuStr = [usersPopUp itemTitleAtIndex:len];
-		//		strcat(curPath, [menuStr UTF8String]);
+//		menuStr = [usersPopUp itemTitleAtIndex:len];
+//		strcat(curPath, [menuStr UTF8String]);
 		len--;
 	}
 }
@@ -1427,7 +1426,7 @@ static IdsController *IdsWindow = nil;
 #pragma unused (sender)
 	NSInteger len;
 	NSInteger menuPos;
-	NSString *menuStr;
+//	NSString *menuStr;
 
 	NSLog(@"IdsController: sesPopUpClicked\n");
 	menuPos = [sender indexOfSelectedItem];
@@ -1435,8 +1434,8 @@ static IdsController *IdsWindow = nil;
 		return;
 	len = [usersPopUp numberOfItems] - 1;
 	while (len >= menuPos) {
-		menuStr = [usersPopUp itemTitleAtIndex:len];
-		//		strcat(curPath, [menuStr UTF8String]);
+//		menuStr = [usersPopUp itemTitleAtIndex:len];
+//		strcat(curPath, [menuStr UTF8String]);
 		len--;
 	}
 }
@@ -1446,7 +1445,7 @@ static IdsController *IdsWindow = nil;
 #pragma unused (sender)
 	NSInteger len;
 	NSInteger menuPos;
-	NSString *menuStr;
+//	NSString *menuStr;
 
 	NSLog(@"IdsController: rolePopUpClicked\n");
 	menuPos = [sender indexOfSelectedItem];
@@ -1454,8 +1453,8 @@ static IdsController *IdsWindow = nil;
 		return;
 	len = [usersPopUp numberOfItems] - 1;
 	while (len >= menuPos) {
-		menuStr = [usersPopUp itemTitleAtIndex:len];
-		//		strcat(curPath, [menuStr UTF8String]);
+//		menuStr = [usersPopUp itemTitleAtIndex:len];
+//		strcat(curPath, [menuStr UTF8String]);
 		len--;
 	}
 }

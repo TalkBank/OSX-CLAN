@@ -37,7 +37,8 @@ AVController *AVMediaPlayer = nil;
 			audioTimer = nil;
 		}
 		[audioPlayer stop];
-		if (playMode == oneBullet || playMode == Walker || playMode == F_five || playMode == ESC_eight) {
+		if (playMode == oneBullet || playMode == Walker || playMode == F_five ||
+			playMode == ESC_seven || playMode == ESC_eight) {
 			docWinCtrl = getDocWinController(docWindow);
 			textView = [docWinCtrl firstTextView];
 			cursorRange = [textView selectedRange];
@@ -222,7 +223,7 @@ AVController *AVMediaPlayer = nil;
 	else
 		currentTime = CMTimeGetSeconds(playerView.player.currentItem.currentTime) * 1000.0000;
 	curTime = (long)currentTime;
-	if (playMode == ESC_eight && curTime > endContPlay) {
+	if ((playMode == ESC_seven || playMode == ESC_eight) && curTime > endContPlay) {
 		[self nextHighlight:curTime];
 	}
 	endValue = (NSTimeInterval)end;
@@ -305,7 +306,7 @@ AVController *AVMediaPlayer = nil;
 					[self StopAV];
 				}
 			}
-		} else if (playMode == ESC_eight) {
+		} else if (playMode == ESC_seven || playMode == ESC_eight) {
 			if (nextSegs == nil)
 				[self StopAV];
 			else {
@@ -384,7 +385,8 @@ AVController *AVMediaPlayer = nil;
 				return;
 			}
 		}
-		if (playMode == oneBullet || playMode == Walker || playMode == F_five || playMode == ESC_eight) {
+		if (playMode == oneBullet || playMode == Walker || playMode == F_five ||
+			playMode == ESC_seven || playMode == ESC_eight) {
 			docWinCtrl = getDocWinController(docWindow);
 			textView = [docWinCtrl firstTextView];
 			cursorRange = [textView selectedRange];
@@ -470,6 +472,21 @@ AVController *AVMediaPlayer = nil;
 	}
 }
 
+static char mediaType(char *rFileName) {
+	char *ext;
+
+	ext = strrchr(rFileName, '.');
+	if (ext == NULL) {
+		return(0);
+	} else if (uS.mStricmp(ext, ".mp3") || uS.mStricmp(ext, ".wav") || uS.mStricmp(ext, ".aif") || uS.mStricmp(ext, ".aiff")) {
+		return(isAudio);
+	} else if (uS.mStricmp(ext, ".mov") || uS.mStricmp(ext, ".mp4") || uS.mStricmp(ext, ".m4v") || uS.mStricmp(ext, ".avi") ||
+			   uS.mStricmp(ext, ".wmv") || uS.mStricmp(ext, ".mpg") || uS.mStricmp(ext, ".dv")) {
+		return(isVideo);
+	}
+	return(0);
+}
+
 static BOOL findFullMediaName(AVInfo *AVinfo) {
 	int pathLen, nameLen;
 	char *rFileName;
@@ -481,6 +498,10 @@ static BOOL findFullMediaName(AVInfo *AVinfo) {
 tryAgain:
 	strcat(rFileName, AVinfo->mediaFName);
 	nameLen = strlen(rFileName);
+	if (!access(rFileName, 0) && strchr(rFileName, '.') != NULL) {
+		AVinfo->isWhatType = mediaType(rFileName);
+		return(true);
+	}
 	strcat(rFileName, ".mov");
 	AVinfo->isWhatType = isVideo;
 	if (access(rFileName, 0)) {
@@ -569,7 +590,7 @@ tryAgain:
 				break;
 			case AVPlayerItemStatusFailed:
 				// Failed. Examine AVPlayerItem.error
-				do_warning_sheet("Failed to loading media player", docWindow);
+				do_warning_sheet("Failed to load media player", docWindow);
 				break;
 			case AVPlayerItemStatusUnknown:
 				// Not ready

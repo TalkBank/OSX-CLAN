@@ -289,7 +289,8 @@ extern char isChatLineNums;
 	
 	if ([view isKindOfClass:[NSTextView class]])
 	{
-		NSUInteger      index, numberOfLines, stringLength, lineEnd, contentEnd;
+//		NSUInteger      numberOfLines;
+		NSUInteger      index, stringLength, lineEnd, contentEnd;
 		NSString        *text;
 		CGFloat         oldThickness, newThickness;
 		
@@ -299,14 +300,14 @@ extern char isChatLineNums;
 		_lineIndices = [[NSMutableArray alloc] init];
 		
 		index = 0;
-		numberOfLines = 0;
+//		numberOfLines = 0;
 		
 		do
 		{
 			[_lineIndices addObject:[NSNumber numberWithUnsignedInteger:index]];
 			
 			index = NSMaxRange([text lineRangeForRange:NSMakeRange(index, 0)]);
-			numberOfLines++;
+//			numberOfLines++;
 		}
 		while (index < stringLength);
 		
@@ -445,7 +446,7 @@ extern char isChatLineNums;
 
 	if ([view isKindOfClass:[NSTextView class]])
 	{
-int t;
+//int t;
 		NSLayoutManager			*layoutManager;
 		NSTextContainer			*container;
 		NSRect					visibleRect, markerRect;
@@ -537,10 +538,10 @@ int t;
 											NSHeight(rects[0]));
 					[labelText drawInRect:markerRect withAttributes:currentTextAttributes];
 				} else {
-					t = 0;
+//					t = 0;
 				}
 			} else {
-				t = 0;
+//				t = 0;
 			}
 			if (index > NSMaxRange(range))
 			{

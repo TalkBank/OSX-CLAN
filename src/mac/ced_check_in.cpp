@@ -1241,7 +1241,14 @@ static char ced_ReadDepFile(char *depfile, char err) {
 		addFilename2Path(mDirPathName, depfile);
 		fp = fopen(mDirPathName,"r");
 	}
-*/	
+*/
+/* 2024-08-22
+#ifndef UNX
+	if (WD_Not_Eq_OD)
+		SetNewVol(wd_dir);
+#endif
+*/
+	fp = checkOpenWdDepfile(depfile); // 2024-08-22
 	if (fp == NULL) {
 		strcpy(mDirPathName, lib_dir);
 		addFilename2Path(mDirPathName, depfile);
@@ -1419,7 +1426,7 @@ static void ced_mess(short wh) {
 		case 6: strcpy(ced_err_message, "-\"@Begin\" is missing at the beginning of the file.");
 				break;
 		case 7: strcpy(ced_err_message, "-\"@End\" is missing at the end of the file."); break;
-		case 8: strcpy(ced_err_message, "-Expected characters are: @ % * TAB SPACE.");
+		case 8: strcpy(ced_err_message, "-Expected characters are: @ % * TAB.");
 				break;
 		case 9: strcpy(ced_err_message,  "-Tier name is too long."); break;
 		case 10: strcpy(ced_err_message, "-Tier text is too long"); break;
@@ -1755,7 +1762,9 @@ static void ced_mess(short wh) {
 			break;
 		case 157: strcpy(ced_err_message, "-Media file name has to match datafile name."); break;
 		case 158: strcpy(ced_err_message, "-[: ...] has to have real word, not 0... or &... or xxx."); break;
-		case 159: strcpy(ced_err_message, "-Pause markers should appear after retrace markers"); break;
+		case 159: strcpy(ced_err_message, "-Pause markers should appear after retrace markers."); break;
+		case 160: strcpy(ced_err_message, "Space character is not allowed after '<' or before '>' character."); break;
+		case 161: strcpy(ced_err_message, "Space character is required before '[' code item."); break;
 
 		default: strcpy(ced_err_message, "+Internal ERROR. undefined error code!"); break;
 	}
@@ -3225,7 +3234,7 @@ static char ced_atUFound(unCH *w, int s) {
 
 static char isIllegalASCII(unCH *w, int s) {
 	if (w[s] == 0x00b7)
-		return(TRUE);
+		return(FALSE);
 	else if (w[s] >= 0xe000) {
 		if ((w[s] >= 0xf170 && w[s] <= 0xf264) || (w[s] >= 0xff01 && w[s] <= 0xff5e))
 			return(FALSE);
@@ -3355,6 +3364,22 @@ static char ced_CheckWords(unCH *w, int pos, unCH *templine, CHECK_IN_TIERS *ts)
 					if (check_err(92, pos-1, pos+s-2, templine))
 						return(FALSE);
 				}
+			} else if (matchType == CA_HURRIED_START) {
+				if (w[s] == EOS || uS.isskip(w,s,&tFnt,TRUE)) {
+					if (check_err(67, pos-1, pos+s-2, templine))
+						return(FALSE);
+				}
+			} else if (matchType == CA_SUDDEN_STOP) {
+				if (!ced_isOnlyCAs(w, s)) {
+					if (check_err(92, pos-1, pos+s-2, templine))
+						return(FALSE);
+				} else if (s == 1) {
+					if (check_err(73, pos-1, pos+s-2, templine))
+						return(FALSE);
+				}
+			}  else if (matchType == CA_HARDENING_OVERDOT) {
+				if (check_err(73, pos-1, pos+s-2, templine))
+					return(FALSE);
 			} else if (matchType == CA_APPLY_OPTOPSQ || matchType == CA_APPLY_OPBOTSQ ||
 					   matchType == NOTCA_GROUP_START || matchType == NOTCA_SIGN_GROUP_START ||
 					   matchType == NOTCA_OPEN_QUOTE)
@@ -3441,28 +3466,31 @@ static char ced_CheckWords(unCH *w, int pos, unCH *templine, CHECK_IN_TIERS *ts)
 				s++;
 			}
 		} else if (uS.isRightChar(w,s,'#',&tFnt,TRUE))  {
-			s++;
-			if (uS.isRightChar(w,s,'#',&tFnt,TRUE))
+			if (ced_isHebrew == TRUE) {
+			} else {
 				s++;
-			if (uS.isRightChar(w,s,'#',&tFnt,TRUE))
-				s++;
-			if (w[s] == '_') {
-				if (check_err(48, pos+s-1, pos+s-1, templine))
-					return(FALSE);
-			}
-			if (w[s] == '0' && w[s+1] != '_') {
-				if (check_err(48, pos+s-1, pos+s-1, templine))
-					return(FALSE);
-			}
-			while (w[s] != EOS) {
-				if (!is_unCH_digit(w[s]) && !uS.isRightChar(w,s,':',&tFnt,TRUE) && !uS.isRightChar(w,s,'_',&tFnt,TRUE)) {
-					if (check_err(48, pos+s-1, pos+s-1, templine))
-						return(FALSE);
-				} else if (uS.isRightChar(w,s-1,'_',&tFnt,TRUE) && w[s] == '0' && is_unCH_digit(w[s+1])) {
+				if (uS.isRightChar(w,s,'#',&tFnt,TRUE))
+					s++;
+				if (uS.isRightChar(w,s,'#',&tFnt,TRUE))
+					s++;
+				if (w[s] == '_') {
 					if (check_err(48, pos+s-1, pos+s-1, templine))
 						return(FALSE);
 				}
-				s++;
+				if (w[s] == '0' && w[s+1] != '_') {
+					if (check_err(48, pos+s-1, pos+s-1, templine))
+						return(FALSE);
+				}
+				while (w[s] != EOS) {
+					if (!is_unCH_digit(w[s]) && !uS.isRightChar(w,s,':',&tFnt,TRUE) && !uS.isRightChar(w,s,'_',&tFnt,TRUE)) {
+						if (check_err(48, pos+s-1, pos+s-1, templine))
+							return(FALSE);
+					} else if (uS.isRightChar(w,s-1,'_',&tFnt,TRUE) && w[s] == '0' && is_unCH_digit(w[s+1])) {
+						if (check_err(48, pos+s-1, pos+s-1, templine))
+							return(FALSE);
+					}
+					s++;
+				}
 			}
 		} else if (uS.mStricmp(w,"xx") == 0 || uS.mStricmp(w,"yy") == 0) {
 				if (check_err(135, pos-1, pos+len-1, templine))
@@ -3505,11 +3533,13 @@ static char ced_CheckWords(unCH *w, int pos, unCH *templine, CHECK_IN_TIERS *ts)
 					t = uS.HandleCAChars(w+s, &matchType);
 					if (t) {
 						if (w[s+t] == EOS && (matchType == CA_APPLY_OPTOPSQ || matchType == CA_APPLY_OPBOTSQ ||
+											  matchType == CA_HURRIED_START ||
 											  matchType == NOTCA_GROUP_START || matchType == NOTCA_SIGN_GROUP_START)) {
 							if (check_err(93, pos+s-1, pos+s+t-2, templine))
 								return(FALSE);
 						}
 						if (w[s+t] != EOS && (matchType == CA_APPLY_CONTINUATION || matchType == CA_APPLY_LATCHING ||
+											  matchType == CA_SUDDEN_STOP ||
 											  matchType == NOTCA_DOUBLE_COMMA || matchType == NOTCA_VOCATIVE)) {
 							if (check_err(92, pos+s-1, pos+s+t-2, templine))
 								return(FALSE);
@@ -3588,7 +3618,7 @@ static char ced_CheckWords(unCH *w, int pos, unCH *templine, CHECK_IN_TIERS *ts)
 						}
 					} else if (uS.isRightChar(w,s,'`',&tFnt,TRUE) && ced_isArabic) {
 					} else if (uS.isRightChar(w,s,'#',&tFnt,TRUE)) {
-						if (ced_isEndOfWord(w+s+1)) ;
+						if (ced_isEndOfWord(w+s+1) || ced_isHebrew == TRUE) ;
 						else {
 							if (ced_atUFound(w, s))
 								break;
@@ -3682,8 +3712,10 @@ static char ced_CheckWords(unCH *w, int pos, unCH *templine, CHECK_IN_TIERS *ts)
 								   uS.isRightChar(w,s+1,'"',&tFnt,TRUE)) {
 							if (ced_atUFound(w, s))
 								break;
-							if (check_err(67, pos+s-1, pos+s-1, templine))
-								return(FALSE);
+							if (ced_isHebrew == FALSE) {
+								if (check_err(67, pos+s-1, pos+s-1, templine))
+									return(FALSE);
+							}
 						} else if (isATFound == 0 && w[s+1] == '@') {
 //							if (!uS.isRightChar(w,s+1,'0',&tFnt,TRUE)) {
 //								if (ced_atUFound(w, s))
@@ -3700,8 +3732,10 @@ static char ced_CheckWords(unCH *w, int pos, unCH *templine, CHECK_IN_TIERS *ts)
 								uS.isRightChar(w,s+1,'_',&tFnt,TRUE))) {
 							if (ced_atUFound(w, s))
 								break;
-							if (check_err(65, pos+s-1, pos+s-1, templine))
-								return(FALSE);
+							if (ced_isHebrew == FALSE) {
+								if (check_err(65, pos+s-1, pos+s-1, templine))
+									return(FALSE);
+							}
 						}
 					} else if (uS.isRightChar(w,s,'@',&tFnt,TRUE)) {
 						isATFound = s;
@@ -3798,9 +3832,8 @@ static char ced_CheckWords(unCH *w, int pos, unCH *templine, CHECK_IN_TIERS *ts)
 			}
 		} else if (uS.isRightChar(w,0,'+',&tFnt,TRUE)) ;
 		else if (uS.isRightChar(w,0,'-',&tFnt,TRUE) && w[1] != EOS && !is_unCH_alnum(w[1])) ;
-		else if (ced_u.check_patmat(w,"unk|xxx") || ced_u.check_patmat(w,"*|xx") ||
-				 ced_u.check_patmat(w,"unk|yyy") || ced_u.check_patmat(w,"*|yy") ||
-				 ced_u.check_patmat(w,"*|www")   /* || ced_u.check_patmat(w,"cm|cm")*/) {
+		else if (ced_u.check_patmat(w,"unk|xxx") || ced_u.check_patmat(w,"unk|yyy") || ced_u.check_patmat(w,"*|www")
+				 /* || ced_u.check_patmat(w,"cm|cm")*/) {
 			if (check_err(134, pos-1, pos+len-1, templine))
 				return(FALSE);
 		} else {
@@ -3947,9 +3980,8 @@ static char ced_CheckWords(unCH *w, int pos, unCH *templine, CHECK_IN_TIERS *ts)
 			}
 		} else if (uS.isRightChar(w,0,'+',&tFnt,TRUE)) ;
 		else if (uS.isRightChar(w,0,'-',&tFnt,TRUE) && w[1] != EOS && !is_unCH_alnum(w[1])) ;
-		else if (ced_u.check_patmat(w,"unk|xxx") || ced_u.check_patmat(w,"*|xx") ||
-				 ced_u.check_patmat(w,"unk|yyy") || ced_u.check_patmat(w,"*|yy") ||
-				 ced_u.check_patmat(w,"*|www")   /* || ced_u.check_patmat(w,"cm|cm")*/) {
+		else if (ced_u.check_patmat(w,"unk|xxx") || ced_u.check_patmat(w,"unk|yyy") || ced_u.check_patmat(w,"*|www")
+				 /* || ced_u.check_patmat(w,"cm|cm")*/) {
 			if (check_err(134, pos-1, pos+len-1, templine))
 				return(FALSE);
 		} else {
@@ -4185,7 +4217,9 @@ static char ced_CheckFixes(CHECK_IN_TIERS *ts, unCH *word, unCH *templine, int s
 			}
 			word[pos+1] = t;
 			if (tp == NULL) {
-				if (isPrefix) {
+				if (word[pos] == '#' && ced_isHebrew == TRUE) {
+					*found = TRUE;
+				} else if (isPrefix) {
 					if (check_err(37,s1-1,s-1,templine))
 						return(FALSE);
 				} else if (templine[s1-1] == '@') {
@@ -4909,13 +4943,23 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 				if (check_err(102,s,s+2,templine)) return(FALSE);
 			}
 */
-			if (templine[s-1] == ';' && (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE))) {
-				if (check_err(48,s-1,s-1,templine)) return(FALSE);
+			if (*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE)) {
+				if (templine[s-1] == ';') {
+					if (check_err(48,s-1,s-1,templine)) return(FALSE);
+				} else if (templine[s-1] == '<' && isSpace(templine[s])) {
+					if (check_err(160,s-1,s+1,templine)) return(FALSE);
+				} else if (templine[s] == '>' && isSpace(templine[s-1])) {
+					j = s - 2;
+					if (j < 0)
+						j = 0;
+					if (check_err(160,j,j+2,templine)) return(FALSE);
+				}
 			}
-			if (*st == ',') {
+			if (*st == ',' && *ced_sp == '*') {
 				if (!uS.isskip(templine,s,&tFnt,TRUE) && templine[s] != ',' && templine[s] != EOS && templine[s] != '\n') {
 					if (uS.HandleCAChars(templine+s, &matchType)) {
 						if (matchType != NOTCA_GROUP_START && matchType != NOTCA_GROUP_END &&
+							matchType != CA_SUDDEN_STOP && matchType != CA_HURRIED_START &&
 							matchType != NOTCA_SIGN_GROUP_START && matchType != NOTCA_SIGN_GROUP_END &&
 							matchType != CA_APPLY_OPTOPSQ && matchType != CA_APPLY_CLTOPSQ &&
 							matchType != CA_APPLY_OPBOTSQ && matchType != CA_APPLY_CLBOTSQ) {
@@ -4965,6 +5009,14 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 				}
 			} else {
 				ced_CheckBrakets(templine,s-1,&sb,&pb,&ab,&cb,&anb);
+			}
+		}
+		if ((*ced_sp == '*' || ced_u.check_partcmp(ced_sp, "%wor", FALSE)) && templine[s-1] == '[') {
+			j = s - 2;
+			if (j >= 0) {
+				if (!isSpace(templine[j])) {
+					if (check_err(161,j,j+1,templine)) return(FALSE);
+				}
 			}
 		}
 		if (*st == EOS) {
@@ -5150,7 +5202,7 @@ static char ced_ParseWords(CHECK_IN_TIERS *ts, BOOL isMedia) {
 			res = uS.HandleCAChars(templine+e, &matchType);
 			if (res) {
 				if (matchType != CA_APPLY_CLTOPSQ && matchType != CA_APPLY_CLBOTSQ && matchType != NOTCA_GROUP_END &&
-					matchType != NOTCA_SIGN_GROUP_END && uS.IsUtteranceDel(templine, e) != 2)
+					matchType != CA_SUDDEN_STOP && matchType != NOTCA_SIGN_GROUP_END && uS.IsUtteranceDel(templine, e) != 2)
 					res = 0;
 			}
 			if (res == 0) {
@@ -5666,7 +5718,7 @@ static char ced_isMissiingID(void) {
 }
 
 static char ced_CheckRest(NSTextView *textView, char *filePath, BOOL isMedia) {
-	char FTime, isSkip, *s;
+	char FTime, isSkip, *ext;
 	int  i, j, langCnt, len;
 	unCH t;
 	TCODES *tc = NULL;
@@ -5883,7 +5935,7 @@ static char ced_CheckRest(NSTextView *textView, char *filePath, BOOL isMedia) {
 				}
 			} else if (ced_u.check_partcmp(ced_sp, MEDIAHEADER, FALSE)) {
 				int cnt;
-				char isAudioFound, isVideoFound;
+				char isAudioFound, isVideoFound, qm;
 
 				isSkip = TRUE;
 				if ((ts=ced_FindTier(ced_headt,ced_sp)) == NULL) {
@@ -5892,6 +5944,7 @@ static char ced_CheckRest(NSTextView *textView, char *filePath, BOOL isMedia) {
 				}
 				i = 0;
 				cnt = 0;
+				qm = 0;
 				isAudioFound = FALSE;
 				isVideoFound = FALSE;
 				ced_isUnlinkedFound = FALSE;
@@ -5904,7 +5957,17 @@ static char ced_CheckRest(NSTextView *textView, char *filePath, BOOL isMedia) {
 					}
 					if (templine[i] == EOS)
 						break;
-					for (j=i; (!uS.isskip(templine,j,&tFnt,TRUE) || templine[j] == '.') && templine[j] != ',' && templine[j] != '\n' && templine[j] != EOS; j++) ;
+					for (j=i; templine[j] != EOS; j++) {
+						if (qm == 0 && (templine[j] == '"' || templine[j] == '\'')) {
+							qm = templine[j];
+						} else if (qm == templine[j]) {
+							qm = 0;
+						} else if (qm != 0) {
+						} else if ((uS.isskip(templine, j, &dFnt, MBF) && templine[j] != '.') ||
+								   templine[j] == ',' || templine[j] == '\n') {
+							break;
+						}
+					}
 					t = templine[j];
 					templine[j] = EOS;
 					cnt++;
@@ -5925,14 +5988,15 @@ static char ced_CheckRest(NSTextView *textView, char *filePath, BOOL isMedia) {
 							ced_isUnlinkedFound = TRUE;
 					} else if (ced_check_mismatch) {
 						extractFileName(templineC2, filePath);
-						if ((s=strrchr(templineC2, '.')) != NULL)
-							*s = EOS;
+						if ((ext=strrchr(templineC2, '.')) != NULL)
+							*ext = EOS;
 						u_strcpy(templine2, templineC2, UTTLINELEN);
-						if (uS.mStricmp(templine+i, templine2) &&
-							uS.mStrnicmp(templine+i, "http", 4) != 0) {
-							s = strrchr(templineC2, '.');
-							if (s != NULL && (uS.mStricmp(s, ".elan") == 0 || uS.mStricmp(s, ".praat") == 0)) {
-								*s = EOS;
+						if (templine[i] == '"' || templine[i] == '\'')
+							i++;
+						if (uS.mStricmp(templine+i, templine2) && uS.mStrnicmp(templine+i, "http", 4) != 0) {
+							if (ext != NULL && uS.mStricmp(ext+1, "cex") == 0) {
+								if ((ext=strrchr(templineC2, '.')) != NULL)
+									*ext = EOS;
 								u_strcpy(templine2, templineC2, UTTLINELEN);
 								if (uS.mStricmp(templine+i, templine2)) {
 									if (check_err(157,i,j-1,templine))
@@ -6486,6 +6550,12 @@ static char ced_OverAll(NSTextView *textView) {
 	return(TRUE);
 }
 
+static void cleanUpCheck_in(void) {
+	ced_check_init(FALSE);
+	cleanupLanguages();
+// 2024-11-15	cleanupUDs();
+}
+
 void CheckC(NSTextView *textView, char *filePath, BOOL isMedia) {
 	int  len;
 	char isverytop;
@@ -6506,22 +6576,27 @@ void CheckC(NSTextView *textView, char *filePath, BOOL isMedia) {
 */
 	initLanguages();
 	if (!ReadLangsFile(TRUE)) {
-		strcpy(ced_err_message, "+Error: Can't open language codes file \"ISO-639\". Please make sure library directory in commands window is set correctly.");
+		strcpy(ced_err_message, "+Error: Can't open language codes file \"ISO-639.cut\".");
 		return;
 	}
+/* 2024-11-15
+	if (!ReadUDsFile(TRUE)) {
+		strcpy(ced_err_message, "+Error: Can't open UD feature codes file \"UD_features.cut\".");
+		return;
+	}
+*/
+	init_punct(0);
 	init_punct(0);
 	ced_lastSpDelim[0] = EOS;
 	if (!ced_ReadDepFile(dep_file, TRUE)) {
-		ced_check_init(FALSE);
-		cleanupLanguages();
+		cleanUpCheck_in();
 		return;
 	}
 	Check_level = 0;
 	if (!ced_OverAll(textView)) {
 //		DisplayErrorRow();
 //		ResetUndos();
-		ced_check_init(FALSE);
-		cleanupLanguages();
+		cleanUpCheck_in();
 		[textView setSelectedRange:ced_cursorRange];
 		[textView scrollRangeToVisible:ced_cursorRange];
 		return;
@@ -6536,8 +6611,7 @@ void CheckC(NSTextView *textView, char *filePath, BOOL isMedia) {
 		if (check_err(6,-1,-1, templine)) {
 //			DisplayErrorRow();
 //			ResetUndos();
-			ced_check_init(FALSE);
-			cleanupLanguages();
+			cleanUpCheck_in();
 			[textView setSelectedRange:ced_cursorRange];
 			[textView scrollRangeToVisible:ced_cursorRange];
 			return;
@@ -6546,8 +6620,7 @@ void CheckC(NSTextView *textView, char *filePath, BOOL isMedia) {
 
 	if (!ced_AtIDFound && IS_CHECK_ID(ced_GenOpt)) {
 		addIDs(textView);
-		ced_check_init(FALSE);
-		cleanupLanguages();
+		cleanUpCheck_in();
 		[textView setSelectedRange:ced_cursorRange];
 		[textView scrollRangeToVisible:ced_cursorRange];
 		return;
@@ -6564,8 +6637,7 @@ void CheckC(NSTextView *textView, char *filePath, BOOL isMedia) {
 //			ResetUndos();
 			ced_check_init(FALSE);
 //			EndOfFile(-1);
-			ced_check_init(FALSE);
-			cleanupLanguages();
+			cleanUpCheck_in();
 			[textView setSelectedRange:ced_cursorRange];
 			[textView scrollRangeToVisible:ced_cursorRange];
 			return;
@@ -6574,8 +6646,7 @@ void CheckC(NSTextView *textView, char *filePath, BOOL isMedia) {
 	if (!ced_CheckRest(textView, filePath, isMedia)) {
 //		DisplayErrorRow();
 //		ResetUndos();
-		ced_check_init(FALSE);
-		cleanupLanguages();
+		cleanUpCheck_in();
 		[textView setSelectedRange:ced_cursorRange];
 		[textView scrollRangeToVisible:ced_cursorRange];
 		return;
@@ -6583,7 +6654,6 @@ void CheckC(NSTextView *textView, char *filePath, BOOL isMedia) {
 	if (isverytop) {
 		strcpy(ced_err_message, "-Success! No errors found.");
 	}
-	ced_check_init(FALSE);
-	cleanupLanguages();
+	cleanUpCheck_in();
 }
 /* main check functions end */

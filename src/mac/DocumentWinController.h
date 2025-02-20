@@ -109,6 +109,15 @@ struct SOUNDINFOC {
 
 @end
 
+// 2024-06-13 beg
+@interface CaretTextView: NSTextView {
+@public
+	CGFloat mCaretWidth;
+}
+
+@end
+// 2024-06-13 end
+
 #define picBullet 2
 #define oldBullet 1
 #define newBullet 0
@@ -201,6 +210,8 @@ struct SOUNDINFOC {
 
 - (long)findEndContPlay:(NSString *)textSt index:(NSUInteger)pos;
 
+- (IBAction)ContinuousInsertSpCodePlayback:(id)sender; // 2024-06-26
+
 - (IBAction)ContinuousPlayback:(id)sender; // 2020-09-01
 
 - (IBAction)ContinuousSkipPausePlayback:(id)sender; // 2021-08-03
@@ -247,6 +258,8 @@ struct SOUNDINFOC {
 
 - (NSUInteger)isLegalBullet:(NSUInteger)pos bTest:(char *)bType;
 
+- (void)MakeAllLemmasColor; // 2024-04-17 beg
+
 @end
 
 @interface DocumentWindowController(SonicModeCode)
@@ -272,7 +285,7 @@ struct SOUNDINFOC {
 extern BOOL activateBauerPatch; // 2023-02-15
 extern CGFloat alphas[]; // 2023/07-21
 extern NSInteger AlphaColorPtr; // 2023-07-21
-extern NSInteger ColorNumPtr; // 2023-07-21
+extern NSInteger HighlightColorNumPtr; // 2023-07-21
 
 // coder mode beg
 BOOL init_codes(const FNType *fname, char *fontName, DocumentWindowController *docWinController);

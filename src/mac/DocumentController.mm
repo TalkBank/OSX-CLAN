@@ -77,8 +77,8 @@
 	NSString *type = nil;
 
 	if (data != nil) {
-		NSDictionary *attributes = nil;
-		string = [[[NSAttributedString alloc] initWithData:data options:nil documentAttributes:&attributes error:error] autorelease];
+		NSDictionary *attributes = nil, *options = nil; // 2024-12-04
+		string = [[[NSAttributedString alloc] initWithData:data options:options documentAttributes:&attributes error:error] autorelease];
 
 		// We only expect to see plain-text, RTF, and RTFD at this point.
 		NSString *docType = [attributes objectForKey:NSDocumentTypeDocumentAttribute];
@@ -203,7 +203,9 @@
  other documents are displayed for window cascading to work correctly. To guarantee this, defer all display operations
  until the transient document has been replaced.
 */
-// - (void)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)displayDocument completionHandler:(void (^)(NSDocument *document, BOOL documentWasAlreadyOpen, NSError *error))completionHandler;
+// - (void)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)displayDocument completionHandler:(void (^)(NSDocument * _Nullable document, BOOL documentWasAlreadyOpen, NSError * _Nullable error))completionHandler
+#define OPENDOCUMENTWITHCONTENTSOFURL
+
 - (id)openDocumentWithContentsOfURL:(NSURL *)absoluteURL display:(BOOL)displayDocument error:(NSError **)outError {
 	// Don't make NSDocumentController display the NSDocument it creates. Instead,
 	// do it later manually to ensure that the transient document has been replaced first.
@@ -233,6 +235,7 @@
 				tPos = pos + 2;
 				while (tPos < len) {
 					ch = [textSt characterAtIndex:tPos];
+/* 2024-02-14
 					if (ch == '\n') {
 						endRange = NSMakeRange(pos, 2); // (NSUInteger pos, NSUInteger len)
 						[text replaceCharactersInRange:endRange withString:@""];
@@ -249,6 +252,7 @@
 						isIncrementPos = false;
 						break;
 					}
+*/
 					if (ch == ATTMARKER) {
 						ch = [textSt characterAtIndex:tPos+1];
 						if (ch == error_end) {
@@ -261,9 +265,9 @@
 								cDoc->pos1C -= 2;
 							if (cDoc->pos2C > pos)
 								cDoc->pos2C -= 2;
-							if (cDoc->pos1C > tPos)
+							if (cDoc->pos1C > pos)
 								cDoc->pos1C -= 2;
-							if (cDoc->pos2C > tPos)
+							if (cDoc->pos2C > pos)
 								cDoc->pos2C -= 2;
 							endRange = NSMakeRange(pos, tPos-pos);
 							[text addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:endRange];

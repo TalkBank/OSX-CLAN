@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2025 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -166,7 +166,7 @@ TAG classname_to_tag(const char* c)
 int tag_to_classname(TAG t, char* r)
 {
 	char xx[64];
-	sprintf( xx, "%ld", t );// lxs1234
+	sprintf( xx, "%d", t );// lxs1234
 	char *s = hashGetCC( _class_hashdic_inverse_, xx );
 	if (s) {
 		strcpy( r, s );

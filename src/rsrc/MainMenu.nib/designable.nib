@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment version="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -90,25 +90,25 @@
                                                 <action selector="morGrammarEng:" target="awX-xD-5B4" id="sd7-kz-4sh"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Cantonese - yue" id="ZjJ-EL-0xG">
+                                        <menuItem title="Cantonese - yue" hidden="YES" enabled="NO" id="ZjJ-EL-0xG">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="morGrammarYue:" target="awX-xD-5B4" id="vfg-Vv-rdn"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Chinese - zho" id="8bC-kk-HHx">
+                                        <menuItem title="Chinese - zho" hidden="YES" enabled="NO" id="8bC-kk-HHx">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="morGrammarZho:" target="awX-xD-5B4" id="Kez-oS-V1d"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Danish - dan" id="iSY-Q1-Zri">
+                                        <menuItem title="Danish - dan" hidden="YES" enabled="NO" id="iSY-Q1-Zri">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="morGrammarDan:" target="awX-xD-5B4" id="2F0-c4-5wQ"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Dutch - nld" id="2Tv-l3-u1d">
+                                        <menuItem title="Dutch - nld" hidden="YES" enabled="NO" id="2Tv-l3-u1d">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="morGrammarNld:" target="awX-xD-5B4" id="Sbb-ht-fcR"/>
@@ -120,25 +120,25 @@
                                                 <action selector="morGrammarFra:" target="awX-xD-5B4" id="GEF-6o-WWN"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="German - deu" id="YSx-29-25A">
+                                        <menuItem title="German - deu" hidden="YES" enabled="NO" id="YSx-29-25A">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="morGrammarDeu:" target="awX-xD-5B4" id="b6e-9R-1MX"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Hebrew - heb" id="aBS-LC-4Mc">
+                                        <menuItem title="Hebrew - heb" hidden="YES" enabled="NO" id="aBS-LC-4Mc">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="morGrammarHeb:" target="awX-xD-5B4" id="oEt-yJ-fTX"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Italian - ita" id="jW8-7B-Y8y">
+                                        <menuItem title="Italian - ita" hidden="YES" enabled="NO" id="jW8-7B-Y8y">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="morGrammarIta:" target="awX-xD-5B4" id="zY8-Cg-HjU"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Japanese - jpn" id="7MA-Ir-kwt">
+                                        <menuItem title="Japanese - jpn" hidden="YES" enabled="NO" id="7MA-Ir-kwt">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="morGrammarJpn:" target="awX-xD-5B4" id="K6x-3o-6md"/>
@@ -328,13 +328,25 @@
                                     <action selector="SelectF5Option:" target="-1" id="6nc-gF-eeg"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Make Selected Text RED" keyEquivalent="'" id="uOw-fM-h52">
+                            <menuItem title="Make All Selected Text RED" keyEquivalent="'" id="uOw-fM-h52">
                                 <connections>
-                                    <action selector="MakeSelectedTextRED:" target="-1" id="mjo-0k-2eI"/>
+                                    <action selector="MakeAllSelectedTextRED:" target="-1" id="e17-GR-LDE"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Reset All Selected Text Color" keyEquivalent="'" id="vGs-Eu-cTs">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                <connections>
+                                    <action selector="ResetAllSelectedTextColor:" target="-1" id="7dk-I1-xre"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Make Selected Text RED" keyEquivalent="'" id="hjb-Ny-cJH">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="MakeSelectedTextRED:" target="-1" id="QT2-qa-Rxw"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Reset Selected Text Color" keyEquivalent="'" id="ipo-Ir-ACE">
-                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="ResetSelectedTextColor:" target="-1" id="Dky-F1-swa"/>
                                 </connections>
@@ -356,6 +368,62 @@
                                 <connections>
                                     <action selector="orderFrontFontPanel:" target="374" id="375"/>
                                 </connections>
+                            </menuItem>
+                            <menuItem title="Writing Direction" id="Rqm-mr-Ibd">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Writing Direction" id="zzQ-zV-AT6">
+                                    <items>
+                                        <menuItem title="Paragraph" enabled="NO" id="nCe-ys-4Rv">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem id="czB-EY-GMC">
+                                            <string key="title">	Default</string>
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="makeBaseWritingDirectionNatural:" target="-1" id="ySe-fL-lbZ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem id="XVX-bT-ulZ">
+                                            <string key="title">	Left to Right</string>
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="makeBaseWritingDirectionLeftToRight:" target="-1" id="7b8-bf-tW4"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem id="rI1-WN-cyY">
+                                            <string key="title">	Right to Left</string>
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="makeBaseWritingDirectionRightToLeft:" target="-1" id="iYl-Cd-qJq"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="dDu-d3-mOz"/>
+                                        <menuItem title="Selection" enabled="NO" id="FZG-5y-XLf">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem id="eZs-q8-wAN">
+                                            <string key="title">	Default</string>
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="makeTextWritingDirectionNatural:" target="-1" id="pGR-Ss-4fe"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem id="VFR-nk-3dO">
+                                            <string key="title">	Left to Right</string>
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="makeTextWritingDirectionLeftToRight:" target="-1" id="Z3B-W1-9Od"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem id="j7w-w5-Y3z">
+                                            <string key="title">	Right to Left</string>
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="makeTextWritingDirectionRightToLeft:" target="-1" id="f6I-Mp-jdJ"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
                             </menuItem>
                             <menuItem title="Bold" tag="1" keyEquivalent="b" id="376">
                                 <connections>

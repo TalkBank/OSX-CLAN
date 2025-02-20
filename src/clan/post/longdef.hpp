@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2025 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -14,7 +14,7 @@
 	#define long32 long
   #endif
 #else
-	#define long32 long
+	#define long32 int
 #endif /* defined(POSTCODE) || defined(_MAC_CODE) */
 
 #endif /* ifndef _LONGDEF_H_ */

@@ -1,6 +1,6 @@
 
 /**********************************************************************
-	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2025 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -24,6 +24,8 @@
 
 extern char OverWriteFile;
 
+static char isCompact;
+
 void init(char f) {
 	char *s;
 
@@ -32,6 +34,7 @@ void init(char f) {
 		AddCEXExtension = ".xml";
 		onlydata = 1;
 		stout = FALSE;
+		isCompact = FALSE;
 	} else {
 		if ((s=strrchr(oldfname, '.')) != NULL) {
 			AddCEXExtension = s;
@@ -40,7 +43,8 @@ void init(char f) {
 }
 
 void usage() {
-	printf("Usage: pp filename(s)\n",mainflgs());
+	printf("Usage: pp [c] filename(s)\n",mainflgs());
+	puts("+c : create compact version");
 	mainusage(TRUE);
 }
 
@@ -58,6 +62,10 @@ void getflag(char *f, char *f1, int *i) {
 
 	f++;
 	switch(*f++) {
+		case 'c':
+			isCompact = TRUE;
+			no_arg_option(f);
+			break;
 		default:
 			maingetflag(f-2,f1,i);
 			break;
@@ -65,12 +73,20 @@ void getflag(char *f, char *f1, int *i) {
 }
 
 static void changeGroupIndent(char *groupIndent, int d) {
-	int i;
+	int  i, offset;
+	char sps[10];
 
+	if (isCompact == TRUE) {
+		strcpy(sps, "  ");
+		offset = 2;
+	} else {
+		strcpy(sps, "    ");
+		offset = 4;
+	}
 	if (d > 0)
-		strcat(groupIndent, "    ");
+		strcat(groupIndent, sps);
 	else {
-		i = strlen(groupIndent) - 4;
+		i = strlen(groupIndent) - offset;
 		if (i < 0)
 			i = 0;
 		groupIndent[i] = EOS;
@@ -78,54 +94,104 @@ static void changeGroupIndent(char *groupIndent, int d) {
 }
 
 void call() {
-	int c, lastC;
+	int inp;
 	char groupIndent[1024];
-	char isCR, ftime;
+	char c, lastC;
+	char isCR, isLastSpace, isIndent, ftime;
 
 	ftime = true;
 	lastC = 0;
 	isCR = true;
+	isIndent = TRUE;
 	groupIndent[0] = EOS;
-	while (!feof(fpin)) {
-		c = getc(fpin);
-		if (feof(fpin)) {
-			if (!isCR)
-				putc('\n', fpout);
-			break;
+	if (fgets_cr(templineC, UTTLINELEN, fpin) == NULL)
+		return;
+	inp = 0;
+	while (true) {
+		if (templineC[inp] == EOS) {
+			if (fgets_cr(templineC, UTTLINELEN, fpin) == NULL) {
+					if (!isCR) {
+						putc('\n', fpout);
+						isLastSpace = FALSE;
+					}
+					break;
+				}
+			inp = 0;
 		}
+		c = templineC[inp++];
+		if (isCompact && c == '\t')
+			c = ' ';
 		if (c == '<') {
-			if (!ftime)
+			if (!ftime && isIndent == TRUE) {
 				putc('\n', fpout);
+				isLastSpace = FALSE;
+			}
 			lastC = c;
-			if (!feof(fpin)) {
-				c = getc(fpin);
+			if (templineC[inp] == EOS) {
+				if (fgets_cr(templineC, UTTLINELEN, fpin) == NULL) {
+					if (!isCR) {
+						putc('\n', fpout);
+						isLastSpace = FALSE;
+					}
+					break;
+				}
+				inp = 0;
+			}
+			c = templineC[inp++];
 				if (c != '/') {
-					fputs(groupIndent, fpout);
+					if (isIndent == TRUE)
+						fputs(groupIndent, fpout);
 					changeGroupIndent(groupIndent, 1);
 				} else {
 					changeGroupIndent(groupIndent, -1);
-					fputs(groupIndent, fpout);
+					if (isIndent == TRUE)
+						fputs(groupIndent, fpout);
 				}
-			} else
-				c = '\n';
+			isIndent = TRUE;
+			if (isCompact == TRUE) {
+				if (uS.mStrnicmp(templineC+inp-1, "comment ", 8) == 0 ||
+					uS.mStrnicmp(templineC+inp-1, "stem>", 5) == 0 ||
+					uS.mStrnicmp(templineC+inp-1, "mk ", 3) == 0 ||
+					uS.mStrnicmp(templineC+inp-1, "c>", 2) == 0 ||
+					uS.mStrnicmp(templineC+inp-1, "s>", 2) == 0
+//					uS.mStrnicmp(templineC+inp-1, "w>", 2) == 0
+					)
+					isIndent = FALSE;
+			} 
 			putc(lastC, fpout);
-			if (c != '\n')
-				putc(c, fpout);
+			isLastSpace = FALSE;
+			if (c != '\n') {
+				if (c == ' ' && isLastSpace == TRUE && isCompact == TRUE) {
+				} else
+					putc(c, fpout);
+			}
+			if (c == ' ')
+				isLastSpace = TRUE;
+			else
+				isLastSpace = FALSE;
 			isCR = true;
 		} else if (c == '>') {
 			putc(c, fpout);
+			isLastSpace = FALSE;
 			if (lastC == '/' || lastC == '?')
 				changeGroupIndent(groupIndent, -1);
 			isCR = false;
 		} else if (c != '\n' && c != 0x0d && c != 0x0a) {
-			if (!isspace(c)) {
+			if (!isspace(c) && isIndent == TRUE) {
 				if (!isCR) {
 					putc('\n', fpout);
+					isLastSpace = FALSE;
 					fputs(groupIndent, fpout);
 				}
 				isCR = true;
 			}
-			putc(c, fpout);
+			if (c == ' ' && isLastSpace == TRUE && isCompact == TRUE) {
+			} else
+				putc(c, fpout);
+			if (c == ' ')
+				isLastSpace = TRUE;
+			else
+				isLastSpace = FALSE;
 		}
 		lastC = c;
 		ftime = false;

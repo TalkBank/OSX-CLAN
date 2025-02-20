@@ -123,9 +123,9 @@ static SelectF5Controller *SelectF5Window = nil;
 // at this point, we can do any needed initialization before turning app control over to the user
 - (void)awakeFromNib
 {
-	int i;
+//	int i;
 
-	i = 12;
+//	i = 12;
 	// We don't actually need to do anything here, so it's empty
 }
 

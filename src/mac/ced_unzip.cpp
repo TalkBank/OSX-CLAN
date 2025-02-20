@@ -264,7 +264,7 @@ static bool DownloadGrammar(const char *grName, char *destName, size_t fileSize)
 }
 
 void GetMORGrammar(const char *grammar, size_t fileSize) {
-	int  i;
+//	int  i;
 	FNType zipFName[FNSize];
 
 	if (DownloadGrammar(grammar, DirPathName, fileSize) == true) {
@@ -280,7 +280,7 @@ void GetMORGrammar(const char *grammar, size_t fileSize) {
 		system(FileName1);
 // delete old grammar location first
 
-		i = strlen(DirPathName) - 1;
+//		i = strlen(DirPathName) - 1;
 		// BEG empty current MOR directory
 		strcpy(FileName1, "rm -rf \"");
 		strcat(FileName1, DirPathName);

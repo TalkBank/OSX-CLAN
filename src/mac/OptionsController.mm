@@ -18,6 +18,7 @@ extern FNType prefsDir[];
 extern BOOL DefClan;
 extern BOOL DefWindowDims;
 extern BOOL isCursorPosRestore;
+extern BOOL AutoSetWorkigDir;
 
 - (id)init {
 	return [super initWithWindowNibName:@"CLANOptions"];
@@ -38,6 +39,11 @@ extern BOOL isCursorPosRestore;
 	else
 		OpenCommandsButton.state = NSControlStateValueOff;
 
+	if (AutoSetWorkigDir)
+		AutoSetWorkigDirButton.state = NSControlStateValueOn;
+	else
+		AutoSetWorkigDirButton.state = NSControlStateValueOff;
+		
 	if (DefWindowDims)
 		NewfilePosSizeButton.state = NSControlStateValueOn;
 	else
@@ -60,15 +66,34 @@ extern BOOL isCursorPosRestore;
 	}
 	[alphaPopUp selectItemAtIndex:AlphaColorPtr]; // 2023-07-21
 	
-	[colorPopUp insertItemWithTitle:@"Selected Background Color" atIndex:0];
-	[colorPopUp insertItemWithTitle:@"Yellow Color" atIndex:1];
-	[colorPopUp insertItemWithTitle:@"Cyan Color" atIndex:2];
-	[colorPopUp insertItemWithTitle:@"Blue Color" atIndex:3];
-	[colorPopUp insertItemWithTitle:@"Orange Color" atIndex:4];
-	[colorPopUp insertItemWithTitle:@"Red Color" atIndex:5];
-	[colorPopUp selectItemAtIndex:ColorNumPtr]; // 2023-07-21
+	[highlightColorPopUp insertItemWithTitle:@"Selected Background Color" atIndex:0];
+	[highlightColorPopUp insertItemWithTitle:@"Yellow Color" atIndex:1];
+	[highlightColorPopUp insertItemWithTitle:@"Cyan Color" atIndex:2];
+	[highlightColorPopUp insertItemWithTitle:@"Blue Color" atIndex:3];
+	[highlightColorPopUp insertItemWithTitle:@"Orange Color" atIndex:4];
+	[highlightColorPopUp insertItemWithTitle:@"Red Color" atIndex:5];
+	[highlightColorPopUp selectItemAtIndex:HighlightColorNumPtr]; // 2023-07-21
 // 2023-07-21 end
 
+// 2024-04-17 beg
+	[lemmasColorPopUp insertItemWithTitle:@"Default color" atIndex:0];
+	[lemmasColorPopUp insertItemWithTitle:@"Blue Color" atIndex:1];
+	[lemmasColorPopUp insertItemWithTitle:@"Orange Color" atIndex:2];
+	[lemmasColorPopUp insertItemWithTitle:@"Magenta Color" atIndex:3];
+	[lemmasColorPopUp insertItemWithTitle:@"Purple Color" atIndex:4];
+	[lemmasColorPopUp insertItemWithTitle:@"Brown Color" atIndex:5];
+	[lemmasColorPopUp selectItemAtIndex:LemmasColorNumPtr]; // 2024-04-17
+// 2024-04-17 end
+
+// 2024-06-17 beg
+	[caretWidthPopUp insertItemWithTitle:@"1" atIndex:0];
+	[caretWidthPopUp insertItemWithTitle:@"2" atIndex:1];
+	[caretWidthPopUp insertItemWithTitle:@"3" atIndex:2];
+	[caretWidthPopUp insertItemWithTitle:@"4" atIndex:3];
+	[caretWidthPopUp insertItemWithTitle:@"5" atIndex:4];
+	[caretWidthPopUp selectItemAtIndex:CaretWidthPtr-1]; // 2024-04-17
+// 2024-06-17 end
+	
 // 2023-09-15 beg
 	[AutoSaveDelayPopUp insertItemWithTitle:@"OFF"  atIndex:0];
 	for (i=1; AutoSaveTime[i] != 0; i++) {
@@ -97,6 +122,19 @@ extern BOOL isCursorPosRestore;
 	}
 //	[OpenCommandsButton performClick:self];
 */
+
+- (IBAction)optionsAutoSetWorkigDirClicked:(NSButton *)sender
+{
+#pragma unused (sender)
+	if ([AutoSetWorkigDirButton state] == NSControlStateValueOn) {// 2019-11-07
+		AutoSetWorkigDir = TRUE;
+	} else if ([AutoSetWorkigDirButton state] == NSControlStateValueOff) {
+		AutoSetWorkigDir = FALSE;
+	} else {
+	}
+	WriteCedPreference();
+}
+
 
 - (IBAction)optionsNewfilePosSizeClicked:(NSButton *)sender
 {
@@ -277,7 +315,7 @@ extern BOOL isCursorPosRestore;
 	NSTextView *textView;
 	NSRange cursorRange;
 
-	ColorNumPtr = [sender indexOfSelectedItem];
+	HighlightColorNumPtr = [sender indexOfSelectedItem];
 	WriteCedPreference();
 	documents = [[NSDocumentController sharedDocumentController] documents];
 	docsCnt = [documents count];
@@ -297,6 +335,50 @@ extern BOOL isCursorPosRestore;
 	}
 }
 // 2023-07-21 end
+
+// 2024-04-17 beg
+- (IBAction)optionsLemmasColorClicked:(NSPopUpButton *)sender
+{
+	Document *cDoc;
+	DocumentWindowController *winCtrl;
+	NSUInteger i, docsCnt, winCtrlCount;
+	NSArray *documents;
+/*
+// 2024-10-29
+	NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
+
+	if (version.majorVersion < 15 || (version.majorVersion == 15 && version.minorVersion < 1)) {
+		do_warning("Color Lemmas only work on MacOS 15.1 or greater", 0);
+		LemmasColorNumPtr = 0;
+		return;
+	}
+*/
+	LemmasColorNumPtr = [sender indexOfSelectedItem];
+	WriteCedPreference();
+	documents = [[NSDocumentController sharedDocumentController] documents];
+	docsCnt = [documents count];
+	for (i=0; i < docsCnt; i++) {
+		cDoc = [documents objectAtIndex:i];
+		if (cDoc != NULL && [cDoc get_wID] == DOCWIN) {
+			winCtrlCount = [[cDoc windowControllers] count];
+			for (i=0; i < winCtrlCount; i++) {             //firstObject
+				winCtrl = [[cDoc windowControllers] objectAtIndex:i];
+				dispatch_async(dispatch_get_main_queue(), ^{
+					[winCtrl MakeAllLemmasColor];
+				});
+			}
+		}
+	}
+}
+// 2024-04-17 end
+
+// 2024-06-17 beg
+- (IBAction)optionsCaretWidthClicked:(NSPopUpButton *)sender
+{
+	CaretWidthPtr = [sender indexOfSelectedItem] + 1;
+	WriteCedPreference();
+}
+// 2024-06-17 end
 
 // 2023-09-15 beg
 - (IBAction)autosaveDelayClicked:(NSPopUpButton *)sender

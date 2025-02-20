@@ -87,6 +87,7 @@
 #import "AppDefaultsKeys.h"
 #import "AppErrors.h"
 #import "AppMisc.h"
+#import "ListBoxController.h"
 #import "c_clan.h"
 #import <objc/message.h> // objc_msgSend
 
@@ -1030,6 +1031,7 @@ NSUInteger getUtts(NSUInteger pos, NSUInteger len, NSString *textSt) {
 		pos2C = 0L;
 		skipP2 = 0L;
 		filePath[0] = EOS;
+		isHebrewData = false;
 		docFont = nil;
 		textStorage = [[NSTextStorage allocWithZone:[self zone]] init];
 
@@ -1041,6 +1043,9 @@ NSUInteger getUtts(NSUInteger pos, NSUInteger len, NSString *textSt) {
 //			[self setBackgroundColor:[NSColor whiteColor]];
 #else //_OS_10_13 2023-05-10
 		dispatch_async(dispatch_get_main_queue(), ^{
+#ifdef _OS_10_13
+			isDarkColor = FALSE;
+#else
 			if (@available(macOS 10.14, *)) {// 2023-05-10
 				NSAppearance *currentAppearance = [NSApp effectiveAppearance];
 				NSString *appName = [currentAppearance name];
@@ -1048,9 +1053,9 @@ NSUInteger getUtts(NSUInteger pos, NSUInteger len, NSString *textSt) {
 					isDarkColor = TRUE;
 				else
 					isDarkColor = FALSE;
-			} else {
+			} else
 				isDarkColor = FALSE;
-			}
+#endif
 //			if (isDarkColor == TRUE)
 //				[self setBackgroundColor:[NSColor blackColor]];
 //			else
@@ -1557,7 +1562,7 @@ NSUInteger getUtts(NSUInteger pos, NSUInteger len, NSString *textSt) {
 			if (pos2C > oPos)
 				tPos2C += 2;
 			attStr = [NSString stringWithFormat:@"%c%c", ATTMARKER, error_end];
-			pos = pos + cursorRange.length + 2;
+			pos = pos + cursorRange.length+2;
 			posRange = NSMakeRange(pos, 0);
 			textSt = [textSt stringByReplacingCharactersInRange:posRange withString:attStr];
 			if (pos1C > oPos)
@@ -1752,6 +1757,43 @@ void CleanMediaName(unCH *tMediaFileName) {// 2020-03-12
 		strcpy(mediaFileName, [subSt UTF8String]);
 //		CleanMediaName(mediaFileName);
 	}
+}
+
+- (BOOL)getLangName:(NSString *)textSt AtIndex:(NSUInteger)pos MaxLen:(NSUInteger)len isLang:(const char *)langName {
+	NSUInteger i;
+	unichar ch;
+	NSString *subSt;
+	char lName[BUFSIZ];
+
+	for (; pos < len; pos++) {
+		ch = [textSt characterAtIndex:pos];
+		if (ch != ' ' && ch != '\t')
+			break;
+	}
+	if (pos >= len)
+		return(false);
+	do {
+		lName[0] = EOS;
+		i = pos;
+		for (; pos < len; pos++) {
+			ch = [textSt characterAtIndex:pos];
+			if (ch == ',' || ch == ' ' || ch == '\t' || ch == '\n')
+				break;
+		}
+		if (pos == i)
+			return(false);
+		subSt = [textSt substringWithRange:NSMakeRange(i, pos-i)];
+		if ([subSt length] < BUFSIZ) {
+			strcpy(lName, [subSt UTF8String]);
+			if (uS.mStricmp(lName, langName) == 0)
+				return(true);
+		}
+		while (ch == ',' || ch == ' ' || ch == '\t') {
+			pos++;
+			ch = [textSt characterAtIndex:pos];
+		}
+	} while (ch != '\n') ;
+	return(false);
 }
 
 - (NSUInteger)getPIDInfo:(NSString *)textSt AtIndex:(NSUInteger)pos MaxLen:(NSUInteger)len { // 2020-05-08
@@ -2080,6 +2122,38 @@ void CleanMediaName(unCH *tMediaFileName) {// 2020-03-12
 	return(0);
 }
 
+- (void)reformatHebrew:(NSTextStorage *)text {
+	BOOL isHebrew;
+	NSUInteger len, pos, beg;
+	NSString *textSt;
+	unichar ch, lastCh;
+	NSWritingDirection writingDirection;
+	NSRange paragraphStyleRange;
+
+	lastCh = '\n';
+	len = [text length];
+	textSt = [text string];
+	beg = 0;
+	for (pos=0; pos < len; pos++) {
+		ch = [textSt characterAtIndex:pos];
+		if (lastCh == '\n' && (ch == '*' || ch == '%' || ch == '@')) {
+			beg = pos;
+			isHebrew = false;
+		}
+		if (ch >= 0x05D0 && ch <= 0x05f2)
+			isHebrew = true;
+		if (ch == '\n') {
+			if (isHebrew == true) {
+				paragraphStyleRange = NSMakeRange(beg, pos-beg-1);
+				writingDirection = NSWritingDirectionRightToLeft; // NSWritingDirectionLeftToRight
+				[text setBaseWritingDirection:writingDirection range:paragraphStyleRange];
+			}
+		}
+		lastCh = ch;
+	}
+}
+
+	
 /* This method is called by the document controller. The message is passed on after information about the selected encodding
  (from our controller subclass) and preference regarding HTML and RTF formatting has been added.
   encodding is the default encodding if the document was opened without an open panel.
@@ -2096,6 +2170,8 @@ void CleanMediaName(unCH *tMediaFileName) {// 2020-03-12
 	NSRange  endRange;
 	NSTextStorage *text = [self textStorage];
 	BOOL success; //, isIncrementPos;
+	FNType mDirPathName[FNSize];
+	extern BOOL AutoSetWorkigDir;
 
 	[fileTypeToSet release];
 	fileTypeToSet = nil;
@@ -2159,6 +2235,7 @@ void CleanMediaName(unCH *tMediaFileName) {// 2020-03-12
 			pos++;
 	}
 	[text endEditing];
+	isHebrewData = false;
 	isCAFont = false;
 	[text beginEditing];
 	textSt = [text string];
@@ -2193,6 +2270,11 @@ void CleanMediaName(unCH *tMediaFileName) {// 2020-03-12
 			if (suSti > 0) {
 				if (uS.mStricmp(suSt, MEDIAHEADER) == 0) {
 					[self getMediaName:textSt AtIndex:pos+MEDIAHEADERLEN MaxLen:len]; // 2020-03-12
+					lastCh = ch;
+					pos++;
+				} else if (uS.mStricmp(suSt, LANGHEADER) == 0) {
+					if ([self getLangName:textSt AtIndex:pos+LANGHEADERLEN MaxLen:len isLang:"heb"] == true)
+						isHebrewData = true;
 					lastCh = ch;
 					pos++;
 				} else if (uS.mStricmp(suSt, UTF8HEADER) == 0) {
@@ -2286,7 +2368,19 @@ void CleanMediaName(unCH *tMediaFileName) {// 2020-03-12
 //	[bulletStr release]; // dealloc
 // 2019-09-10 end
 
-	strcpy(filePath, [absoluteURL fileSystemRepresentation]);
+	if (isHebrewData)
+		[self reformatHebrew:text];
+	if (AutoSetWorkigDir) { // 2025-01-02 beg
+		strcpy(filePath, [absoluteURL fileSystemRepresentation]);
+		extractPath(mDirPathName, filePath);
+		len = strlen(mDirPathName);
+		if (len > 0) {
+			if (mDirPathName[len-1] == '/')
+				mDirPathName[len-1] = EOS;
+		}
+		SetWdLibFolder(mDirPathName, wdFolders);
+	} // 2025-01-02 end
+
 	[self setFileType:typeName];
 	// If we're reverting, NSDocument will set the file type behind out backs. This enables restoring that type.
 	fileTypeToSet = [typeName copy];
@@ -2402,7 +2496,8 @@ void CleanMediaName(unCH *tMediaFileName) {// 2020-03-12
 	// We now preserve base writing direction even for plain text, using the 10.6-introduced attribute enumeration API
 	[text enumerateAttribute:NSParagraphStyleAttributeName inRange:NSMakeRange(0, [text length]) options:0 usingBlock:^(id paragraphStyle, NSRange paragraphStyleRange, BOOL *stop){
 #pragma unused (stop)
-		NSWritingDirection writingDirection = paragraphStyle ? [(NSParagraphStyle *)paragraphStyle baseWritingDirection] : NSWritingDirectionNatural;
+		NSWritingDirection writingDirection = paragraphStyle ? [(NSParagraphStyle *)paragraphStyle baseWritingDirection] : NSWritingDirectionNatural; // NSWritingDirectionLeftToRight
+//		writingDirection = NSWritingDirectionRightToLeft; // NSWritingDirectionLeftToRight
 		// We also preserve NSWritingDirectionAttributeName (new in 10.6)
 		[text enumerateAttribute:NSWritingDirectionAttributeName inRange:paragraphStyleRange options:0 usingBlock:^(id value, NSRange attributeRange, BOOL *stop){
 #pragma unused (stop)
@@ -2412,7 +2507,8 @@ void CleanMediaName(unCH *tMediaFileName) {// 2020-03-12
 				[text addAttribute:NSWritingDirectionAttributeName value:value range:attributeRange];
 			[value release];
 		}];
-		if (writingDirection != NSWritingDirectionNatural) [text setBaseWritingDirection:writingDirection range:paragraphStyleRange];
+		if (writingDirection != NSWritingDirectionNatural)
+			[text setBaseWritingDirection:writingDirection range:paragraphStyleRange];
 	}];
 }
 
@@ -2711,27 +2807,30 @@ static void makeUnicodeString(unichar *st, const char *src) {
 		/*31*/	makeUnicodeString(st, "0x223E constriction0x223E; F1 n");
 		/*32*/	makeUnicodeString(st, "0x21BB 0x21BBpitch reset; F1 r");
 		/*33*/	makeUnicodeString(st, "0x1F29 laugh in a word; F1 c");
-		/*34*/	makeUnicodeString(st, "0x201E Tag or sentence final particle; F2 t");
-		/*35*/	makeUnicodeString(st, "0x2021 0x2021 Vocative or summons; F2 v");
-		/*36*/	makeUnicodeString(st, "0x0323 Arabic dot diacritic; F2 ,");
-		/*37*/	makeUnicodeString(st, "0x02B0 Arabic raised h; F2 H");
-		/*38*/	makeUnicodeString(st, "0x0304 Stress; F2 -");
-		/*39*/	makeUnicodeString(st, "0x0294 Glottal stop0x0294; F2 q");
-		/*40*/	makeUnicodeString(st, "0x0295 Reverse glottal0x0295; F2 Q");
-		/*41*/	makeUnicodeString(st, "0x030C Caron; F2 ;");
-		/*42*/	makeUnicodeString(st, "0x02C8 raised0x02C8 stroke; F2 1");
-		/*43*/	makeUnicodeString(st, "0x02CC lowered0x02CC stroke; F2 2");
-		/*44*/	makeUnicodeString(st, "0x02D0 length on the %pho line; F2 :");
-		/*45*/	makeUnicodeString(st, "0x2039 0x2039begin phono group0x203A marker; F2 <");
-		/*46*/	makeUnicodeString(st, "0x203A 0x2039end phono group0x203A marker; F2 >");
-		/*47*/	makeUnicodeString(st, "0x3014 0x3014begin sign group0x3015; F2 {");
-		/*48*/	makeUnicodeString(st, "0x3015 0x3014end sign group0x3015; F2 }");
-		/*49*/	makeUnicodeString(st, "0x2026 %pho missing word; F2 m");
-		/*50*/	makeUnicodeString(st, "0x0332 und0x0332e0x0332r0x0332line; F2 <underline>");
-		/*51*/	makeUnicodeString(st, "0x201C open 0x201Cquote0x201D; F2 '");
-		/*52*/	makeUnicodeString(st, "0x201D close 0x201Cquote0x201D; F2 \"");
-		/*53*/	makeUnicodeString(st, "0x2260 0x2260row; F2 =");
-		/*54*/	makeUnicodeString(st, "0x21AB 0x21ABr-r0x21ABrabbit; F2 /");
+		/*34*/	makeUnicodeString(st, "0x2907 0x2907hurried start; F1 q");
+		/*35*/	makeUnicodeString(st, "0x2906 sudden0x2906 stop; F1 x");
+		/*36*/	makeUnicodeString(st, "0x2051 hard0x2051ening overdot; F1 t");
+		/*37*/	makeUnicodeString(st, "0x201E Tag or sentence final particle; F2 t");
+		/*38*/	makeUnicodeString(st, "0x2021 0x2021 Vocative or summons; F2 v");
+		/*39*/	makeUnicodeString(st, "0x0323 Arabic dot diacritic; F2 ,");
+		/*40*/	makeUnicodeString(st, "0x02B0 Arabic raised h; F2 H");
+		/*41*/	makeUnicodeString(st, "0x0304 Stress; F2 -");
+		/*42*/	makeUnicodeString(st, "0x0294 Glottal stop0x0294; F2 q");
+		/*43*/	makeUnicodeString(st, "0x0295 Reverse glottal0x0295; F2 Q");
+		/*44*/	makeUnicodeString(st, "0x030C Caron; F2 ;");
+		/*45*/	makeUnicodeString(st, "0x02C8 raised0x02C8 stroke; F2 1");
+		/*46*/	makeUnicodeString(st, "0x02CC lowered0x02CC stroke; F2 2");
+		/*47*/	makeUnicodeString(st, "0x02D0 length on the %pho line; F2 :");
+		/*48*/	makeUnicodeString(st, "0x2039 0x2039begin phono group0x203A marker; F2 <");
+		/*49*/	makeUnicodeString(st, "0x203A 0x2039end phono group0x203A marker; F2 >");
+		/*50*/	makeUnicodeString(st, "0x3014 0x3014begin sign group0x3015; F2 {");
+		/*51*/	makeUnicodeString(st, "0x3015 0x3014end sign group0x3015; F2 }");
+		/*51*/	makeUnicodeString(st, "0x2026 %pho missing word; F2 m");
+		/*53*/	makeUnicodeString(st, "0x0332 und0x0332e0x0332r0x0332line; F2 <underline>");
+		/*54*/	makeUnicodeString(st, "0x201C open 0x201Cquote0x201D; F2 '");
+		/*55*/	makeUnicodeString(st, "0x201D close 0x201Cquote0x201D; F2 \"");
+		/*56*/	makeUnicodeString(st, "0x2260 0x2260row; F2 =");
+		/*57*/	makeUnicodeString(st, "0x21AB 0x21ABr-r0x21ABrabbit; F2 /");
 
 		mySt = [NSString stringWithCharacters:st length:strlen(st)]; // NSUnicodeStringEncoding
 

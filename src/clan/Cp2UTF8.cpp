@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2025 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -32,6 +32,7 @@
 extern struct tier *defheadtier;
 extern struct tier *headtier;
 extern char OverWriteFile;
+extern char GExt[];
 
 typedef struct WCHARMASK {
 	char c1, c2;
@@ -127,7 +128,7 @@ static void extractUCs(char *line, unsigned long *uc0, unsigned long *uc1) {
 static void readConvFile(void) {
 	FILE *fdic;
 	int i, j;
-	unsigned char x, col[10];
+	unsigned char col[10];
 	unsigned long uc0;
 	unsigned long uc1;
 	unsigned long hex;
@@ -162,7 +163,6 @@ static void readConvFile(void) {
 		}
 		uc0 = 0L;
 		uc1 = 0L;
-		x = 0;
 		col[convCol] = 0;
 
 		if (templineC[0] != EOS && templineC[0] != '\n' && uS.mStrnicmp(templineC, "DEL", 3)) {
@@ -186,9 +186,9 @@ static void readConvFile(void) {
 			continue;
 		i++;
 		if (templineC[i] != '\t' && templineC[i] != '\n' && templineC[i])
-			x = templineC[i++];
+			i++;
 		if (templineC[i] != '\t' && templineC[i] != '\n' && templineC[i])
-			x = templineC[i++];
+			i++;
 
 		for (j=0; j < 10; j++) {
 			for (; templineC[i] != '\t' && templineC[i] != '\n' && templineC[i]; i++) ;
@@ -310,8 +310,11 @@ void init(char f) {
 			fputs("The +d1 option can only be used with +d2 option\n", stderr);
 			cutt_exit(0);
 		}
-		if (isMakeTXT)
+		if (isMakeTXT) {
+			if (replaceFile)
+				GExt[0] = EOS;
 			AddCEXExtension = ".txt";
+		}
 		fTime = FALSE;
 	}
 }

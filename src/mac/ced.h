@@ -392,6 +392,7 @@ struct MOVIEINFO {
 	unCH MovieFile[FILENAME_MAX];
 	FNType rMovieFile[FNSize];
 	long  MBeg, MEnd;
+	long  nextBegF;
 	movInfo *nMovie;
 } ;
 
@@ -418,6 +419,7 @@ struct SOUNDINFO {
 	int   SNDWprint_row2;
 	long  BegF, EndF;
 	long  dBegF, dEndF;
+	long  nextBegF;
 	long  contPlayBeg, contPlayEnd;
 	long  SoundFileSize;
 	long  WBegF, WEndF, WBegFM, WEndFM;
@@ -493,6 +495,7 @@ typedef struct {
 	long  Ltik;
 	long  KBSize, KBIndex;
 	unCH  *KillBuff;
+	char  re_colorLemmas;
 	char  checkMessCnt;
 	char  isUTF;
 	char  isOutputScrolledOff;
@@ -817,10 +820,13 @@ struct SelectedFilesList {
 
 #ifdef _COCOA_APP
 extern unCH NextTierName[];
+extern NSInteger LemmasColorNumPtr; // 2024-04-17
+extern CGFloat CaretWidthPtr; // 2024-06-17
 #else
 extern unCH NextTierName[80];
-extern struct DefWin defWinSize;
+extern int LemmasColorNumPtr; // 2024-04-17
 extern char isCursorPosRestore;
+extern struct DefWin defWinSize;
 #endif 
 extern char defUniFontName[];
 extern char isAjustCursor;
@@ -1042,7 +1048,7 @@ extern char AdjustSound(int row, int col, int ext, Size right_lim);
 extern char AllocConstString(char *st, int sp);
 extern char AllocSpeakerNames(unCH *st, int sp);
 extern char GetSpeakerNames(unCH *st, int num, unsigned long size);
-extern char ShowGRA();
+extern char ShowGRA(char *graSt, char *morSt);
 extern char OpenProgressDialog(const char *str);
 extern char UpdateProgressDialog(short percentFilled);
 extern char DoURLFileName(char *tName);

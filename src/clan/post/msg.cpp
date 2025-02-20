@@ -1,5 +1,5 @@
 /**********************************************************************
-	"Copyright 1990-2024 Brian MacWhinney. Use is subject to Gnu Public License
+	"Copyright 1990-2025 Brian MacWhinney. Use is subject to Gnu Public License
 	as stated in the attached "gpl.txt" file."
 */
 
@@ -129,11 +129,10 @@ void msgfile( FILE* outfile, const char *string, ... )     // this function may 
 	char *q = (char *)(&string) + sizeof(char *);
 	vsprintf(szmess, string, q);
 #else
-	int t;
 	va_list args;
 
 	va_start(args, string); 	// prepare the arguments
-	t = vsprintf(szmess, string, args);
+	vsprintf(szmess, string, args);
 	va_end(args);				// clean the stack
 #endif
 

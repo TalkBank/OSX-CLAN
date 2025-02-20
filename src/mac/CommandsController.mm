@@ -170,6 +170,29 @@ void SetClanWinIcons(void) {
 		commandsWindow = [[CommandsController alloc] initWithWindowNibName:@"Commands"];
 		[commandsWindow showWindow:nil];
 		isMORXiMode = FALSE;
+
+// 2024-03-22 beg
+#ifdef _OS_10_13
+		isDarkColor = FALSE;
+#else
+		if (@available(macOS 10.14, *)) {
+			NSAppearance *currentAppearance = [NSApp effectiveAppearance];
+			NSString *appName = [currentAppearance name];
+			if ([appName isEqualToString:NSAppearanceNameDarkAqua] == YES)
+				isDarkColor = TRUE;
+			else
+				isDarkColor = FALSE;
+		} else
+			isDarkColor = FALSE;
+#endif
+		NSTextView* textField = (NSTextView*)[commandsWindow->commandString currentEditor];
+		if( [textField respondsToSelector: @selector(setInsertionPointColor:)] ) {
+			if (isDarkColor)
+				[textField setInsertionPointColor:[NSColor whiteColor]];
+			else
+				[textField setInsertionPointColor:[NSColor blackColor]];
+		}
+// 2024-03-22 end
 	} else
 		[commandsWindow showWindow:nil];
 }
@@ -726,9 +749,9 @@ yank:
  */
 - (IBAction)commandTextChanged:(id)sender {
 #pragma unused (sender)
-	int i;
+//	int i;
 
-	i = 12;
+//	i = 12;
 }
 
 - (IBAction)commandRunClicked:(NSButton *)sender
@@ -767,9 +790,9 @@ yank:
 	NSInteger strLen;
 	NSRange aRange;
 
-	NSInteger i;
-	i = sizeof(wchar_t);
-	i = sizeof(unichar);
+//	NSInteger i;
+//	i = sizeof(wchar_t);
+//	i = sizeof(unichar);
 
 	comStr = [commandString stringValue];
 
@@ -841,6 +864,29 @@ yank:
 		commandsFont = [workingString font];
 	if (commandsFont != nil)
 		[fontManager setSelectedFont:commandsFont isMultiple:NO];
+
+// 2024-03-22 beg
+#ifdef _OS_10_13
+		isDarkColor = FALSE;
+#else
+	if (@available(macOS 10.14, *)) {
+		NSAppearance *currentAppearance = [NSApp effectiveAppearance];
+		NSString *appName = [currentAppearance name];
+		if ([appName isEqualToString:NSAppearanceNameDarkAqua] == YES)
+			isDarkColor = TRUE;
+		else
+			isDarkColor = FALSE;
+	} else
+		isDarkColor = FALSE;
+#endif
+	NSTextView* textField = (NSTextView*)[commandsWindow->commandString currentEditor];
+	if( [textField respondsToSelector: @selector(setInsertionPointColor:)] ) {
+		if (isDarkColor)
+			[textField setInsertionPointColor:[NSColor whiteColor]];
+		else
+			[textField setInsertionPointColor:[NSColor blackColor]];
+	}
+// 2024-03-22 end
 }
 
 - (void)windowDidResize:(NSNotification *)notification {// 2020-01-29
